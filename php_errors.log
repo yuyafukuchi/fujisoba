@@ -1,0 +1,8 @@
+[02-Oct-2017 20:12:31 Asia/Tokyo] PHP Parse error:  syntax error, unexpected ''Muffin/Footprint'' (T_CONSTANT_ENCAPSED_STRING), expecting ']' in /home/ubuntu/workspace/fujisoba/vendor/cakephp-plugins.php on line 8
+[02-Oct-2017 20:12:31 Asia/Tokyo] PHP Stack trace:
+[02-Oct-2017 20:12:31 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/fujisoba/webroot/index.php:0
+[02-Oct-2017 20:12:31 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/fujisoba/webroot/index.php:37
+[02-Oct-2017 20:12:31 Asia/Tokyo] PHP   3. Cake\Http\BaseApplication->bootstrap() /home/ubuntu/workspace/fujisoba/vendor/cakephp/cakephp/src/Http/Server.php:72
+[02-Oct-2017 20:12:31 Asia/Tokyo] PHP   4. require_once() /home/ubuntu/workspace/fujisoba/vendor/cakephp/cakephp/src/Http/BaseApplication.php:61
+[02-Oct-2017 20:12:31 Asia/Tokyo] PHP   5. Cake\Core\Plugin::load() /home/ubuntu/workspace/fujisoba/config/bootstrap.php:223
+[02-Oct-2017 20:12:31 Asia/Tokyo] PHP   6. Cake\Core\Plugin::_loadConfig() /home/ubuntu/workspace/fujisoba/vendor/cakephp/cakephp/src/Core/Plugin.php:123
