@@ -19,7 +19,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class PermitPcsTable extends AppTable
+class PermitPcsTable extends Table
 {
 
     /**
@@ -36,7 +36,7 @@ class PermitPcsTable extends AppTable
         $this->displayField('id');
         $this->primaryKey('id');
 
-        
+        $this->addBehavior('Timestamp');
     }
 
     /**

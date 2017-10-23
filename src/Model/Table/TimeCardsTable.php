@@ -23,7 +23,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class TimeCardsTable extends AppTable
+class TimeCardsTable extends Table
 {
 
     /**
@@ -40,7 +40,7 @@ class TimeCardsTable extends AppTable
         $this->displayField('id');
         $this->primaryKey('id');
 
-        
+        $this->addBehavior('Timestamp');
 
         $this->belongsTo('Employees', [
             'foreignKey' => 'employee_id',
@@ -49,9 +49,6 @@ class TimeCardsTable extends AppTable
         $this->belongsTo('Stores', [
             'foreignKey' => 'store_id',
             'joinType' => 'INNER'
-        ]);
-        $this->belongsTo('AttendanceStores', [
-            'foreignKey' => 'attendance_store_id'
         ]);
     }
 
@@ -141,7 +138,6 @@ class TimeCardsTable extends AppTable
     {
         $rules->add($rules->existsIn(['employee_id'], 'Employees'));
         $rules->add($rules->existsIn(['store_id'], 'Stores'));
-        $rules->add($rules->existsIn(['attendance_store_id'], 'AttendanceStores'));
 
         return $rules;
     }

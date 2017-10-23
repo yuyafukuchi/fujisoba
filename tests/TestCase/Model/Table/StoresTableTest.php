@@ -28,6 +28,7 @@ class StoresTableTest extends TestCase
         'app.companies',
         'app.employees',
         'app.time_cards',
+        'app.attendance_stores',
         'app.users',
         'app.cash_account_trans',
         'app.cash_accounts',

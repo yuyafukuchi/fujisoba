@@ -21,7 +21,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class MenusTable extends AppTable
+class MenusTable extends Table
 {
 
     /**
@@ -38,7 +38,7 @@ class MenusTable extends AppTable
         $this->displayField('id');
         $this->primaryKey('id');
 
-        
+        $this->addBehavior('Timestamp');
 
         $this->hasMany('SalesTransactions', [
             'foreignKey' => 'menu_id'
@@ -60,7 +60,8 @@ class MenusTable extends AppTable
         $validator
             ->integer('menu_number')
             ->requirePresence('menu_number', 'create')
-            ->notEmpty('menu_number');
+            ->notEmpty('menu_number')
+            ->add('menu_number', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->integer('created_by')
@@ -71,5 +72,19 @@ class MenusTable extends AppTable
             ->allowEmpty('modified_by');
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->isUnique(['menu_number']));
+
+        return $rules;
     }
 }

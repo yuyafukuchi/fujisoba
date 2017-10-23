@@ -45,6 +45,7 @@ class TimeCardsTableTest extends TestCase
         'app.accounts',
         'app.debit_categories',
         'app.credit_categories',
+        'app.store_menu_histories',
         'app.users',
         'app.attendance_stores'
     ];

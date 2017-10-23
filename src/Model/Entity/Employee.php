@@ -17,6 +17,7 @@ use Cake\ORM\Entity;
  * @property string $contact_type
  * @property \Cake\I18n\Time $joined
  * @property \Cake\I18n\Time $retired
+ * @property bool $deleted
  * @property string $note
  * @property bool $flag
  * @property int $regular_amount

@@ -68,7 +68,8 @@ class SalesItemsTable extends AppTable
         $validator
             ->integer('sales_item_number')
             ->requirePresence('sales_item_number', 'create')
-            ->notEmpty('sales_item_number');
+            ->notEmpty('sales_item_number')
+            ->add('sales_item_number', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->integer('created_by')

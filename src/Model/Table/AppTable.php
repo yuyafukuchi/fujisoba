@@ -13,7 +13,7 @@ use Cake\ORM\Table;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class AppTable extends AppTable
+class AppTable extends Table
 {
     /**
      * Initialize method

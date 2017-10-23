@@ -22,7 +22,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class UsersTable extends AppTable
+class UsersTable extends Table
 {
 
     /**
@@ -39,7 +39,7 @@ class UsersTable extends AppTable
         $this->displayField('name');
         $this->primaryKey('id');
 
-        
+        $this->addBehavior('Timestamp');
 
         $this->belongsTo('Companies', [
             'foreignKey' => 'company_id',
@@ -64,7 +64,8 @@ class UsersTable extends AppTable
 
         $validator
             ->requirePresence('code', 'create')
-            ->notEmpty('code');
+            ->notEmpty('code')
+            ->add('code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->requirePresence('name', 'create')

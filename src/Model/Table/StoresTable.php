@@ -16,6 +16,7 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\HasMany $SalesTransactions
  * @property \Cake\ORM\Association\HasMany $StoreAccountInfos
  * @property \Cake\ORM\Association\HasMany $StoreInventoryItemHistories
+ * @property \Cake\ORM\Association\HasMany $StoreMenuHistories
  * @property \Cake\ORM\Association\HasMany $TimeCards
  * @property \Cake\ORM\Association\HasMany $Users
  *
@@ -29,7 +30,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class StoresTable extends AppTable
+class StoresTable extends Table
 {
 
     /**
@@ -46,7 +47,7 @@ class StoresTable extends AppTable
         $this->displayField('name');
         $this->primaryKey('id');
 
-        
+        $this->addBehavior('Timestamp');
 
         $this->belongsTo('Companies', [
             'foreignKey' => 'company_id',
@@ -68,6 +69,9 @@ class StoresTable extends AppTable
             'foreignKey' => 'store_id'
         ]);
         $this->hasMany('StoreInventoryItemHistories', [
+            'foreignKey' => 'store_id'
+        ]);
+        $this->hasMany('StoreMenuHistories', [
             'foreignKey' => 'store_id'
         ]);
         $this->hasMany('TimeCards', [
@@ -92,7 +96,8 @@ class StoresTable extends AppTable
 
         $validator
             ->requirePresence('code', 'create')
-            ->notEmpty('code');
+            ->notEmpty('code')
+            ->add('code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->requirePresence('name', 'create')

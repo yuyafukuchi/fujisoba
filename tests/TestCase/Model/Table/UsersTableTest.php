@@ -45,6 +45,7 @@ class UsersTableTest extends TestCase
         'app.accounts',
         'app.debit_categories',
         'app.credit_categories',
+        'app.store_menu_histories',
         'app.time_cards',
         'app.attendance_stores'
     ];
