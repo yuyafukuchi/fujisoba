@@ -1,10 +1,10 @@
-<?php use Cake\I18n\Time;
-use Cake\Routing\Router;
+<?php
 /**
-  * @var \App\View\AppView $this
-  */
+ * @var \App\View\AppView $this
+ * @var \App\Model\Entity\MonthlyTimeCard $monthlyTimeCard
+ */
 ?>
-<?php 
+<?php
 function convert_week($week)
     {
         $ret = "";
@@ -33,37 +33,10 @@ function convert_week($week)
         }
         return $ret;
     }
-$url = Router::url(NULL,true);
-$now = Time::now();
-	try{
-		if(!isset($_GET['t']) || !preg_match('/\A\d{4}-\d{2}\z/', $_GET['t'])){
-			throw new Exception();
-		}
-		$url_datetime = new DateTime($_GET['t']);
-		$current_year = ($url_datetime->format('Y'));
-		$current_month = intval($url_datetime->format('n'));
-		$yeartime = $url_datetime->format('F Y');
-		$first_day = new DateTime('first day of' . $yeartime);
-	} catch (Exception $e) 
-	{
-		$current_month = intval($now->format('n'));
-		$current_year = ($now->format('Y'));
-		$first_day = new DateTime('first day of this month');
-	}
-$day = strtotime($current_year.'-'.$current_month.'-'.'16 -1 month');
-$stopper = 0;
-
 ?>
-<div class="timeCards index large-9 medium-8 columns content">
-    <h3><?= __('Time Cards') ?></h3>
-    <button type="button" onclick="location.href='<?=$url?>'">当月</button>
-    <button type="button" onclick="location.href='<?=$url.'?t='.date('Y-m',$day)?>'">先月</button>
-    <button type="button" onclick="location.href='<?php
-        $day2 = $day;
-        $day2 = strtotime('+2 month',$day2);
-        echo $url.'?t='.date('Y-m',$day2);
-    ?>'">翌月</button>
-    <?=$current_year . '年' . $current_month . '月'?>
+<?=$data['index'] > 1 ? $this->Html->link('前', [ 'action' => 'view', $data['index']-1]) : ''?>
+<?=$data['index'] < $data['length'] ? $this->Html->link('次', [ 'action' => 'view', $data['index']+1]) : ''?>
+<div class="monthlyTimeCards view large-9 medium-8 columns content">
     <table>
         <thead>
             <tr>
@@ -90,6 +63,8 @@ $stopper = 0;
             <?php 
             $dayNum = 0;
             $workDayNum = 0;
+		    $current_month = $data['current_month'];
+		    $day = strtotime($data['current_year'].'-'.$current_month.'-'.'16 -1 month');
             while (!(date('d',$day) == 16 && date('m',$day) == $current_month)){ ?>
             <tr>
                 <th><?=date('d ',$day)?></th>
@@ -210,24 +185,4 @@ $stopper = 0;
             <?php endforeach; ?>
         </tbody>
     </table>
-    -->
-    <?php
-        echo $this->Html->link('一括印刷', ['controller'=>'Users', 'action'=>'login']);
-        ?> <br> <?php
-        echo $this->Html->link('CSV', ['controller'=>'Users', 'action'=>'attendance']);
-        ?> <br> <?php
-        echo $this->Html->link('戻る', ['controller'=>'Users', 'action'=>'attendance']);
-    ?>
-    <!--
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
-    -->
 </div>

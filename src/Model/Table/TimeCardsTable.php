@@ -86,8 +86,8 @@ class TimeCardsTable extends Table
             ->allowEmpty('out_time2');
 
         $validator
-            ->dateTime('schedules_in_time')
-            ->allowEmpty('schedules_in_time');
+            ->dateTime('scheduled_in_time')
+            ->allowEmpty('scheduled_in_time');
 
         $validator
             ->dateTime('scheduled_out_time')

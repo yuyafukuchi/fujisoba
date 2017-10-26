@@ -5,6 +5,9 @@
 ?>
 
 <?php 
+echo $store_name;
+echo nl2br("\n");
+echo $this->Html->link('ログアウト', ['controller'=>'/../Users', 'action'=>'logout']);
 echo $this->Form->create('Employees') ;
 echo $this -> Form -> input ( "code", [ "type" => "text",
                                            "size" => 10,

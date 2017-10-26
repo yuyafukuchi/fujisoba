@@ -5,6 +5,8 @@
 ?>
 
 <?php 
+echo $storeName . ' / '.$user->name_first .' '. $user->name_last .' 様';
+echo nl2br("\n");
 echo $timeCard['support'];
 echo $this -> Form -> create (
                 "null", [ "type" => "post",

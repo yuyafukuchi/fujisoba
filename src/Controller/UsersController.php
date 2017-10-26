@@ -36,11 +36,13 @@ class UsersController extends AppController
      */
     public function index()
     {
-        var_dump($this->Auth->user());
         $this->paginate = [
             'contain' => ['Companies', 'Stores']
         ];
         $users = $this->paginate($this->Users);
+        if($this->Auth->user('type') === 'G'){
+            $this->redirect(array('controller' => 'Attendance/TimeCards', 'action' => 'login'));
+        }
         $data = array('users' => $users, 'type' => $this->Auth->user('type'));
         $this->set(compact('data'));
         $this->set('_serialize', ['data']);
@@ -156,6 +158,26 @@ class UsersController extends AppController
     public function logout() {
         $this->Auth->logout();
         $this->redirect(array('controller' => 'Users', 'action' => 'login'));
+    }
+    
+    public function attendance() {
+        if($this->Auth->user('type') === 'G'){
+            $this->redirect(array('controller' => 'Attendance/TimeCards', 'action' => 'login'));
+        }
+        $users = $this->paginate($this->Users);
+        $type = $this->Auth->user('type');
+        $name = '';
+        if($type === 'H')
+        {
+            $name = '本社管理者 様';
+        }
+        if($type === 'M')
+        {
+            $name = $this->Users->Stores->get($this->Auth->user('store_id'))['name'].'管理者 様';
+        }
+        $data = array('users' => $users, 'type' => $type, 'name' => $name);
+        $this->set(compact('data'));
+        $this->set('_serialize', ['data']);
     }
 
 

@@ -5,6 +5,7 @@
 ?>
 
 <div class="employees form large-9 medium-8 columns content">
+    <?=$data['name']?>
     <?= $this->Form->create($employee) ?>
     <fieldset>
         <legend><?= __('Add Employee') ?></legend>
@@ -14,17 +15,16 @@
             echo $this->Form->input('name_first',['type' => 'text','label' => '名（漢字）']);
             echo $this->Form->input('name_last_kana',['type' => 'text','label' => '姓（カナ）']);
             echo $this->Form->input('name_first_kana',['type' => 'text','label' => '名(カナ）']);
-            echo $this -> Form -> input  ( "select3",
+            if($data['type']==='M'){
+                echo $this->Form->input('company_id', ['options' => $companies, "label" => '会社名']);
+                echo $this->Form->input('store_id', ['options' => $stores,"label" => '店舗名']);
+            }else{
+                echo $this->Form->input('company_id', ['options' => $companies,'empty' => true, "label" => '会社名']);
+                echo $this->Form->input('store_id', ['options' => $stores, 'empty' => true,"label" => '店舗名']);
+            }
+           echo $this -> Form -> input  ( "contact_type",
                                  [ "type" => "select",
-                                   "options" => [ "one" => "ダイタン企画株式会社" ], 
-                                   "label" => '会社名'] );
-            echo $this -> Form -> input  ( "select3",
-                                 [ "type" => "select",
-                                   "options" => [ "one" => "" ], 
-                                   "label" => '店舗名'] );
-           echo $this -> Form -> input  ( "select3",
-                                 [ "type" => "select",
-                                   "options" => [ "one" => "" ], 
+                                   "options" => [ "P" => "正社員","C" => "契約社員","A" => "アルバイト" ], 
                                    "label" => '種別'] );
             echo $this->Form->input('joined', ['empty' => true,'label' => '入社年月日）']);
             echo $this->Form->input('retired', ['empty' => true,'label' => '退職年月日']);

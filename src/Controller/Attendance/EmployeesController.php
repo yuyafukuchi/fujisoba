@@ -2,6 +2,7 @@
 namespace App\Controller\Attendance;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
 
 /**
  * Employees Controller
@@ -10,6 +11,11 @@ use App\Controller\AppController;
  */
 class EmployeesController extends AppController
 {
+    public $paginate = [
+        'order' => [
+            'Employees.code' => 'asc'
+        ]
+    ];
     
     public function initialize()
     {
@@ -27,9 +33,38 @@ class EmployeesController extends AppController
                 ]
             ]
         ]);
+        $this->loadComponent('Search.Prg');
         $this->Auth->sessionKey = 'Auth.Users';
     }
     
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $type = $this->Auth->user('type');
+        $name = '';
+        if($type === 'G')
+        {
+            $this->redirect(array('controller' => 'Attendance/TimeCards', 'action' => 'login'));
+        }
+        else if($type === 'H')
+        {
+            $name = '本社管理者 様';
+            $searchQuery['company_id'] = $this->Auth->user('company_id');
+            $companies = $this->Employees->Companies->find('list', ['limit' => 200]);
+            $stores = $this->Employees->Stores->find('list', ['limit' => 200]);
+        }
+        else if($type === 'M')       
+        {
+            $searchQuery['company_id'] = $this->Auth->user('company_id');
+            $searchQuery['store_id'] = $this->Auth->user('store_id');
+            $name = $this->Employees->Stores->get($this->Auth->user('store_id'))['name'].'管理者 様';
+            $companies = $this->Employees->Companies->find('list', ['limit' => 200])->where(['id' => $this->Auth->user('company_id')]);
+            $stores = $this->Employees->Stores->find('list', ['limit' => 200])->where(['id' => $this->Auth->user('store_id')]);
+        }
+         $data = array('type' => $type, 'name' => $name);
+         $this->set(compact('companies', 'stores','data'));
+    }
+        
     /**
      * Index method
      *
@@ -37,12 +72,45 @@ class EmployeesController extends AppController
      */
     public function index()
     {
+        $searchQuery = $this->request->query();
+        $searchQuery['deleted'] = 0;
+        if(!array_key_exists('retired',$searchQuery)){
+            $searchQuery['retired'] = 0;
+        }
         $this->paginate = [
             'contain' => ['Companies', 'Stores']
         ];
-        $employees = $this->paginate($this->Employees);
-        debug($this->Employees->find()->toArray());
+        $type = $this->Auth->user('type');
+        if($type === 'H')
+        {
+            $searchQuery['company_id'] = $this->Auth->user('company_id');
+        }
+        else if($type === 'M')       
+        {
+            $searchQuery['company_id'] = $this->Auth->user('company_id');
+            $searchQuery['store_id'] = $this->Auth->user('store_id');
+        }
+        
+        $employees = $this->Employees->find('search', ['search' => $searchQuery]);
+        $employees = $this->paginate($employees)->toArray();
+        foreach ($employees as $employee){
+            switch ($employee['contact_type']){
+                case 'P':
+                    $employee['contact_type'] = '正社員';
+                    break;
+                case 'C':
+                    $employee['contact_type'] = '契約社員';
+                    break;
+                case 'A':
+                    $employee['contact_type'] = 'アルバイト';
+                    break;
+            }
+            if($employee['retired'] != null){
+                $employee['retired'] = ' (退職)';
+            }
+        }
         $this->set(compact('employees'));
+        //$this->set(compact('employees'));
         $this->set('_serialize', ['employees']);
     }
 
@@ -70,6 +138,7 @@ class EmployeesController extends AppController
      */
     public function add()
     {
+        
         $employee = $this->Employees->newEntity();
         if ($this->request->is('post')) {
             $sentData = $this->request->data();
@@ -80,7 +149,6 @@ class EmployeesController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            debug($employee->errors());
             if(array_key_exists('code',$employee->errors())){
                 if(array_key_exists('unique',$employee->errors()['code'])){
                     $this->Flash->error(__('エラー：その従業員コードはすでに存在します'));
@@ -91,9 +159,8 @@ class EmployeesController extends AppController
                 $this->Flash->error(__('The employee could not be saved. Please, try again.'));
             }
         }
-        $companies = $this->Employees->Companies->find('list', ['limit' => 200]);
-        $stores = $this->Employees->Stores->find('list', ['limit' => 200]);
-        $this->set(compact('employee', 'companies', 'stores'));
+
+        $this->set(compact('employee'));
         $this->set('_serialize', ['employee']);
     }
 
@@ -118,9 +185,8 @@ class EmployeesController extends AppController
             }
             $this->Flash->error(__('The employee could not be saved. Please, try again.'));
         }
-        $companies = $this->Employees->Companies->find('list', ['limit' => 200]);
-        $stores = $this->Employees->Stores->find('list', ['limit' => 200]);
-        $this->set(compact('employee', 'companies', 'stores'));
+
+        $this->set(compact('employee'));
         $this->set('_serialize', ['employee']);
     }
 
@@ -135,7 +201,8 @@ class EmployeesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $employee = $this->Employees->get($id);
-        if ($this->Employees->delete($employee)) {
+        $employee->deleted = true;
+        if ($this->Employees->save($employee)) {
             $this->Flash->success(__('The employee has been deleted.'));
         } else {
             $this->Flash->error(__('The employee could not be deleted. Please, try again.'));

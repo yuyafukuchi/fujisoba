@@ -10,17 +10,17 @@ if($data['type'] === 'H')
 {
     echo $this->Html->link('売上管理', ['controller'=>'Users', 'action'=>'login']);
     ?> <br> <?php
-    echo $this->Html->link('勤怠管理', ['controller'=>'Attendance/employees', 'action'=>'index']);
+    echo $this->Html->link('勤怠管理', ['controller'=>'Users', 'action'=>'attendance']);
 }
 if($data['type'] === 'M')
 {
     echo $this->Html->link('売上管理', ['controller'=>'Users', 'action'=>'login']);
     ?> <br> <?php
-    echo $this->Html->link('勤怠管理', ['controller'=>'Attendance/employees', 'action'=>'index']);
+    echo $this->Html->link('勤怠管理', ['controller'=>'Users', 'action'=>'attendance']);
 }
 if($data['type'] === 'G')
 {
-    
+    echo 'エラー：このページにはアクセスできません。';
 }
 ?>
 </div>

@@ -708,3 +708,750 @@
 [20-Oct-2017 17:56:15 Asia/Tokyo] PHP  14. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:121
 [20-Oct-2017 17:56:15 Asia/Tokyo] PHP  15. call_user_func_array:{/home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435}() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
 [20-Oct-2017 17:56:15 Asia/Tokyo] PHP  16. App\Controller\Attendance\EmployeesController->add() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 12:42:50 Asia/Tokyo] PHP Parse error:  syntax error, unexpected '$user' (T_VARIABLE), expecting ',' or ';' in /home/ubuntu/workspace/src/Template/Attendance/TimeCards/emboss.ctp on line 8
+[23-Oct-2017 12:42:50 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 12:42:50 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 12:42:50 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 12:42:50 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 12:42:50 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 12:42:50 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 12:42:50 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 12:42:50 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 12:42:50 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 12:42:50 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 12:42:50 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 12:42:50 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 12:42:50 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 12:42:50 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 12:42:50 Asia/Tokyo] PHP  14. Cake\Controller\Controller->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:127
+[23-Oct-2017 12:42:50 Asia/Tokyo] PHP  15. Cake\View\View->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:617
+[23-Oct-2017 12:42:50 Asia/Tokyo] PHP  16. Cake\View\View->_render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:597
+[23-Oct-2017 12:42:50 Asia/Tokyo] PHP  17. Cake\View\View->_evaluate() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:973
+[23-Oct-2017 13:33:46 Asia/Tokyo] PHP Fatal error:  Call to undefined function App\Controller\Attendance\compace() in /home/ubuntu/workspace/src/Controller/Attendance/TimeCardsController.php on line 162
+[23-Oct-2017 13:33:46 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 13:33:46 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 13:33:46 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 13:33:46 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 13:33:46 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 13:33:46 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 13:33:46 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 13:33:46 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 13:33:46 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 13:33:46 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 13:33:46 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 13:33:46 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 13:33:46 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 13:33:46 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 13:33:46 Asia/Tokyo] PHP  14. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:121
+[23-Oct-2017 13:33:46 Asia/Tokyo] PHP  15. call_user_func_array:{/home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435}() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 13:33:46 Asia/Tokyo] PHP  16. App\Controller\Attendance\TimeCardsController->emboss() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 14:21:55 Asia/Tokyo] PHP Fatal error:  Class 'Time' not found in /home/ubuntu/workspace/src/Template/Attendance/TimeCards/index.ctp on line 7
+[23-Oct-2017 14:21:55 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 14:21:55 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 14:21:55 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 14:21:55 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 14:21:55 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 14:21:55 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 14:21:55 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 14:21:55 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 14:21:55 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 14:21:55 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 14:21:55 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 14:21:55 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 14:21:55 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 14:21:55 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 14:21:55 Asia/Tokyo] PHP  14. Cake\Controller\Controller->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:127
+[23-Oct-2017 14:21:55 Asia/Tokyo] PHP  15. Cake\View\View->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:617
+[23-Oct-2017 14:21:55 Asia/Tokyo] PHP  16. Cake\View\View->_render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:597
+[23-Oct-2017 14:21:55 Asia/Tokyo] PHP  17. Cake\View\View->_evaluate() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:973
+[23-Oct-2017 14:21:55 Asia/Tokyo] PHP  18. include() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:1014
+[23-Oct-2017 14:22:06 Asia/Tokyo] PHP Fatal error:  Class 'Time' not found in /home/ubuntu/workspace/src/Template/Attendance/TimeCards/index.ctp on line 7
+[23-Oct-2017 14:22:06 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 14:22:06 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 14:22:06 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 14:22:06 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 14:22:06 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 14:22:06 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 14:22:06 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 14:22:06 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 14:22:06 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 14:22:06 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 14:22:06 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 14:22:06 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 14:22:06 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 14:22:06 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 14:22:06 Asia/Tokyo] PHP  14. Cake\Controller\Controller->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:127
+[23-Oct-2017 14:22:06 Asia/Tokyo] PHP  15. Cake\View\View->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:617
+[23-Oct-2017 14:22:06 Asia/Tokyo] PHP  16. Cake\View\View->_render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:597
+[23-Oct-2017 14:22:06 Asia/Tokyo] PHP  17. Cake\View\View->_evaluate() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:973
+[23-Oct-2017 14:22:06 Asia/Tokyo] PHP  18. include() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:1014
+[23-Oct-2017 14:22:19 Asia/Tokyo] PHP Fatal error:  Class 'Time' not found in /home/ubuntu/workspace/src/Template/Attendance/TimeCards/index.ctp on line 7
+[23-Oct-2017 14:22:19 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 14:22:19 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 14:22:19 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 14:22:19 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 14:22:19 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 14:22:19 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 14:22:19 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 14:22:19 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 14:22:19 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 14:22:19 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 14:22:19 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 14:22:19 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 14:22:19 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 14:22:19 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 14:22:19 Asia/Tokyo] PHP  14. Cake\Controller\Controller->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:127
+[23-Oct-2017 14:22:19 Asia/Tokyo] PHP  15. Cake\View\View->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:617
+[23-Oct-2017 14:22:19 Asia/Tokyo] PHP  16. Cake\View\View->_render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:597
+[23-Oct-2017 14:22:19 Asia/Tokyo] PHP  17. Cake\View\View->_evaluate() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:973
+[23-Oct-2017 14:22:19 Asia/Tokyo] PHP  18. include() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:1014
+[23-Oct-2017 14:29:50 Asia/Tokyo] PHP Fatal error:  Call to a member function format() on a non-object in /home/ubuntu/workspace/src/Template/Attendance/TimeCards/index.ctp on line 23
+[23-Oct-2017 14:29:50 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 14:29:50 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 14:29:50 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 14:29:50 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 14:29:50 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 14:29:50 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 14:29:50 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 14:29:50 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 14:29:50 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 14:29:50 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 14:29:50 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 14:29:50 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 14:29:50 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 14:29:50 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 14:29:50 Asia/Tokyo] PHP  14. Cake\Controller\Controller->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:127
+[23-Oct-2017 14:29:50 Asia/Tokyo] PHP  15. Cake\View\View->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:617
+[23-Oct-2017 14:29:50 Asia/Tokyo] PHP  16. Cake\View\View->_render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:597
+[23-Oct-2017 14:29:50 Asia/Tokyo] PHP  17. Cake\View\View->_evaluate() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:973
+[23-Oct-2017 14:29:50 Asia/Tokyo] PHP  18. include() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:1014
+[23-Oct-2017 15:18:30 Asia/Tokyo] PHP Parse error:  syntax error, unexpected '++' (T_INC) in /home/ubuntu/workspace/src/Template/Attendance/TimeCards/index.ctp on line 146
+[23-Oct-2017 15:18:30 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 15:18:30 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 15:18:30 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 15:18:30 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 15:18:30 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 15:18:30 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 15:18:30 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 15:18:30 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 15:18:30 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 15:18:30 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 15:18:30 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 15:18:30 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 15:18:30 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 15:18:30 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 15:18:30 Asia/Tokyo] PHP  14. Cake\Controller\Controller->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:127
+[23-Oct-2017 15:18:30 Asia/Tokyo] PHP  15. Cake\View\View->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:617
+[23-Oct-2017 15:18:30 Asia/Tokyo] PHP  16. Cake\View\View->_render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:597
+[23-Oct-2017 15:18:30 Asia/Tokyo] PHP  17. Cake\View\View->_evaluate() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:973
+[23-Oct-2017 15:31:47 Asia/Tokyo] PHP Parse error:  syntax error, unexpected '?>' in /home/ubuntu/workspace/src/Template/Attendance/TimeCards/index.ctp on line 107
+[23-Oct-2017 15:31:47 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 15:31:47 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 15:31:47 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 15:31:47 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 15:31:47 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 15:31:47 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 15:31:47 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 15:31:47 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 15:31:47 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 15:31:47 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 15:31:47 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 15:31:47 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 15:31:47 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 15:31:47 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 15:31:47 Asia/Tokyo] PHP  14. Cake\Controller\Controller->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:127
+[23-Oct-2017 15:31:47 Asia/Tokyo] PHP  15. Cake\View\View->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:617
+[23-Oct-2017 15:31:47 Asia/Tokyo] PHP  16. Cake\View\View->_render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:597
+[23-Oct-2017 15:31:47 Asia/Tokyo] PHP  17. Cake\View\View->_evaluate() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:973
+[23-Oct-2017 15:43:41 Asia/Tokyo] PHP Warning:  Unterminated comment starting line 8 in /home/ubuntu/workspace/src/Template/Users/attendance.ctp on line 8
+[23-Oct-2017 15:43:41 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 15:43:41 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 15:43:41 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 15:43:41 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 15:43:41 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 15:43:41 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 15:43:41 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 15:43:41 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 15:43:41 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 15:43:41 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 15:43:41 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 15:43:41 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 15:43:41 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 15:43:41 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 15:43:41 Asia/Tokyo] PHP  14. Cake\Controller\Controller->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:127
+[23-Oct-2017 15:43:41 Asia/Tokyo] PHP  15. Cake\View\View->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:617
+[23-Oct-2017 15:43:41 Asia/Tokyo] PHP  16. Cake\View\View->_render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:597
+[23-Oct-2017 15:43:41 Asia/Tokyo] PHP  17. Cake\View\View->_evaluate() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:973
+[23-Oct-2017 16:13:14 Asia/Tokyo] PHP Fatal error:  Cannot use object of type Cake\I18n\FrozenDate as array in /home/ubuntu/workspace/src/Controller/Attendance/TimeCardsController.php on line 57
+[23-Oct-2017 16:13:14 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 16:13:14 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 16:13:14 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 16:13:14 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 16:13:14 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 16:13:14 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:13:14 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 16:13:14 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:13:14 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 16:13:14 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:13:14 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 16:13:14 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:13:14 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 16:13:14 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 16:13:14 Asia/Tokyo] PHP  14. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:121
+[23-Oct-2017 16:13:14 Asia/Tokyo] PHP  15. call_user_func_array:{/home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435}() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 16:13:14 Asia/Tokyo] PHP  16. App\Controller\Attendance\TimeCardsController->index() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 16:14:07 Asia/Tokyo] PHP Fatal error:  Cannot use object of type Cake\I18n\FrozenDate as array in /home/ubuntu/workspace/src/Controller/Attendance/TimeCardsController.php on line 58
+[23-Oct-2017 16:14:07 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 16:14:07 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 16:14:07 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 16:14:07 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 16:14:07 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 16:14:07 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:14:07 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 16:14:07 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:14:07 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 16:14:07 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:14:07 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 16:14:07 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:14:07 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 16:14:07 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 16:14:07 Asia/Tokyo] PHP  14. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:121
+[23-Oct-2017 16:14:07 Asia/Tokyo] PHP  15. call_user_func_array:{/home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435}() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 16:14:07 Asia/Tokyo] PHP  16. App\Controller\Attendance\TimeCardsController->index() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 16:14:59 Asia/Tokyo] PHP Fatal error:  Call to undefined method Cake\I18n\FrozenDate::time() in /home/ubuntu/workspace/src/Controller/Attendance/TimeCardsController.php on line 58
+[23-Oct-2017 16:14:59 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 16:14:59 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 16:14:59 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 16:14:59 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 16:14:59 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 16:14:59 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:14:59 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 16:14:59 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:14:59 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 16:14:59 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:14:59 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 16:14:59 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:14:59 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 16:14:59 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 16:14:59 Asia/Tokyo] PHP  14. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:121
+[23-Oct-2017 16:14:59 Asia/Tokyo] PHP  15. call_user_func_array:{/home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435}() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 16:14:59 Asia/Tokyo] PHP  16. App\Controller\Attendance\TimeCardsController->index() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 16:16:58 Asia/Tokyo] PHP Fatal error:  Call to undefined method Cake\I18n\FrozenDate::toString() in /home/ubuntu/workspace/src/Controller/Attendance/TimeCardsController.php on line 58
+[23-Oct-2017 16:16:58 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 16:16:58 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 16:16:58 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 16:16:58 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 16:16:58 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 16:16:58 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:16:58 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 16:16:58 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:16:58 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 16:16:58 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:16:58 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 16:16:58 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:16:58 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 16:16:58 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 16:16:58 Asia/Tokyo] PHP  14. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:121
+[23-Oct-2017 16:16:58 Asia/Tokyo] PHP  15. call_user_func_array:{/home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435}() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 16:16:58 Asia/Tokyo] PHP  16. App\Controller\Attendance\TimeCardsController->index() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 16:17:10 Asia/Tokyo] PHP Fatal error:  Call to undefined method Cake\I18n\FrozenDate::getDate() in /home/ubuntu/workspace/src/Controller/Attendance/TimeCardsController.php on line 58
+[23-Oct-2017 16:17:10 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 16:17:10 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 16:17:10 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 16:17:10 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 16:17:10 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 16:17:10 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:17:10 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 16:17:10 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:17:10 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 16:17:10 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:17:10 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 16:17:10 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:17:10 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 16:17:10 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 16:17:10 Asia/Tokyo] PHP  14. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:121
+[23-Oct-2017 16:17:10 Asia/Tokyo] PHP  15. call_user_func_array:{/home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435}() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 16:17:10 Asia/Tokyo] PHP  16. App\Controller\Attendance\TimeCardsController->index() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 16:19:45 Asia/Tokyo] PHP Fatal error:  Call to a member function format() on a non-object in /home/ubuntu/workspace/src/Controller/Attendance/TimeCardsController.php on line 58
+[23-Oct-2017 16:19:45 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 16:19:45 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 16:19:45 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 16:19:45 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 16:19:45 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 16:19:45 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:19:45 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 16:19:45 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:19:45 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 16:19:45 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:19:45 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 16:19:45 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:19:45 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 16:19:45 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 16:19:45 Asia/Tokyo] PHP  14. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:121
+[23-Oct-2017 16:19:45 Asia/Tokyo] PHP  15. call_user_func_array:{/home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435}() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 16:19:45 Asia/Tokyo] PHP  16. App\Controller\Attendance\TimeCardsController->index() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 16:38:23 Asia/Tokyo] PHP Fatal error:  Call to a member function i18nFormat() on a non-object in /home/ubuntu/workspace/src/Template/Attendance/TimeCards/index.ctp on line 139
+[23-Oct-2017 16:38:23 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 16:38:23 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 16:38:23 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 16:38:23 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 16:38:23 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 16:38:23 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:38:23 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 16:38:23 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:38:23 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 16:38:23 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:38:23 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 16:38:23 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:38:23 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 16:38:23 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 16:38:23 Asia/Tokyo] PHP  14. Cake\Controller\Controller->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:127
+[23-Oct-2017 16:38:23 Asia/Tokyo] PHP  15. Cake\View\View->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:617
+[23-Oct-2017 16:38:23 Asia/Tokyo] PHP  16. Cake\View\View->_render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:597
+[23-Oct-2017 16:38:23 Asia/Tokyo] PHP  17. Cake\View\View->_evaluate() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:973
+[23-Oct-2017 16:38:23 Asia/Tokyo] PHP  18. include() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:1014
+[23-Oct-2017 16:42:22 Asia/Tokyo] PHP Fatal error:  Call to a member function i18nFormat() on a non-object in /home/ubuntu/workspace/src/Template/Attendance/TimeCards/index.ctp on line 139
+[23-Oct-2017 16:42:22 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 16:42:22 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 16:42:22 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 16:42:22 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 16:42:22 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 16:42:22 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:42:22 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 16:42:22 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:42:22 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 16:42:22 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:42:22 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 16:42:22 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:42:22 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 16:42:22 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 16:42:22 Asia/Tokyo] PHP  14. Cake\Controller\Controller->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:127
+[23-Oct-2017 16:42:22 Asia/Tokyo] PHP  15. Cake\View\View->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:617
+[23-Oct-2017 16:42:22 Asia/Tokyo] PHP  16. Cake\View\View->_render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:597
+[23-Oct-2017 16:42:22 Asia/Tokyo] PHP  17. Cake\View\View->_evaluate() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:973
+[23-Oct-2017 16:42:22 Asia/Tokyo] PHP  18. include() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:1014
+[23-Oct-2017 16:44:10 Asia/Tokyo] PHP Fatal error:  Call to a member function i18nFormat() on a non-object in /home/ubuntu/workspace/src/Template/Attendance/TimeCards/index.ctp on line 139
+[23-Oct-2017 16:44:10 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 16:44:10 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 16:44:10 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 16:44:10 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 16:44:10 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 16:44:10 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:44:10 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 16:44:10 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:44:10 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 16:44:10 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:44:10 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 16:44:10 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 16:44:10 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 16:44:10 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 16:44:10 Asia/Tokyo] PHP  14. Cake\Controller\Controller->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:127
+[23-Oct-2017 16:44:10 Asia/Tokyo] PHP  15. Cake\View\View->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:617
+[23-Oct-2017 16:44:10 Asia/Tokyo] PHP  16. Cake\View\View->_render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:597
+[23-Oct-2017 16:44:10 Asia/Tokyo] PHP  17. Cake\View\View->_evaluate() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:973
+[23-Oct-2017 16:44:10 Asia/Tokyo] PHP  18. include() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:1014
+[23-Oct-2017 17:33:33 Asia/Tokyo] PHP Parse error:  syntax error, unexpected '}' in /home/ubuntu/workspace/src/Controller/Attendance/TimeCardsController.php on line 61
+[23-Oct-2017 17:33:33 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 17:33:33 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 17:33:33 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 17:33:33 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 17:33:33 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 17:33:33 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 17:33:33 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 17:33:33 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 17:33:33 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 17:33:33 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 17:33:33 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 17:33:33 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 17:33:33 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 17:33:33 Asia/Tokyo] PHP  13. Cake\Http\ControllerFactory->create() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:92
+[23-Oct-2017 17:33:33 Asia/Tokyo] PHP  14. Cake\Core\App::className() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ControllerFactory.php:70
+[23-Oct-2017 17:33:33 Asia/Tokyo] PHP  15. Cake\Core\App::_classExistsInBase() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Core/App.php:64
+[23-Oct-2017 17:33:33 Asia/Tokyo] PHP  16. class_exists() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Core/App.php:152
+[23-Oct-2017 17:33:33 Asia/Tokyo] PHP  17. spl_autoload_call() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Core/App.php:152
+[23-Oct-2017 17:33:33 Asia/Tokyo] PHP  18. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Core/App.php:152
+[23-Oct-2017 17:33:33 Asia/Tokyo] PHP  19. Composer\Autoload\includeFile() /home/ubuntu/workspace/vendor/composer/ClassLoader.php:322
+[23-Oct-2017 17:33:44 Asia/Tokyo] PHP Parse error:  syntax error, unexpected ';' in /home/ubuntu/workspace/src/Controller/Attendance/TimeCardsController.php on line 62
+[23-Oct-2017 17:33:44 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 17:33:44 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 17:33:44 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 17:33:44 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 17:33:44 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 17:33:44 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 17:33:44 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 17:33:44 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 17:33:44 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 17:33:44 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 17:33:44 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 17:33:44 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 17:33:44 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 17:33:44 Asia/Tokyo] PHP  13. Cake\Http\ControllerFactory->create() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:92
+[23-Oct-2017 17:33:44 Asia/Tokyo] PHP  14. Cake\Core\App::className() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ControllerFactory.php:70
+[23-Oct-2017 17:33:44 Asia/Tokyo] PHP  15. Cake\Core\App::_classExistsInBase() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Core/App.php:64
+[23-Oct-2017 17:33:44 Asia/Tokyo] PHP  16. class_exists() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Core/App.php:152
+[23-Oct-2017 17:33:44 Asia/Tokyo] PHP  17. spl_autoload_call() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Core/App.php:152
+[23-Oct-2017 17:33:44 Asia/Tokyo] PHP  18. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Core/App.php:152
+[23-Oct-2017 17:33:44 Asia/Tokyo] PHP  19. Composer\Autoload\includeFile() /home/ubuntu/workspace/vendor/composer/ClassLoader.php:322
+[23-Oct-2017 17:39:57 Asia/Tokyo] PHP Fatal error:  Class 'App\Controller\Attendance\DateTime' not found in /home/ubuntu/workspace/src/Controller/Attendance/TimeCardsController.php on line 56
+[23-Oct-2017 17:39:57 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 17:39:57 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 17:39:57 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 17:39:57 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 17:39:57 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 17:39:57 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 17:39:57 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 17:39:57 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 17:39:57 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 17:39:57 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 17:39:57 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 17:39:57 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 17:39:57 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 17:39:57 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 17:39:57 Asia/Tokyo] PHP  14. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:121
+[23-Oct-2017 17:39:57 Asia/Tokyo] PHP  15. call_user_func_array:{/home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435}() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 17:39:57 Asia/Tokyo] PHP  16. App\Controller\Attendance\TimeCardsController->index() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP Fatal error:  Class 'App\Controller\Attendance\DateTime' not found in /home/ubuntu/workspace/src/Controller/Attendance/TimeCardsController.php on line 56
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP  14. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:121
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP  15. call_user_func_array:{/home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435}() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP  16. App\Controller\Attendance\TimeCardsController->index() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP Fatal error:  Class 'App\Controller\Attendance\Exception' not found in /home/ubuntu/workspace/src/Controller/Attendance/TimeCardsController.php on line 54
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP  14. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:121
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP  15. call_user_func_array:{/home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435}() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 17:41:27 Asia/Tokyo] PHP  16. App\Controller\Attendance\TimeCardsController->index() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 17:42:08 Asia/Tokyo] PHP Fatal error:  Class 'App\Controller\Attendance\Exception' not found in /home/ubuntu/workspace/src/Controller/Attendance/TimeCardsController.php on line 54
+[23-Oct-2017 17:42:08 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 17:42:08 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 17:42:08 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 17:42:08 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 17:42:08 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 17:42:08 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 17:42:08 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 17:42:08 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 17:42:08 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 17:42:08 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 17:42:08 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 17:42:08 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 17:42:08 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 17:42:08 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 17:42:08 Asia/Tokyo] PHP  14. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:121
+[23-Oct-2017 17:42:08 Asia/Tokyo] PHP  15. call_user_func_array:{/home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435}() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 17:42:08 Asia/Tokyo] PHP  16. App\Controller\Attendance\TimeCardsController->index() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 20:41:59 Asia/Tokyo] PHP Fatal error:  Class 'App\Controller\Attendance\DateTime' not found in /home/ubuntu/workspace/src/Controller/Attendance/TimeCardsController.php on line 49
+[23-Oct-2017 20:41:59 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 20:41:59 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 20:41:59 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 20:41:59 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 20:41:59 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 20:41:59 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 20:41:59 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 20:41:59 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 20:41:59 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 20:41:59 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 20:41:59 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 20:41:59 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 20:41:59 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 20:41:59 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 20:41:59 Asia/Tokyo] PHP  14. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:121
+[23-Oct-2017 20:41:59 Asia/Tokyo] PHP  15. call_user_func_array:{/home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435}() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 20:41:59 Asia/Tokyo] PHP  16. App\Controller\Attendance\TimeCardsController->index() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 20:45:38 Asia/Tokyo] PHP Fatal error:  Class 'App\Controller\Attendance\Exception' not found in /home/ubuntu/workspace/src/Controller/Attendance/TimeCardsController.php on line 47
+[23-Oct-2017 20:45:38 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 20:45:38 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 20:45:38 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 20:45:38 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 20:45:38 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 20:45:38 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 20:45:38 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 20:45:38 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 20:45:38 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 20:45:38 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 20:45:38 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 20:45:38 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 20:45:38 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 20:45:38 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 20:45:38 Asia/Tokyo] PHP  14. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:121
+[23-Oct-2017 20:45:38 Asia/Tokyo] PHP  15. call_user_func_array:{/home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435}() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 20:45:38 Asia/Tokyo] PHP  16. App\Controller\Attendance\TimeCardsController->index() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 20:46:00 Asia/Tokyo] PHP Fatal error:  Class 'App\Controller\Attendance\Exception' not found in /home/ubuntu/workspace/src/Controller/Attendance/TimeCardsController.php on line 47
+[23-Oct-2017 20:46:00 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 20:46:00 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 20:46:00 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 20:46:00 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 20:46:00 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 20:46:00 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 20:46:00 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 20:46:00 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 20:46:00 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 20:46:00 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 20:46:00 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 20:46:00 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 20:46:00 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 20:46:00 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 20:46:00 Asia/Tokyo] PHP  14. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:121
+[23-Oct-2017 20:46:00 Asia/Tokyo] PHP  15. call_user_func_array:{/home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435}() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 20:46:00 Asia/Tokyo] PHP  16. App\Controller\Attendance\TimeCardsController->index() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 20:50:27 Asia/Tokyo] PHP Fatal error:  Call to undefined function App\Controller\Attendance\strtodate() in /home/ubuntu/workspace/src/Controller/Attendance/TimeCardsController.php on line 50
+[23-Oct-2017 20:50:27 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 20:50:27 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 20:50:27 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 20:50:27 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 20:50:27 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 20:50:27 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 20:50:27 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 20:50:27 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 20:50:27 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 20:50:27 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 20:50:27 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 20:50:27 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 20:50:27 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 20:50:27 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 20:50:27 Asia/Tokyo] PHP  14. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:121
+[23-Oct-2017 20:50:27 Asia/Tokyo] PHP  15. call_user_func_array:{/home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435}() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 20:50:27 Asia/Tokyo] PHP  16. App\Controller\Attendance\TimeCardsController->index() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 21:47:58 Asia/Tokyo] PHP Fatal error:  Call to a member function find() on a non-object in /home/ubuntu/workspace/src/Controller/Attendance/TimeCardsController.php on line 325
+[23-Oct-2017 21:47:58 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 21:47:58 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 21:47:58 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 21:47:58 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 21:47:58 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 21:47:58 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 21:47:58 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 21:47:58 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 21:47:58 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 21:47:58 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 21:47:58 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 21:47:58 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 21:47:58 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 21:47:58 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 21:47:58 Asia/Tokyo] PHP  14. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:121
+[23-Oct-2017 21:47:58 Asia/Tokyo] PHP  15. call_user_func_array:{/home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435}() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 21:47:58 Asia/Tokyo] PHP  16. App\Controller\Attendance\TimeCardsController->search() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 21:48:42 Asia/Tokyo] PHP Fatal error:  Call to a member function find() on a non-object in /home/ubuntu/workspace/src/Controller/Attendance/TimeCardsController.php on line 325
+[23-Oct-2017 21:48:42 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 21:48:42 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 21:48:42 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 21:48:42 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 21:48:42 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 21:48:42 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 21:48:42 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 21:48:42 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 21:48:42 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 21:48:42 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 21:48:42 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 21:48:42 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 21:48:42 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 21:48:42 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 21:48:42 Asia/Tokyo] PHP  14. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:121
+[23-Oct-2017 21:48:42 Asia/Tokyo] PHP  15. call_user_func_array:{/home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435}() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 21:48:42 Asia/Tokyo] PHP  16. App\Controller\Attendance\TimeCardsController->search() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 21:48:48 Asia/Tokyo] PHP Fatal error:  Call to a member function find() on a non-object in /home/ubuntu/workspace/src/Controller/Attendance/TimeCardsController.php on line 325
+[23-Oct-2017 21:48:48 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 21:48:48 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 21:48:48 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 21:48:48 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 21:48:48 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 21:48:48 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 21:48:48 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 21:48:48 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 21:48:48 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 21:48:48 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 21:48:48 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 21:48:48 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 21:48:48 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 21:48:48 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 21:48:48 Asia/Tokyo] PHP  14. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:121
+[23-Oct-2017 21:48:48 Asia/Tokyo] PHP  15. call_user_func_array:{/home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435}() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 21:48:48 Asia/Tokyo] PHP  16. App\Controller\Attendance\TimeCardsController->search() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 22:03:23 Asia/Tokyo] PHP Fatal error:  Call to a member function get() on a non-object in /home/ubuntu/workspace/src/Controller/Attendance/EmployeesController.php on line 106
+[23-Oct-2017 22:03:23 Asia/Tokyo] PHP Stack trace:
+[23-Oct-2017 22:03:23 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 22:03:23 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[23-Oct-2017 22:03:23 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:90
+[23-Oct-2017 22:03:23 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[23-Oct-2017 22:03:23 Asia/Tokyo] PHP   5. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 22:03:23 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:81
+[23-Oct-2017 22:03:23 Asia/Tokyo] PHP   7. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 22:03:23 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[23-Oct-2017 22:03:23 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 22:03:23 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:62
+[23-Oct-2017 22:03:23 Asia/Tokyo] PHP  11. Cake\Http\BaseApplication->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[23-Oct-2017 22:03:23 Asia/Tokyo] PHP  12. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:83
+[23-Oct-2017 22:03:23 Asia/Tokyo] PHP  13. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:95
+[23-Oct-2017 22:03:23 Asia/Tokyo] PHP  14. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:121
+[23-Oct-2017 22:03:23 Asia/Tokyo] PHP  15. call_user_func_array:{/home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435}() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 22:03:23 Asia/Tokyo] PHP  16. App\Controller\Attendance\EmployeesController->add() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:435
+[23-Oct-2017 14:00:36 UTC] PHP Parse error:  syntax error, unexpected '.', expecting '&' or variable (T_VARIABLE) in /home/ubuntu/workspace/vendor/cakephp/cakephp/src/I18n/functions.php on line 26
+[23-Oct-2017 14:00:36 UTC] PHP Stack trace:
+[23-Oct-2017 14:00:36 UTC] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 14:00:36 UTC] PHP   2. require() /home/ubuntu/workspace/webroot/index.php:27
+[23-Oct-2017 14:00:36 UTC] PHP   3. ComposerAutoloaderInit3ba0921653337ec5ee811908372d95c2::getLoader() /home/ubuntu/workspace/vendor/autoload.php:7
+[23-Oct-2017 14:00:36 UTC] PHP   4. composerRequire3ba0921653337ec5ee811908372d95c2() /home/ubuntu/workspace/vendor/composer/autoload_real.php:56
+[23-Oct-2017 14:00:43 UTC] PHP Parse error:  syntax error, unexpected '.', expecting '&' or variable (T_VARIABLE) in /home/ubuntu/workspace/vendor/cakephp/cakephp/src/I18n/functions.php on line 26
+[23-Oct-2017 14:00:43 UTC] PHP Stack trace:
+[23-Oct-2017 14:00:43 UTC] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 14:00:43 UTC] PHP   2. require() /home/ubuntu/workspace/webroot/index.php:27
+[23-Oct-2017 14:00:43 UTC] PHP   3. ComposerAutoloaderInit3ba0921653337ec5ee811908372d95c2::getLoader() /home/ubuntu/workspace/vendor/autoload.php:7
+[23-Oct-2017 14:00:43 UTC] PHP   4. composerRequire3ba0921653337ec5ee811908372d95c2() /home/ubuntu/workspace/vendor/composer/autoload_real.php:56
+[23-Oct-2017 14:00:50 UTC] PHP Parse error:  syntax error, unexpected '.', expecting '&' or variable (T_VARIABLE) in /home/ubuntu/workspace/vendor/cakephp/cakephp/src/I18n/functions.php on line 26
+[23-Oct-2017 14:00:50 UTC] PHP Stack trace:
+[23-Oct-2017 14:00:50 UTC] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 14:00:50 UTC] PHP   2. require() /home/ubuntu/workspace/webroot/index.php:27
+[23-Oct-2017 14:00:50 UTC] PHP   3. ComposerAutoloaderInit3ba0921653337ec5ee811908372d95c2::getLoader() /home/ubuntu/workspace/vendor/autoload.php:7
+[23-Oct-2017 14:00:50 UTC] PHP   4. composerRequire3ba0921653337ec5ee811908372d95c2() /home/ubuntu/workspace/vendor/composer/autoload_real.php:56
+[23-Oct-2017 14:01:15 UTC] PHP Parse error:  syntax error, unexpected '.', expecting '&' or variable (T_VARIABLE) in /home/ubuntu/workspace/vendor/cakephp/cakephp/src/I18n/functions.php on line 26
+[23-Oct-2017 14:01:15 UTC] PHP Stack trace:
+[23-Oct-2017 14:01:15 UTC] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 14:01:15 UTC] PHP   2. require() /home/ubuntu/workspace/webroot/index.php:27
+[23-Oct-2017 14:01:15 UTC] PHP   3. ComposerAutoloaderInit3ba0921653337ec5ee811908372d95c2::getLoader() /home/ubuntu/workspace/vendor/autoload.php:7
+[23-Oct-2017 14:01:15 UTC] PHP   4. composerRequire3ba0921653337ec5ee811908372d95c2() /home/ubuntu/workspace/vendor/composer/autoload_real.php:56
+[23-Oct-2017 14:07:16 UTC] PHP Parse error:  syntax error, unexpected '.', expecting '&' or variable (T_VARIABLE) in /home/ubuntu/workspace/vendor/cakephp/cakephp/src/I18n/functions.php on line 26
+[23-Oct-2017 14:07:16 UTC] PHP Stack trace:
+[23-Oct-2017 14:07:16 UTC] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 14:07:16 UTC] PHP   2. require() /home/ubuntu/workspace/webroot/index.php:27
+[23-Oct-2017 14:07:16 UTC] PHP   3. ComposerAutoloaderInit3ba0921653337ec5ee811908372d95c2::getLoader() /home/ubuntu/workspace/vendor/autoload.php:7
+[23-Oct-2017 14:07:16 UTC] PHP   4. composerRequire3ba0921653337ec5ee811908372d95c2() /home/ubuntu/workspace/vendor/composer/autoload_real.php:56
+[23-Oct-2017 14:10:00 UTC] PHP Parse error:  syntax error, unexpected '.', expecting '&' or variable (T_VARIABLE) in /home/ubuntu/workspace/vendor/cakephp/cakephp/src/I18n/functions.php on line 26
+[23-Oct-2017 14:10:00 UTC] PHP Stack trace:
+[23-Oct-2017 14:10:00 UTC] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 14:10:00 UTC] PHP   2. require() /home/ubuntu/workspace/webroot/index.php:27
+[23-Oct-2017 14:10:00 UTC] PHP   3. ComposerAutoloaderInit3ba0921653337ec5ee811908372d95c2::getLoader() /home/ubuntu/workspace/vendor/autoload.php:7
+[23-Oct-2017 14:10:00 UTC] PHP   4. composerRequire3ba0921653337ec5ee811908372d95c2() /home/ubuntu/workspace/vendor/composer/autoload_real.php:56
+[23-Oct-2017 14:11:45 UTC] PHP Parse error:  syntax error, unexpected '.', expecting '&' or variable (T_VARIABLE) in /home/ubuntu/workspace/vendor/cakephp/cakephp/src/I18n/functions.php on line 26
+[23-Oct-2017 14:11:45 UTC] PHP Stack trace:
+[23-Oct-2017 14:11:45 UTC] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 14:11:45 UTC] PHP   2. require() /home/ubuntu/workspace/webroot/index.php:27
+[23-Oct-2017 14:11:45 UTC] PHP   3. ComposerAutoloaderInit3ba0921653337ec5ee811908372d95c2::getLoader() /home/ubuntu/workspace/vendor/autoload.php:7
+[23-Oct-2017 14:11:45 UTC] PHP   4. composerRequire3ba0921653337ec5ee811908372d95c2() /home/ubuntu/workspace/vendor/composer/autoload_real.php:56
+[23-Oct-2017 14:11:59 UTC] PHP Parse error:  syntax error, unexpected '.', expecting '&' or variable (T_VARIABLE) in /home/ubuntu/workspace/vendor/cakephp/cakephp/src/I18n/functions.php on line 26
+[23-Oct-2017 14:11:59 UTC] PHP Stack trace:
+[23-Oct-2017 14:11:59 UTC] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 14:11:59 UTC] PHP   2. require() /home/ubuntu/workspace/webroot/index.php:27
+[23-Oct-2017 14:11:59 UTC] PHP   3. ComposerAutoloaderInit3ba0921653337ec5ee811908372d95c2::getLoader() /home/ubuntu/workspace/vendor/autoload.php:7
+[23-Oct-2017 14:11:59 UTC] PHP   4. composerRequire3ba0921653337ec5ee811908372d95c2() /home/ubuntu/workspace/vendor/composer/autoload_real.php:56
+[23-Oct-2017 14:13:48 UTC] PHP Parse error:  syntax error, unexpected '.', expecting '&' or variable (T_VARIABLE) in /home/ubuntu/workspace/vendor/cakephp/cakephp/src/I18n/functions.php on line 26
+[23-Oct-2017 14:13:48 UTC] PHP Stack trace:
+[23-Oct-2017 14:13:48 UTC] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 14:13:48 UTC] PHP   2. require() /home/ubuntu/workspace/webroot/index.php:27
+[23-Oct-2017 14:13:48 UTC] PHP   3. ComposerAutoloaderInit3ba0921653337ec5ee811908372d95c2::getLoader() /home/ubuntu/workspace/vendor/autoload.php:7
+[23-Oct-2017 14:13:48 UTC] PHP   4. composerRequire3ba0921653337ec5ee811908372d95c2() /home/ubuntu/workspace/vendor/composer/autoload_real.php:56
+[23-Oct-2017 14:28:21 UTC] PHP Parse error:  syntax error, unexpected '.', expecting '&' or variable (T_VARIABLE) in /home/ubuntu/workspace/vendor/cakephp/cakephp/src/I18n/functions.php on line 26
+[23-Oct-2017 14:28:21 UTC] PHP Stack trace:
+[23-Oct-2017 14:28:21 UTC] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 14:28:21 UTC] PHP   2. require() /home/ubuntu/workspace/webroot/index.php:27
+[23-Oct-2017 14:28:21 UTC] PHP   3. ComposerAutoloaderInit3ba0921653337ec5ee811908372d95c2::getLoader() /home/ubuntu/workspace/vendor/autoload.php:7
+[23-Oct-2017 14:28:21 UTC] PHP   4. composerRequire3ba0921653337ec5ee811908372d95c2() /home/ubuntu/workspace/vendor/composer/autoload_real.php:56
+[23-Oct-2017 15:12:13 UTC] PHP Parse error:  syntax error, unexpected '.', expecting '&' or variable (T_VARIABLE) in /home/ubuntu/workspace/vendor/cakephp/cakephp/src/I18n/functions.php on line 26
+[23-Oct-2017 15:12:13 UTC] PHP Stack trace:
+[23-Oct-2017 15:12:13 UTC] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 15:12:13 UTC] PHP   2. require() /home/ubuntu/workspace/webroot/index.php:27
+[23-Oct-2017 15:12:13 UTC] PHP   3. ComposerAutoloaderInit3ba0921653337ec5ee811908372d95c2::getLoader() /home/ubuntu/workspace/vendor/autoload.php:7
+[23-Oct-2017 15:12:13 UTC] PHP   4. composerRequire3ba0921653337ec5ee811908372d95c2() /home/ubuntu/workspace/vendor/composer/autoload_real.php:56
+[23-Oct-2017 15:29:06 UTC] PHP Parse error:  syntax error, unexpected '.', expecting '&' or variable (T_VARIABLE) in /home/ubuntu/workspace/vendor/cakephp/cakephp/src/I18n/functions.php on line 26
+[23-Oct-2017 15:29:06 UTC] PHP Stack trace:
+[23-Oct-2017 15:29:06 UTC] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[23-Oct-2017 15:29:06 UTC] PHP   2. require() /home/ubuntu/workspace/webroot/index.php:27
+[23-Oct-2017 15:29:06 UTC] PHP   3. ComposerAutoloaderInit3ba0921653337ec5ee811908372d95c2::getLoader() /home/ubuntu/workspace/vendor/autoload.php:7
+[23-Oct-2017 15:29:06 UTC] PHP   4. composerRequire3ba0921653337ec5ee811908372d95c2() /home/ubuntu/workspace/vendor/composer/autoload_real.php:56
+[24-Oct-2017 03:50:48 UTC] PHP Parse error:  syntax error, unexpected '.', expecting '&' or variable (T_VARIABLE) in /home/ubuntu/workspace/vendor/cakephp/cakephp/src/I18n/functions.php on line 26
+[24-Oct-2017 03:50:48 UTC] PHP Stack trace:
+[24-Oct-2017 03:50:48 UTC] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[24-Oct-2017 03:50:48 UTC] PHP Parse error:  syntax error, unexpected '.', expecting '&' or variable (T_VARIABLE) in /home/ubuntu/workspace/vendor/cakephp/cakephp/src/I18n/functions.php on line 26
+[24-Oct-2017 03:50:48 UTC] PHP Stack trace:
+[24-Oct-2017 03:50:48 UTC] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[24-Oct-2017 03:50:48 UTC] PHP   2. require() /home/ubuntu/workspace/webroot/index.php:27
+[24-Oct-2017 03:50:48 UTC] PHP   3. ComposerAutoloaderInit3ba0921653337ec5ee811908372d95c2::getLoader() /home/ubuntu/workspace/vendor/autoload.php:7
+[24-Oct-2017 03:50:48 UTC] PHP   4. composerRequire3ba0921653337ec5ee811908372d95c2() /home/ubuntu/workspace/vendor/composer/autoload_real.php:56
+[24-Oct-2017 03:50:48 UTC] PHP   2. require() /home/ubuntu/workspace/webroot/index.php:27
+[24-Oct-2017 03:50:48 UTC] PHP   3. ComposerAutoloaderInit3ba0921653337ec5ee811908372d95c2::getLoader() /home/ubuntu/workspace/vendor/autoload.php:7
+[24-Oct-2017 03:50:48 UTC] PHP   4. composerRequire3ba0921653337ec5ee811908372d95c2() /home/ubuntu/workspace/vendor/composer/autoload_real.php:56
+[24-Oct-2017 04:00:20 UTC] PHP Fatal error:  You must enable the intl extension to use CakePHP. in /home/ubuntu/workspace/config/bootstrap.php on line 27
+[24-Oct-2017 04:00:20 UTC] PHP Fatal error:  You must enable the intl extension to use CakePHP. in /home/ubuntu/workspace/config/bootstrap.php on line 27
+[24-Oct-2017 04:01:24 UTC] PHP Fatal error:  You must enable the intl extension to use CakePHP. in /home/ubuntu/workspace/config/bootstrap.php on line 27
+[24-Oct-2017 04:01:41 UTC] PHP Fatal error:  You must enable the intl extension to use CakePHP. in /home/ubuntu/workspace/config/bootstrap.php on line 27
+[24-Oct-2017 04:03:04 UTC] PHP Fatal error:  You must enable the intl extension to use CakePHP. in /home/ubuntu/workspace/config/bootstrap.php on line 27
+[24-Oct-2017 04:04:56 UTC] PHP Fatal error:  You must enable the intl extension to use CakePHP. in /home/ubuntu/workspace/config/bootstrap.php on line 27
+[24-Oct-2017 04:05:11 UTC] PHP Fatal error:  You must enable the intl extension to use CakePHP. in /home/ubuntu/workspace/config/bootstrap.php on line 27
+[24-Oct-2017 04:05:14 UTC] PHP Fatal error:  You must enable the intl extension to use CakePHP. in /home/ubuntu/workspace/config/bootstrap.php on line 27
+[24-Oct-2017 04:05:16 UTC] PHP Fatal error:  You must enable the intl extension to use CakePHP. in /home/ubuntu/workspace/config/bootstrap.php on line 27
+[24-Oct-2017 04:05:50 UTC] PHP Fatal error:  You must enable the intl extension to use CakePHP. in /home/ubuntu/workspace/config/bootstrap.php on line 27
+[24-Oct-2017 04:08:57 UTC] PHP Fatal error:  You must enable the intl extension to use CakePHP. in /home/ubuntu/workspace/config/bootstrap.php on line 27
+[24-Oct-2017 04:16:25 UTC] PHP Fatal error:  You must enable the intl extension to use CakePHP. in /home/ubuntu/workspace/config/bootstrap.php on line 27
+[24-Oct-2017 04:22:29 UTC] PHP Fatal error:  You must enable the intl extension to use CakePHP. in /home/ubuntu/workspace/config/bootstrap.php on line 27
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 92282880 bytes) in /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Debugger.php on line 850
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP Stack trace:
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:81
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP   5. DebugKit\Middleware\DebugKitMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:52
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP   7. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:95
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP  11. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP  12. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:106
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP  13. App\Application->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP  14. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:103
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP  15. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:93
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP  16. App\Controller\Attendance\MonthlyTimeCardsController->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:125
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP  17. App\View\AppView->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:623
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP  18. App\View\AppView->_render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:765
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP  19. App\View\AppView->_evaluate() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:1157
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP  20. include() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:1196
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP  21. Cake\Error\ErrorHandler->handleError() /home/ubuntu/workspace/src/Template/Attendance/MonthlyTimeCards/view.ctp:67
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP  22. Cake\Error\ErrorHandler->_displayError() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php:152
+[26-Oct-2017 22:39:49 Asia/Tokyo] PHP  23. Cake\Error\Debugger->outputError() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/ErrorHandler.php:118
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 92291072 bytes) in /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Debugger.php on line 850
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP Stack trace:
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:81
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP   5. DebugKit\Middleware\DebugKitMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:52
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP   7. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:95
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP  11. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP  12. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:106
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP  13. App\Application->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP  14. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:103
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP  15. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:93
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP  16. App\Controller\Attendance\MonthlyTimeCardsController->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:125
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP  17. App\View\AppView->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:623
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP  18. App\View\AppView->_render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:765
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP  19. App\View\AppView->_evaluate() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:1157
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP  20. include() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:1196
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP  21. Cake\Error\ErrorHandler->handleError() /home/ubuntu/workspace/src/Template/Attendance/MonthlyTimeCards/view.ctp:67
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP  22. Cake\Error\ErrorHandler->_displayError() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php:152
+[26-Oct-2017 22:41:21 Asia/Tokyo] PHP  23. Cake\Error\Debugger->outputError() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/ErrorHandler.php:118

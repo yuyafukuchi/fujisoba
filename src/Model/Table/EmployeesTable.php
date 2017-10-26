@@ -41,6 +41,8 @@ class EmployeesTable extends Table
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
+        
+        $this->addBehavior('Search.Search');
 
         $this->belongsTo('Companies', [
             'foreignKey' => 'company_id',
@@ -53,6 +55,47 @@ class EmployeesTable extends Table
         $this->hasMany('TimeCards', [
             'foreignKey' => 'employee_id'
         ]);
+        
+        $this->searchManager()
+            ->add('deleted', 'Search.Callback', [
+                'callback' => function ($query, $args, $type) {
+                    $query->where(['Employees.deleted' => $args['deleted']]);
+                    return $query;
+                }
+            ])
+           ->add('retired', 'Search.Callback', [
+                'callback' => function ($query, $args, $type) {
+                    if($args['retired'] =='0'){
+                        $query->where(['Employees.retired is' =>null ]);
+                    }
+                    return $query;
+                }
+            ])
+            ->add('company_id', 'Search.Callback', [
+                'callback' => function ($query, $args, $type) {
+                    $query->where(['Employees.company_id' => $args['company_id']]);
+                    return $query;
+                }
+            ])
+            ->add('name', 'Search.Callback', [
+                'callback' => function ($query, $args, $type) {
+                    $query->where(['OR' => [['Employees.name_last LIKE' => '%'.$args['name'].'%'], ['Employees.name_first LIKE' => '%'.$args['name'].'%']]]);
+                    return $query;
+                }
+            ])
+            
+            ->add('store_id', 'Search.Callback', [
+                'callback' => function ($query, $args, $type) {
+                    $query->where(['Employees.store_id' => $args['store_id']]);
+                    return $query;
+                }
+            ])
+            ->add('code', 'Search.Callback', [
+                'callback' => function ($query, $args, $type) {
+                    $query->where(['Employees.code' => $args['code']]);
+                    return $query;
+                }
+            ]);
     }
 
     /**
@@ -89,7 +132,16 @@ class EmployeesTable extends Table
             ->notEmpty('name_first_kana');
 
         $validator
-            ->allowEmpty('contact_type');
+            ->requirePresence('company_id', 'create')
+            ->notEmpty('company_id');
+        
+        $validator
+            ->requirePresence('store_id', 'create')
+            ->notEmpty('store_id');
+            
+        $validator
+            ->requirePresence('contact_type', 'create')
+            ->notEmpty('contact_type');
 
         $validator
             ->dateTime('joined')
