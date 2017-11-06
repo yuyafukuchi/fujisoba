@@ -24,16 +24,12 @@
     <fieldset>
         <legend><?= __('Edit User') ?></legend>
         <?php
-            echo $this->Form->input('code');
-            echo $this->Form->input('company_id', ['options' => $companies]);
-            echo $this->Form->input('store_id', ['options' => $stores, 'empty' => true]);
-            echo $this->Form->input('name');
-            echo $this->Form->input('password');
-            echo $this->Form->input('type');
-            echo $this->Form->input('created_by');
-            echo $this->Form->input('modified_by', ['empty' => true]);
+            echo $this->Form->input('password',['default' => '']);
+            echo $this->Form->input('password_confirm',['type' => 'password']);
+
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->submit("キャンセル",['name'=>'button']) ?>
+    <?= $this->Form->submit('設定',['name'=>'button']) ?>
     <?= $this->Form->end() ?>
 </div>

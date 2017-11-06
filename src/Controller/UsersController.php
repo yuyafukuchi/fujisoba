@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
 
 /**
  * Users Controller
@@ -27,6 +28,34 @@ class UsersController extends AppController
             ]
         ]);
         $this->Auth->sessionKey = 'Auth.Users';
+    }
+    
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $type = $this->Auth->user('type');
+        $name = '';
+        if($type === 'G')
+        {
+            $this->redirect(array('controller' => 'Attendance/TimeCards', 'action' => 'login'));
+        }
+        else if($type === 'H')
+        {
+            $name = '本社管理者';
+            $searchQuery['company_id'] = $this->Auth->user('company_id');
+            $companies = $this->Users->Companies->find('list', ['limit' => 200]);
+            $stores = $this->Users->Stores->find('list', ['limit' => 200]);
+        }
+        else if($type === 'M')       
+        {
+            $searchQuery['company_id'] = $this->Auth->user('company_id');
+            $searchQuery['store_id'] = $this->Auth->user('store_id');
+            $name = $this->Users->Stores->get($this->Auth->user('store_id'))['name'].'/店舗管理者';
+            $companies = $this->Users->Companies->find('list', ['limit' => 200])->where(['id' => $this->Auth->user('company_id')]);
+            $stores = $this->Users->Stores->find('list', ['limit' => 200])->where(['id' => $this->Auth->user('store_id')]);
+        }
+         $data = array('type' => $type, 'name' => $name);
+         $this->set(compact('companies', 'stores','data'));
     }
 
     /**
@@ -102,13 +131,19 @@ class UsersController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->data);
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+            $data = $this->request->data;
+            if($data['button'] === 'キャンセル'){
+                return $this->redirect(['action' => 'list']);
+            } else if($data['button'] === '変更'){
+                $data['id'] = $id;
+                $user = $this->Users->patchEntity($user, $data);
+                if ($this->Users->save($user)) {
+                    $this->Flash->success(__('パスワードを変更しました。'));
+                    return $this->redirect(['action' => 'list']);
+                }
+                debug($user->errors());
+                $this->Flash->error(__('正しいパスワードを入力してください'));
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
         $companies = $this->Users->Companies->find('list', ['limit' => 200]);
         $stores = $this->Users->Stores->find('list', ['limit' => 200]);
@@ -179,6 +214,15 @@ class UsersController extends AppController
         $this->set(compact('data'));
         $this->set('_serialize', ['data']);
     }
-
+    
+    public function sales() {
+       $storeId = $this->Auth->user('store_id');
+       $this->set(compact('storeId'));
+    }
+    
+    public function list() {
+        $users = $this->Users->find()->select(['id', 'name']);
+        $this->set(compact('users'));
+    }
 
 }

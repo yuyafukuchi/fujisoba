@@ -9,8 +9,8 @@ use Cake\Validation\Validator;
 /**
  * SalesItemTransactions Model
  *
- * @property \Cake\ORM\Association\BelongsTo $SalesTransactions
- * @property \Cake\ORM\Association\BelongsTo $SalesItems
+ * @property \App\Model\Table\SalesTransactionsTable|\Cake\ORM\Association\BelongsTo $SalesTransactions
+ * @property \App\Model\Table\SalesItemsTable|\Cake\ORM\Association\BelongsTo $SalesItems
  *
  * @method \App\Model\Entity\SalesItemTransaction get($primaryKey, $options = [])
  * @method \App\Model\Entity\SalesItemTransaction newEntity($data = null, array $options = [])
@@ -22,7 +22,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class SalesItemTransactionsTable extends AppTable
+class SalesItemTransactionsTable extends Table
 {
 
     /**
@@ -35,11 +35,11 @@ class SalesItemTransactionsTable extends AppTable
     {
         parent::initialize($config);
 
-        $this->table('sales_item_transactions');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setTable('sales_item_transactions');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
 
-        
+        $this->addBehavior('Timestamp');
 
         $this->belongsTo('SalesTransactions', [
             'foreignKey' => 'sales_transaction_id',
@@ -72,7 +72,7 @@ class SalesItemTransactionsTable extends AppTable
             ->allowEmpty('sales_item_price');
 
         $validator
-            ->integer('sales_item_cost')
+            ->decimal('sales_item_cost')
             ->allowEmpty('sales_item_cost');
 
         $validator

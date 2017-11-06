@@ -36,7 +36,7 @@ class MenuHistoriesTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('MenuHistories') ? [] : ['className' => 'App\Model\Table\MenuHistoriesTable'];
+        $config = TableRegistry::exists('MenuHistories') ? [] : ['className' => MenuHistoriesTable::class];
         $this->MenuHistories = TableRegistry::get('MenuHistories', $config);
     }
 

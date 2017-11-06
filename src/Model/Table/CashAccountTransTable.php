@@ -9,8 +9,8 @@ use Cake\Validation\Validator;
 /**
  * CashAccountTrans Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Stores
- * @property \Cake\ORM\Association\BelongsTo $CashAccounts
+ * @property \App\Model\Table\StoresTable|\Cake\ORM\Association\BelongsTo $Stores
+ * @property |\Cake\ORM\Association\BelongsTo $CashAccounts
  *
  * @method \App\Model\Entity\CashAccountTran get($primaryKey, $options = [])
  * @method \App\Model\Entity\CashAccountTran newEntity($data = null, array $options = [])
@@ -22,7 +22,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class CashAccountTransTable extends AppTable
+class CashAccountTransTable extends Table
 {
 
     /**
@@ -35,19 +35,19 @@ class CashAccountTransTable extends AppTable
     {
         parent::initialize($config);
 
-        $this->table('cash_account_trans');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setTable('cash_account_trans');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
 
-        
+        $this->addBehavior('Timestamp');
 
         $this->belongsTo('Stores', [
             'foreignKey' => 'store_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('CashAccounts', [
+        $this->belongsTo('Accounts', [
             'foreignKey' => 'cash_account_id',
-            'joinType' => 'INNER'
+            'conditions' => ['Accounts.cash_account ' => 1],
         ]);
     }
 
@@ -68,10 +68,11 @@ class CashAccountTransTable extends AppTable
             ->allowEmpty('transaction_date');
 
         $validator
-            ->integer('amount')
-            ->allowEmpty('amount');
+            ->requirePresence('amount', 'create')
+            ->notEmpty('amount');
 
         $validator
+            ->scalar('note')
             ->allowEmpty('note');
 
         $validator
@@ -94,8 +95,8 @@ class CashAccountTransTable extends AppTable
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['store_id'], 'Stores'));
-        $rules->add($rules->existsIn(['cash_account_id'], 'CashAccounts'));
+        //$rules->add($rules->existsIn(['store_id'], 'Stores'));
+        $rules->add($rules->existsIn(['cash_account_id'], 'Accounts'));
 
         return $rules;
     }

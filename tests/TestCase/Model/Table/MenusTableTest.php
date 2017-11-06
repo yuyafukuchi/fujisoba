@@ -32,15 +32,14 @@ class MenusTableTest extends TestCase
         'app.time_cards',
         'app.users',
         'app.cash_account_trans',
-        'app.cash_accounts',
+        'app.accounts',
+        'app.store_account_infos',
+        'app.debit_categories',
+        'app.credit_categories',
         'app.inventory_purchase_transactions',
         'app.inventory_items',
         'app.inventory_item_histories',
         'app.store_inventory_item_histories',
-        'app.store_account_infos',
-        'app.accounts',
-        'app.debit_categories',
-        'app.credit_categories',
         'app.store_menu_histories',
         'app.sales_item_transactions',
         'app.sales_items',
@@ -57,7 +56,7 @@ class MenusTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Menus') ? [] : ['className' => 'App\Model\Table\MenusTable'];
+        $config = TableRegistry::exists('Menus') ? [] : ['className' => MenusTable::class];
         $this->Menus = TableRegistry::get('Menus', $config);
     }
 
@@ -89,6 +88,16 @@ class MenusTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test buildRules method
+     *
+     * @return void
+     */
+    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

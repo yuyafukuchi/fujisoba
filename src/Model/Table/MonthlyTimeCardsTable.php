@@ -91,6 +91,30 @@ class MonthlyTimeCardsTable extends Table
                     $query->where(['Employees.code' => $args['code']]);
                     return $query;
                 }
+            ])
+            ->add('printed', 'Search.Callback', [
+                'callback' => function ($query, $args, $type) {
+                    if($args['printed'] === '1'){
+                        $query->where(['MonthlyTimeCards.printed' => false]);
+                    }
+                    return $query;
+                }
+            ])
+            ->add('approved', 'Search.Callback', [
+                'callback' => function ($query, $args, $type) {
+                    if($args['approved'] === '1'){
+                        $query->where(['MonthlyTimeCards.approved' => false]);
+                    }
+                    return $query;
+                }
+            ])
+            ->add('csv_exported', 'Search.Callback', [
+                'callback' => function ($query, $args, $type) {
+                    if($args['csv_exported'] === '1'){
+                        $query->where(['MonthlyTimeCards.csv_exported' => false]);
+                    }
+                    return $query;
+                }
             ]);
     }
 

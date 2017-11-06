@@ -9,7 +9,7 @@ use Cake\Validation\Validator;
 /**
  * InventoryItemHistories Model
  *
- * @property \Cake\ORM\Association\BelongsTo $InventoryItems
+ * @property \App\Model\Table\InventoryItemsTable|\Cake\ORM\Association\BelongsTo $InventoryItems
  *
  * @method \App\Model\Entity\InventoryItemHistory get($primaryKey, $options = [])
  * @method \App\Model\Entity\InventoryItemHistory newEntity($data = null, array $options = [])
@@ -21,7 +21,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class InventoryItemHistoriesTable extends AppTable
+class InventoryItemHistoriesTable extends Table
 {
 
     /**
@@ -34,11 +34,11 @@ class InventoryItemHistoriesTable extends AppTable
     {
         parent::initialize($config);
 
-        $this->table('inventory_item_histories');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setTable('inventory_item_histories');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
 
-        
+        $this->addBehavior('Timestamp');
 
         $this->belongsTo('InventoryItems', [
             'foreignKey' => 'inventory_item_id',
@@ -59,6 +59,7 @@ class InventoryItemHistoriesTable extends AppTable
             ->allowEmpty('id', 'create');
 
         $validator
+            ->scalar('item_name')
             ->requirePresence('item_name', 'create')
             ->notEmpty('item_name');
 

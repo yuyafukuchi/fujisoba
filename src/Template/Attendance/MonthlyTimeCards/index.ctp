@@ -12,7 +12,7 @@
 echo $this -> Form -> create (null);
 echo '該当年月';
 echo $this -> Form -> input (
-     "date", [ "label" => "日本表記の日時",
+     "date", [ "label" => "",
                       "type" => "datetime",
                       "dateformat" => "YM",
                       "monthNames" => false,
@@ -25,19 +25,19 @@ echo $this -> Form -> input (
 
 echo $this -> Form -> label ( "invalid", "勤務データ不備あり" );
 echo $this -> Form -> checkbox ( "invalid", [ "id" => "invalid",
-                                            "value" => "check2" ] );
+                                            "value" => "1" ] );
 echo $this -> Form -> label ( "printed", "未印刷" );
 echo $this -> Form -> checkbox ( "printed", [ "id" => "printed",
-                                            "value" => "check2" ] );
+                                            "value" => "1" ] );
 echo $this -> Form -> label ( "approved", "未承認" );
 echo $this -> Form -> checkbox ( "approved", [ "id" => "approved",
-                                            "value" => "check2" ] );
+                                            "value" => "1" ] );
 echo $this -> Form -> label ( "csv_exported", "CSV未出力" );
 echo $this -> Form -> checkbox ( "csv_exported", [ "id" => "csv_exported",
-                                            "value" => "check2" ] );
+                                            "value" => "1" ] );
 echo $this -> Form -> label ( "unmatch", "予定と実績が異なる" );
 echo $this -> Form -> checkbox ( "unmatch", [ "id" => "unmatch",
-                                            "value" => "check2" ] );
+                                            "value" => "1" ] );
 echo $this -> Form -> input ( "code", [ "type" => "text",
                                            "size" => 10,
                                            "label" => "従業員コード",

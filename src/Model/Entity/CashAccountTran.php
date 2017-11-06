@@ -8,17 +8,17 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property int $store_id
- * @property \Cake\I18n\Time $transaction_date
+ * @property \Cake\I18n\FrozenTime $transaction_date
  * @property int $cash_account_id
  * @property int $amount
  * @property string $note
- * @property \Cake\I18n\Time $created
+ * @property \Cake\I18n\FrozenTime $created
  * @property int $created_by
- * @property \Cake\I18n\Time $modified
+ * @property \Cake\I18n\FrozenTime $modified
  * @property int $modified_by
  *
  * @property \App\Model\Entity\Store $store
- * @property \App\Model\Entity\CashAccount $cash_account
+ * @property \App\Model\Entity\Account $account
  */
 class CashAccountTran extends Entity
 {
@@ -33,7 +33,16 @@ class CashAccountTran extends Entity
      * @var array
      */
     protected $_accessible = [
-        '*' => true,
-        'id' => false
+        'store_id' => true,
+        'transaction_date' => true,
+        'cash_account_id' => true,
+        'amount' => true,
+        'note' => true,
+        'created' => true,
+        'created_by' => true,
+        'modified' => true,
+        'modified_by' => true,
+        'store' => true,
+        'account' => true
     ];
 }

@@ -26,7 +26,26 @@ class CashAccountTransTableTest extends TestCase
     public $fixtures = [
         'app.cash_account_trans',
         'app.stores',
-        'app.cash_accounts'
+        'app.companies',
+        'app.employees',
+        'app.time_cards',
+        'app.users',
+        'app.inventory_purchase_transactions',
+        'app.inventory_items',
+        'app.inventory_item_histories',
+        'app.store_inventory_item_histories',
+        'app.sales_transactions',
+        'app.menus',
+        'app.sales_item_transactions',
+        'app.sales_items',
+        'app.sales_item_assign_histories',
+        'app.menu_items',
+        'app.sales_item_histories',
+        'app.store_account_infos',
+        'app.accounts',
+        'app.debit_categories',
+        'app.credit_categories',
+        'app.store_menu_histories'
     ];
 
     /**
@@ -37,7 +56,7 @@ class CashAccountTransTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('CashAccountTrans') ? [] : ['className' => 'App\Model\Table\CashAccountTransTable'];
+        $config = TableRegistry::exists('CashAccountTrans') ? [] : ['className' => CashAccountTransTable::class];
         $this->CashAccountTrans = TableRegistry::get('CashAccountTrans', $config);
     }
 

@@ -9,8 +9,8 @@ use Cake\Validation\Validator;
 /**
  * InventoryPurchaseTransactions Model
  *
- * @property \Cake\ORM\Association\BelongsTo $InventoryItems
- * @property \Cake\ORM\Association\BelongsTo $Stores
+ * @property \App\Model\Table\InventoryItemsTable|\Cake\ORM\Association\BelongsTo $InventoryItems
+ * @property \App\Model\Table\StoresTable|\Cake\ORM\Association\BelongsTo $Stores
  *
  * @method \App\Model\Entity\InventoryPurchaseTransaction get($primaryKey, $options = [])
  * @method \App\Model\Entity\InventoryPurchaseTransaction newEntity($data = null, array $options = [])
@@ -22,7 +22,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class InventoryPurchaseTransactionsTable extends AppTable
+class InventoryPurchaseTransactionsTable extends Table
 {
 
     /**
@@ -35,11 +35,11 @@ class InventoryPurchaseTransactionsTable extends AppTable
     {
         parent::initialize($config);
 
-        $this->table('inventory_purchase_transactions');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setTable('inventory_purchase_transactions');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
 
-        
+        $this->addBehavior('Timestamp');
 
         $this->belongsTo('InventoryItems', [
             'foreignKey' => 'inventory_item_id',

@@ -9,7 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Accounts Model
  *
- * @property \Cake\ORM\Association\HasMany $StoreAccountInfos
+ * @property \App\Model\Table\StoreAccountInfosTable|\Cake\ORM\Association\HasMany $StoreAccountInfos
  *
  * @method \App\Model\Entity\Account get($primaryKey, $options = [])
  * @method \App\Model\Entity\Account newEntity($data = null, array $options = [])
@@ -21,7 +21,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class AccountsTable extends AppTable
+class AccountsTable extends Table
 {
 
     /**
@@ -34,11 +34,11 @@ class AccountsTable extends AppTable
     {
         parent::initialize($config);
 
-        $this->table('accounts');
-        $this->displayField('name');
-        $this->primaryKey('id');
+        $this->setTable('accounts');
+        $this->setDisplayField('name');
+        $this->setPrimaryKey('id');
 
-        
+        $this->addBehavior('Timestamp');
 
         $this->hasMany('StoreAccountInfos', [
             'foreignKey' => 'account_id'
@@ -58,23 +58,29 @@ class AccountsTable extends AppTable
             ->allowEmpty('id', 'create');
 
         $validator
+            ->scalar('code')
             ->requirePresence('code', 'create')
             ->notEmpty('code');
 
         $validator
+            ->scalar('name')
             ->requirePresence('name', 'create')
             ->notEmpty('name');
 
         $validator
+            ->scalar('debit_tax_code')
             ->allowEmpty('debit_tax_code');
 
         $validator
+            ->scalar('debit_found_class')
             ->allowEmpty('debit_found_class');
 
         $validator
+            ->scalar('credit_tax_code')
             ->allowEmpty('credit_tax_code');
 
         $validator
+            ->scalar('credit_found_class')
             ->allowEmpty('credit_found_class');
 
         $validator

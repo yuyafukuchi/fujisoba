@@ -28,7 +28,24 @@ class StoreInventoryItemHistoriesTableTest extends TestCase
         'app.inventory_items',
         'app.inventory_item_histories',
         'app.inventory_purchase_transactions',
-        'app.stores'
+        'app.stores',
+        'app.companies',
+        'app.employees',
+        'app.time_cards',
+        'app.users',
+        'app.cash_account_trans',
+        'app.accounts',
+        'app.store_account_infos',
+        'app.debit_categories',
+        'app.credit_categories',
+        'app.sales_transactions',
+        'app.menus',
+        'app.sales_item_transactions',
+        'app.sales_items',
+        'app.sales_item_assign_histories',
+        'app.menu_items',
+        'app.sales_item_histories',
+        'app.store_menu_histories'
     ];
 
     /**
@@ -39,7 +56,7 @@ class StoreInventoryItemHistoriesTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('StoreInventoryItemHistories') ? [] : ['className' => 'App\Model\Table\StoreInventoryItemHistoriesTable'];
+        $config = TableRegistry::exists('StoreInventoryItemHistories') ? [] : ['className' => StoreInventoryItemHistoriesTable::class];
         $this->StoreInventoryItemHistories = TableRegistry::get('StoreInventoryItemHistories', $config);
     }
 

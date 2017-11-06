@@ -34,8 +34,15 @@ function convert_week($week)
         return $ret;
     }
 ?>
+<?=$this->Html->link('戻る', [ 'action' => 'index'])?>
 <?=$data['index'] > 1 ? $this->Html->link('前', [ 'action' => 'view', $data['index']-1]) : ''?>
 <?=$data['index'] < $data['length'] ? $this->Html->link('次', [ 'action' => 'view', $data['index']+1]) : ''?>
+<?php
+echo $this->Form->create(null) ;
+
+echo $this -> Form -> submit ( $data['approveButton'], array('name' => 'button'));
+echo $this -> Form -> end ();
+?>
 <div class="monthlyTimeCards view large-9 medium-8 columns content">
     <table>
         <thead>

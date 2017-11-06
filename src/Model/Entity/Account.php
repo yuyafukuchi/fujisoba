@@ -14,9 +14,9 @@ use Cake\ORM\Entity;
  * @property string $credit_tax_code
  * @property string $credit_found_class
  * @property bool $cash_account
- * @property \Cake\I18n\Time $created
+ * @property \Cake\I18n\FrozenTime $created
  * @property int $created_by
- * @property \Cake\I18n\Time $modified
+ * @property \Cake\I18n\FrozenTime $modified
  * @property int $modified_by
  *
  * @property \App\Model\Entity\StoreAccountInfo[] $store_account_infos
@@ -34,7 +34,17 @@ class Account extends Entity
      * @var array
      */
     protected $_accessible = [
-        '*' => true,
-        'id' => false
+        'code' => true,
+        'name' => true,
+        'debit_tax_code' => true,
+        'debit_found_class' => true,
+        'credit_tax_code' => true,
+        'credit_found_class' => true,
+        'cash_account' => true,
+        'created' => true,
+        'created_by' => true,
+        'modified' => true,
+        'modified_by' => true,
+        'store_account_infos' => true
     ];
 }

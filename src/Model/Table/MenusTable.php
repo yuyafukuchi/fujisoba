@@ -9,7 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Menus Model
  *
- * @property \Cake\ORM\Association\HasMany $SalesTransactions
+ * @property \App\Model\Table\SalesTransactionsTable|\Cake\ORM\Association\HasMany $SalesTransactions
  *
  * @method \App\Model\Entity\Menu get($primaryKey, $options = [])
  * @method \App\Model\Entity\Menu newEntity($data = null, array $options = [])
@@ -34,9 +34,9 @@ class MenusTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('menus');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setTable('menus');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
 

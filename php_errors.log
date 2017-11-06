@@ -1455,3 +1455,72 @@
 [26-Oct-2017 22:41:21 Asia/Tokyo] PHP  21. Cake\Error\ErrorHandler->handleError() /home/ubuntu/workspace/src/Template/Attendance/MonthlyTimeCards/view.ctp:67
 [26-Oct-2017 22:41:21 Asia/Tokyo] PHP  22. Cake\Error\ErrorHandler->_displayError() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php:152
 [26-Oct-2017 22:41:21 Asia/Tokyo] PHP  23. Cake\Error\Debugger->outputError() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/ErrorHandler.php:118
+[29-Oct-2017 09:00:58 Asia/Tokyo] PHP Notice:  Array to string conversion in /home/ubuntu/workspace/src/Template/Sales/CashAccountTrans/add.ctp on line 26
+[29-Oct-2017 09:00:58 Asia/Tokyo] PHP Stack trace:
+[29-Oct-2017 09:00:58 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[29-Oct-2017 09:00:58 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[29-Oct-2017 09:00:58 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:81
+[29-Oct-2017 09:00:58 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[29-Oct-2017 09:00:58 Asia/Tokyo] PHP   5. DebugKit\Middleware\DebugKitMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[29-Oct-2017 09:00:58 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:52
+[29-Oct-2017 09:00:58 Asia/Tokyo] PHP   7. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[29-Oct-2017 09:00:58 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:95
+[29-Oct-2017 09:00:58 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[29-Oct-2017 09:00:58 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[29-Oct-2017 09:00:58 Asia/Tokyo] PHP  11. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[29-Oct-2017 09:00:58 Asia/Tokyo] PHP  12. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:106
+[29-Oct-2017 09:00:58 Asia/Tokyo] PHP  13. App\Application->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[29-Oct-2017 09:00:58 Asia/Tokyo] PHP  14. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:103
+[29-Oct-2017 09:00:58 Asia/Tokyo] PHP  15. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:93
+[29-Oct-2017 09:00:58 Asia/Tokyo] PHP  16. App\Controller\Sales\CashAccountTransController->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:125
+[29-Oct-2017 09:00:58 Asia/Tokyo] PHP  17. App\View\AppView->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:623
+[29-Oct-2017 09:00:58 Asia/Tokyo] PHP  18. App\View\AppView->_render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:765
+[29-Oct-2017 09:00:58 Asia/Tokyo] PHP  19. App\View\AppView->_evaluate() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:1157
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Debugger.php on line 341
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP Stack trace:
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:81
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP   5. DebugKit\Middleware\DebugKitMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:52
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP   7. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:95
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP  11. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP  12. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:106
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP  13. App\Application->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP  14. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:103
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP  15. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:93
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP  16. App\Controller\Sales\CashAccountTransController->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:125
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP  17. App\View\AppView->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:623
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP  18. App\View\AppView->_render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:765
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP  19. App\View\AppView->_evaluate() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:1157
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP  20. include() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:1196
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP  21. Cake\Error\ErrorHandler->handleError() /home/ubuntu/workspace/src/Template/Sales/CashAccountTrans/index.ctp:51
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP  22. Cake\Error\ErrorHandler->_displayError() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php:152
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP  23. Cake\Error\Debugger->outputError() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/ErrorHandler.php:118
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP  24. Cake\Error\Debugger::trace() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Debugger.php:797
+[29-Oct-2017 18:27:27 Asia/Tokyo] PHP  25. Cake\Error\Debugger::formatTrace() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Debugger.php:274
+[01-Nov-2017 11:52:13 Asia/Tokyo] PHP Fatal error:  Cannot use empty array elements in arrays in /home/ubuntu/workspace/src/Template/Sales/StoreInventoryItemHistories/index.ctp on line 58
+[01-Nov-2017 11:52:13 Asia/Tokyo] PHP Stack trace:
+[01-Nov-2017 11:52:13 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[01-Nov-2017 11:52:13 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[01-Nov-2017 11:52:13 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:81
+[01-Nov-2017 11:52:13 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[01-Nov-2017 11:52:13 Asia/Tokyo] PHP   5. DebugKit\Middleware\DebugKitMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[01-Nov-2017 11:52:13 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:52
+[01-Nov-2017 11:52:13 Asia/Tokyo] PHP   7. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[01-Nov-2017 11:52:13 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:95
+[01-Nov-2017 11:52:13 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[01-Nov-2017 11:52:13 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[01-Nov-2017 11:52:13 Asia/Tokyo] PHP  11. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[01-Nov-2017 11:52:13 Asia/Tokyo] PHP  12. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:106
+[01-Nov-2017 11:52:13 Asia/Tokyo] PHP  13. App\Application->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[01-Nov-2017 11:52:13 Asia/Tokyo] PHP  14. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:103
+[01-Nov-2017 11:52:13 Asia/Tokyo] PHP  15. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:93
+[01-Nov-2017 11:52:13 Asia/Tokyo] PHP  16. App\Controller\Sales\StoreInventoryItemHistoriesController->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:125
+[01-Nov-2017 11:52:13 Asia/Tokyo] PHP  17. App\View\AppView->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:623
+[01-Nov-2017 11:52:13 Asia/Tokyo] PHP  18. App\View\AppView->_render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:765
+[01-Nov-2017 11:52:13 Asia/Tokyo] PHP  19. App\View\AppView->_evaluate() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:1157

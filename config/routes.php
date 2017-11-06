@@ -77,6 +77,9 @@ Router::scope('/', function (RouteBuilder $routes) {
 Router::prefix('attendance', function ($routes) {
   $routes->fallbacks('DashedRoute');
 });
+Router::prefix('sales', function ($routes) {
+  $routes->fallbacks('DashedRoute');
+});
 /**
  * Load all plugin routes.  See the Plugin documentation on
  * how to customize the loading of plugin routes.
