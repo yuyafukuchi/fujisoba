@@ -1524,3 +1524,43 @@
 [01-Nov-2017 11:52:13 Asia/Tokyo] PHP  17. App\View\AppView->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:623
 [01-Nov-2017 11:52:13 Asia/Tokyo] PHP  18. App\View\AppView->_render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:765
 [01-Nov-2017 11:52:13 Asia/Tokyo] PHP  19. App\View\AppView->_evaluate() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:1157
+[07-Nov-2017 13:26:00 Asia/Tokyo] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to App\Controller\Sales\InventoryPurchaseTransactionsController::App\Controller\Sales\{closure}() must be an instance of App\Controller\Sales\Query, instance of Cake\ORM\Query given, called in /home/ubuntu/workspace/vendor/cakephp/cakephp/src/ORM/Association.php on line 925 and defined in /home/ubuntu/workspace/src/Controller/Sales/InventoryPurchaseTransactionsController.php:223
+Stack trace:
+#0 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/ORM/Association.php(925): App\Controller\Sales\InventoryPurchaseTransactionsController->App\Controller\Sales\{closure}(Object(Cake\ORM\Query))
+#1 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/ORM/EagerLoader.php(447): Cake\ORM\Association->attachTo(Object(Cake\ORM\Query), Array)
+#2 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/ORM/Query.php(1066): Cake\ORM\EagerLoader->attachAssociations(Object(Cake\ORM\Query), Object(App\Model\Table\StoreInventoryItemHistoriesTable), false)
+#3 /home/ubuntu/workspace/vendor/cakephp/cakephp/s in /home/ubuntu/workspace/src/Controller/Sales/InventoryPurchaseTransactionsController.php on line 223
+[07-Nov-2017 13:27:09 Asia/Tokyo] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to App\Controller\Sales\InventoryPurchaseTransactionsController::App\Controller\Sales\{closure}() must be an instance of App\Controller\Sales\Query, instance of Cake\ORM\Query given, called in /home/ubuntu/workspace/vendor/cakephp/cakephp/src/ORM/Association.php on line 925 and defined in /home/ubuntu/workspace/src/Controller/Sales/InventoryPurchaseTransactionsController.php:223
+Stack trace:
+#0 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/ORM/Association.php(925): App\Controller\Sales\InventoryPurchaseTransactionsController->App\Controller\Sales\{closure}(Object(Cake\ORM\Query))
+#1 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/ORM/EagerLoader.php(447): Cake\ORM\Association->attachTo(Object(Cake\ORM\Query), Array)
+#2 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/ORM/Query.php(1066): Cake\ORM\EagerLoader->attachAssociations(Object(Cake\ORM\Query), Object(App\Model\Table\StoreInventoryItemHistoriesTable), false)
+#3 /home/ubuntu/workspace/vendor/cakephp/cakephp/s in /home/ubuntu/workspace/src/Controller/Sales/InventoryPurchaseTransactionsController.php on line 223
+[07-Nov-2017 13:28:19 Asia/Tokyo] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to App\Controller\Sales\InventoryPurchaseTransactionsController::App\Controller\Sales\{closure}() must be an instance of App\Controller\Sales\Query, instance of Cake\ORM\Query given, called in /home/ubuntu/workspace/vendor/cakephp/cakephp/src/ORM/Association.php on line 925 and defined in /home/ubuntu/workspace/src/Controller/Sales/InventoryPurchaseTransactionsController.php:223
+Stack trace:
+#0 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/ORM/Association.php(925): App\Controller\Sales\InventoryPurchaseTransactionsController->App\Controller\Sales\{closure}(Object(Cake\ORM\Query))
+#1 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/ORM/EagerLoader.php(447): Cake\ORM\Association->attachTo(Object(Cake\ORM\Query), Array)
+#2 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/ORM/Query.php(1066): Cake\ORM\EagerLoader->attachAssociations(Object(Cake\ORM\Query), Object(App\Model\Table\StoreInventoryItemHistoriesTable), false)
+#3 /home/ubuntu/workspace/vendor/cakephp/cakephp/s in /home/ubuntu/workspace/src/Controller/Sales/InventoryPurchaseTransactionsController.php on line 223
+[08-Nov-2017 14:42:07 Asia/Tokyo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 65028096 bytes) in /home/ubuntu/workspace/src/Template/Sales/SalesTransactions/detail.ctp on line 43
+[08-Nov-2017 14:42:07 Asia/Tokyo] PHP Stack trace:
+[08-Nov-2017 14:42:07 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[08-Nov-2017 14:42:07 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[08-Nov-2017 14:42:07 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:81
+[08-Nov-2017 14:42:07 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[08-Nov-2017 14:42:07 Asia/Tokyo] PHP   5. DebugKit\Middleware\DebugKitMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[08-Nov-2017 14:42:07 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:52
+[08-Nov-2017 14:42:07 Asia/Tokyo] PHP   7. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[08-Nov-2017 14:42:07 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:95
+[08-Nov-2017 14:42:07 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[08-Nov-2017 14:42:07 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[08-Nov-2017 14:42:07 Asia/Tokyo] PHP  11. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[08-Nov-2017 14:42:07 Asia/Tokyo] PHP  12. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:106
+[08-Nov-2017 14:42:07 Asia/Tokyo] PHP  13. App\Application->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[08-Nov-2017 14:42:07 Asia/Tokyo] PHP  14. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:103
+[08-Nov-2017 14:42:07 Asia/Tokyo] PHP  15. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:93
+[08-Nov-2017 14:42:07 Asia/Tokyo] PHP  16. App\Controller\Sales\SalesTransactionsController->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:125
+[08-Nov-2017 14:42:07 Asia/Tokyo] PHP  17. App\View\AppView->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:623
+[08-Nov-2017 14:42:07 Asia/Tokyo] PHP  18. App\View\AppView->_render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:765
+[08-Nov-2017 14:42:07 Asia/Tokyo] PHP  19. App\View\AppView->_evaluate() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:1157
+[08-Nov-2017 14:42:07 Asia/Tokyo] PHP  20. include() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:1196

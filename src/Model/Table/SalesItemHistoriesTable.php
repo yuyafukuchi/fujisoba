@@ -9,7 +9,7 @@ use Cake\Validation\Validator;
 /**
  * SalesItemHistories Model
  *
- * @property \Cake\ORM\Association\BelongsTo $SalesItems
+ * @property \App\Model\Table\SalesItemsTable|\Cake\ORM\Association\BelongsTo $SalesItems
  *
  * @method \App\Model\Entity\SalesItemHistory get($primaryKey, $options = [])
  * @method \App\Model\Entity\SalesItemHistory newEntity($data = null, array $options = [])
@@ -21,7 +21,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class SalesItemHistoriesTable extends AppTable
+class SalesItemHistoriesTable extends Table
 {
 
     /**
@@ -34,11 +34,11 @@ class SalesItemHistoriesTable extends AppTable
     {
         parent::initialize($config);
 
-        $this->table('sales_item_histories');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setTable('sales_item_histories');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
 
-        
+        $this->addBehavior('Timestamp');
 
         $this->belongsTo('SalesItems', [
             'foreignKey' => 'sales_item_id',
@@ -59,6 +59,7 @@ class SalesItemHistoriesTable extends AppTable
             ->allowEmpty('id', 'create');
 
         $validator
+            ->scalar('sales_item_name')
             ->requirePresence('sales_item_name', 'create')
             ->notEmpty('sales_item_name');
 

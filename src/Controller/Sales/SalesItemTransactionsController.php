@@ -2,6 +2,7 @@
 namespace App\Controller\Sales;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 /**
  * SalesItemTransactions Controller
@@ -12,6 +13,10 @@ use App\Controller\AppController;
  */
 class SalesItemTransactionsController extends AppController
 {
+    public $paginate = [
+        'limit' => 4,
+    ];
+    
 
     /**
      * Index method
@@ -20,12 +25,67 @@ class SalesItemTransactionsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['SalesTransactions', 'SalesItems']
-        ];
-        $salesItemTransactions = $this->paginate($this->SalesItemTransactions);
-
-        $this->set(compact('salesItemTransactions'));
+        $this->Session = $this->request->session();
+        //$storeId = $this->Auth->user('store_id');
+        $date = null;
+        if ($this->request->is('post')) {
+            $data = $this->request->data();
+            if($data['button'] === '設定') {
+                if(strtotime($data['date'])){
+                    $date = strtotime($data['date']);
+                    $this->Session->write('SalesItemTransactions.date', $date);
+                }
+            }
+        }
+        if($date == null){
+            if($this->Session->read('SalesItemTransactions.date') == null){
+                $date = time();
+                $this->Session->write('SalesItemTransactions.date', $date);
+            } else {
+                $date = $this->Session->read('SalesItemTransactions.date');
+            }
+        }
+        if(isset($_GET['store'])){
+            $storeId = intval($_GET['store']);
+        } else {
+            $storeId = 0;
+        }
+        if($storeId === 0) {
+            return $this->redirect(['controller' => '/../Users', 'action' => 'sales']);
+        }
+        $salesItemHistories = null;
+        if ($this->request->is('post')) {
+            $data = $this->request->data();
+            debug($data);
+            if($data['button'] === '設定') {
+                if(strtotime($data['date']['year'].'-'.$data['date']['month'])){
+                    $date = strtotime($data['date']['year'].'-'.$data['date']['month']);
+                    $this->Session->write('InventoryPurchaseTransactions.date', $date);
+                }
+            } else if($data['button'] === '検索'){
+                $this->SalesItemHistories = TableRegistry::get('sales_item_histories');
+                $salesItemHistories = $this->SalesItemHistories->find()
+                    ->where(['sales_item_name LIKE' => '%'.$data['queryName'].'%']);
+            }
+        }
+        $this->Stores = TableRegistry::get('stores');
+        $storeName = $this->Stores->get($storeId)->name;
+        //$salesItemTransactions = $this->SalesItemTransactions->find();
+        
+        $salesItemTransactions = array();
+        if($salesItemHistories == null){
+            $this->SalesItemHistories = TableRegistry::get('sales_item_histories');
+            $salesItemHistories = $this->SalesItemHistories->find();
+        }
+        $salesItemHistories = $this->paginate($salesItemHistories);
+        foreach ($salesItemHistories as $salesItemHistory) {
+            $array = $this->SalesItemTransactions->find()
+                ->where(['sales_item_id' => $salesItemHistory->sales_item_id])
+                ->contain(['SalesTransactions'])->toArray();
+            array_push($salesItemTransactions, $array);
+        }
+        
+        $this->set(compact('salesItemTransactions', 'salesItemHistories','date', 'storeName'));
         $this->set('_serialize', ['salesItemTransactions']);
     }
 

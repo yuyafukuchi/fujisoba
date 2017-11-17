@@ -26,33 +26,67 @@ class MenuHistoriesController extends AppController
         if ($this->request->is('post')) {
             $data = $this->request->data();
             if($data['button'] === '新規作成'){
-                if($data['name'] === ''){
-                    $this->Flash->error('マスタ在庫アイテム名を入力してください。');
+                if($data['menu_number'] === ''){
+                    $this->Flash->error('メニュー番号を入力してください。');
+                } else if($data['menu_name'] === ''){
+                    $this->Flash->error('メニュー名を入力してください。');
                 } else {
-                    $this->Menus = TableRegistry::get('menus');
+                    $this->SalesItems = TableRegistry::get('sales_items');
+                    $this->SalesItemHistories = TableRegistry::get('sales_item_histories');
                     if($this->Session->read('MenuHistories.date') == null){
                         $date = time();
                     } else {
                         $date = $this->Session->read('MenuHistories.date');
                         $this->Session->write('MenuHistories.date', $date);
                     }
-                    $menu = $this->Menus->newEntity();
-                    $menu = $this->Menus->patchEntity($menu, ['menu_number' => $data['number']]);
-                    if($this->Menus->save($menu)){
-                        $menuHistory = $this->MenuHistories->newEntity();
-                        $menuHistory = $this->MenuHistories->patchEntity($menuHistory, [
-                                'menu_item_id' => $menu['id'],
-                                'name' => $data['name'],
-                                'start' => date('Y-m-d'.' 00:00:00',$date),
-                                'deleted' => false]);
-                        if($this->MenuHistories->save($menuHistory)){
-                            $this->Flash->success('データの保存に成功しました');
-                        } else {
-                            $this->Menus->delete($menu);
-                            $this->Flash->error('データの保存に失敗しました');
-                        }
+                    $salesItemHistory = $this->SalesItemHistories->find()
+                        ->where([   'sales_item_histories.sales_item_name' => $data['item_name']])
+                        ->matching('SalesItems', function ($q) use ($data){
+                                return $q->where(['SalesItems.sales_item_number' => $data['item_number']]);
+                        })
+                        ->limit(1)->first();
+                    $salesItemHistoryExists = false
+                    if($salesItemHistory != null){
+                        $salesItemHistoryExists = true;
+                    } else if($this->SalesItems->find()->where(['sales_item_number' => $data['item_number']])->first() != null){
+                        $this->Flash->error('その出庫アイテム番号はすでに存在します。');
+                    } else if($this->SalesItemHistories->find()->where(['sales_item_name' => $data['item_name']])->first() != null){
+                        $this->Flash->error('その出庫アイテム名はすでに存在します。');
                     } else {
-                        $this->Flash->error('データの保存に失敗しました');
+                        $this->Menus = TableRegistry::get('menus');
+                        $menu = $this->Menus->newEntity();
+                        $this->Menus->patchEntity($menu,[
+                                'menu_number' => $data['menu_number']]);
+                        if($this->Menus->save($menu)){
+                            $menuHistory = $this->MenuHistories->newEntity();
+                            $this->MenuHistories->patchEntity($menuHistory, [
+                                'menu_item_id' => $menu['id'],
+                                'name' => $data['menu_name'],
+                                'start' => date('Y-m-d 00:00:00',$date),
+                                'deleted' => false]);
+                            if($this->MenuHistories->save($menuHistory)){
+                                $this->SalesItemAssignHistories = TableRegistry::get('sales_item_assign_histories');
+                                $salesItemAssignHistory = $this->SalesItemAssignHistories->newEntity();
+                                $this->SalesItemAssignHistories->patchEntity($salesItemAssignHistory,[
+                                    'menu_item_id' => $menu['id'],
+                                    'sales_item_id' => $salesItemHistory->_matchingData['SalesItems']['sales_item_number'],
+                                    'start' => date('Y-m-d 00:00:00',$date)]);
+                                if($this->SalesItemAssignHistories->save($salesItemAssignHistory)){
+                                    $this->Flash->success('データの保存に成功しました。');
+                                } else {
+                                    $this->MenuHistories->delete($menuHistory);
+                                    $this->Menus->delete($menus);
+                                    $this->Flash->error('データの保存に失敗しました。3');
+                                }
+                            }
+                            else {
+                                $this->Menus->delete($menus);
+                                $this->Flash->error('データの保存に失敗しました。2');
+                            }
+                        } else {
+                            debug($menu->errors());
+                            $this->Flash->error('データの保存に失敗しました。1');
+                        }
                     }
                 }
             } else if($data['button'] === '設定') {
@@ -72,8 +106,8 @@ class MenuHistoriesController extends AppController
             }
         }
         $menuHistories = $this->MenuHistories -> find()
-            ->where(['start <=' => date('Y-m-d H:i:s', $date), 'OR' => [['end >' => date('Y-m-d H:i:s', $date)],['end is' => null]]])
-            ->contain(['Menus']);
+            ->where(['MenuHistories.start <=' => date('Y-m-d H:i:s', $date), 'OR' => [['MenuHistories.end >' => date('Y-m-d H:i:s', $date)],['MenuHistories.end is' => null]]])
+            ->contain(['Menus','SalesItemAssignHistories','SalesItemAssignHistories.SalesItems.SalesItemHistories']);
 
         $this->set(compact('menuHistories', 'date'));
         $this->set('_serialize', ['menuHistories']);

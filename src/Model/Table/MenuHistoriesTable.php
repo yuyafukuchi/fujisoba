@@ -44,6 +44,13 @@ class MenuHistoriesTable extends Table
             'foreignKey' => 'menu_item_id',
             'joinType' => 'INNER'
         ]);
+        
+        $this->belongsTo('SalesItemAssignHistories', [
+            'className' => 'SalesItemAssignHistories',
+            'bindingKey' => 'menu_item_id',
+            'foreignKey' => 'menu_item_id',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**

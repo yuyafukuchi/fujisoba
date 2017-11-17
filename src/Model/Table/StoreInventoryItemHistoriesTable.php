@@ -45,6 +45,11 @@ class StoreInventoryItemHistoriesTable extends Table
             'foreignKey' => 'inventory_item_id',
             'joinType' => 'INNER'
         ]);
+        $this->belongsTo('InventoryItemHistories', [
+            'foreignKey' => 'inventory_item_id',
+            'bindingKey' => 'inventory_item_id',
+            'joinType' => 'INNER'
+        ]);
         $this->belongsTo('Stores', [
             'foreignKey' => 'store_id',
             'joinType' => 'INNER'

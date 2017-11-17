@@ -9,8 +9,8 @@ use Cake\Validation\Validator;
 /**
  * SalesItemAssignHistories Model
  *
- * @property \Cake\ORM\Association\BelongsTo $MenuItems
- * @property \Cake\ORM\Association\BelongsTo $SalesItems
+ * @property |\Cake\ORM\Association\BelongsTo $MenuItems
+ * @property \App\Model\Table\SalesItemsTable|\Cake\ORM\Association\BelongsTo $SalesItems
  *
  * @method \App\Model\Entity\SalesItemAssignHistory get($primaryKey, $options = [])
  * @method \App\Model\Entity\SalesItemAssignHistory newEntity($data = null, array $options = [])
@@ -22,7 +22,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class SalesItemAssignHistoriesTable extends AppTable
+class SalesItemAssignHistoriesTable extends Table
 {
 
     /**
@@ -35,13 +35,13 @@ class SalesItemAssignHistoriesTable extends AppTable
     {
         parent::initialize($config);
 
-        $this->table('sales_item_assign_histories');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setTable('sales_item_assign_histories');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
 
-        
+        $this->addBehavior('Timestamp');
 
-        $this->belongsTo('MenuItems', [
+        $this->belongsTo('Menus', [
             'foreignKey' => 'menu_item_id',
             'joinType' => 'INNER'
         ]);
@@ -90,7 +90,7 @@ class SalesItemAssignHistoriesTable extends AppTable
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['menu_item_id'], 'MenuItems'));
+        $rules->add($rules->existsIn(['menu_item_id'], 'Menus'));
         $rules->add($rules->existsIn(['sales_item_id'], 'SalesItems'));
 
         return $rules;

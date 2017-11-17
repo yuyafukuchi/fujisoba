@@ -42,9 +42,9 @@ class SalesItemTransactionsTableTest extends TestCase
         'app.store_inventory_item_histories',
         'app.store_menu_histories',
         'app.menus',
-        'app.sales_items',
+        'app.menu_histories',
         'app.sales_item_assign_histories',
-        'app.menu_items',
+        'app.sales_items',
         'app.sales_item_histories'
     ];
 

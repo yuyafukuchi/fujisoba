@@ -8,7 +8,7 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property int $store_id
- * @property \Cake\I18n\Time $transaction_data
+ * @property \Cake\I18n\FrozenTime $transaction_date
  * @property int $menu_id
  * @property int $menu_number
  * @property string $menu_name
@@ -16,9 +16,9 @@ use Cake\ORM\Entity;
  * @property int $cash_sales_amount
  * @property int $pasmo_sales_amount
  * @property int $sales_amount
- * @property \Cake\I18n\Time $created
+ * @property \Cake\I18n\FrozenTime $created
  * @property int $created_by
- * @property \Cake\I18n\Time $modified
+ * @property \Cake\I18n\FrozenTime $modified
  * @property int $modified_by
  *
  * @property \App\Model\Entity\Store $store
@@ -38,7 +38,21 @@ class SalesTransaction extends Entity
      * @var array
      */
     protected $_accessible = [
-        '*' => true,
-        'id' => false
+        'store_id' => true,
+        'transaction_date' => true,
+        'menu_id' => true,
+        'menu_number' => true,
+        'menu_name' => true,
+        'qty' => true,
+        'cash_sales_amount' => true,
+        'pasmo_sales_amount' => true,
+        'sales_amount' => true,
+        'created' => true,
+        'created_by' => true,
+        'modified' => true,
+        'modified_by' => true,
+        'store' => true,
+        'menu' => true,
+        'sales_item_transactions' => true
     ];
 }

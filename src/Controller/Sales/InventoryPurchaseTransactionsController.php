@@ -204,8 +204,14 @@ class InventoryPurchaseTransactionsController extends AppController
         if($storeId === 0) {
             return $this->redirect(['controller' => '/../Users', 'action' => 'sales']);
         }
+        $this->Stores = TableRegistry::get('stores');
+        if(count($this->Stores->find()->where(['id' => $storeId])->toArray()) === 1){
+            $storeName = $this->Stores->get($storeId)->name;
+        } else {
+            return $this->redirect(['controller' => '/../Users', 'action' => 'sales']);
+        }
+        debug($storeName);
         $this->Session = $this->request->session();
-        $storeId = $this->Auth->user('store_id');
         $date = null;
         $storeInventoryItemHistories = null;
         if ($this->request->is('post')) {
@@ -219,7 +225,10 @@ class InventoryPurchaseTransactionsController extends AppController
             } else if($data['button'] === '検索'){
                 $this->StoreInventoryItemHistories = TableRegistry::get('store_inventory_item_histories');
                 $storeInventoryItemHistories = $this->StoreInventoryItemHistories->find()->contain(['Stores', 'InventoryItems','InventoryItems.InventoryItemHistories'])
-                    ->where(['store_inventory_item_histories.store_id' => $storeId, 'inventory_item_histories.item_name LIKE' => '%'.$data['queryName'].'%']);
+                    ->where(['store_inventory_item_histories.store_id' => $storeId])
+                    ->matching('InventoryItemHIstories', function ($q) use ($data) {
+                      return $q->where(['InventoryItemHistories.item_name LIKE' => '%'.$data['queryName'].'%']);
+                    });
             }
         }
         if($date == null){
@@ -246,6 +255,6 @@ class InventoryPurchaseTransactionsController extends AppController
                 ->order(['transaction_date'])->toArray();
             array_push($inventoryPurchaseTransactions, $array );
         }
-        $this->set(compact('date', 'storeInventoryItemHistories','inventoryPurchaseTransactions'));
+        $this->set(compact('date', 'storeInventoryItemHistories','inventoryPurchaseTransactions', 'storeName'));
     }
 }

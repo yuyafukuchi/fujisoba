@@ -14,7 +14,13 @@
 </nav>
 <div class="storeMenuHistories index large-9 medium-8 columns content">
     <h3><?= __('Store Menu Histories') ?></h3>
-    マスタメニュー<?php debug($storeId); ?>
+    <?= $storeName ?> 店舗メニュー設定 <br>
+    <?=date('Y年m月d日',$date).'以降の設定'?>
+    <?=$this->Form->create(null) ?>
+    <?= $this->Form->control('date',['label' => '設定日','rows'=>1,'type'=>'text'])?>
+    <?= $this->Form->submit("設定",['name'=>'button']) ?>
+    <?=$this->Form->end() ?>
+    マスタメニュー
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
@@ -29,52 +35,47 @@
                 <td><?= h($menuHistory->menu->menu_number) ?></td>
                 <td><?= h($menuHistory->name) ?></td>
                 <td><?= in_array($menuHistory->menu_item_id,$idArray,true) ? h(''): 
-                $this->Form->postLink('>', ['action' => 'add', 'item' => $menuHistory->menu_item_id, 'store' => $storeId]) ?></td>
+                $this->Form->postLink('>', ['action' => 'add', 'item' => $menuHistory->menu_item_id, 'store' => $storeId, ]) ?></td>
             </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
+    店舗メニュー
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('menu_item_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('store_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('store_menu_number') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('price') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('vending_mashine1') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('vending_mashine2') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('sales_item_price') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('sales_item_cost') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('start_date') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('end_date') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('deleted') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created_by') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified_by') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <th scope="col">品名</th>
+                <th scope="col">マスタメニュー番号</th>
+                <th scope="col">店舗メニュー番号</th>
+                <th scope="col">価格</th>
+                <th scope="col">一号機</th>
+                <th scope="col">二号機</th>
+                <th scope="col">出庫アイテム番号</th>
+                <th scope="col">出庫アイテム名</th>
+                <th scope="col">出庫計算金額</th>
+                <th scope="col">原価</th>
+                <th scope="col">更新日</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($storeMenuHistories as $storeMenuHistory): ?>
             <tr>
+                <td><?= h($storeMenuHistory->menu_history->name) ?></td>
                 <td><?= $this->Number->format($storeMenuHistory->id) ?></td>
-                <td><?= $this->Number->format($storeMenuHistory->menu_item_id) ?></td>
-                <td><?= $storeMenuHistory->has('store') ? $this->Html->link($storeMenuHistory->store->name, ['controller' => 'Stores', 'action' => 'view', $storeMenuHistory->store->id]) : '' ?></td>
-                <td><?= $this->Number->format($storeMenuHistory->store_menu_number) ?></td>
-                <td><?= $this->Number->format($storeMenuHistory->price) ?></td>
-                <td><?= h($storeMenuHistory->vending_mashine1) ?></td>
-                <td><?= h($storeMenuHistory->vending_mashine2) ?></td>
-                <td><?= $this->Number->format($storeMenuHistory->sales_item_price) ?></td>
-                <td><?= $this->Number->format($storeMenuHistory->sales_item_cost) ?></td>
-                <td><?= h($storeMenuHistory->start_date) ?></td>
-                <td><?= h($storeMenuHistory->end_date) ?></td>
-                <td><?= h($storeMenuHistory->deleted) ?></td>
-                <td><?= h($storeMenuHistory->created) ?></td>
-                <td><?= $this->Number->format($storeMenuHistory->created_by) ?></td>
-                <td><?= h($storeMenuHistory->modified) ?></td>
-                <td><?= $this->Number->format($storeMenuHistory->modified_by) ?></td>
+                <?=$this->Form->create('StoreMenuHistories'.$storeMenuHistory->id,['url' => ['action' => 'edit','store' => $storeId, $storeMenuHistory->id]]) ?>
+                <td><?= $this->Form->control('store_menu_num',['label' => '','rows'=>1,'type'=>'number', 'step'=>0.1, 'default' => intval($storeMenuHistory->store_menu_number)])?></td>
+                <td><?= $this->Form->control('price',['label' => '','rows'=>1,'type'=>'number', 'default' => intval($storeMenuHistory->price)])?></td>
+                <td><?=  $this -> Form -> input ( "vm1", [ "type" => "checkbox","value" => "1","label" => "" ,'checked' => $storeMenuHistory->vending_mashine1, 'default' => 0 ]);?></td>
+                <td><?=  $this -> Form -> input ( "vm2", [ "type" => "checkbox","value" => "1","label" => "" ,'checked' => $storeMenuHistory->vending_mashine2, 'default' => 0 ]);?></td>
+                <td><?= h($storeMenuHistory->menu_history->sales_item_assign_history->sales_item->sales_item_number) ?></td>
+                <td><?= h($storeMenuHistory->menu_history->sales_item_assign_history->sales_item->sales_item_histories[0]->sales_item_name) ?></td>
+                <td><?= $this->Form->control('sales_item_price',['label' => '','rows'=>1,'type'=>'number', 'default' => intval($storeMenuHistory->sales_item_price)])?></td>
+                <td><?= $this->Form->control('sales_item_cost',['label' => '','rows'=>1,'type'=>'number', 'default' => intval($storeMenuHistory->sales_item_cost)])?></td>
+                <td><?= h($storeMenuHistory->modified->i18nFormat('YYYY/MM/dd')) ?></td>
+                <td><?= $this->Form->submit("登録",['name'=>'button']) ?></td>
+                <?=$this->Form->end() ?>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $storeMenuHistory->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $storeMenuHistory->id]) ?>
@@ -84,14 +85,4 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
 </div>

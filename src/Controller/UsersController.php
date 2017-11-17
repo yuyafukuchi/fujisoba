@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
 
 /**
  * Users Controller
@@ -20,7 +21,7 @@ class UsersController extends AppController
                 'controller' => 'Users',
                 'action' => 'login',
             ],
-            'authError' => 'Did you really think you are allowed to see that?',
+            'authError' => 'このページを見るためにはログインが必要です',
             'authenticate' => [
                 'Form' => [
                     'fields' => ['username' => 'name','password' => 'password']    // ログインID対象をemailカラムへ
@@ -217,7 +218,12 @@ class UsersController extends AppController
     
     public function sales() {
        $storeId = $this->Auth->user('store_id');
-       $this->set(compact('storeId'));
+       if($this->Auth->user('type') == 'H'){
+            $this->Stores = TableRegistry::get('stores');
+            $stores = $this->Stores->find()->select(['id','name'])->where(['company_id' => $this->Auth->user('company_id')]);
+            $storeId = null;
+       }
+       $this->set(compact('storeId', 'stores'));
     }
     
     public function list() {

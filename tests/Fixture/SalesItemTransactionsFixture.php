@@ -50,9 +50,9 @@ class SalesItemTransactionsFixture extends TestFixture
             'qty' => 1,
             'sales_item_price' => 1,
             'sales_item_cost' => 1.5,
-            'created' => '2017-11-06 11:39:18',
+            'created' => '2017-11-08 07:28:46',
             'created_by' => 1,
-            'modified' => '2017-11-06 11:39:18',
+            'modified' => '2017-11-08 07:28:46',
             'modified_by' => 1
         ],
     ];

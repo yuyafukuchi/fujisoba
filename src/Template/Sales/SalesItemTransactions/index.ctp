@@ -14,46 +14,34 @@
         <li><?= $this->Html->link(__('New Sales Item'), ['controller' => 'SalesItems', 'action' => 'add']) ?></li>
     </ul>
 </nav>
+<?php $week_name = array("日", "月", "火", "水", "木", "金", "土");?>
+<?php $arraySize = count($salesItemHistories->toArray()); ?>
+<?php $lastDay = date('d', strtotime('last day of this month', $date)) ?>
+<?php $day = strtotime('first day of this month',$date);?>
+<?php $sumArray = array(array(0,0), array(0,0), array(0,0), array(0,0)); ?>
+<?php $index = array(0,0,0,0); ?>
 <div class="salesItemTransactions index large-9 medium-8 columns content">
-    <h3><?= __('Sales Item Transactions') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('sales_transaction_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('sales_item_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('qty') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('sales_item_price') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('sales_item_cost') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created_by') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified_by') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($salesItemTransactions as $salesItemTransaction): ?>
-            <tr>
-                <td><?= $this->Number->format($salesItemTransaction->id) ?></td>
-                <td><?= $salesItemTransaction->has('sales_transaction') ? $this->Html->link($salesItemTransaction->sales_transaction->id, ['controller' => 'SalesTransactions', 'action' => 'view', $salesItemTransaction->sales_transaction->id]) : '' ?></td>
-                <td><?= $salesItemTransaction->has('sales_item') ? $this->Html->link($salesItemTransaction->sales_item->id, ['controller' => 'SalesItems', 'action' => 'view', $salesItemTransaction->sales_item->id]) : '' ?></td>
-                <td><?= $this->Number->format($salesItemTransaction->qty) ?></td>
-                <td><?= $this->Number->format($salesItemTransaction->sales_item_price) ?></td>
-                <td><?= $this->Number->format($salesItemTransaction->sales_item_cost) ?></td>
-                <td><?= h($salesItemTransaction->created) ?></td>
-                <td><?= $this->Number->format($salesItemTransaction->created_by) ?></td>
-                <td><?= h($salesItemTransaction->modified) ?></td>
-                <td><?= $this->Number->format($salesItemTransaction->modified_by) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $salesItemTransaction->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $salesItemTransaction->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $salesItemTransaction->id], ['confirm' => __('Are you sure you want to delete # {0}?', $salesItemTransaction->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+    <?php if($storeName == null){$storeName = 'ほげ';}?>
+    <?=$storeName ?> 出庫日計表 
+    <?=date('Y年m月度',$date)?>
+    <?=$this->Form->create(null) ?>
+    <?= $this -> Form -> input (
+     "date", [ "label" => "",
+                      "type" => "datetime",
+                      "dateformat" => "YM",
+                      "monthNames" => false,
+                      "separator" => "/",
+                      "templates" => [ "dateWidget" => '{{year}} 年 {{month}} 月' ],
+                      "minYear" => date ( "Y" ) - 70,
+                      "maxYear" => date ( "Y" ) - 18,
+                      "default" => date ( "Y-m" ),
+                      "empty" => [ "year" => "年", "month" => "月"] ] ) ?>
+    <?= $this->Form->submit("設定",['name'=>'button']) ?>
+    <?=$this->Form->end() ?>
+    <?=$this->Form->create(null) ?>
+    <?= $this->Form->control('queryName',['label' => '','rows'=>1,'type'=>'text'])?>
+    <?= $this->Form->submit("検索",['name'=>'button']) ?>
+    <?=$this->Form->end() ?>
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
@@ -64,4 +52,62 @@
         </ul>
         <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
     </div>
+    <h3><?= __('Sales Item Transactions') ?></h3>
+    <table cellpadding="0" cellspacing="0">
+        <thead>
+            <tr>
+                <th colspan="2"></th>
+                <?php foreach ($salesItemHistories as $salesItemHistory) : ?>
+                    <th colspan="2"><?=$salesItemHistory->sales_item_name?><br>単価：</th>
+                <?php endforeach; ?>
+                <th>合計金額</th>
+            </tr>
+            <tr>
+                <th>日</th>
+                <th>曜</th>
+                <?php for ($i=0;$i<$arraySize;$i++) : ?>
+                    <th>出庫数</th>
+                    <th>金額</th>
+                <?php endfor; ?>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while($day <= strtotime('last day of this month', $date)) : ?>
+                <tr>
+                    <td><?=h(date('d',$day))?></td>
+                    <td><?=h($week_name[date('w',$day)]) ?></td>
+                    <?php for($i=0;$i<$arraySize;$i++) : ?>
+                        <?php if(count($salesItemTransactions[$i]) > $index[$i] 
+                        && $salesItemTransactions[$i][$index[$i]]['sales_transaction']['transaction_date']->i18nFormat('dd') == date('d',$day) ) : ?>
+                            <td><?=$salesItemTransactions[$i][$index[$i]]['qty']?></td>
+                            <?php $sumArray[$i][0] += intval($salesItemTransactions[$i][$index[$i]]['qty']); ?>
+                            <?php $index[$i] ++; ?>
+                            <td>金額</td>
+                        <?php else : ?>
+                            <td></td>
+                            <td></td>
+                        <?php endif; ?>
+                    <?php endfor; ?>
+                </tr>
+                <?php $day = strtotime('+1 day', $day); ?>
+            <?php endwhile; ?>
+            <tr>
+                <td>合計</td>
+                <td></td>
+                <?php for($i=0;$i<$arraySize;$i++) : ?>
+                    <td><?=h($sumArray[$i][0]) ?></td>
+                    <td><?=h($sumArray[$i][1]) ?></td>
+                <?php endfor; ?>
+            </tr>
+            <tr>
+                <td>平均</td>
+                <td></td>
+                <?php for($i=0;$i<$arraySize;$i++) : ?>
+                    <td><?= h(count($salesItemTransactions[$i]) != 0 ? round($sumArray[$i][0]/count($salesItemTransactions[$i])) : 0) ?></td>
+                    <td><?= h(count($salesItemTransactions[$i]) != 0 ? round($sumArray[$i][1]/count($salesItemTransactions[$i])) : 0) ?></td>
+                <?php endfor; ?>
+            </tr>
+        </tbody>
+    </table>
 </div>

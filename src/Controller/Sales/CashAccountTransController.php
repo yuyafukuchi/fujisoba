@@ -62,13 +62,21 @@ class CashAccountTransController extends AppController
         $this->paginate = [
             'contain' => ['Stores', 'Accounts']
         ];
+        if(isset($_GET['store'])){
+            $storeId = intval($_GET['store']);
+        } else {
+            $storeId = 0;
+        }
+        if($storeId === 0) {
+            return $this->redirect(['controller' => '/../Users', 'action' => 'sales']);
+        }
         if ($this->request->is('post')) {
             $data = $this->request->data()['transaction_month'];
             $date = strtotime($data['year'].'-'.$data['month']);
         } else {
             $date = strtotime(date('Y-m',time()));
         }
-        $cashAccountTrans =$this->CashAccountTrans->find()->where(['transaction_date >=' => date('Y-m-d',$date), 'transaction_date <' => date('Y-m-d',strtotime('+1 month', $date))])
+        $cashAccountTrans =$this->CashAccountTrans->find()->where(['store_id' => $storeId, 'transaction_date >=' => date('Y-m-d',$date), 'transaction_date <' => date('Y-m-d',strtotime('+1 month', $date))])
                                     ->order(['transaction_date' => 'ASC']);
         $this->Session = $this->request->session();
         $this->Session->write('CashAccountTrans.newTrans', array());
