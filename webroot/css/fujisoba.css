@@ -1,0 +1,176 @@
+/*
+
+    <div class="footer">
+        <p>Copyright 2017 powered by TRT Corp. All rights reserved.</p>
+    </div>
+
+*/
+
+.header .main {
+    background: #cb3315;
+    color: white;
+    padding: 10px;
+}
+
+.logo {
+    padding-left: 10px;
+    font-family: serif;
+    font-weight: bold;
+}
+
+.footer {
+    background: #cb3315;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.login_form {
+    margin: auto;
+    width: 300px;
+}
+
+body {
+    border-left: 3px solid #cb3315;
+    border-right: 3px solid #cb3315;
+}
+
+.login-button {
+    font-weight: bold;
+    background: #d0d1d0;
+    width: 300px;
+    margin-top: 10px;
+}
+
+.logout-button {
+    color: #333;
+    background: #d0d1d0;
+}
+
+div.input.text {
+    margin: auto;
+    width: 300px;
+}
+
+div.input.select {
+    margin: auto;
+    width: 300px;
+}
+
+div.input.checkbox {
+    padding-right: 30px;
+    text-align: right;
+}
+
+div.form-table {
+    display: table;
+    width: 100%;
+}
+
+div.form-cell {
+    display: table-cell;
+}
+
+div.submit {
+    display: inline;
+    text-align: right;
+}
+
+.employees-index {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.employees-info {
+    float: left;
+    width: 300px;
+}
+
+label.retired {
+    margin-right: 20px;
+}
+
+a.add-link {
+    float: right;
+    margin-right: 20px;
+}
+
+a.return-link {
+    float: right;
+    margin-right: 20px;
+}
+
+div.employees.form {
+    padding-bottom: 100px;
+}
+
+div.input.text.required {
+    width: 200px;
+}
+
+div.add-employees.left {
+    width: 60%;
+}
+
+div.add-employees.right {
+    width: 40%;
+}
+
+
+
+a.logout {
+    display: inline-block;
+    float: right;
+    margin-right: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    background: #d4d4d4;
+    color: #000000;
+    border: solid 1px #666666;
+}
+
+th.number {
+    width: 60px;
+}
+
+p.name {
+    color: #ffffff;
+    float: left;
+    margin-left: 20px;
+    margin-bottom: 0;
+}
+
+input.confirm-attendance {
+    margin-top: 20px;
+    width: 145px;
+    float: left;
+}
+
+input.support-another {
+    margin-top: 20px;
+    width: 145px;
+    float: right;
+}
+
+div.upper-block {
+    background: #cb3315;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+a.master-maintenance {
+    display: block;
+    text-align-last: center;
+    margin: 0 auto;
+    margin-top: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: #d4d4d4;
+    color: #000000;
+    border: solid 1px #666666;
+    width: 500px;
+}

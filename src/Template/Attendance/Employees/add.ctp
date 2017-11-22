@@ -4,12 +4,13 @@
   */
 ?>
 
-<div class="employees form large-9 medium-8 columns content">
+<div class="employees form">
     <?=$data['name']?>
     <?= $this->Form->create($employee) ?>
     <fieldset>
         <legend><?= __('Add Employee') ?></legend>
-        <?php
+        <div class="add-employees left">
+            <?php
             echo $this->Form->input('code',['type' => 'text','label' => '従業員コード']);
             echo $this->Form->input('name_last',['type' => 'text','label' => '姓(漢字）']);
             echo $this->Form->input('name_first',['type' => 'text','label' => '名（漢字）']);
@@ -29,6 +30,10 @@
             echo $this->Form->input('joined', ['empty' => true,'label' => '入社年月日）']);
             echo $this->Form->input('retired', ['empty' => true,'label' => '退職年月日']);
             echo $this->Form->input('note',['type' => 'text','label' => '備考']);
+        ?>
+        </div>
+        <div class="add-employees right">
+            <?php
             echo '職責';
             echo $this -> Form -> input ( "check", [ "type" => "checkbox",
                                          "value" => "check2",
@@ -54,6 +59,9 @@
                                          "value" => "check2",
                                          "label" => "この従業員を削除する" ] );
         ?>
+        </div>
+        
+        
     </fieldset>
     <?= $this->Form->button(__('登録')) ?>
     <?= $this->Form->button(__('新規')) ?>

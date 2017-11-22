@@ -1,10 +1,5 @@
+<div class="login_form">
 <?php
-/**
-  * @var \App\View\AppView $this
-  */
-?>
-
-<?php 
 echo $this->Form->create('Users');
 echo $this -> Form -> input ( "name", [ "type" => "text",
                                            "size" => 10,
@@ -13,8 +8,11 @@ echo $this -> Form -> input ( "name", [ "type" => "text",
 echo $this -> Form -> input ( "password", [ "type" => "password",
                                            "size" => 10,
                                            "label" => "パスワード",
+                                           'class' => 'bbbbb',
                                            "default" => "" ]  );
-echo $this -> Form -> submit ( "ログイン");
+echo $this -> Form -> submit ( "ログイン", [
+    'class' => 'login-button'
+] );
 echo $this -> Form -> end ();
 ?>
 </div>

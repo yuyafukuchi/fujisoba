@@ -6,13 +6,19 @@
 <?php 
 echo $data['name'];
 echo nl2br("\n");
-echo $this->Html->link('ログアウト', ['controller'=>'Users', 'action'=>'logout']);
+echo $this->Html->link('ログアウト', ['controller'=>'Users', 'action'=>'logout'], [ 'class' => "logout"]);
 ?> <br> <?php
 if($data['type'] === 'H')
 {
-    echo $this->Html->link('従業員マスタ保守', ['controller'=>'Attendance/Employees', 'action'=>'index']);
+   
+    echo $this->Html->link('従業員マスタ保守', [ 'controller'=>'Attendance/Employees', 
+                                                 'action'=>'index' ],
+                                               [ 'class' => 'master-maintenance' ]);
     ?> <br> <?php
-    echo $this->Html->link('勤怠データ検索', ['controller'=>'Attendance/monthly-time-cards', 'action'=>'index']);
+    echo $this->Html->link('勤怠データ検索', [ 'controller'=>'Attendance/monthly-time-cards',
+                                               'action'=>'index' ],
+                                             [ 'class' => 'master-maintenance' ]);
+    
 }
 if($data['type'] === 'M')
 {
