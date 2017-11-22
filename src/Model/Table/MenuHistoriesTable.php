@@ -9,7 +9,7 @@ use Cake\Validation\Validator;
 /**
  * MenuHistories Model
  *
- * @property \Cake\ORM\Association\BelongsTo $MenuItems
+ * @property \App\Model\Table\MenuItemsTable|\Cake\ORM\Association\BelongsTo $MenuItems
  *
  * @method \App\Model\Entity\MenuHistory get($primaryKey, $options = [])
  * @method \App\Model\Entity\MenuHistory newEntity($data = null, array $options = [])
@@ -21,7 +21,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class MenuHistoriesTable extends AppTable
+class MenuHistoriesTable extends Table
 {
 
     /**
@@ -34,13 +34,20 @@ class MenuHistoriesTable extends AppTable
     {
         parent::initialize($config);
 
-        $this->table('menu_histories');
-        $this->displayField('name');
-        $this->primaryKey('id');
+        $this->setTable('menu_histories');
+        $this->setDisplayField('name');
+        $this->setPrimaryKey('id');
 
+        $this->addBehavior('Timestamp');
+
+        $this->belongsTo('Menus', [
+            'foreignKey' => 'menu_item_id',
+            'joinType' => 'INNER'
+        ]);
         
-
-        $this->belongsTo('MenuItems', [
+        $this->belongsTo('SalesItemAssignHistories', [
+            'className' => 'SalesItemAssignHistories',
+            'bindingKey' => 'menu_item_id',
             'foreignKey' => 'menu_item_id',
             'joinType' => 'INNER'
         ]);
@@ -59,6 +66,7 @@ class MenuHistoriesTable extends AppTable
             ->allowEmpty('id', 'create');
 
         $validator
+            ->scalar('name')
             ->requirePresence('name', 'create')
             ->notEmpty('name');
 
@@ -95,7 +103,7 @@ class MenuHistoriesTable extends AppTable
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['menu_item_id'], 'MenuItems'));
+        $rules->add($rules->existsIn(['menu_item_id'], 'Menus'));
 
         return $rules;
     }

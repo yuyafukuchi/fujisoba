@@ -9,13 +9,13 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property int $inventory_item_id
  * @property int $store_id
- * @property \Cake\I18n\Time $transaction_date
+ * @property \Cake\I18n\FrozenTime $transaction_date
  * @property int $purchase_qty
  * @property int $loss_qty
  * @property int $count_qty
- * @property \Cake\I18n\Time $created
+ * @property \Cake\I18n\FrozenTime $created
  * @property int $created_by
- * @property \Cake\I18n\Time $modified
+ * @property \Cake\I18n\FrozenTime $modified
  * @property int $modified_by
  *
  * @property \App\Model\Entity\InventoryItem $inventory_item
@@ -34,7 +34,22 @@ class InventoryPurchaseTransaction extends Entity
      * @var array
      */
     protected $_accessible = [
-        '*' => true,
-        'id' => false
+        'inventory_item_id' => true,
+        'store_id' => true,
+        'transaction_date' => true,
+        'purchase_qty' => true,
+        'loss_qty' => true,
+        'count_qty' => true,
+        'created' => true,
+        'created_by' => true,
+        'modified' => true,
+        'modified_by' => true,
+        'inventory_item' => true,
+        'store' => true
     ];
+    
+    protected function _getHoge()
+    {
+      return $this->_properties['purchase_qty'] - $this->_properties['loss_qty'] - $this->_properties['count_qty'];;
+    }
 }

@@ -9,8 +9,8 @@ use Cake\Validation\Validator;
 /**
  * StoreInventoryItemHistories Model
  *
- * @property \Cake\ORM\Association\BelongsTo $InventoryItems
- * @property \Cake\ORM\Association\BelongsTo $Stores
+ * @property \App\Model\Table\InventoryItemsTable|\Cake\ORM\Association\BelongsTo $InventoryItems
+ * @property \App\Model\Table\StoresTable|\Cake\ORM\Association\BelongsTo $Stores
  *
  * @method \App\Model\Entity\StoreInventoryItemHistory get($primaryKey, $options = [])
  * @method \App\Model\Entity\StoreInventoryItemHistory newEntity($data = null, array $options = [])
@@ -22,7 +22,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class StoreInventoryItemHistoriesTable extends AppTable
+class StoreInventoryItemHistoriesTable extends Table
 {
 
     /**
@@ -35,14 +35,19 @@ class StoreInventoryItemHistoriesTable extends AppTable
     {
         parent::initialize($config);
 
-        $this->table('store_inventory_item_histories');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setTable('store_inventory_item_histories');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
 
-        
+        $this->addBehavior('Timestamp');
 
         $this->belongsTo('InventoryItems', [
             'foreignKey' => 'inventory_item_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('InventoryItemHistories', [
+            'foreignKey' => 'inventory_item_id',
+            'bindingKey' => 'inventory_item_id',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Stores', [

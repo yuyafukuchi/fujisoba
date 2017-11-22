@@ -50,9 +50,9 @@ class MenusFixture extends TestFixture
         [
             'id' => 1,
             'menu_number' => 1,
-            'created' => '2017-10-20 17:47:08',
+            'created' => '2017-10-31 19:18:05',
             'created_by' => 1,
-            'modified' => '2017-10-20 17:47:08',
+            'modified' => '2017-10-31 19:18:05',
             'modified_by' => 1
         ],
     ];

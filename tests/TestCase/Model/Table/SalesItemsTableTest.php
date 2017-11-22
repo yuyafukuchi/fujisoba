@@ -29,7 +29,23 @@ class SalesItemsTableTest extends TestCase
         'app.menu_items',
         'app.sales_item_histories',
         'app.sales_item_transactions',
-        'app.sales_transactions'
+        'app.sales_transactions',
+        'app.stores',
+        'app.companies',
+        'app.employees',
+        'app.time_cards',
+        'app.users',
+        'app.cash_account_trans',
+        'app.accounts',
+        'app.store_account_infos',
+        'app.debit_categories',
+        'app.credit_categories',
+        'app.inventory_purchase_transactions',
+        'app.inventory_items',
+        'app.inventory_item_histories',
+        'app.store_inventory_item_histories',
+        'app.store_menu_histories',
+        'app.menus'
     ];
 
     /**
@@ -40,7 +56,7 @@ class SalesItemsTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('SalesItems') ? [] : ['className' => 'App\Model\Table\SalesItemsTable'];
+        $config = TableRegistry::exists('SalesItems') ? [] : ['className' => SalesItemsTable::class];
         $this->SalesItems = TableRegistry::get('SalesItems', $config);
     }
 

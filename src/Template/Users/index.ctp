@@ -8,13 +8,13 @@ echo $this->Html->link('ログアウト', ['controller'=>'Users', 'action'=>'log
 ?> <br> <?php
 if($data['type'] === 'H')
 {
-    echo $this->Html->link('売上管理', ['controller'=>'Users', 'action'=>'login']);
+    echo $this->Html->link('売上管理', ['controller'=>'Users', 'action'=>'sales']);
     ?> <br> <?php
     echo $this->Html->link('勤怠管理', ['controller'=>'Users', 'action'=>'attendance']);
 }
 if($data['type'] === 'M')
 {
-    echo $this->Html->link('売上管理', ['controller'=>'Users', 'action'=>'login']);
+    echo $this->Html->link('売上管理', ['controller'=>'Users', 'action'=>'sales']);
     ?> <br> <?php
     echo $this->Html->link('勤怠管理', ['controller'=>'Users', 'action'=>'attendance']);
 }

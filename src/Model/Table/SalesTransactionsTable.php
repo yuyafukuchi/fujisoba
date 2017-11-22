@@ -9,9 +9,9 @@ use Cake\Validation\Validator;
 /**
  * SalesTransactions Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Stores
- * @property \Cake\ORM\Association\BelongsTo $Menus
- * @property \Cake\ORM\Association\HasMany $SalesItemTransactions
+ * @property \App\Model\Table\StoresTable|\Cake\ORM\Association\BelongsTo $Stores
+ * @property \App\Model\Table\MenusTable|\Cake\ORM\Association\BelongsTo $Menus
+ * @property \App\Model\Table\SalesItemTransactionsTable|\Cake\ORM\Association\HasMany $SalesItemTransactions
  *
  * @method \App\Model\Entity\SalesTransaction get($primaryKey, $options = [])
  * @method \App\Model\Entity\SalesTransaction newEntity($data = null, array $options = [])
@@ -23,7 +23,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class SalesTransactionsTable extends AppTable
+class SalesTransactionsTable extends Table
 {
 
     /**
@@ -36,11 +36,11 @@ class SalesTransactionsTable extends AppTable
     {
         parent::initialize($config);
 
-        $this->table('sales_transactions');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setTable('sales_transactions');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
 
-        
+        $this->addBehavior('Timestamp');
 
         $this->belongsTo('Stores', [
             'foreignKey' => 'store_id',
@@ -67,9 +67,9 @@ class SalesTransactionsTable extends AppTable
             ->allowEmpty('id', 'create');
 
         $validator
-            ->dateTime('transaction_data')
-            ->requirePresence('transaction_data', 'create')
-            ->notEmpty('transaction_data');
+            ->dateTime('transaction_date')
+            ->requirePresence('transaction_date', 'create')
+            ->notEmpty('transaction_date');
 
         $validator
             ->integer('menu_number')
@@ -77,6 +77,7 @@ class SalesTransactionsTable extends AppTable
             ->notEmpty('menu_number');
 
         $validator
+            ->scalar('menu_name')
             ->allowEmpty('menu_name');
 
         $validator

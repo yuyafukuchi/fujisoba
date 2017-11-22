@@ -300,7 +300,7 @@ class TimeCardsController extends AppController
                         $this->Auth->setUser($user);    // データをセットしてログイン
                         $logIn = true ;
                         if(intval(date('d',time())) >= 16){
-                            $this->redirect(array('controller' => 'TimeCards', 'action' => 'index','t' => date('Y-m',strtotime('+1 month',time()))));
+                            $this->redirect(array('controller' => 'TimeCards', 'action' => 'index','t' => date('Y-m',strtotime('+1 month',strtotime('first day of',time())))));
                         }
                         $this->redirect(array('controller' => 'TimeCards', 'action' => 'index'));
                      }

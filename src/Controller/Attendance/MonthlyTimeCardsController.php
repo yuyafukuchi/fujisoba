@@ -138,7 +138,22 @@ class MonthlyTimeCardsController extends AppController
         $monthlyTimeCard = $this->MonthlyTimeCards->get($id, [
             'contain' => ['Employees','Employees.Companies', 'Employees.Stores']
         ]);
-        debug($monthlyTimeCard['date']);
+        if ($this->request->is('post')) {
+            if($this->request->data()['button'] === '承認'){
+                $monthlyTimeCard = $this->MonthlyTimeCards->patchEntity($monthlyTimeCard,array('id' => $monthlyTimeCard['id'],'approved' => true));
+                $this->MonthlyTimeCards->save($monthlyTimeCard);
+                $this->Flash->success('この勤務表を承認しました');
+            }
+            else if($this->request->data()['button'] === '非承認'){
+                $monthlyTimeCard = $this->MonthlyTimeCards->patchEntity($monthlyTimeCard,array('id' => $monthlyTimeCard['id'],'approved' => false));
+                $this->MonthlyTimeCards->save($monthlyTimeCard);
+                $this->Flash->success('この勤務表の承認を取り消しました');
+            }
+            debug($this->request->data());
+        }
+        $approveButton = $monthlyTimeCard['approved'] ? '非承認' : '承認';
+        
+        // get timeCards
         $this->TimeCards = TableRegistry::get('time_cards');
         if(intval(date('d',time())) >= 16){
             $date = strtotime('+1 month',time());
@@ -158,7 +173,12 @@ class MonthlyTimeCardsController extends AppController
             $timeCard['storeName'] = $storeName;
             $timeCards[$key] = $timeCard;
         }
-        $data = array('index' => $index,'length' => $length,'current_year'=>date('Y',$date), 'current_month'=>date('m',$date));
+        
+        $data = array(  'index' => $index,
+                        'length' => $length,
+                        'current_year'=>date('Y',$date), 
+                        'current_month'=>date('m',$date),
+                        'approveButton' => $approveButton);
         $this->set(compact('monthlyTimeCard','timeCards','data'));
         $this->set('_serialize', ['monthlyTimeCard']);
     }                 

@@ -8,9 +8,9 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property int $menu_number
- * @property \Cake\I18n\Time $created
+ * @property \Cake\I18n\FrozenTime $created
  * @property int $created_by
- * @property \Cake\I18n\Time $modified
+ * @property \Cake\I18n\FrozenTime $modified
  * @property int $modified_by
  *
  * @property \App\Model\Entity\SalesTransaction[] $sales_transactions
@@ -28,7 +28,11 @@ class Menu extends Entity
      * @var array
      */
     protected $_accessible = [
-        '*' => true,
-        'id' => false
+        'menu_number' => true,
+        'created' => true,
+        'created_by' => true,
+        'modified' => true,
+        'modified_by' => true,
+        'sales_transactions' => true
     ];
 }

@@ -25,7 +25,27 @@ class InventoryItemHistoriesTableTest extends TestCase
      */
     public $fixtures = [
         'app.inventory_item_histories',
-        'app.inventory_items'
+        'app.inventory_items',
+        'app.inventory_purchase_transactions',
+        'app.stores',
+        'app.companies',
+        'app.employees',
+        'app.time_cards',
+        'app.users',
+        'app.cash_account_trans',
+        'app.accounts',
+        'app.store_account_infos',
+        'app.debit_categories',
+        'app.credit_categories',
+        'app.sales_transactions',
+        'app.menus',
+        'app.sales_item_transactions',
+        'app.sales_items',
+        'app.sales_item_assign_histories',
+        'app.menu_items',
+        'app.sales_item_histories',
+        'app.store_inventory_item_histories',
+        'app.store_menu_histories'
     ];
 
     /**
@@ -36,7 +56,7 @@ class InventoryItemHistoriesTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('InventoryItemHistories') ? [] : ['className' => 'App\Model\Table\InventoryItemHistoriesTable'];
+        $config = TableRegistry::exists('InventoryItemHistories') ? [] : ['className' => InventoryItemHistoriesTable::class];
         $this->InventoryItemHistories = TableRegistry::get('InventoryItemHistories', $config);
     }
 

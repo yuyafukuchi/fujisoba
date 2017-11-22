@@ -9,9 +9,9 @@ use Cake\Validation\Validator;
 /**
  * SalesItems Model
  *
- * @property \Cake\ORM\Association\HasMany $SalesItemAssignHistories
- * @property \Cake\ORM\Association\HasMany $SalesItemHistories
- * @property \Cake\ORM\Association\HasMany $SalesItemTransactions
+ * @property \App\Model\Table\SalesItemAssignHistoriesTable|\Cake\ORM\Association\HasMany $SalesItemAssignHistories
+ * @property \App\Model\Table\SalesItemHistoriesTable|\Cake\ORM\Association\HasMany $SalesItemHistories
+ * @property \App\Model\Table\SalesItemTransactionsTable|\Cake\ORM\Association\HasMany $SalesItemTransactions
  *
  * @method \App\Model\Entity\SalesItem get($primaryKey, $options = [])
  * @method \App\Model\Entity\SalesItem newEntity($data = null, array $options = [])
@@ -23,7 +23,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class SalesItemsTable extends AppTable
+class SalesItemsTable extends Table
 {
 
     /**
@@ -36,11 +36,11 @@ class SalesItemsTable extends AppTable
     {
         parent::initialize($config);
 
-        $this->table('sales_items');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setTable('sales_items');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
 
-        
+        $this->addBehavior('Timestamp');
 
         $this->hasMany('SalesItemAssignHistories', [
             'foreignKey' => 'sales_item_id'
@@ -80,5 +80,19 @@ class SalesItemsTable extends AppTable
             ->allowEmpty('modified_by');
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->isUnique(['sales_item_number']));
+
+        return $rules;
     }
 }
