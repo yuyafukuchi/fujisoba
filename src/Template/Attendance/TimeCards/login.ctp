@@ -22,10 +22,8 @@ echo $this -> Form -> input ( "code", [ "type" => "text",
                                            "size" => 10,
                                            "label" => "従業員コード",
                                            "default" => "" ]  );
-echo $this -> Form -> submit ( "ログイン", [ 'class' => 'login-button' ] );
-echo $this -> Form -> submit ( "勤怠データ確認", [
-    'class' => 'confirm-attendance'
-] );
+echo $this -> Form -> submit ( "ログイン", [ 'class' => 'login-button', 'name' => 'loginButton' ] );
+echo $this -> Form -> submit ( "勤怠データ確認", [ 'class' => 'confirm-attendance', 'name' => 'loginButton' ] );
 echo $this -> Form -> submit ( "別店舗応援", [ 'class' => 'support-another' ] );
 echo $this -> Form -> end ();
 ?>
