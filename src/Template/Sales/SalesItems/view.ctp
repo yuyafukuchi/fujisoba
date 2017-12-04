@@ -49,7 +49,7 @@
     </table>
     <div class="related">
         <h4><?= __('Related Sales Item Assign Histories') ?></h4>
-        <?php if (!empty($salesItem->sales_item_assign_histories)): ?>
+        <?php if(!empty($salesItem->sales_item_assign_histories)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
@@ -86,7 +86,7 @@
     </div>
     <div class="related">
         <h4><?= __('Related Sales Item Histories') ?></h4>
-        <?php if (!empty($salesItem->sales_item_histories)): ?>
+        <?php if(!empty($salesItem->sales_item_histories)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
@@ -125,7 +125,7 @@
     </div>
     <div class="related">
         <h4><?= __('Related Sales Item Transactions') ?></h4>
-        <?php if (!empty($salesItem->sales_item_transactions)): ?>
+        <?php if(!empty($salesItem->sales_item_transactions)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>

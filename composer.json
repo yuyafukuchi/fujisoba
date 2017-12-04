@@ -11,7 +11,8 @@
         "cakephp/migrations": "~1.0",
         "cakephp/plugin-installer": "*",
         "muffin/footprint": "^1.1",
-        "friendsofcake/search": "^4.0"
+        "friendsofcake/search": "^4.0",
+        "elboletaire/twbs-cake-plugin": "^3.4"
     },
     "require-dev": {
         "psy/psysh": "@stable",

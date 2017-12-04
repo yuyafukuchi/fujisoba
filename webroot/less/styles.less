@@ -1,0 +1,163 @@
+html {
+    // height: 100%;
+}
+
+body {
+    border: 5px solid #cc3300;
+    height: 100%;
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 60px;
+}
+
+body.atendance {
+    border-color: #6ff;
+
+    .navbar-inverse {
+        background-color: #6ff;
+        border-color: #6ff;
+        color: #333;
+
+        .navbar-brand,
+        .navbar-nav>li>a {
+            color: #333;
+        }
+
+        &.heading {
+            min-height: 0;
+            line-height: 2;
+            font-size: large;
+
+            p {
+                margin: 0;
+            }
+        }
+    }
+
+    .navbar.breadcrumbs {
+        min-height: 0;
+        font-weight: bold;
+    }
+
+    .navbar-outverse {
+        margin-bottom: 0;
+        z-index: 99;
+
+        h1 {
+            margin: 0;
+            font-size: 36px;
+            font-weight: bold;
+            line-height: 2;
+        }
+
+        img {
+            margin: 10px;
+        }
+
+        .navbar-nav {
+            float: right;
+        }
+
+        .navbar-nav>li>a {
+            line-height: 42px;
+            background: #d9d9d9;
+            color: #333;
+        }
+    }
+}
+
+/**
+ * Navigations
+ */
+.navbar-inverse {
+    background-color: #cc3300;
+    border-color: #cc3300;
+    border-radius: 0;
+    color: #fff;
+
+    .navbar-brand,
+    .navbar-nav>li>a {
+        color: #fff;
+        font-weight: bold;
+    }
+}
+
+footer.navbar-inverse {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height: 0;
+    margin: 0;
+    border: none;
+
+    p {
+        margin: 0;
+        line-height: 2;
+    }
+}
+
+/**
+ * Form
+ */
+.control-label {
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.btn-lg {
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.btn-default {
+    background-color: #d9d9d9;
+    border: 1px solid #41719c;
+}
+
+/**
+ * Misc
+ */
+.vertical-center {
+    position: absolute;
+    min-height: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    left: 0;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+
+    .row, form {
+        width: 100%;
+    }
+}
+
+/**
+ * Users / index
+ */
+.page-users-index {
+    text-align: center;
+    position: relative;
+
+    .btn-30pct {
+        width: 30%;
+        padding: 100px 30px;
+        background: pink;
+        display: inline-block;
+        margin: 0 2%;
+        font-size: xx-large;
+        color: #000;
+        font-weight: bold;
+        border-radius: 30px;
+        border: 2px solid #000;
+    }
+    .btn-30pct:hover {
+        opacity: 0.8;
+        color: #000;
+    }
+    .bg-blue {
+        background: turquoise;
+    }
+}

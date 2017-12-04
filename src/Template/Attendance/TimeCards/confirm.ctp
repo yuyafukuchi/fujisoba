@@ -1,14 +1,18 @@
 <?php
-/**
-  * @var \App\View\AppView $this
-  */
+$this->append('heading', '<p>' . $storeName . ' / '.$user->name_first .' '. $user->name_last .' 様' . '</p>');
+$breadcrumb = !empty($timeCard['support']) ? $timeCard['support'] : '勤怠入力';
+$this->append('breadcrumbs', '<p>勤怠入力確認・' . $data['type'] . '時</p>');
 ?>
-<meta http-equiv="refresh" content="20;URL=/attendance/time-cards/login">
-<?=$data['type']?>時間を<br>
-<br>
-<?=$data['time']?>
-<br>
-で登録しました。
-<br>
-20秒後に自動ログアウトします。
+
+<div class="row" style="zoom: 3;">
+    <div class="col-md-12 text-center">
+        <p style="font-weight: bold;"><?= $data['type'] ?>時間を<br><?= $data['time']?><br>で登録しました。</p>
+    </div>
 </div>
+<div class="row" style="zoom: 1.5; margin-top: 50px;">
+    <div class="col-md-12 text-right">
+        <p style="font-weight: bold;">20秒後に自動ログアウトします。</p>
+    </div>
+</div>
+
+<meta http-equiv="refresh" content="20;URL=/attendance/time-cards/login">

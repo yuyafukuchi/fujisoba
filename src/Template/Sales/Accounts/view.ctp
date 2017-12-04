@@ -69,7 +69,7 @@
     </table>
     <div class="related">
         <h4><?= __('Related Store Account Infos') ?></h4>
-        <?php if (!empty($account->store_account_infos)): ?>
+        <?php if(!empty($account->store_account_infos)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>

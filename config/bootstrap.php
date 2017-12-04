@@ -225,3 +225,5 @@ if (Configure::read('debug')) {
 Plugin::load('Muffin/Footprint');
 
 Plugin::load('Search');
+
+Plugin::load('Bootstrap', ['bootstrap' => true]);

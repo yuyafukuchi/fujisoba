@@ -37,10 +37,10 @@
             <tr>
                 <td>
                     <?php foreach ($salesItemHistories as $salesItemHistory) : ?>
-                        <?=  $this -> Form -> input ( 'check-'.$storeMenuHistory->id.'-'.$salesItemHistory->id, 
+                        <?=  $this->Form->input('check-'.$storeMenuHistory->id.'-'.$salesItemHistory->id, 
                             [ "type" => "checkbox","value" => $salesItemHistory->sales_item_id,"label" => "" ,'hiddenField' => false,
                             'checked' => array_key_exists($storeMenuHistory->menu_item_id, $assignArray) ? in_array($salesItemHistory->sales_item_id,$assignArray[$storeMenuHistory->menu_item_id]) : false ]);?>
-                         <?=$this -> Form -> label ( 'check-'.$storeMenuHistory->id.'-'.$salesItemHistory->id,  $salesItemHistory->sales_item->sales_item_number . ' : ' . $salesItemHistory->sales_item_name )?><br>
+                         <?=$this->Form->label('check-'.$storeMenuHistory->id.'-'.$salesItemHistory->id,  $salesItemHistory->sales_item->sales_item_number . ' : ' . $salesItemHistory->sales_item_name )?><br>
                     <?php endforeach; ?>
                 </td>
             </tr>

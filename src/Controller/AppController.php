@@ -27,6 +27,14 @@ use Cake\Event\Event;
  */
 class AppController extends Controller
 {
+    // Load Bootstrap plugin
+    public $helpers = [
+        'Less.Less',
+        'BootstrapUI.Form',
+        'BootstrapUI.Html',
+        'BootstrapUI.Flash',
+        'BootstrapUI.Paginator'
+    ];
 
     /**
      * Initialization hook method.
@@ -60,6 +68,15 @@ class AppController extends Controller
      */
     public function beforeRender(Event $event)
     {
+        // Load Bootstrap layout
+        // $this->viewBuilder()->theme('Bootstrap');
+
+        if ($this->request->prefix === 'attendance') {
+            $this->set('mode', 'atendance');
+        }
+
+        // $this->set('currentUser', $this->Auth->user()); // debug($this->Auth); die;
+
         if (!array_key_exists('_serialize', $this->viewVars) &&
             in_array($this->response->type(), ['application/json', 'application/xml'])
         ) {

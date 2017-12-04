@@ -41,6 +41,13 @@ class TimeCardsController extends AppController
      */
     public function index()
     {
+        // Set breadcrumbs
+        $this->Auth->sessionKey = 'Auth.Users';
+        $parentUser = $this->Auth->user();
+        $storeName = TableRegistry::get('Stores')->get($parentUser['store_id'])['name'];
+        $this->Auth->sessionKey = 'Auth.Employees';
+        $user = $this->Auth->user();
+        $this->set(compact('storeName', 'user'));
 
 		if(!isset($_GET['t']) || !preg_match('/\A\d{4}-\d{2}\z/', $_GET['t'])){
 			$date = time();
@@ -53,10 +60,10 @@ class TimeCardsController extends AppController
         //$timeCards = $this->paginate($this->TimeCards);
         //$this->set(compact('timeCards'));
         //$this->set('_serialize', ['timeCards']);
-        
+
         $this->Auth->sessionKey = 'Auth.Employees';
         $employee_id = $this->Auth->user()['id'];
-        $timeCardsOld = $this->TimeCards->find()->where([   'employee_id' => $employee_id, 
+        $timeCardsOld = $this->TimeCards->find()->where([   'employee_id' => $employee_id,
                                                         'date >=' => date('Y-m',strtotime('-1 month',$date)).'-16',
                                                         'date <=' => date('Y-m',$date).'-15'])->toArray();
         $timeCards = array();
@@ -160,12 +167,17 @@ class TimeCardsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-    
-    public function emboss(){
+
+    public function emboss()
+    {
         $this->Session = $this->request->session();
-        $timeCard = $this->TimeCards->find()->where(['date' => date('Y-m-d'), 
-                                                        'employee_id' => $this->Auth->user()['id']])->toArray();
-        
+        $timeCard = $this->TimeCards->find()
+            ->where([
+                'date' => date('Y-m-d'),
+                'employee_id' => $this->Auth->user()['id']
+            ])
+            ->toArray();
+
         $this->Auth->sessionKey = 'Auth.Users';
         $parentUser = $this->Auth->user();
         $this->Stores = TableRegistry::get('stores');
@@ -178,7 +190,7 @@ class TimeCardsController extends AppController
             $support = '';
         }
         $this->Auth->sessionKey = 'Auth.Employees';
-        
+
         if(count($timeCard) == 0){
             $this->set('timeCard',array('in_time'=> null,'out_time'=> null, 'in_time2' => null, 'out_time2'=> null, 'support' => $support));
         }else{
@@ -193,7 +205,7 @@ class TimeCardsController extends AppController
            return;
        }
        $type =  $type = $this->request->data['button'];
-       
+
         if ($this->request->is('post')) {  //if post
             $this->Auth->sessionKey = 'Auth.Employees';
             $user = $this->Auth->user();
@@ -217,7 +229,7 @@ class TimeCardsController extends AppController
             } else {
                 $monthlyTimeCard = $this->MonthlyTimeCards->find()->where(['employee_id' => $user['id'], 'date' => $timeCardMonth])->toArray()[0];
             }
-            
+
             if(count($timeCard) == 0){
                 $timeCard = $this->TimeCards->newEntity();
                 $timeCard = $this->TimeCards->patchEntity($timeCard,array(
@@ -261,8 +273,9 @@ class TimeCardsController extends AppController
             return $this->redirect(['action' => 'confirm']);
         }
     }
-    
-    public function login(){
+
+    public function login()
+    {
         $this->Auth->sessionKey = 'Auth.Users';
         if($this->Auth->user() == null){
             return $this->redirect(['controller' => '/../Users', 'action' => 'login']);
@@ -323,40 +336,56 @@ class TimeCardsController extends AppController
                     [],
                     'auth'
                  );
-                 
+
             }
         }
     }
-    public function confirm(){
+    public function confirm()
+    {
         $this->Session = $this->request->session();
-        $this->Auth->logout();
+
+        // Set breadcrumbs
+        $this->Auth->sessionKey = 'Auth.Users';
+        $parentUser = $this->Auth->user();
+        $storeName = TableRegistry::get('Stores')->get($parentUser['store_id'])['name'];
+        $this->Auth->sessionKey = 'Auth.Employees';
+        $user = $this->Auth->user();
+        $this->set(compact('storeName', 'user'));
+
         $data = $this->Session->read('TimeCard.confirm');
-        $data = $this->Session->delete('TimeCard.confirm');
+        $this->Session->delete('TimeCard.confirm');
+
+        $this->Auth->logout();
+
         $this->set(compact('data'));
         $this->set('_serialize', ['data']);
     }
-    
-    public function logout(){
+
+    public function logout()
+    {
         $this->Auth->sessionKey = 'Auth.Employees';
         $this->Auth->logout();
         $this->redirect(array('controller' => 'TimeCards', 'action' => 'login'));
     }
-    
-    public function logoutParent(){
+
+    public function logoutParent()
+    {
         $this->Auth->sessionKey = 'Auth.Users';
         $this->Auth->logout();
         $this->redirect(array('controller' => 'Users', 'action' => 'login'));
     }
-    
-    public function search() {
+
+    public function search()
+    {
         $this->Companies = TableRegistry::get('companies');
         $this->Stores = TableRegistry::get('stores');
         $companies = $this->Companies->find('list', ['limit' => 200]);
         $stores = $this->Stores->find('list', ['limit' => 200]);
         $this->set(compact( 'companies', 'stores'));
     }
-    
-    private function saveMonthlyTimeCard ($monthlyTimeCard, $finish) {
+
+    private function saveMonthlyTimeCard ($monthlyTimeCard, $finish)
+    {
         $this->MonthlyTimeCards = TableRegistry::get('monthly_time_cards');
         $monthlyTimeCard = $this->MonthlyTimeCards->patchEntity($monthlyTimeCard, array(
                     'date' => $monthlyTimeCard['date'],

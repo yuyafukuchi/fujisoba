@@ -25,17 +25,17 @@
     <?=$storeName ?> 出庫日計表 
     <?=date('Y年m月度',$date)?>
     <?=$this->Form->create(null) ?>
-    <?= $this -> Form -> input (
-     "date", [ "label" => "",
+    <?= $this->Form->input(
+     "date", ["label" => "",
                       "type" => "datetime",
                       "dateformat" => "YM",
                       "monthNames" => false,
                       "separator" => "/",
                       "templates" => [ "dateWidget" => '{{year}} 年 {{month}} 月' ],
-                      "minYear" => date ( "Y" ) - 70,
-                      "maxYear" => date ( "Y" ) - 18,
-                      "default" => date ( "Y-m" ),
-                      "empty" => [ "year" => "年", "month" => "月"] ] ) ?>
+                      "minYear" => date("Y" ) - 70,
+                      "maxYear" => date("Y" ) - 18,
+                      "default" => date("Y-m" ),
+                      "empty" => [ "year" => "年", "month" => "月"]]) ?>
     <?= $this->Form->submit("設定",['name'=>'button']) ?>
     <?=$this->Form->end() ?>
     <?=$this->Form->create(null) ?>
@@ -65,7 +65,7 @@
             <tr>
                 <th>日</th>
                 <th>曜</th>
-                <?php for ($i=0;$i<$arraySize;$i++) : ?>
+                <?php for($i=0;$i<$arraySize;$i++) : ?>
                     <th>出庫数</th>
                     <th>金額</th>
                 <?php endfor; ?>

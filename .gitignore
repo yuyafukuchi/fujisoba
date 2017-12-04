@@ -15,3 +15,6 @@ Thumbs.db
 *.un~
 *~
 *BAK
+*.lesscache
+lessphp_*
+*.log

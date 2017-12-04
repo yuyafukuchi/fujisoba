@@ -1,26 +1,19 @@
 <?php
-/**
-  * @var \App\View\AppView $this
-  */
+$this->append('menu', '<li><a href="/users/sales">売上管理</a></li>');
+$this->append('menu', '<li><a href="/users/attendance">勤怠管理</a></li>');
 ?>
-<?php 
-echo $this->Html->link('ログアウト', ['controller'=>'Users', 'action'=>'logout']);
-?> <br> <?php
-if($data['type'] === 'H')
-{
-    echo $this->Html->link('売上管理', ['controller'=>'Users', 'action'=>'sales']);
-    ?> <br> <?php
-    echo $this->Html->link('勤怠管理', ['controller'=>'Users', 'action'=>'attendance']);
-}
-if($data['type'] === 'M')
-{
-    echo $this->Html->link('売上管理', ['controller'=>'Users', 'action'=>'sales']);
-    ?> <br> <?php
-    echo $this->Html->link('勤怠管理', ['controller'=>'Users', 'action'=>'attendance']);
-}
-if($data['type'] === 'G')
-{
-    echo 'エラー：このページにはアクセスできません。';
-}
-?>
+
+<div class="page-users-index">
+    <?php if ($data['type'] === 'H'): ?>
+        <?= $this->Html->link('売上管理', ['controller'=>'Users', 'action'=>'sales'], ['class' => 'btn-30pct']) ?>
+        <?= $this->Html->link('勤怠管理', ['controller'=>'Users', 'action'=>'attendance'], ['class' => 'btn-30pct bg-blue']) ?>
+    <?php endif; ?>
+
+    <?php if ($data['type'] === 'M'): ?>
+        <?= $this->Html->link('売上管理', ['controller'=>'Users', 'action'=>'sales'], ['class' => 'btn-30pct']) ?>
+    <?php endif; ?>
+
+    <?php if ($data['type'] === 'G'): ?>
+        エラー：このページにはアクセスできません。
+    <?php endif; ?>
 </div>

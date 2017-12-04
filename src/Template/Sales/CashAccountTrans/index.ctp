@@ -19,16 +19,16 @@
     <?= $data['name'].' 現金出納表 '?>
     <?= count($date) == 2 ? $date[0].'年'.$date[1].'月' : ''?>
     <?= $this->Form->create(null)?>
-     <?= $this -> Form -> input (
-     "transaction_month", [ "label" => '',
+     <?= $this->Form->input(
+     "transaction_month", ["label" => '',
                     "type" => "datetime",
                     "dateformat" => "YM",
                     "monthNames" => false,
                     "separator" => "/",
                     "templates" => [ "dateWidget" => '{{year}} 年 {{month}} 月' ],
-                    "minYear" => date ( "Y" ) - 70,
-                    "maxYear" => date ( "Y" ) - 18,
-                    "default" => date ( "Y-m" ),] )?>
+                    "minYear" => date("Y" ) - 70,
+                    "maxYear" => date("Y" ) - 18,
+                    "default" => date("Y-m" ),] )?>
     <?= $this->Form->submit("検索",['name'=>'button']) ?>
     <?= $this->Form->end()?>
     <table cellpadding="0" cellspacing="0">

@@ -1,18 +1,30 @@
-<div class="login_form">
-<?php
-echo $this->Form->create('Users');
-echo $this -> Form -> input ( "name", [ "type" => "text",
-                                           "size" => 10,
-                                           "label" => "ユーザ",
-                                           "default" => "" ]  );
-echo $this -> Form -> input ( "password", [ "type" => "password",
-                                           "size" => 10,
-                                           "label" => "パスワード",
-                                           'class' => 'bbbbb',
-                                           "default" => "" ]  );
-echo $this -> Form -> submit ( "ログイン", [
-    'class' => 'login-button'
-] );
-echo $this -> Form -> end ();
-?>
+<div class="vertical-center">
+    <?= $this->Form->create('Users') ?>
+        <div class="row">
+            <div class="col-md-5 control-label text-right">ユーザ</div>
+            <div class="col-md-4">
+                <?= $this->Form->input("name", [
+                    "type" => "text",
+                    'label' => false,
+                    'class' => 'input-lg',
+                ]) ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5 control-label text-right">パスワード</div>
+            <div class="col-md-4">
+                <?= $this->Form->input("password", [
+                    "type" => "password",
+                    'label' => false,
+                    'class' => 'input-lg',
+                ]) ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5 control-label text-right"></div>
+            <div class="col-md-4">
+                <?= $this->Form->submit("ログイン", ['class' => 'btn btn-lg btn-block'])?>
+            </div>
+        </div>
+    <?= $this->Form->end() ?>
 </div>

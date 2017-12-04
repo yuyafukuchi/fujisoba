@@ -8,7 +8,7 @@
     <ul class="side-nav">
         <li class="heading">富士そば</li>
         <li class="heading"><?=h($data['name']) ?></li>
-        <?php if ($data['type'] === 'H') : ?> <!-- 本社管理者 -->
+        <?php if($data['type'] === 'H') : ?> <!-- 本社管理者 -->
         <li class="heading">売上日計表</li>
             <?php foreach ($stores as $store) : ?>
             <li><?= $this->Html->link($store->name, ['controller' => 'Sales/SalesTransactions','action' => 'view', 'store' => $store->id]) ?></li>
@@ -18,15 +18,15 @@
             <?php foreach ($stores as $store) : ?>
             <li><?= $this->Html->link($store->name, ['controller' => 'Sales/SalesTransactions', 'action' => 'view', 'store' => $store->id]) ?></li>
             <?php endforeach; ?>
-        <li class="heading">　在庫日計表一覧</li>
+        <li class="heading"> 在庫日計表一覧</li>
             <?php foreach ($stores as $store) : ?>
             <li><?= $this->Html->link($store->name, ['controller' => 'Sales/InventoryPurchaseTransactions','action' => 'monthly', 'store' => $store->id]) ?></li>
             <?php endforeach; ?>
-        <li class="heading">　出庫日計表一覧</li>
+        <li class="heading"> 出庫日計表一覧</li>
             <?php foreach ($stores as $store) : ?>
             <li><?= $this->Html->link($store->name, ['controller' => 'Sales/SalesItemTransactions','action' => 'index', 'store' => $store->id]) ?></li>
             <?php endforeach; ?>
-        <li class="heading">　現金出納表一覧</li>
+        <li class="heading"> 現金出納表一覧</li>
             <?php foreach ($stores as $store) : ?>
             <li><?= $this->Html->link($store->name, ['controller' => 'Sales/CashAccountTrans', 'action' => 'index', 'store' => $store->id]) ?></li>
             <?php endforeach; ?>

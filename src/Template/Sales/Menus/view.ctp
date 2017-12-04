@@ -45,7 +45,7 @@
     </table>
     <div class="related">
         <h4><?= __('Related Sales Transactions') ?></h4>
-        <?php if (!empty($menu->sales_transactions)): ?>
+        <?php if(!empty($menu->sales_transactions)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>

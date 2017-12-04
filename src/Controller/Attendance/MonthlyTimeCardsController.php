@@ -14,7 +14,7 @@ use Cake\ORM\TableRegistry;
  */
 class MonthlyTimeCardsController extends AppController
 {
-    
+
     public function initialize()
     {
         parent::initialize();
@@ -28,8 +28,8 @@ class MonthlyTimeCardsController extends AppController
         $this->loadComponent('Search.Prg');
         $this->Auth->sessionKey = 'Auth.Users';
     }
-    
-    
+
+
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
@@ -46,7 +46,7 @@ class MonthlyTimeCardsController extends AppController
             $companies = $this->Users->Companies->find('list', ['limit' => 200]);
             $stores = $this->Users->Stores->find('list', ['limit' => 200]);
         }
-        else if($type === 'M')       
+        else if($type === 'M')
         {
             $name = $this->Users->Stores->get($this->Auth->user('store_id'))['name'].'管理者 様';
             $companies = $this->Users->Companies->find('list', ['limit' => 200])->where(['id' => $this->Auth->user('company_id')]);
@@ -54,6 +54,7 @@ class MonthlyTimeCardsController extends AppController
         }
          $data = array('type' => $type, 'name' => $name);
          $this->set(compact('companies', 'stores','data'));
+         $this->set('data2', $data);
     }
 
     /**
@@ -73,7 +74,7 @@ class MonthlyTimeCardsController extends AppController
         {
             $searchQuery['company_id'] = $this->Auth->user('company_id');
         }
-        else if($type === 'M')       
+        else if($type === 'M')
         {
             $searchQuery['company_id'] = $this->Auth->user('company_id');
             $searchQuery['store_id'] = $this->Auth->user('store_id');
@@ -87,7 +88,7 @@ class MonthlyTimeCardsController extends AppController
         foreach ($monthlyTimeCards as $monthlyTimeCard){
             array_push($timeCardIDs,$monthlyTimeCard['id']);
         }*/
-        
+
         $monthlyTimeCards = $this->paginate($monthlyTimeCards)->toArray();
         foreach ($monthlyTimeCards as $monthlyTimeCard){
             array_push($timeCardIDs,$monthlyTimeCard['id']);
@@ -111,7 +112,7 @@ class MonthlyTimeCardsController extends AppController
         $this->set(compact('monthlyTimeCards'));
         $this->set('_serialize', ['monthlyTimeCards']);
     }
-    
+
 
     /**
      * View method
@@ -134,7 +135,7 @@ class MonthlyTimeCardsController extends AppController
             $this->Session->delete('MonthlyTimeCard.idArray');
             return $this->redirect(['action' => 'index']);
         }
-        $id = $idArray[$index-1];                                                                                                                                                                                                                                                                                                                                                                                                     
+        $id = $idArray[$index-1];
         $monthlyTimeCard = $this->MonthlyTimeCards->get($id, [
             'contain' => ['Employees','Employees.Companies', 'Employees.Stores']
         ]);
@@ -152,7 +153,7 @@ class MonthlyTimeCardsController extends AppController
             debug($this->request->data());
         }
         $approveButton = $monthlyTimeCard['approved'] ? '非承認' : '承認';
-        
+
         // get timeCards
         $this->TimeCards = TableRegistry::get('time_cards');
         if(intval(date('d',time())) >= 16){
@@ -160,7 +161,7 @@ class MonthlyTimeCardsController extends AppController
         } else {
             $date = time();
         }
-        $timeCardsOld = $this->TimeCards->find()->where([   'employee_id' => $monthlyTimeCard['employee_id'], 
+        $timeCardsOld = $this->TimeCards->find()->where([   'employee_id' => $monthlyTimeCard['employee_id'],
                                                         'date >=' => date('Y-m',strtotime('-1 month',$date)).'-16',
                                                         'date <=' => date('Y-m',$date).'-15'])->toArray();
         $timeCards = array();
@@ -173,15 +174,17 @@ class MonthlyTimeCardsController extends AppController
             $timeCard['storeName'] = $storeName;
             $timeCards[$key] = $timeCard;
         }
-        
+
         $data = array(  'index' => $index,
                         'length' => $length,
-                        'current_year'=>date('Y',$date), 
+                        'current_year'=>date('Y',$date),
                         'current_month'=>date('m',$date),
-                        'approveButton' => $approveButton);
+                        'approveButton' => $approveButton,
+                        'employee' => $monthlyTimeCard->employee,
+        );
         $this->set(compact('monthlyTimeCard','timeCards','data'));
         $this->set('_serialize', ['monthlyTimeCard']);
-    }                 
+    }
 
     /**
      * Add method

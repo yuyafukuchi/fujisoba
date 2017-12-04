@@ -124,7 +124,7 @@
     </div>
     <div class="related">
         <h4><?= __('Related Time Cards') ?></h4>
-        <?php if (!empty($employee->time_cards)): ?>
+        <?php if(!empty($employee->time_cards)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>

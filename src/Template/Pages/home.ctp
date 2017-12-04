@@ -1,13 +1,13 @@
 <?php
 /**
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * CakePHP(tm) : Rapid Development Framework(http://cakephp.org)
+ * Copyright(c) Cake Software Foundation, Inc.(http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @copyright     Copyright(c) Cake Software Foundation, Inc.(http://cakefoundation.org)
  * @link          http://cakephp.org CakePHP(tm) Project
  * @since         0.10.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
@@ -21,7 +21,7 @@ use Cake\Network\Exception\NotFoundException;
 
 $this->layout = false;
 
-if (!Configure::read('debug')):
+if(!Configure::read('debug')):
     throw new NotFoundException('Please replace src/Template/Pages/home.ctp with your own version.');
 endif;
 
@@ -72,27 +72,27 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
     <div class="columns large-6">
         <h4>Environment</h4>
         <ul>
-        <?php if (version_compare(PHP_VERSION, '5.5.9', '>=')): ?>
-            <li class="bullet success">Your version of PHP is 5.5.9 or higher (detected <?= PHP_VERSION ?>).</li>
+        <?php if(version_compare(PHP_VERSION, '5.5.9', '>=')): ?>
+            <li class="bullet success">Your version of PHP is 5.5.9 or higher(detected <?= PHP_VERSION ?>).</li>
         <?php else: ?>
-            <li class="bullet problem">Your version of PHP is too low. You need PHP 5.5.9 or higher to use CakePHP (detected <?= PHP_VERSION ?>).</li>
+            <li class="bullet problem">Your version of PHP is too low. You need PHP 5.5.9 or higher to use CakePHP(detected <?= PHP_VERSION ?>).</li>
         <?php endif; ?>
 
-        <?php if (extension_loaded('mbstring')): ?>
+        <?php if(extension_loaded('mbstring')): ?>
             <li class="bullet success">Your version of PHP has the mbstring extension loaded.</li>
         <?php else: ?>
             <li class="bullet problem">Your version of PHP does NOT have the mbstring extension loaded.</li>;
         <?php endif; ?>
 
-        <?php if (extension_loaded('openssl')): ?>
+        <?php if(extension_loaded('openssl')): ?>
             <li class="bullet success">Your version of PHP has the openssl extension loaded.</li>
-        <?php elseif (extension_loaded('mcrypt')): ?>
+        <?php elseif(extension_loaded('mcrypt')): ?>
             <li class="bullet success">Your version of PHP has the mcrypt extension loaded.</li>
         <?php else: ?>
             <li class="bullet problem">Your version of PHP does NOT have the openssl or mcrypt extension loaded.</li>
         <?php endif; ?>
 
-        <?php if (extension_loaded('intl')): ?>
+        <?php if(extension_loaded('intl')): ?>
             <li class="bullet success">Your version of PHP has the intl extension loaded.</li>
         <?php else: ?>
             <li class="bullet problem">Your version of PHP does NOT have the intl extension loaded.</li>
@@ -102,20 +102,20 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
     <div class="columns large-6">
         <h4>Filesystem</h4>
         <ul>
-        <?php if (is_writable(TMP)): ?>
+        <?php if(is_writable(TMP)): ?>
             <li class="bullet success">Your tmp directory is writable.</li>
         <?php else: ?>
             <li class="bullet problem">Your tmp directory is NOT writable.</li>
         <?php endif; ?>
 
-        <?php if (is_writable(LOGS)): ?>
+        <?php if(is_writable(LOGS)): ?>
             <li class="bullet success">Your logs directory is writable.</li>
         <?php else: ?>
             <li class="bullet problem">Your logs directory is NOT writable.</li>
         <?php endif; ?>
 
         <?php $settings = Cache::config('_cake_core_'); ?>
-        <?php if (!empty($settings)): ?>
+        <?php if(!empty($settings)): ?>
             <li class="bullet success">The <em><?= $settings['className'] ?>Engine</em> is being used for core caching. To change the config edit config/app.php</li>
         <?php else: ?>
             <li class="bullet problem">Your cache is NOT working. Please check the settings in config/app.php</li>
@@ -132,19 +132,19 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
         try {
             $connection = ConnectionManager::get('default');
             $connected = $connection->connect();
-        } catch (Exception $connectionError) {
+        } catch(Exception $connectionError) {
             $connected = false;
             $errorMsg = $connectionError->getMessage();
-            if (method_exists($connectionError, 'getAttributes')):
+            if(method_exists($connectionError, 'getAttributes')):
                 $attributes = $connectionError->getAttributes();
-                if (isset($errorMsg['message'])):
+                if(isset($errorMsg['message'])):
                     $errorMsg .= '<br />' . $attributes['message'];
                 endif;
             endif;
         }
         ?>
         <ul>
-        <?php if ($connected): ?>
+        <?php if($connected): ?>
             <li class="bullet success">CakePHP is able to connect to the database.</li>
         <?php else: ?>
             <li class="bullet problem">CakePHP is NOT able to connect to the database.<br /><?= $errorMsg ?></li>
@@ -154,7 +154,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
     <div class="columns large-6">
         <h4>DebugKit</h4>
         <ul>
-        <?php if (Plugin::loaded('DebugKit')): ?>
+        <?php if(Plugin::loaded('DebugKit')): ?>
             <li class="bullet success">DebugKit is loaded.</li>
         <?php else: ?>
             <li class="bullet problem">DebugKit is NOT loaded. You need to either install pdo_sqlite, or define the "debug_kit" connection name.</li>

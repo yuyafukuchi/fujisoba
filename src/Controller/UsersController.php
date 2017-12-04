@@ -30,7 +30,7 @@ class UsersController extends AppController
         ]);
         $this->Auth->sessionKey = 'Auth.Users';
     }
-    
+
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
@@ -47,7 +47,7 @@ class UsersController extends AppController
             $companies = $this->Users->Companies->find('list', ['limit' => 200]);
             $stores = $this->Users->Stores->find('list', ['limit' => 200]);
         }
-        else if($type === 'M')       
+        else if($type === 'M')
         {
             $searchQuery['company_id'] = $this->Auth->user('company_id');
             $searchQuery['store_id'] = $this->Auth->user('store_id');
@@ -76,7 +76,7 @@ class UsersController extends AppController
         $data = array('users' => $users, 'type' => $this->Auth->user('type'));
         $this->set(compact('data'));
         $this->set('_serialize', ['data']);
-        
+
     }
 
     /**
@@ -171,11 +171,11 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-    
+
     public function login() {
         if($this->request->is('post')) {
             $user = $this->Auth->identify();
-        
+
             if($user) {
               $this->Auth->setUser($user);
               if($user['type'] === 'G'){
@@ -190,13 +190,15 @@ class UsersController extends AppController
             }
          }
     }
-    
+
     public function logout() {
         $this->Auth->logout();
         $this->redirect(array('controller' => 'Users', 'action' => 'login'));
     }
-    
+
     public function attendance() {
+        $this->set('mode', 'atendance');
+
         if($this->Auth->user('type') === 'G'){
             $this->redirect(array('controller' => 'Attendance/TimeCards', 'action' => 'login'));
         }
@@ -215,7 +217,7 @@ class UsersController extends AppController
         $this->set(compact('data'));
         $this->set('_serialize', ['data']);
     }
-    
+
     public function sales() {
        $storeId = $this->Auth->user('store_id');
        if($this->Auth->user('type') == 'H'){
@@ -225,7 +227,7 @@ class UsersController extends AppController
        }
        $this->set(compact('storeId', 'stores'));
     }
-    
+
     public function list() {
         $users = $this->Users->find()->select(['id', 'name']);
         $this->set(compact('users'));

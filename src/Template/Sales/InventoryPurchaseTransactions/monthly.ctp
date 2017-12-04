@@ -21,17 +21,17 @@
     <?=$storeName ?> 在庫日計表 
     <?=date('Y年m月度',$date)?>
     <?=$this->Form->create(null) ?>
-    <?= $this -> Form -> input (
-     "date", [ "label" => "",
+    <?= $this->Form->input(
+     "date", ["label" => "",
                       "type" => "datetime",
                       "dateformat" => "YM",
                       "monthNames" => false,
                       "separator" => "/",
                       "templates" => [ "dateWidget" => '{{year}} 年 {{month}} 月' ],
-                      "minYear" => date ( "Y" ) - 70,
-                      "maxYear" => date ( "Y" ) - 18,
-                      "default" => date ( "Y-m" ),
-                      "empty" => [ "year" => "年", "month" => "月"] ] ) ?>
+                      "minYear" => date("Y" ) - 70,
+                      "maxYear" => date("Y" ) - 18,
+                      "default" => date("Y-m" ),
+                      "empty" => [ "year" => "年", "month" => "月"]]) ?>
     <?= $this->Form->submit("設定",['name'=>'button']) ?>
     <?=$this->Form->end() ?>
     <?=$this->Form->create(null) ?>
@@ -84,7 +84,7 @@
                 <?php $recordSize[$i] = count($inventoryPurchaseTransactions[$i]) - $index[$i]; ?>
                 <?php endif; ?>
             <?php endfor; ?>
-           <?php for ($i = 1 ; $i <= $lastDay ;  $i++) : ?>
+           <?php for($i = 1 ; $i <= $lastDay ;  $i++) : ?>
            <tr>
                <?php for($j = 0 ; $j < $arraySize ; $j ++) :?>
                <td><?= $i?></td>
@@ -96,7 +96,7 @@
                    <?php $priceSum[$j][1] += $inventoryPurchaseTransactions[$j][$index[$j]]['purchase_qty']; ?>
                    <td><?= h($inventoryPurchaseTransactions[$j][$index[$j]]['loss_qty']) ?></td>
                    <?php $priceSum[$j][2] += $inventoryPurchaseTransactions[$j][$index[$j]]['loss_qty']; ?>
-                   <?php $sum =  ($index[$j] === 0 ? 0 : $inventoryPurchaseTransactions[$j][$index[$j]-1]['count_qty'])
+                   <?php $sum = ($index[$j] === 0 ? 0 : $inventoryPurchaseTransactions[$j][$index[$j]-1]['count_qty'])
                        + $inventoryPurchaseTransactions[$j][$index[$j]]['purchase_qty']
                        - $inventoryPurchaseTransactions[$j][$index[$j]]['loss_qty']
                        - $inventoryPurchaseTransactions[$j][$index[$j]]['count_qty']; 
@@ -118,7 +118,7 @@
            <tr>
            <?php for($j = 0 ; $j < $arraySize ; $j ++) : ?>
             <td>合計</td>
-            <?php for ($k = 0 ; $k < 5 ; $k ++ ): ?>
+            <?php for($k = 0 ; $k < 5 ; $k ++ ): ?>
                 <td><?= h($priceSum[$j][$k]) ?></td>
             <?php endfor; ?>
            <?php endfor; ?>
@@ -126,7 +126,7 @@
            <tr>
            <?php for($j = 0 ; $j < $arraySize ; $j ++) : ?>
             <td>平均</td>
-            <?php for ($k = 0 ; $k < 5 ; $k ++ ): ?>
+            <?php for($k = 0 ; $k < 5 ; $k ++ ): ?>
                 <td><?= h(round($priceSum[$j][$k]/$recordSize[$j],2)) ?></td>
             <?php endfor; ?>
            <?php endfor; ?>

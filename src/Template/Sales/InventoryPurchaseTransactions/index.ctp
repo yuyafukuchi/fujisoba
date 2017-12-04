@@ -16,7 +16,7 @@
 </nav>
 <div class="inventoryPurchaseTransactions index large-9 medium-8 columns content">
     <h3><?= __('Inventory Purchase Transactions') ?></h3>
-    仕入在庫入力　計算日(仕入・残取した日)
+    仕入在庫入力 計算日(仕入・残取した日)
     <?=date('Y年m月d日',$date)?>
     <?=$this->Form->create(null) ?>
     <?= $this->Form->control('date',['label' => '設定日','rows'=>1,'type'=>'text'])?>
@@ -44,7 +44,7 @@
                 <td><?=h($storeInventoryItemHistory->inventory_item->inventory_item_histories[0]->item_name)?></td>
                 <?php $previousDayCount = intval($previousDayCountArray[$storeInventoryItemHistory->inventory_item_id]); ?>
                 <td><?= h($previousDayCount)?></td>
-                <?php if (array_key_exists($storeInventoryItemHistory->inventory_item_id,$idArray)): ?>　<!--edit-->
+                <?php if(array_key_exists($storeInventoryItemHistory->inventory_item_id,$idArray)): ?> <!--edit-->
                     <?=$this->Form->hidden( 'edit['.$i.'][inventory_item_id]' ,['value' => $storeInventoryItemHistory->inventory_item_id]) ?>
                     <?=$this->Form->hidden( 'edit['.$i.'][store_id]' ,['value' => $storeId]) ?>
                     <?=$this->Form->hidden( 'edit['.$i.'][transaction_date]' ,['value' => date('Y-m-d 00:00:00', $date)]) ?>
@@ -60,7 +60,7 @@
                     <td><?= h($salesCountSum) ?></td>
                     <?php $price = intval($storeInventoryItemHistory->price); ?>
                     <td><?= $price ?></td>
-                    <td><?php echo h($salesCountSum * $price) ;$salesSum += ($salesCountSum * $price); ?></td>
+                    <td><?php echo h($salesCountSum * $price) ;$salesSum +=($salesCountSum * $price); ?></td>
                 <?php else : ?>                                                                        <!-- add -->
                     <?=$this->Form->hidden( 'add['.$i.'][inventory_item_id]' ,['value' => $storeInventoryItemHistory->inventory_item_id]) ?>
                     <?=$this->Form->hidden( 'add['.$i.'][store_id]' ,['value' => $storeId]) ?>

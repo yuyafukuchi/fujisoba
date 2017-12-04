@@ -67,8 +67,8 @@
                 <?=$this->Form->create('StoreMenuHistories'.$storeMenuHistory->id,['url' => ['action' => 'edit','store' => $storeId, $storeMenuHistory->id]]) ?>
                 <td><?= $this->Form->control('store_menu_num',['label' => '','rows'=>1,'type'=>'number', 'step'=>0.1, 'default' => intval($storeMenuHistory->store_menu_number)])?></td>
                 <td><?= $this->Form->control('price',['label' => '','rows'=>1,'type'=>'number', 'default' => intval($storeMenuHistory->price)])?></td>
-                <td><?=  $this -> Form -> input ( "vm1", [ "type" => "checkbox","value" => "1","label" => "" ,'checked' => $storeMenuHistory->vending_mashine1, 'default' => 0 ]);?></td>
-                <td><?=  $this -> Form -> input ( "vm2", [ "type" => "checkbox","value" => "1","label" => "" ,'checked' => $storeMenuHistory->vending_mashine2, 'default' => 0 ]);?></td>
+                <td><?=  $this->Form->input("vm1", ["type" => "checkbox","value" => "1","label" => "" ,'checked' => $storeMenuHistory->vending_mashine1, 'default' => 0 ]);?></td>
+                <td><?=  $this->Form->input("vm2", ["type" => "checkbox","value" => "1","label" => "" ,'checked' => $storeMenuHistory->vending_mashine2, 'default' => 0 ]);?></td>
                 <td><?= h($storeMenuHistory->menu_history->sales_item_assign_history->sales_item->sales_item_number) ?></td>
                 <td><?= h($storeMenuHistory->menu_history->sales_item_assign_history->sales_item->sales_item_histories[0]->sales_item_name) ?></td>
                 <td><?= $this->Form->control('sales_item_price',['label' => '','rows'=>1,'type'=>'number', 'default' => intval($storeMenuHistory->sales_item_price)])?></td>

@@ -1,30 +1,34 @@
 <?php
-/**
-  * @var \App\View\AppView $this
-  */
+$this->append('heading', '<p>' . $store_name . '</p>');
+// $this->append('breadcrumbs', '<p>トップ：管理者メニュー</p>');
 ?>
-<div class="upper-block">
-<p class="name">
-<?php
-echo $store_name;
-?>
-</p>
-<?php
-echo $this->Html->link('ログアウト', ['controller'=>'/../Users', 'action'=>'logout'], ['class' => 'logout']);
-echo nl2br("\n");
-?>
-</div>
-<div class="login_form">
-<?php 
 
-echo $this->Form->create('Employees') ;
-echo $this -> Form -> input ( "code", [ "type" => "text",
-                                           "size" => 10,
-                                           "label" => "従業員コード",
-                                           "default" => "" ]  );
-echo $this -> Form -> submit ( "ログイン", [ 'class' => 'login-button', 'name' => 'loginButton' ] );
-echo $this -> Form -> submit ( "勤怠データ確認", [ 'class' => 'confirm-attendance', 'name' => 'loginButton' ] );
-echo $this -> Form -> submit ( "別店舗応援", [ 'class' => 'support-another' ] );
-echo $this -> Form -> end ();
-?>
+<div class="vertical-center">
+    <?= $this->Form->create('Employees') ?>
+        <div class="row">
+            <div class="col-md-5 control-label text-right">従業員コード</div>
+            <div class="col-md-4">
+                <?= $this->Form->input("code", [
+                    "type" => "text",
+                    'label' => false,
+                    'class' => 'input-lg',
+                    'required' => true,
+                ]) ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5 control-label text-right"></div>
+            <div class="col-md-4">
+                <?= $this->Form->submit("ログイン", ['class' => 'btn btn-lg btn-block', 'name' => 'loginButton'])?>
+                <div class="row" style="margin-top: 15px; width: auto;">
+                    <div class="col-md-6">
+                        <?= $this->Form->submit("勤怠データ確認", ['class' => 'btn btn-lg btn-block', 'name' => 'loginButton'])?>
+                    </div>
+                    <div class="col-md-6">
+                        <?= $this->Form->submit("別店舗応援", ['class' => 'btn btn-lg btn-block', 'name' => 'loginButton'])?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?= $this->Form->end() ?>
 </div>

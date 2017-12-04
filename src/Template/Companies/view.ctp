@@ -60,7 +60,7 @@
     </table>
     <div class="related">
         <h4><?= __('Related Employees') ?></h4>
-        <?php if (!empty($company->employees)): ?>
+        <?php if(!empty($company->employees)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
@@ -129,7 +129,7 @@
     </div>
     <div class="related">
         <h4><?= __('Related Stores') ?></h4>
-        <?php if (!empty($company->stores)): ?>
+        <?php if(!empty($company->stores)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
@@ -200,7 +200,7 @@
     </div>
     <div class="related">
         <h4><?= __('Related Users') ?></h4>
-        <?php if (!empty($company->users)): ?>
+        <?php if(!empty($company->users)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>

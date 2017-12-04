@@ -140,7 +140,7 @@
     </table>
     <div class="related">
         <h4><?= __('Related Cash Account Trans') ?></h4>
-        <?php if (!empty($store->cash_account_trans)): ?>
+        <?php if(!empty($store->cash_account_trans)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
@@ -179,7 +179,7 @@
     </div>
     <div class="related">
         <h4><?= __('Related Employees') ?></h4>
-        <?php if (!empty($store->employees)): ?>
+        <?php if(!empty($store->employees)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
@@ -248,7 +248,7 @@
     </div>
     <div class="related">
         <h4><?= __('Related Inventory Purchase Transactions') ?></h4>
-        <?php if (!empty($store->inventory_purchase_transactions)): ?>
+        <?php if(!empty($store->inventory_purchase_transactions)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
@@ -289,7 +289,7 @@
     </div>
     <div class="related">
         <h4><?= __('Related Sales Transactions') ?></h4>
-        <?php if (!empty($store->sales_transactions)): ?>
+        <?php if(!empty($store->sales_transactions)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
@@ -336,7 +336,7 @@
     </div>
     <div class="related">
         <h4><?= __('Related Store Account Infos') ?></h4>
-        <?php if (!empty($store->store_account_infos)): ?>
+        <?php if(!empty($store->store_account_infos)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
@@ -381,7 +381,7 @@
     </div>
     <div class="related">
         <h4><?= __('Related Store Inventory Item Histories') ?></h4>
-        <?php if (!empty($store->store_inventory_item_histories)): ?>
+        <?php if(!empty($store->store_inventory_item_histories)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
@@ -424,7 +424,7 @@
     </div>
     <div class="related">
         <h4><?= __('Related Time Cards') ?></h4>
-        <?php if (!empty($store->time_cards)): ?>
+        <?php if(!empty($store->time_cards)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
@@ -485,7 +485,7 @@
     </div>
     <div class="related">
         <h4><?= __('Related Users') ?></h4>
-        <?php if (!empty($store->users)): ?>
+        <?php if(!empty($store->users)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>

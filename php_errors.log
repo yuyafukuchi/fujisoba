@@ -1564,3 +1564,74 @@ Stack trace:
 [08-Nov-2017 14:42:07 Asia/Tokyo] PHP  18. App\View\AppView->_render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:765
 [08-Nov-2017 14:42:07 Asia/Tokyo] PHP  19. App\View\AppView->_evaluate() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:1157
 [08-Nov-2017 14:42:07 Asia/Tokyo] PHP  20. include() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:1196
+[01-Dec-2017 22:50:17 Asia/Tokyo] PHP Fatal error:  [Cake\Core\Exception\MissingPluginException] Plugin Bootstrap could not be found.
+#0 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Core/App.php(190): Cake\Core\Plugin::classPath('Bootstrap')
+#1 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php(1458): Cake\Core\App::path('Template', 'Bootstrap')
+#2 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php(1272): Cake\View\View->_paths(NULL)
+#3 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php(761): Cake\View\View->_getViewFileName('Error/error500')
+#4 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(364): Cake\View\View->render('error500', 'error')
+#5 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(343): Cake\Error\ExceptionRenderer->_outputMessageSafe('error500')
+#6 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(200): Cake\Error\ExceptionRenderer->_outputMessage('fatalError')
+#7 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error in /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/ErrorHandler.php on line 149
+[01-Dec-2017 22:50:17 Asia/Tokyo] PHP Stack trace:
+[01-Dec-2017 22:50:17 Asia/Tokyo] PHP   1. Cake\Error\ErrorHandler->wrapAndHandleException() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php:0
+[01-Dec-2017 22:50:17 Asia/Tokyo] PHP   2. Cake\Error\ErrorHandler->handleException() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php:171
+[01-Dec-2017 22:50:17 Asia/Tokyo] PHP   3. Cake\Error\ErrorHandler->_displayException() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php:187
+[01-Dec-2017 22:50:17 Asia/Tokyo] PHP   4. trigger_error() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/ErrorHandler.php:149
+[01-Dec-2017 22:50:17 Asia/Tokyo] PHP   5. Cake\Error\ErrorHandler->handleError() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/ErrorHandler.php:149
+[01-Dec-2017 22:50:17 Asia/Tokyo] PHP   6. Cake\Error\ErrorHandler->handleFatalError() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php:133
+[01-Dec-2017 22:50:17 Asia/Tokyo] PHP   7. Cake\Error\ErrorHandler->handleException() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php:225
+[01-Dec-2017 22:50:17 Asia/Tokyo] PHP   8. Cake\Error\ErrorHandler->_displayException() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php:187
+[01-Dec-2017 22:50:17 Asia/Tokyo] PHP   9. trigger_error() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/ErrorHandler.php:149
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/ubuntu/workspace/vendor/oyejorge/less.php/lib/Less/Output/Mapped.php on line 96
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP Stack trace:
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:81
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP   5. DebugKit\Middleware\DebugKitMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP   6. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:52
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP   7. Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP   8. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php:95
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP   9. Cake\Routing\Middleware\AssetMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP  10. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php:88
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP  11. Cake\Routing\Middleware\RoutingMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP  12. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php:106
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP  13. App\Application->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP  14. Cake\Http\ActionDispatcher->dispatch() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/BaseApplication.php:103
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP  15. Cake\Http\ActionDispatcher->_invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:93
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP  16. App\Controller\UsersController->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php:125
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP  17. App\View\AppView->render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php:623
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP  18. App\View\AppView->renderLayout() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:770
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP  19. App\View\AppView->_render() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:812
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP  20. App\View\AppView->_evaluate() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:1157
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP  21. include() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/View/View.php:1196
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP  22. Less\View\Helper\LessHelper->less() /home/ubuntu/workspace/src/Template/Layout/default.ctp:62
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP  23. Less\View\Helper\LessHelper->compile() /home/ubuntu/workspace/vendor/elboletaire/less-cake-plugin/src/View/Helper/LessHelper.php:150
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP  24. Less_Cache::Get() /home/ubuntu/workspace/vendor/elboletaire/less-cake-plugin/src/View/Helper/LessHelper.php:215
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP  25. Less_Cache::Cache() /home/ubuntu/workspace/vendor/oyejorge/less.php/lib/Less/Cache.php:106
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP  26. Less_Parser->getCss() /home/ubuntu/workspace/vendor/oyejorge/less.php/lib/Less/Cache.php:170
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP  27. Less_SourceMap_Generator->generateCSS() /home/ubuntu/workspace/vendor/oyejorge/less.php/lib/Less/Parser.php:209
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP  28. Less_Tree_Ruleset->genCSS() /home/ubuntu/workspace/vendor/oyejorge/less.php/lib/Less/SourceMap/Generator.php:108
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP  29. Less_Tree_Ruleset->genCSS() /home/ubuntu/workspace/vendor/oyejorge/less.php/lib/Less/Tree/Ruleset.php:455
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP  30. Less_Tree_Selector->genCSS() /home/ubuntu/workspace/vendor/oyejorge/less.php/lib/Less/Tree/Ruleset.php:407
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP  31. Less_Tree_Element->genCSS() /home/ubuntu/workspace/vendor/oyejorge/less.php/lib/Less/Tree/Selector.php:152
+[03-Dec-2017 18:34:09 Asia/Tokyo] PHP  32. Less_Output_Mapped->add() /home/ubuntu/workspace/vendor/oyejorge/less.php/lib/Less/Tree/Element.php:55
+[04-Dec-2017 05:49:28 Asia/Tokyo] PHP Fatal error:  Uncaught Error: Call to a member function user() on boolean in /home/ubuntu/workspace/src/Controller/AppController.php:78
+Stack trace:
+#0 /home/ubuntu/workspace/src/Controller/ErrorController.php(54): App\Controller\AppController->beforeRender(Object(Cake\Event\Event))
+#1 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Event/EventManager.php(416): App\Controller\ErrorController->beforeRender(Object(Cake\Event\Event))
+#2 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Event/EventManager.php(393): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#3 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(110): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#4 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php(610): Cake\Controller\Controller->dispatchEvent('Controller.befo...')
+#5 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(325): Cake\Controller\Controller->render('error')
+#6 /home/ubuntu/w in /home/ubuntu/workspace/src/Controller/AppController.php on line 78
+[04-Dec-2017 05:50:08 Asia/Tokyo] PHP Fatal error:  Uncaught Error: Call to a member function user() on boolean in /home/ubuntu/workspace/src/Controller/AppController.php:78
+Stack trace:
+#0 /home/ubuntu/workspace/src/Controller/ErrorController.php(54): App\Controller\AppController->beforeRender(Object(Cake\Event\Event))
+#1 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Event/EventManager.php(416): App\Controller\ErrorController->beforeRender(Object(Cake\Event\Event))
+#2 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Event/EventManager.php(393): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#3 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(110): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#4 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php(610): Cake\Controller\Controller->dispatchEvent('Controller.befo...')
+#5 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(325): Cake\Controller\Controller->render('error')
+#6 /home/ubuntu/w in /home/ubuntu/workspace/src/Controller/AppController.php on line 78
