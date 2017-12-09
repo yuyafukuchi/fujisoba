@@ -41,6 +41,7 @@ class TimeCardsTable extends Table
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Muffin/Footprint.Footprint');
 
         $this->belongsTo('Employees', [
             'foreignKey' => 'employee_id',

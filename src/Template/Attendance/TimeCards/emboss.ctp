@@ -16,6 +16,7 @@ $this->append('breadcrumbs', '<p>' . $breadcrumb . '</p>');
                     'placeholder' => date('Y/m/d'),
                     'default' => date('Y/m/d'),
                     'style' => 'background-color: #f2dede !important;',
+                    'id' => 'clock_date',
                 ]) ?>
             </div>
             <div class="col-md-3 text-center">
@@ -26,13 +27,22 @@ $this->append('breadcrumbs', '<p>' . $breadcrumb . '</p>');
                     'placeholder' => date('H:i:s'),
                     'default' => date('H:i:s'),
                     'style' => 'background-color: #f2dede !important;',
+                    'id' => 'clock_time',
                 ]) ?>
             </div>
         </div>
         <div class="row" style="zoom: 2;">
             <div class="col-md-3"></div>
             <div class="col-md-3 text-center text-primary">
-                <?= $this->Form->submit("出勤", ['class' => 'btn btn-lg btn-blocka', 'name' => 'button'])?>
+                <?php
+                // 同日（出勤時刻が前回の出勤時刻と同日）の出勤の場合、出勤ボタンを押した際メッセージを出し、はいの場合、打刻し、いいえの場合何もしない
+                if (!empty($timeCard['out_time'])) {
+                    $onClick = 'return confirm(\'同日に再出勤してよいですか？\');';
+                } else {
+                    $onClick = null;
+                }
+                ?>
+                <?= $this->Form->submit("出勤", ['class' => 'btn btn-lg btn-blocka', 'name' => 'button', 'onclick' => $onClick])?>
 
                 <?php if (!empty($timeCard['in_time'])): ?>
                     <br><?= h($timeCard['in_time']->format('m/d H:i')) ?>
@@ -58,5 +68,37 @@ $this->append('breadcrumbs', '<p>' . $breadcrumb . '</p>');
                 <?php endif; ?>
             </div>
         </div>
+        <div class="row" style="zoom: 1.5; margin-top: 50px;">
+            <div class="col-md-12 text-center">
+                <a href="/attendance/time-cards/login" class="btn btn-default btn-large">従業員ログアウト</a>
+            </div>
+        </div>
     <?= $this->Form->end() ?>
 </div>
+
+<script>
+var toDoubleDigits = function(num) {
+    num += "";
+    if (num.length === 1) {
+        num = "0" + num;
+    }
+    return num;
+};
+
+function clock() {
+    var now = new Date();
+    var y = now.getFullYear();
+    var mo = toDoubleDigits(now.getMonth() + 1);
+    var d = toDoubleDigits(now.getDate());
+    var h = toDoubleDigits(now.getHours());
+    var mi = toDoubleDigits(now.getMinutes());
+    var s = toDoubleDigits(now.getSeconds());
+
+    //　HTML: <span id="clock_date">(ココの日付文字列を書き換え)</span>
+    $("#clock_date").val(y + "/" + mo + "/" + d);
+    //　HTML: <span id="clock_time">(ココの時刻文字列を書き換え)</span>
+    $("#clock_time").val(h + ":" + mi + ":" + s);
+}
+
+setInterval(clock, 1000);
+</script>

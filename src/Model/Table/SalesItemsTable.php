@@ -41,6 +41,7 @@ class SalesItemsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Muffin/Footprint.Footprint');
 
         $this->hasMany('SalesItemAssignHistories', [
             'foreignKey' => 'sales_item_id'

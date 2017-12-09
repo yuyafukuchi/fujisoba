@@ -41,6 +41,7 @@ class CompaniesTable extends Table
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Muffin/Footprint.Footprint');
 
         $this->hasMany('Employees', [
             'foreignKey' => 'company_id'

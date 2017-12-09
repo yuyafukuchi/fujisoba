@@ -43,14 +43,17 @@ class MonthlyTimeCardsController extends AppController
         else if($type === 'H')
         {
             $name = '本社管理者 様';
-            $companies = $this->Users->Companies->find('list', ['limit' => 200]);
+            $companies = $this->Users->Companies->find('list', ['limit' => 200])
+                ->where(['id' => $this->Auth->user('company_id')]);
             $stores = $this->Users->Stores->find('list', ['limit' => 200]);
         }
         else if($type === 'M')
         {
             $name = $this->Users->Stores->get($this->Auth->user('store_id'))['name'].'管理者 様';
-            $companies = $this->Users->Companies->find('list', ['limit' => 200])->where(['id' => $this->Auth->user('company_id')]);
-            $stores = $this->Users->Stores->find('list', ['limit' => 200])->where(['id' => $this->Auth->user('store_id')]);
+            $companies = $this->Users->Companies->find('list', ['limit' => 200])
+                ->where(['id' => $this->Auth->user('company_id')]);
+            $stores = $this->Users->Stores->find('list', ['limit' => 200])
+                ->where(['id' => $this->Auth->user('store_id')]);
         }
          $data = array('type' => $type, 'name' => $name);
          $this->set(compact('companies', 'stores','data'));
@@ -64,6 +67,9 @@ class MonthlyTimeCardsController extends AppController
      */
     public function index()
     {
+        // なぜか POST が GET に変換されるバグの応急処置
+        $this->request->data = $this->request->query();
+
         $this->paginate = [
             'contain' => ['Employees','Employees.Companies', 'Employees.Stores']
         ];
@@ -89,6 +95,8 @@ class MonthlyTimeCardsController extends AppController
             array_push($timeCardIDs,$monthlyTimeCard['id']);
         }*/
 
+        $isSearch = !empty($this->request->getQuery('is_search'));
+
         $monthlyTimeCards = $this->paginate($monthlyTimeCards)->toArray();
         foreach ($monthlyTimeCards as $monthlyTimeCard){
             array_push($timeCardIDs,$monthlyTimeCard['id']);
@@ -104,12 +112,12 @@ class MonthlyTimeCardsController extends AppController
                     break;
             }
             if($monthlyTimeCard->employee->retired != null){
-                $monthlyTimeCard->employee->retired = ' (退職)';
+                $monthlyTimeCard->employee->retired = ' <span class="text-danger">(退職)</span>';
             }
         }
         $this->Session = $this->request->session();
         $this->Session->write('MonthlyTimeCard.idArray', $timeCardIDs);
-        $this->set(compact('monthlyTimeCards'));
+        $this->set(compact('monthlyTimeCards', 'isSearch'));
         $this->set('_serialize', ['monthlyTimeCards']);
     }
 

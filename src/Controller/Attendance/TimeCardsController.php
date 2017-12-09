@@ -12,10 +12,13 @@ use Cake\ORM\TableRegistry;
  */
 class TimeCardsController extends AppController
 {
-
     public function initialize()
     {
         parent::initialize();
+
+        // _userModel is used inside Footprint plugin
+        $this->_userModel = 'Employees';
+
         $this->loadComponent('Auth', [
             'loginAction' => [
                 'controller' => 'TimeCards',
@@ -24,7 +27,8 @@ class TimeCardsController extends AppController
             'authError' => 'Did you really think you are allowed to see that?',
             'authenticate' => [
                 'Form' => [
-                    'fields' => ['username' => 'code','password' => 'code']    // ログインID対象をemailカラムへ
+                    'fields' => ['username' => 'code','password' => 'code'],    // ログインID対象をemailカラムへ
+                    'userModel' => 'Employees', // Use same model for AuthComponent
                 ]
             ]
         ]);
@@ -174,7 +178,7 @@ class TimeCardsController extends AppController
         $timeCard = $this->TimeCards->find()
             ->where([
                 'date' => date('Y-m-d'),
-                'employee_id' => $this->Auth->user()['id']
+                'employee_id' => $this->Auth->user('id')
             ])
             ->toArray();
 
@@ -277,7 +281,7 @@ class TimeCardsController extends AppController
     public function login()
     {
         $this->Auth->sessionKey = 'Auth.Users';
-        if($this->Auth->user() == null){
+        if (empty($this->Auth->user())) {
             return $this->redirect(['controller' => '/../Users', 'action' => 'login']);
         }
         $store_id = $this->Auth->user()['store_id'];
@@ -340,6 +344,19 @@ class TimeCardsController extends AppController
             }
         }
     }
+
+    public function confirm2()
+    {
+        // Set breadcrumbs
+        $this->Auth->sessionKey = 'Auth.Users';
+        $parentUser = $this->Auth->user();
+        $storeName = TableRegistry::get('Stores')->get($parentUser['store_id'])['name'];
+        $this->Auth->sessionKey = 'Auth.Employees';
+        $user = $this->Auth->user();
+        $data = ['type' => '勤務', 'time' => date('H:i')];
+        $this->set(compact('storeName', 'user', 'data'));
+    }
+
     public function confirm()
     {
         $this->Session = $this->request->session();

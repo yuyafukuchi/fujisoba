@@ -37,6 +37,7 @@ class PermitPcsTable extends Table
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Muffin/Footprint.Footprint');
     }
 
     /**

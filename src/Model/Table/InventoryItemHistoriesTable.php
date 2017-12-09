@@ -39,6 +39,7 @@ class InventoryItemHistoriesTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Muffin/Footprint.Footprint');
 
         $this->belongsTo('InventoryItems', [
             'foreignKey' => 'inventory_item_id',

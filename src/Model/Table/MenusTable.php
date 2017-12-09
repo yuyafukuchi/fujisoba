@@ -39,6 +39,7 @@ class MenusTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Muffin/Footprint.Footprint');
 
         $this->hasMany('SalesTransactions', [
             'foreignKey' => 'menu_id'

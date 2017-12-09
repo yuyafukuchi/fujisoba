@@ -1,6 +1,8 @@
 <?php
 $this->append('heading', '<p>' . $data['name'] . '</p>');
-$this->append('breadcrumbs', '<p>トップ＞勤怠データ検索・一覧</p>');
+$this->append('breadcrumbs', sprintf('<p>%s＞勤怠データ検索・一覧</p>',
+    $this->Html->link('トップ', ['controller' => 'Users', 'action' => 'attendance', 'prefix' => false])
+));
 ?>
 
 <?= $this->Form->create(null) ?>
@@ -96,41 +98,44 @@ $this->append('breadcrumbs', '<p>トップ＞勤怠データ検索・一覧</p>'
             <div>
                 <?= $this->Form->input("retired", ["type" => "checkbox", "value" => "1", "label" => "退職者も表示"]) ?>
             </div>
+            <?= $this->Form->hidden('is_search', ['value' => 1]) ?>
             <?= $this->Form->submit("検索", ['type' => 'submit', 'class' => 'btn btn-default btn-lg']) ?>
         </div>
     </div>
 <?= $this->Form->end() ?>
 
-<div class="row" style="margin: 20px;">
-    <table class="table table-bordered">
-        <thead>
-            <tr class="active">
-                <th scope="col">NO</th>
-                <th scope="col">コード</th>
-                <th scope="col">氏名</th>
-                <th scope="col">会社名</th>
-                <th scope="col">店舗名</th>
-                <th scope="col">種別</th>
-                <th scope="col">ステータス</th>
-                <th scope="col">備考</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php $i = 1; foreach ($monthlyTimeCards as $monthlyTimeCard): ?>
-            <tr>
-                <td><?= h($i) ?></td>
-                <td><?= $monthlyTimeCard->has('employee') ? h($monthlyTimeCard->employee->code) : '' ?></td>
-                <td><?= $monthlyTimeCard->has('employee') ? $this->Html->link(h($monthlyTimeCard->employee->name_last.' '.$monthlyTimeCard->employee->name_first), ['action' => 'view', $i]) : ''?></td>
-                <td><?= $monthlyTimeCard->has('employee') ? h($monthlyTimeCard->employee->company->name): '' ?></td>
-                <td><?= $monthlyTimeCard->has('employee') ? h($monthlyTimeCard->employee->store->name): '' ?></td>
-                <td><?= $monthlyTimeCard->has('employee') ? h($monthlyTimeCard->employee->contact_type.$monthlyTimeCard->employee->retired): '' ?></td>
-                <td><?=($monthlyTimeCard->printed ? '印刷':'').' '.($monthlyTimeCard->approved ? '承認' : '').' '.($monthlyTimeCard->csv_exported ? 'CSV' : '') ?></td>
-                <td><?= '' ?></td>
-            </tr>
-            <?php $i++; endforeach; ?>
-        </tbody>
-    </table>
-</div>
+<?php if ($isSearch): ?>
+    <div class="row" style="margin: 20px;">
+        <table class="table table-bordered">
+            <thead>
+                <tr class="active">
+                    <th scope="col">NO</th>
+                    <th scope="col">コード</th>
+                    <th scope="col">氏名</th>
+                    <th scope="col">会社名</th>
+                    <th scope="col">店舗名</th>
+                    <th scope="col">種別</th>
+                    <th scope="col">ステータス</th>
+                    <th scope="col">備考</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $i = 1; foreach ($monthlyTimeCards as $monthlyTimeCard): ?>
+                <tr>
+                    <td><?= h($i) ?></td>
+                    <td><?= $monthlyTimeCard->has('employee') ? h($monthlyTimeCard->employee->code) : '' ?></td>
+                    <td><?= $monthlyTimeCard->has('employee') ? $this->Html->link(h($monthlyTimeCard->employee->name_last.' '.$monthlyTimeCard->employee->name_first) . $monthlyTimeCard->employee->retired, ['action' => 'view', $i], ['escape' => false]) : ''?></td>
+                    <td><?= $monthlyTimeCard->has('employee') ? h($monthlyTimeCard->employee->company->name): '' ?></td>
+                    <td><?= $monthlyTimeCard->has('employee') ? h($monthlyTimeCard->employee->store->name): '' ?></td>
+                    <td><?= $monthlyTimeCard->has('employee') ? h($monthlyTimeCard->employee->contact_type): '' ?></td>
+                    <td><?=($monthlyTimeCard->printed ? '印刷':'').' '.($monthlyTimeCard->approved ? '承認' : '').' '.($monthlyTimeCard->csv_exported ? 'CSV' : '') ?></td>
+                    <td><?= '' ?></td>
+                </tr>
+                <?php $i++; endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+<?php endif; ?>
 
 <div class="row" style="margin: 0;">
     <div class="col-xs-12">

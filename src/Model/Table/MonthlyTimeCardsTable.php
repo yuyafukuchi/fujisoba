@@ -39,6 +39,7 @@ class MonthlyTimeCardsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Muffin/Footprint.Footprint');
         $this->addBehavior('Search.Search');
 
         $this->belongsTo('Employees', [

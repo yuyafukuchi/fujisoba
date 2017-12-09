@@ -1,6 +1,9 @@
 <?php
 $this->append('heading', '<p>' . $data2['name'] . '</p>');
-$this->append('breadcrumbs', '<p>トップ＞勤怠データ検索・一覧＞勤怠データ詳細 (管理者用)</p>');
+$this->append('breadcrumbs', sprintf('<p>%s＞%s＞勤怠データ詳細 (管理者用)</p>',
+    $this->Html->link('トップ', ['controller' => 'Users', 'action' => 'attendance', 'prefix' => false]),
+    $this->Html->link('勤怠データ検索・一覧', ['controller' => 'MonthlyTimeCards', 'action' => 'index', 'prefix' => 'attendance'])
+));
 
 function convert_week($week)
 {

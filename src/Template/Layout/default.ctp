@@ -37,7 +37,10 @@ $this->prepend('script', $this->Html->script([
 ]));
 
 // Append logout menu
-if ($this->request->controller == 'Users' && ($this->request->action == 'index' || $this->request->action == 'login')) {
+if (
+    ($this->request->controller == 'Users' && ($this->request->action == 'index' || $this->request->action == 'login')) ||
+    ($this->request->controller == 'TimeCards' && ($this->request->action == 'emboss' || $this->request->action == 'confirm'))
+) {
     //
 } else {
     $this->append('menu', '<li><a href="/users/logout" class="btn_ btn-default_">ログアウト</a></li>');
@@ -108,7 +111,7 @@ if (!isset($mode)) {
                     <div class="col-sm-4">
                         <a href="/"><img src="/img/logo-small.png" alt="富士そば" height="50"></a>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-4 text-center">
                         <h1>勤怠管理システム</h1>
                     </div>
                     <div class="col-sm-4">

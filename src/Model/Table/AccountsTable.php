@@ -39,6 +39,7 @@ class AccountsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Muffin/Footprint.Footprint');
 
         $this->hasMany('StoreAccountInfos', [
             'foreignKey' => 'account_id'

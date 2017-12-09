@@ -1635,3 +1635,21 @@ Stack trace:
 #4 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php(610): Cake\Controller\Controller->dispatchEvent('Controller.befo...')
 #5 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(325): Cake\Controller\Controller->render('error')
 #6 /home/ubuntu/w in /home/ubuntu/workspace/src/Controller/AppController.php on line 78
+[09-Dec-2017 06:20:58 Asia/Tokyo] PHP Fatal error:  Uncaught Error: Call to a member function user() on boolean in /home/ubuntu/workspace/src/Controller/AppController.php:81
+Stack trace:
+#0 /home/ubuntu/workspace/src/Controller/ErrorController.php(54): App\Controller\AppController->beforeRender(Object(Cake\Event\Event))
+#1 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Event/EventManager.php(416): App\Controller\ErrorController->beforeRender(Object(Cake\Event\Event))
+#2 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Event/EventManager.php(393): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#3 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(110): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#4 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php(610): Cake\Controller\Controller->dispatchEvent('Controller.befo...')
+#5 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(325): Cake\Controller\Controller->render('error')
+#6 /home/ubuntu/w in /home/ubuntu/workspace/src/Controller/AppController.php on line 81
+[09-Dec-2017 06:21:58 Asia/Tokyo] PHP Fatal error:  Uncaught Error: Call to a member function user() on boolean in /home/ubuntu/workspace/src/Controller/AppController.php:81
+Stack trace:
+#0 /home/ubuntu/workspace/src/Controller/ErrorController.php(54): App\Controller\AppController->beforeRender(Object(Cake\Event\Event))
+#1 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Event/EventManager.php(416): App\Controller\ErrorController->beforeRender(Object(Cake\Event\Event))
+#2 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Event/EventManager.php(393): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#3 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(110): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#4 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php(610): Cake\Controller\Controller->dispatchEvent('Controller.befo...')
+#5 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(325): Cake\Controller\Controller->render('error')
+#6 /home/ubuntu/w in /home/ubuntu/workspace/src/Controller/AppController.php on line 81

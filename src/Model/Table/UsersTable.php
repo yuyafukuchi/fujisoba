@@ -40,6 +40,7 @@ class UsersTable extends Table
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Muffin/Footprint.Footprint');
 
         $this->belongsTo('Companies', [
             'foreignKey' => 'company_id',

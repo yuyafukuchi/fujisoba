@@ -186,7 +186,7 @@ class UsersController extends AppController
               }
               //$this->redirect($this->Auth->redirectUrl());
             } else {
-              $this->Flash->error('ログインエラーです');
+              $this->Flash->error('ユーザまたはパスワードが違います。');
             }
          }
     }

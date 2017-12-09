@@ -27,6 +27,7 @@ class AppTable extends Table
 
         // Timestamp
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Muffin/Footprint.Footprint');
 
         // Footprint
         $this->addBehavior('Muffin/Footprint.Footprint');

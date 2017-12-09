@@ -1,15 +1,17 @@
 <?php
 $this->append('heading', '<p>' . $data['name'] . '</p>');
-$this->append('breadcrumbs', '<p>トップ＞従業員マスタ検索</p>');
+$this->append('breadcrumbs', sprintf('<p>%s＞従業員マスタ検索</p>',
+    $this->Html->link('トップ', ['controller' => 'Users', 'action' => 'attendance', 'prefix' => false])
+));
 ?>
 
 <div class="row" style="margin: 20px;">
-    <?= $this->Form->create(null) ?>
+    <?= $this->Form->create() ?>
         <div class="col-sm-5">
             <div class="row">
                 <div class="col-md-4 control-label text-right">従業員コード</div>
                 <div class="col-md-8">
-                    <?= $this->Form->input("employees_code", [
+                    <?= $this->Form->input("code", [
                         "type" => "text",
                         "label" => false,
                         'class' => 'input-lg',
@@ -19,7 +21,7 @@ $this->append('breadcrumbs', '<p>トップ＞従業員マスタ検索</p>');
             <div class="row">
                 <div class="col-md-4 control-label text-right">従業員名</div>
                 <div class="col-md-8">
-                    <?= $this->Form->input("employees_name", [
+                    <?= $this->Form->input("name", [
                         "type" => "text",
                         "label" => false,
                         'class' => 'input-lg',
@@ -38,6 +40,7 @@ $this->append('breadcrumbs', '<p>トップ＞従業員マスタ検索</p>');
                             'empty' => true,
                             "label" => false,
                             'class' => 'input-lg',
+                            'default' => !empty($currentUser['company_id']) ? $currentUser['company_id'] : null,
                         ]) ?>
                     </div>
                 </div>
@@ -49,6 +52,7 @@ $this->append('breadcrumbs', '<p>トップ＞従業員マスタ検索</p>');
                             'empty' => true,
                             "label" => false,
                             'class' => 'input-lg',
+                            'default' => !empty($currentUser['store_id']) ? $currentUser['store_id'] : null,
                         ]) ?>
                     </div>
                 </div>
@@ -61,6 +65,7 @@ $this->append('breadcrumbs', '<p>トップ＞従業員マスタ検索</p>');
                             'empty' => true,
                             "label" => false,
                             'class' => 'input-lg',
+                            'default' => !empty($currentUser['company_id']) ? $currentUser['company_id'] : null,
                         ]) ?>
                     </div>
                 </div>
@@ -82,38 +87,46 @@ $this->append('breadcrumbs', '<p>トップ＞従業員マスタ検索</p>');
             <div style="zoom: 1.5;">
                 <?= $this->Form->input("retired", ["type" => "checkbox", "value" => "1", "label" => "退職者も表示"]) ?>
             </div>
+            <?= $this->Form->hidden('is_search', ['value' => 1]) ?>
             <?= $this->Form->submit("検索", ['type' => 'submit', 'class' => 'btn btn-default btn-lg']) ?>
         </div>
     <?= $this->Form->end() ?>
 </div>
 
-<table class="table table-bordered">
-    <thead>
-        <tr class="active">
-            <th scope="col" class="number">NO</th>
-            <th scope="col"><?= $this->Paginator->sort('コード') ?></th>
-            <th scope="col"><?= $this->Paginator->sort('氏名') ?></th>
-            <th scope="col"><?= $this->Paginator->sort('会社名') ?></th>
-            <th scope="col"><?= $this->Paginator->sort('店舗名') ?></th>
-            <th scope="col"><?= $this->Paginator->sort('種別') ?></th>
-            <th scope="col"><?= $this->Paginator->sort('備考') ?></th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php $i = 1;
-             foreach ($employees as $employee): ?>
-        <tr>
-            <td><?= h($i) ?></td>
-            <td><?= h($employee->code) ?></td>
-            <td><?= $this->Html->link(h($employee->name_last.' '.$employee->name_first), ['action' => 'edit', $employee->id])?></td>
-            <td><?= $employee->has('company') ? h($employee->company->name) : '' ?></td>
-            <td><?= $employee->has('store') ? h($employee->store->name) : '' ?></td>
-            <td><?= h($employee->contact_type.$employee->retired) ?></td>
-            <td><?= h($employee->note) ?></td>
-        </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+<?php if ($isSearch): ?>
+    <table class="table table-bordered">
+        <thead>
+            <tr class="active">
+                <th scope="col" class="number">NO</th>
+                <th scope="col"><?= $this->Paginator->sort('コード') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('氏名') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('会社名') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('店舗名') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('種別') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('備考') ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $i = 1;
+                 foreach ($employees as $key => $employee): ?>
+            <tr>
+                <td><?= $key + 1 ?></td>
+                <td><?= h($employee->code) ?></td>
+                <td>
+                    <?= $this->Html->link(h($employee->name_last.' '.$employee->name_first), ['action' => 'edit', $employee->id])?>
+                    <?php if (!empty($employee->retired) && time() >= strtotime($employee->retired->format('Y-m-d'))): ?>
+                        <span class="text-danger">(退職)</span>
+                    <?php endif; ?>
+                </td>
+                <td><?= $employee->has('company') ? h($employee->company->name) : '' ?></td>
+                <td><?= $employee->has('store') ? h($employee->store->name) : '' ?></td>
+                <td><?= h($employee->contact_type) ?></td>
+                <td><?= h($employee->note) ?></td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php endif; ?>
 
 <div class="row" style="margin: 0;">
     <div class="col-xs-12">
@@ -122,6 +135,19 @@ $this->append('breadcrumbs', '<p>トップ＞従業員マスタ検索</p>');
         <?= $this->Html->link('戻る', ['controller'=>'Users', 'action'=>'attendance', 'prefix' => false], ['class' => 'btn btn-default btn-md return-link']) ?>
         </p>
 
-        <p>並び順は店舗カナ名、従業員コード順</p>
+        <p>
+            <span class="inline-block">並び順は店舗カナ名、従業員コード順</span>
+            <span class="inline-block text-primary">検索結果は<?= count($employees) ?>件です</span>
+        </p>
     </div>
 </div>
+
+<style>
+    .inline-block {
+        display: inline-block;
+        margin-right: 15px;
+    }
+    .inline-block label {
+        font-weight: normal !important;
+    }
+</style>

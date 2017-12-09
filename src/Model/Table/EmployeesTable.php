@@ -41,7 +41,7 @@ class EmployeesTable extends Table
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
-        
+        $this->addBehavior('Muffin/Footprint.Footprint');
         $this->addBehavior('Search.Search');
 
         $this->belongsTo('Companies', [
@@ -55,7 +55,7 @@ class EmployeesTable extends Table
         $this->hasMany('TimeCards', [
             'foreignKey' => 'employee_id'
         ]);
-        
+
         $this->searchManager()
             ->add('deleted', 'Search.Callback', [
                 'callback' => function ($query, $args, $type) {
@@ -83,7 +83,7 @@ class EmployeesTable extends Table
                     return $query;
                 }
             ])
-            
+
             ->add('store_id', 'Search.Callback', [
                 'callback' => function ($query, $args, $type) {
                     $query->where(['Employees.store_id' => $args['store_id']]);
@@ -112,8 +112,7 @@ class EmployeesTable extends Table
 
         $validator
             ->requirePresence('code', 'create')
-            ->notEmpty('code')
-            ->add('code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->notEmpty('code');
 
         $validator
             ->requirePresence('name_last', 'create')
@@ -134,21 +133,21 @@ class EmployeesTable extends Table
         $validator
             ->requirePresence('company_id', 'create')
             ->notEmpty('company_id');
-        
+
         $validator
             ->requirePresence('store_id', 'create')
             ->notEmpty('store_id');
-            
+
         $validator
             ->requirePresence('contact_type', 'create')
             ->notEmpty('contact_type');
 
         $validator
-            ->dateTime('joined')
+            ->date('joined')
             ->allowEmpty('joined');
 
         $validator
-            ->dateTime('retired')
+            ->date('retired')
             ->allowEmpty('retired');
 
         $validator
@@ -212,6 +211,7 @@ class EmployeesTable extends Table
     {
         $rules->add($rules->existsIn(['company_id'], 'Companies'));
         $rules->add($rules->existsIn(['store_id'], 'Stores'));
+        $rules->add($rules->isUnique(['code', 'company_id']), ['message' => __('社内で同じ従業員コードの登録はできません。')]);
 
         return $rules;
     }

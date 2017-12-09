@@ -1,6 +1,9 @@
 <?php
 $this->append('heading', '<p>' . $data['name'] . '</p>');
-$this->append('breadcrumbs', '<p>トップ＞従業員マスタ検索＞従業員登録</p>');
+$this->append('breadcrumbs', sprintf('<p>%s＞%s＞従業員登録</p>',
+    $this->Html->link('トップ', ['controller' => 'Users', 'action' => 'attendance', 'prefix' => false]),
+    $this->Html->link('従業員マスタ検索', ['action' => 'index'])
+));
 ?>
 
 <?php // debug($employee); ?>
@@ -76,7 +79,14 @@ $this->append('breadcrumbs', '<p>トップ＞従業員マスタ検索＞従業�
                 <div class="col-md-1 text-right"><label>＊</label></div>
                 <div class="col-md-3"><label>入社年月日</label></div>
                 <div class="col-md-3">
-                    <?= $this->Form->input('joined', ['empty' => true,'label' => false, 'type' => "text", 'placeholder' => '入力形式: '.date('Y-m-d'), 'required' => true]) ?>
+                    <?= $this->Form->input('joined', [
+                        'empty' => true,
+                        'label' => false,
+                        'type' => "text",
+                        'placeholder' => '入力形式: '.date('Y-m-d'),
+                        'required' => true,
+                        'value' => !empty($employee->joined) ? $employee->joined->format('Y-m-d') : null,
+                    ]) ?>
                 </div>
             </div>
 
@@ -84,7 +94,13 @@ $this->append('breadcrumbs', '<p>トップ＞従業員マスタ検索＞従業�
                 <div class="col-md-1 text-right"><label></label></div>
                 <div class="col-md-3"><label>退職年月日</label></div>
                 <div class="col-md-3">
-                    <?= $this->Form->input('retired', ['empty' => true,'label' => false, 'type' => "text", 'placeholder' => '入力形式: '.date('Y-m-d')]) ?>
+                    <?= $this->Form->input('retired', [
+                        'empty' => true,
+                        'label' => false,
+                        'type' => "text",
+                        'placeholder' => '入力形式: '.date('Y-m-d'),
+                        'value' => !empty($employee->retired) ? $employee->retired->format('Y-m-d') : null,
+                    ]) ?>
                 </div>
             </div>
 
@@ -167,9 +183,9 @@ $this->append('breadcrumbs', '<p>トップ＞従業員マスタ検索＞従業�
             <div class="row">
                 <div class="col-md-1 text-right"><label></label></div>
                 <div class="col-md-11">
-                    <?= $this->Form->input("check", [
+                    <?= $this->Form->input("deleted", [
                         "type" => "checkbox",
-                        "value" => "check2",
+                        "value" => "1",
                         "label" => "この従業員を削除する"
                     ]) ?>
                 </div>

@@ -20,4 +20,6 @@ $this->append('breadcrumbs', '<p>勤怠入力確認・' . $data['type'] . '時</
     </div>
 </div>
 
+<!--
 <meta http-equiv="refresh" content="20;URL=/attendance/time-cards/login">
+-->

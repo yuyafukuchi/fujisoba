@@ -16,7 +16,7 @@ class EmployeesController extends AppController
             'Employees.code' => 'asc'
         ]
     ];
-    
+
     public function initialize()
     {
         parent::initialize();
@@ -36,7 +36,7 @@ class EmployeesController extends AppController
         $this->loadComponent('Search.Prg');
         $this->Auth->sessionKey = 'Auth.Users';
     }
-    
+
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
@@ -50,21 +50,25 @@ class EmployeesController extends AppController
         {
             $name = '本社管理者 様';
             $searchQuery['company_id'] = $this->Auth->user('company_id');
-            $companies = $this->Employees->Companies->find('list', ['limit' => 200]);
-            $stores = $this->Employees->Stores->find('list', ['limit' => 200]);
+            $companies = $this->Employees->Companies->find('list', ['limit' => 200])
+                ->where(['id' => $this->Auth->user('company_id')]);
+            $stores = $this->Employees->Stores->find('list', ['limit' => 200])
+                ->where(['company_id' => $this->Auth->user('company_id')]);
         }
-        else if($type === 'M')       
+        else if($type === 'M')
         {
             $searchQuery['company_id'] = $this->Auth->user('company_id');
             $searchQuery['store_id'] = $this->Auth->user('store_id');
             $name = $this->Employees->Stores->get($this->Auth->user('store_id'))['name'].'管理者 様';
-            $companies = $this->Employees->Companies->find('list', ['limit' => 200])->where(['id' => $this->Auth->user('company_id')]);
-            $stores = $this->Employees->Stores->find('list', ['limit' => 200])->where(['id' => $this->Auth->user('store_id')]);
+            $companies = $this->Employees->Companies->find('list', ['limit' => 200])
+                ->where(['id' => $this->Auth->user('company_id')]);
+            $stores = $this->Employees->Stores->find('list', ['limit' => 200])
+                ->where(['id' => $this->Auth->user('store_id')]);
         }
          $data = array('type' => $type, 'name' => $name);
          $this->set(compact('companies', 'stores','data'));
     }
-        
+
     /**
      * Index method
      *
@@ -72,11 +76,11 @@ class EmployeesController extends AppController
      */
     public function index()
     {
+        // なぜか POST が GET に変換されるバグの応急処置
+        $this->request->data = $this->request->query();
+
         $searchQuery = $this->request->query();
         $searchQuery['deleted'] = 0;
-        if(!array_key_exists('retired',$searchQuery)){
-            $searchQuery['retired'] = 0;
-        }
         $this->paginate = [
             'contain' => ['Companies', 'Stores']
         ];
@@ -85,12 +89,14 @@ class EmployeesController extends AppController
         {
             $searchQuery['company_id'] = $this->Auth->user('company_id');
         }
-        else if($type === 'M')       
+        else if($type === 'M')
         {
             $searchQuery['company_id'] = $this->Auth->user('company_id');
             $searchQuery['store_id'] = $this->Auth->user('store_id');
         }
-        
+
+        $isSearch = !empty($this->request->getQuery('is_search'));
+
         $employees = $this->Employees->find('search', ['search' => $searchQuery]);
         $employees = $this->paginate($employees)->toArray();
         foreach ($employees as $employee){
@@ -105,11 +111,8 @@ class EmployeesController extends AppController
                     $employee['contact_type'] = 'アルバイト';
                     break;
             }
-            if($employee['retired'] != null){
-                $employee['retired'] = ' (退職)';
-            }
         }
-        $this->set(compact('employees'));
+        $this->set(compact('employees', 'isSearch'));
         //$this->set(compact('employees'));
         $this->set('_serialize', ['employees']);
     }
@@ -138,25 +141,18 @@ class EmployeesController extends AppController
      */
     public function add()
     {
-        
+
         $employee = $this->Employees->newEntity();
         if ($this->request->is('post')) {
             $sentData = $this->request->data();
             $sentData['deleted'] = false;
             $employee = $this->Employees->patchEntity($employee, $sentData);
             if ($this->Employees->save($employee)) {
-                $this->Flash->success(__('The employee has been saved.'));
+                $this->Flash->success('従業員を登録しました。');
 
                 return $this->redirect(['action' => 'index']);
-            }
-            if(array_key_exists('code',$employee->errors())){
-                if(array_key_exists('unique',$employee->errors()['code'])){
-                    $this->Flash->error(__('エラー：その従業員コードはすでに存在します'));
-                } else {
-                    $this->Flash->error(__('The employee could not be saved. Please, try again.'));
-                }
             } else {
-                $this->Flash->error(__('The employee could not be saved. Please, try again.'));
+                $this->Flash->error('登録に失敗しました。もう一度お試しください。');
             }
         }
 
@@ -211,7 +207,7 @@ class EmployeesController extends AppController
         return $this->redirect(['action' => 'index']);
     }
     public function admin(){
-        
+
     }
     public function login(){
          if ($this->request->is('post')) {

@@ -1,6 +1,9 @@
 <?php
 $this->append('heading', '<p>' . $data['name'] . '</p>');
-$this->append('breadcrumbs', '<p>トップ＞従業員マスタ検索＞従業員登録</p>');
+$this->append('breadcrumbs', sprintf('<p>%s＞%s＞従業員登録</p>',
+    $this->Html->link('トップ', ['controller' => 'Users', 'action' => 'attendance', 'prefix' => false]),
+    $this->Html->link('従業員マスタ検索', ['action' => 'index'])
+));
 ?>
 
 <?= $this->Form->create($employee) ?>
@@ -54,8 +57,13 @@ $this->append('breadcrumbs', '<p>トップ＞従業員マスタ検索＞従業�
                 <div class="col-md-1 text-right"><label><?= ($data['type']==='M') ? '＊' : null ?></label></div>
                 <div class="col-md-3"><label>店舗名</label></div>
                 <div class="col-md-6">
-                    <?php if ($data['type']==='M'): ?>
-                        <?= $this->Form->input('store_id', ['options' => $stores, "label" => false, 'required' => true]) ?>
+                    <?php if ($data['type'] === 'M'): // 店舗管理者 ?>
+                        <?= $this->Form->input('store_id', [
+                            'options' => $stores,
+                            "label" => false,
+                            'required' => true,
+                            'default' => $currentUser['store_id']
+                        ]) ?>
                     <?php else: ?>
                         <?= $this->Form->input('store_id', ['options' => $stores, 'empty' => true, "label" => false]) ?>
                     <?php endif; ?>

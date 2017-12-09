@@ -16,6 +16,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Muffin\Footprint\Auth\FootprintAwareTrait;
 
 /**
  * Application Controller
@@ -27,6 +28,8 @@ use Cake\Event\Event;
  */
 class AppController extends Controller
 {
+    use FootprintAwareTrait;
+
     // Load Bootstrap plugin
     public $helpers = [
         'Less.Less',
@@ -61,6 +64,16 @@ class AppController extends Controller
     }
 
     /**
+     * beforeFilter callback.
+     *
+     * @param \Cake\Event\Event $event Event.
+     * @return \Cake\Network\Response|null|void
+     */
+    public function beforeFilter(Event $event)
+    {
+    }
+
+    /**
      * Before render callback.
      *
      * @param \Cake\Event\Event $event The beforeRender event.
@@ -75,7 +88,9 @@ class AppController extends Controller
             $this->set('mode', 'atendance');
         }
 
-        // $this->set('currentUser', $this->Auth->user()); // debug($this->Auth); die;
+        if (isset($this->Auth)) {
+            $this->set('currentUser', $this->Auth->user()); // debug($this->Auth); die;
+        }
 
         if (!array_key_exists('_serialize', $this->viewVars) &&
             in_array($this->response->type(), ['application/json', 'application/xml'])

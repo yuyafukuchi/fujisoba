@@ -41,6 +41,7 @@ class SalesTransactionsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Muffin/Footprint.Footprint');
 
         $this->belongsTo('Stores', [
             'foreignKey' => 'store_id',
