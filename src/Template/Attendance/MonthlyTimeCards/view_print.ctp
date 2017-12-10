@@ -1,10 +1,4 @@
 <?php
-$this->append('heading', '<p>' . $data2['name'] . '</p>');
-$this->append('breadcrumbs', sprintf('<p>%s＞%s＞勤怠データ詳細 (管理者用)</p>',
-    $this->Html->link('トップ', ['controller' => 'Users', 'action' => 'attendance', 'prefix' => false]),
-    $this->Html->link('勤怠データ検索・一覧', ['controller' => 'MonthlyTimeCards', 'action' => 'index', 'prefix' => 'attendance'])
-));
-
 function convert_week($week)
 {
     $ret = "";
@@ -38,54 +32,18 @@ function convert_week($week)
 ?>
 
 <div class="row" style="margin: 0 0 20px;">
-    <div class="col-sm-8">
-        <div class="row" style="margin: 0 0 15px; font-size: large; font-weight: bold;">
-            <?= $data['employee']->company->name ?>／<?= $data['employee']->store->name ?>／<?= $data['employee']->name_last ?><?= $data['employee']->name_first ?>
-        </div>
-        <div class="row">
-            <div class="col-sm-5">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <?= $this->Form->create(null) ?>
-                            <?= $this->Form->submit($data['approveButton'], ['name' => 'button', 'class' => 'btn btn-default btn-block']) ?>
-                        <?= $this->Form->end() ?>
-                    </div>
-                    <div class="col-sm-3">
-                        <?= $this->Html->link('印刷', ['action' => 'viewPrint', $data['index']], ['class' => 'btn btn-default btn-block']) ?>
-                    </div>
-                    <div class="col-sm-3">
-                        <?= $this->Html->link('登録', ['action' => 'view', $data['index']+1], ['class' => 'btn btn-default btn-block disabled']) ?>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-7">
-                <?= $data['current_year'] ?>年<?= $data['current_month'] ?>月
-            </div>
-        </div>
+    <div class="col-xs-8">
+        <h1><?= $data['current_year'] ?>年<?= $data['current_month'] ?>月　勤務表</h1>
+        <h2><?= $data['employee']->store->name ?></h2>
     </div>
-    <div class="col-sm-4">
-        <div class="row" style="margin-bottom: 15px;">
-            <div class="col-sm-3">
-                <?= $data['index'] > 1 ? $this->Html->link('前', ['action' => 'view', $data['index']-1], ['class' => 'btn btn-default btn-block']) : $this->Html->link('前', ['action' => 'view', $data['index']-1], ['class' => 'btn btn-default btn-block disabled']) ?>
-            </div>
-            <div class="col-sm-3">
-                <?= $data['index'] < $data['length'] ? $this->Html->link('次', ['action' => 'view', $data['index']+1], ['class' => 'btn btn-default btn-block']) : $this->Html->link('次', ['action' => 'view', $data['index']+1], ['class' => 'btn btn-default btn-block disabled']) ?>
-            </div>
-        </div>
+    <div class="col-xs-4" style="border-bottom: 2px solid;">
+        <h3><?= $data['employee']->company->name ?></h3>
         <div class="row">
-            <div class="col-sm-3">
-                <?= $this->Form->create(null) ?>
-                    <?= $this->Form->submit($data['approveButton'], ['name' => 'button', 'class' => 'btn btn-default btn-block']) ?>
-                <?= $this->Form->end() ?>
+            <div class="col-xs-6">
+                <h3 style=""><?= $data['employee']->name_last ?>　<?= $data['employee']->name_first ?></h3>
             </div>
-            <div class="col-sm-3">
-                <?= $this->Html->link('印刷', ['action' => 'viewPrint', $data['index']], ['class' => 'btn btn-default btn-block']) ?>
-            </div>
-            <div class="col-sm-3">
-                <?= $this->Html->link('登録', ['action' => 'view', $data['index']+1], ['class' => 'btn btn-default btn-block disabled']) ?>
-            </div>
-            <div class="col-sm-3">
-                <?=$this->Html->link('戻る', ['action' => 'index'], ['class' => 'btn btn-default btn-block'])?>
+            <div class="col-xs-6 text-right">
+                <span style="border-radius: 1em; border: 1px solid; display: inline-block; padding: .1em .3em; margin: 20px 0 0;">印</span>
             </div>
         </div>
     </div>

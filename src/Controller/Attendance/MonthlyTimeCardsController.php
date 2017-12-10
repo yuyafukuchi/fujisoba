@@ -121,7 +121,6 @@ class MonthlyTimeCardsController extends AppController
         $this->set('_serialize', ['monthlyTimeCards']);
     }
 
-
     /**
      * View method
      *
@@ -131,6 +130,80 @@ class MonthlyTimeCardsController extends AppController
      */
     public function view($index = null)
     {
+        $index = intval($index);
+        $this->Session = $this->request->session();
+        $idArray = $this->Session->read('MonthlyTimeCard.idArray');
+        if($idArray == null || count($idArray) == 0){
+            $this->Session->delete('MonthlyTimeCard.idArray');
+            return $this->redirect(['action' => 'index']);
+        }
+        $length = count($idArray);
+        if(!($index-1 >= 0 && $index-1 < $length)){
+            $this->Session->delete('MonthlyTimeCard.idArray');
+            return $this->redirect(['action' => 'index']);
+        }
+        $id = $idArray[$index-1];
+        $monthlyTimeCard = $this->MonthlyTimeCards->get($id, [
+            'contain' => ['Employees','Employees.Companies', 'Employees.Stores']
+        ]);
+        if ($this->request->is('post')) {
+            if($this->request->data()['button'] === '承認'){
+                $monthlyTimeCard = $this->MonthlyTimeCards->patchEntity($monthlyTimeCard,array('id' => $monthlyTimeCard['id'],'approved' => true));
+                $this->MonthlyTimeCards->save($monthlyTimeCard);
+                $this->Flash->success('この勤務表を承認しました');
+            }
+            else if($this->request->data()['button'] === '非承認'){
+                $monthlyTimeCard = $this->MonthlyTimeCards->patchEntity($monthlyTimeCard,array('id' => $monthlyTimeCard['id'],'approved' => false));
+                $this->MonthlyTimeCards->save($monthlyTimeCard);
+                $this->Flash->success('この勤務表の承認を取り消しました');
+            }
+            debug($this->request->data());
+        }
+        $approveButton = $monthlyTimeCard['approved'] ? '非承認' : '承認';
+
+        // get timeCards
+        $this->TimeCards = TableRegistry::get('time_cards');
+        if(intval(date('d',time())) >= 16){
+            $date = strtotime('+1 month',time());
+        } else {
+            $date = time();
+        }
+        $timeCardsOld = $this->TimeCards->find()->where([   'employee_id' => $monthlyTimeCard['employee_id'],
+                                                        'date >=' => date('Y-m',strtotime('-1 month',$date)).'-16',
+                                                        'date <=' => date('Y-m',$date).'-15'])->toArray();
+        $timeCards = array();
+        foreach ($timeCardsOld as $timeCard){
+            $key = $timeCard['date']->i18nFormat('YYYY-MM-dd');
+            $storeName = $this->TimeCards->Stores->get($timeCard['attendance_store_id'])['name'];
+            if($timeCard['store_id'] != $timeCard['attendance_store_id']){
+                $storeName = $storeName . '【応援】';
+            }
+            $timeCard['storeName'] = $storeName;
+            $timeCards[$key] = $timeCard;
+        }
+
+        $data = array(  'index' => $index,
+                        'length' => $length,
+                        'current_year'=>date('Y',$date),
+                        'current_month'=>date('m',$date),
+                        'approveButton' => $approveButton,
+                        'employee' => $monthlyTimeCard->employee,
+        );
+        $this->set(compact('monthlyTimeCard','timeCards','data'));
+        $this->set('_serialize', ['monthlyTimeCard']);
+    }
+
+    /**
+     * Print View method
+     *
+     * @param string|null $id Monthly Time Card id.
+     * @return \Cake\Http\Response|void
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function viewPrint($index = null)
+    {
+        $this->viewBuilder()->setLayout('print');
+
         $index = intval($index);
         $this->Session = $this->request->session();
         $idArray = $this->Session->read('MonthlyTimeCard.idArray');
