@@ -70,7 +70,12 @@ class MonthlyTimeCardsTable extends Table
             ])
             ->add('dateQuery', 'Search.Callback', [
                 'callback' => function ($query, $args, $type) {
-                    $query->where(['MonthlyTimeCards.date' => $args['dateQuery']]);
+                    $query->where([
+                            'AND' => [
+                                ['MonthlyTimeCards.date >=' => $args['dateQuery']],
+                                ['MonthlyTimeCards.date <' => date('Y-m-d', strtotime($args['dateQuery'] . ' +1 month'))],
+                            ],
+                        ]);
 
                     return $query;
                 }
