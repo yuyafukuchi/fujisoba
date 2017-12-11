@@ -81,9 +81,7 @@ class EmployeesController extends AppController
 
         $searchQuery = $this->request->query();
         $searchQuery['deleted'] = 0;
-        $this->paginate = [
-            'contain' => ['Companies', 'Stores']
-        ];
+
         $type = $this->Auth->user('type');
         if($type === 'H')
         {
@@ -97,8 +95,11 @@ class EmployeesController extends AppController
 
         $isSearch = !empty($this->request->getQuery('is_search'));
 
-        $employees = $this->Employees->find('search', ['search' => $searchQuery]);
-        $employees = $this->paginate($employees)->toArray();
+        $employees = $this->Employees->find('search', ['search' => $searchQuery])
+            ->contain(['Companies', 'Stores'])
+            ->order(['Stores.name_kana' => 'ASC'])
+            ->order(['Employees.code' => 'ASC'])
+            ->toArray();
         foreach ($employees as $employee){
             switch ($employee['contact_type']){
                 case 'P':

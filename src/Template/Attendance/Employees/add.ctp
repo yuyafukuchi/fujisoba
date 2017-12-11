@@ -42,14 +42,10 @@ $this->append('breadcrumbs', sprintf('<p>%s＞%s＞従業員登録</p>',
             </div>
 
             <div class="row">
-                <div class="col-md-1 text-right"><label><?= ($data['type']==='M') ? '＊' : null ?></label></div>
+                <div class="col-md-1 text-right"><label>＊</label></div>
                 <div class="col-md-3"><label>会社名</label></div>
                 <div class="col-md-6">
-                    <?php if ($data['type']==='M'): ?>
-                        <?= $this->Form->input('company_id', ['options' => $companies, "label" => false, 'required' => true]) ?>
-                    <?php else: ?>
-                        <?= $this->Form->input('company_id', ['options' => $companies,'empty' => true, "label" => false]) ?>
-                    <?php endif; ?>
+                    <?= $this->Form->input('company_id', ['options' => $companies, "label" => false, 'required' => true]) ?>
                 </div>
             </div>
 

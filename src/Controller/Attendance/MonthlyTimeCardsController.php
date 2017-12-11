@@ -45,7 +45,8 @@ class MonthlyTimeCardsController extends AppController
             $name = '本社管理者 様';
             $companies = $this->Users->Companies->find('list', ['limit' => 200])
                 ->where(['id' => $this->Auth->user('company_id')]);
-            $stores = $this->Users->Stores->find('list', ['limit' => 200]);
+            $stores = $this->Users->Stores->find('list', ['limit' => 200])
+                ->where(['id' => $this->Auth->user('store_id')]);
         }
         else if($type === 'M')
         {
@@ -88,7 +89,11 @@ class MonthlyTimeCardsController extends AppController
         if(array_key_exists('date',$searchQuery)){
              $searchQuery['dateQuery'] = $searchQuery['date']['year'].'-'.$searchQuery['date']['month'].'-01';
         }
-        $monthlyTimeCards = $this->MonthlyTimeCards->find('search', ['search' => $searchQuery]);
+        $monthlyTimeCards = $this->MonthlyTimeCards->find('search', ['search' => $searchQuery])
+            ->contain(['Employees','Employees.Companies', 'Employees.Stores'])
+            ->order(['Stores.name_kana' => 'ASC'])
+            ->order(['Employees.code' => 'ASC'])
+            ->toArray();
         $timeCardIDs = array();
         /* これを入れると止まる（なんで？）
         foreach ($monthlyTimeCards as $monthlyTimeCard){
@@ -97,7 +102,7 @@ class MonthlyTimeCardsController extends AppController
 
         $isSearch = !empty($this->request->getQuery('is_search'));
 
-        $monthlyTimeCards = $this->paginate($monthlyTimeCards)->toArray();
+        // $monthlyTimeCards = $this->paginate($monthlyTimeCards)->toArray();
         foreach ($monthlyTimeCards as $monthlyTimeCard){
             array_push($timeCardIDs,$monthlyTimeCard['id']);
             switch ($monthlyTimeCard->employee->contact_type){

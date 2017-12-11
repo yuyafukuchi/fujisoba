@@ -34,6 +34,7 @@
         <?php
             echo $this->Form->input('code');
             echo $this->Form->input('name');
+            echo $this->Form->input('name_kana');
             echo $this->Form->input('company_id', ['options' => $companies]);
             echo $this->Form->input('pay_department_code');
             echo $this->Form->input('fin_department_code');

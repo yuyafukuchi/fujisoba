@@ -65,8 +65,13 @@ class EmployeesTable extends Table
             ])
            ->add('retired', 'Search.Callback', [
                 'callback' => function ($query, $args, $type) {
-                    if($args['retired'] =='0'){
-                        $query->where(['Employees.retired is' =>null ]);
+                    if ($args['retired'] =='0'){
+                        $query->where([
+                            'OR' => [
+                                ['Employees.retired is' => null],
+                                ['Employees.retired >=' => date('Y-m-d 00:00:00', strtotime('+1 day'))],
+                            ],
+                        ]);
                     }
                     return $query;
                 }
@@ -79,7 +84,14 @@ class EmployeesTable extends Table
             ])
             ->add('name', 'Search.Callback', [
                 'callback' => function ($query, $args, $type) {
-                    $query->where(['OR' => [['Employees.name_last LIKE' => '%'.$args['name'].'%'], ['Employees.name_first LIKE' => '%'.$args['name'].'%']]]);
+                    $query->where([
+                        'OR' => [
+                            ['Employees.name_last LIKE' => '%'.$args['name'].'%'],
+                            ['Employees.name_first LIKE' => '%'.$args['name'].'%'],
+                            ['Employees.name_last_kana LIKE' => '%'.$args['name'].'%'],
+                            ['Employees.name_first_kana LIKE' => '%'.$args['name'].'%'],
+                        ],
+                    ]);
                     return $query;
                 }
             ])
@@ -92,7 +104,7 @@ class EmployeesTable extends Table
             ])
             ->add('code', 'Search.Callback', [
                 'callback' => function ($query, $args, $type) {
-                    $query->where(['Employees.code' => $args['code']]);
+                    $query->where(['Employees.code LIKE' => '%' . $args['code'] . '%']);
                     return $query;
                 }
             ]);

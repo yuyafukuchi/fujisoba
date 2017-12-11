@@ -75,11 +75,12 @@ $this->append('breadcrumbs', sprintf('<p>%s＞勤怠データ検索・一覧</p>
             <div class="row" style="margin-bottom: 20px;">
                 <div class="col-md-4"><label>会社名</label></div>
                 <div class="col-md-8 form-inline">
-                    <?php if ($data['type']==='M'): ?>
-                        <?= $this->Form->input('company_id', ['options' => $companies, "label" => false]) ?>
-                    <?php else: ?>
-                        <?= $this->Form->input('company_id', ['options' => $companies,'empty' => true, "label" => false]) ?>
-                    <?php endif; ?>
+                        <?= $this->Form->input('company_id', [
+                            'options' => $companies,
+                            'empty' => true,
+                            "label" => false,
+                            'default' => !empty($currentUser['company_id']) ? $currentUser['company_id'] : null,
+                        ]) ?>
                 </div>
             </div>
             <div class="row" style="margin-bottom: 20px;">
@@ -145,13 +146,15 @@ $this->append('breadcrumbs', sprintf('<p>%s＞勤怠データ検索・一覧</p>
         <?= $this->Html->link('戻る', ['controller'=>'Users', 'action'=>'attendance', 'prefix' => false], ['class' => 'btn btn-default btn-md return-link']) ?>
         </p>
 
-        <p>
-            <span class="inline-block">並び順は店舗カナ名、従業員コード順</span>
-            <span class="inline-block text-primary">検索結果は<?= count($monthlyTimeCards) ?>件です</span>
-            <span class="inline-block"><?= $this->Html->link('人件費計算', ['controller'=>'Employees', 'action'=>'add'], ['class' => 'btn btn-default btn-md disabled']) ?></span>
-            <span class="inline-block text-primary">予定: <?= '1,500,000' ?>円</span>
-            <span class="inline-block text-primary">実績: <?= '1,580,000' ?>円</span>
-        </p>
+        <?php if ($isSearch): ?>
+            <p>
+                <span class="inline-block">並び順は店舗カナ名、従業員コード順</span>
+                <span class="inline-block text-primary">検索結果は<?= count($monthlyTimeCards) ?>件です</span>
+                <span class="inline-block"><?= $this->Html->link('人件費計算', ['controller'=>'Employees', 'action'=>'add'], ['class' => 'btn btn-default btn-md disabled']) ?></span>
+                <span class="inline-block text-primary">予定: <?= '1,500,000' ?>円</span>
+                <span class="inline-block text-primary">実績: <?= '1,580,000' ?>円</span>
+            </p>
+        <?php endif; ?>
     </div>
 </div>
 

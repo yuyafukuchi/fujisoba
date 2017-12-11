@@ -284,7 +284,7 @@ class TimeCardsController extends AppController
         if (empty($this->Auth->user())) {
             return $this->redirect(['controller' => '/../Users', 'action' => 'login']);
         }
-        $store_id = $this->Auth->user()['store_id'];
+        $store_id = $this->Auth->user('store_id');
         $store_name = $this->TimeCards->Stores->get($store_id)->name;
         $this->set(compact('store_name'));
         $this->set('_serialize', ['store_name']);
