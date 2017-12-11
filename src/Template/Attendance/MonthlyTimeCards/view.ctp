@@ -1,4 +1,7 @@
 <?php
+use Cake\I18n\Time;
+use Cake\Routing\Router;
+
 $this->append('heading', '<p>' . $data2['name'] . '</p>');
 $this->append('breadcrumbs', sprintf('<p>%s＞%s＞勤怠データ詳細 (管理者用)</p>',
     $this->Html->link('トップ', ['controller' => 'Users', 'action' => 'attendance', 'prefix' => false]),
@@ -44,19 +47,33 @@ function convert_week($week)
         </div>
         <div class="row">
             <div class="col-sm-5">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <?= $this->Form->create(null) ?>
-                            <?= $this->Form->submit($data['approveButton'], ['name' => 'button', 'class' => 'btn btn-default btn-block']) ?>
-                        <?= $this->Form->end() ?>
-                    </div>
-                    <div class="col-sm-3">
-                        <?= $this->Html->link('印刷', ['action' => 'viewPrint', $data['index']], ['class' => 'btn btn-default btn-block', 'target' => '_blank']) ?>
-                    </div>
-                    <div class="col-sm-3">
-                        <?= $this->Html->link('登録', ['action' => 'view', $data['index']+1], ['class' => 'btn btn-default btn-block disabled']) ?>
-                    </div>
-                </div>
+                <?php
+                $url = Router::url(NULL,true);
+                $now = Time::now();
+                try {
+                	if(!isset($_GET['t']) || !preg_match('/\A\d{4}-\d{2}\z/', $_GET['t'])){
+                		throw new Exception();
+                	}
+                	$url_datetime = new DateTime($_GET['t']);
+                	$current_year =($url_datetime->format('Y'));
+                	$current_month = intval($url_datetime->format('n'));
+                	$yeartime = $url_datetime->format('F Y');
+                	$first_day = new DateTime('first day of' . $yeartime);
+                } catch(Exception $e) {
+                	$current_month = intval($now->format('n'));
+                	$current_year =($now->format('Y'));
+                	$first_day = new DateTime('first day of this month');
+                }
+                $day = strtotime($current_year.'-'.$current_month.'-'.'16 -1 month');
+                $stopper = 0;
+                ?>
+                <button type="button" onclick="location.href='<?=$url?>'" class="btn btn-default btn-md">当月</button>
+                <button type="button" onclick="location.href='<?=$url.'?t='.date('Y-m',$day)?>'" class="btn btn-default btn-md">先月</button>
+                <button type="button" onclick="location.href='<?php
+                    $day2 = $day;
+                    $day2 = strtotime('+2 month',$day2);
+                    echo $url.'?t='.date('Y-m',$day2);
+                ?>'" class="btn btn-default btn-md">翌月</button>
             </div>
             <div class="col-sm-7">
                 <?= $data['current_year'] ?>年<?= $data['current_month'] ?>月

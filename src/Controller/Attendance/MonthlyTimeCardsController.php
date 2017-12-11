@@ -169,11 +169,16 @@ class MonthlyTimeCardsController extends AppController
 
         // get timeCards
         $this->TimeCards = TableRegistry::get('time_cards');
-        if(intval(date('d',time())) >= 16){
-            $date = strtotime('+1 month',time());
-        } else {
-            $date = time();
-        }
+
+		if(!isset($_GET['t']) || !preg_match('/\A\d{4}-\d{2}\z/', $_GET['t'])){
+            if(intval(date('d',time())) >= 16){
+                $date = strtotime('+1 month',time());
+            } else {
+                $date = time();
+            }
+		}else{
+		    $date = strtotime($_GET['t']);
+		}
         $timeCardsOld = $this->TimeCards->find()->where([   'employee_id' => $monthlyTimeCard['employee_id'],
                                                         'date >=' => date('Y-m',strtotime('-1 month',$date)).'-16',
                                                         'date <=' => date('Y-m',$date).'-15'])->toArray();
