@@ -64,18 +64,21 @@ class MonthlyTimeCardsTable extends Table
                             ],
                         ]);
                     }
+
                     return $query;
                 }
             ])
             ->add('dateQuery', 'Search.Callback', [
                 'callback' => function ($query, $args, $type) {
                     $query->where(['MonthlyTimeCards.date' => $args['dateQuery']]);
+
                     return $query;
                 }
             ])
             ->add('company_id', 'Search.Callback', [
                 'callback' => function ($query, $args, $type) {
-                    //$query->where(['Employees.company_id' => $args['company_id']]);
+                    $query->where(['Employees.company_id' => $args['company_id']]);
+
                     return $query;
                 }
             ])
