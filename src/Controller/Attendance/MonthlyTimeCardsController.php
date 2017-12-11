@@ -45,8 +45,7 @@ class MonthlyTimeCardsController extends AppController
             $name = '本社管理者 様';
             $companies = $this->Users->Companies->find('list', ['limit' => 200])
                 ->where(['id' => $this->Auth->user('company_id')]);
-            $stores = $this->Users->Stores->find('list', ['limit' => 200])
-                ->where(['id' => $this->Auth->user('store_id')]);
+            $stores = $this->Users->Stores->find('list', ['limit' => 200]);
         }
         else if($type === 'M')
         {
