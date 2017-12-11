@@ -105,7 +105,7 @@ $this->append('breadcrumbs', sprintf('<p>%s＞%s＞従業員登録</p>',
             <div class="row">
                 <div class="col-md-1 text-right"><label></label></div>
                 <div class="col-md-11">
-                    <?= $this->Form->input("check", ["type" => "checkbox", "value" => "check2", "label" => "社員"]) ?>
+                    <?= $this->Form->input("flag", ["type" => "checkbox", "value" => "1", "label" => "社員"]) ?>
                 </div>
             </div>
 
@@ -148,12 +148,12 @@ $this->append('breadcrumbs', sprintf('<p>%s＞%s＞従業員登録</p>',
                 <div class="col-md-2"><label>シフト</label></div>
                 <div class="col-md-9">
                     <?= $this->Form->radio(
-                        'シフト',
+                        'employee_shift',
                         [
-                            ['value' => '0', 'text' => '早番'],
-                            ['value' => '1', 'text' => '中番'],
-                            ['value' => '2', 'text' => '遅番'],
-                            ['value' => '3', 'text' => 'その他'],
+                            ['value' => 'E', 'text' => '早番'],
+                            ['value' => 'M', 'text' => '中番'],
+                            ['value' => 'L', 'text' => '遅番'],
+                            ['value' => 'O', 'text' => 'その他'],
                         ]
                     ) ?>
 

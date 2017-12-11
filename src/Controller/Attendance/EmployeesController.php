@@ -148,10 +148,11 @@ class EmployeesController extends AppController
             $sentData = $this->request->data();
             $sentData['deleted'] = false;
             $employee = $this->Employees->patchEntity($employee, $sentData);
-            if ($this->Employees->save($employee)) {
+            $saveResult = $this->Employees->save($employee);
+            if ($saveResult) {
                 $this->Flash->success('従業員を登録しました。');
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'edit', $saveResult->id]);
             } else {
                 $this->Flash->error('登録に失敗しました。もう一度お試しください。');
             }
@@ -175,10 +176,11 @@ class EmployeesController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $employee = $this->Employees->patchEntity($employee, $this->request->data);
+            // debug($employee); die;
             if ($this->Employees->save($employee)) {
                 $this->Flash->success(__('The employee has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'edit', $id]);
             }
             $this->Flash->error(__('The employee could not be saved. Please, try again.'));
         }
