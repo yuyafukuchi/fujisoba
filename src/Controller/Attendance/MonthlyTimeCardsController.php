@@ -115,8 +115,10 @@ class MonthlyTimeCardsController extends AppController
                     $monthlyTimeCard->employee->contact_type = 'アルバイト';
                     break;
             }
-            if($monthlyTimeCard->employee->retired != null){
+            if ($monthlyTimeCard->employee->retired != null && $monthlyTimeCard->employee->retired->format('Y-m-d') <= date('Y-m-d')) {
                 $monthlyTimeCard->employee->retired = ' <span class="text-danger">(退職)</span>';
+            } else {
+                $monthlyTimeCard->employee->retired = null;
             }
         }
         $this->Session = $this->request->session();
