@@ -39,6 +39,7 @@ $this->prepend('script', $this->Html->script([
 // Append logout menu
 if (
     // ($this->request->controller == 'Users' && ($this->request->action == 'index' || $this->request->action == 'login')) ||
+    ($this->request->controller == 'Users' && ($this->request->action == 'index')) ||
     ($this->request->controller == 'TimeCards' && ($this->request->action == 'emboss' || $this->request->action == 'confirm'))
 ) {
     //
