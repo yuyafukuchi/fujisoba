@@ -51,7 +51,7 @@ function convert_week($week)
                         <?= $this->Form->end() ?>
                     </div>
                     <div class="col-sm-3">
-                        <?= $this->Html->link('印刷', ['action' => 'viewPrint', $data['index']], ['class' => 'btn btn-default btn-block']) ?>
+                        <?= $this->Html->link('印刷', ['action' => 'viewPrint', $data['index']], ['class' => 'btn btn-default btn-block', 'target' => '_blank']) ?>
                     </div>
                     <div class="col-sm-3">
                         <?= $this->Html->link('登録', ['action' => 'view', $data['index']+1], ['class' => 'btn btn-default btn-block disabled']) ?>
@@ -79,7 +79,7 @@ function convert_week($week)
                 <?= $this->Form->end() ?>
             </div>
             <div class="col-sm-3">
-                <?= $this->Html->link('印刷', ['action' => 'viewPrint', $data['index']], ['class' => 'btn btn-default btn-block']) ?>
+                <?= $this->Html->link('印刷', ['action' => 'viewPrint', $data['index']], ['class' => 'btn btn-default btn-block', 'target' => '_blank']) ?>
             </div>
             <div class="col-sm-3">
                 <?= $this->Html->link('登録', ['action' => 'view', $data['index']+1], ['class' => 'btn btn-default btn-block disabled']) ?>
