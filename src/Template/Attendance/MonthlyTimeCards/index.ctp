@@ -152,8 +152,8 @@ $this->append('breadcrumbs', sprintf('<p>%s＞勤怠データ検索・一覧</p>
 <div class="row" style="margin: 0;">
     <div class="col-xs-12">
         <p class="pull-right">
-        <?= $this->Html->link('一括印刷', ['controller'=>'Employees', 'action'=>'add'], ['class' => 'btn btn-default btn-md add-link disabled', 'style' => 'margin-right: 15px;']) ?>
-        <?= $this->Html->link('CSV', ['controller'=>'Employees', 'action'=>'add'], ['class' => 'btn btn-default btn-md add-link disabled', 'style' => 'margin-right: 15px;']) ?>
+        <?= $this->Html->link('一括印刷', ['controller'=>'Employees', 'action'=>'add'], ['class' => 'btn btn-default btn-md add-link hidden', 'style' => 'margin-right: 15px;']) ?>
+        <?= $this->Html->link('CSV', ['controller'=>'Employees', 'action'=>'add'], ['class' => 'btn btn-default btn-md add-link hidden', 'style' => 'margin-right: 15px;']) ?>
         <?= $this->Html->link('戻る', ['controller'=>'Users', 'action'=>'attendance', 'prefix' => false], ['class' => 'btn btn-default btn-md return-link']) ?>
         </p>
 
