@@ -18,10 +18,10 @@ $this->append('breadcrumbs', sprintf('<p>%s＞勤怠データ検索・一覧</p>
                         "monthNames" => false,
                         "separator" => "/",
                         "templates" => [ "dateWidget" => '{{year}} 年 {{month}} 月' ],
-                        "minYear" => date("Y" ) - 70,
-                        "maxYear" => date("Y" ) - 18,
-                        "default" => date("Y-m" ),
-                        "empty" => true
+                        "minYear" => date("Y") - 70,
+                        "maxYear" => date("Y") - 18,
+                        "default" => date("Y-m"),
+                        "empty" => false,
                     ]) ?>
                 </div>
             </div>
@@ -43,7 +43,7 @@ $this->append('breadcrumbs', sprintf('<p>%s＞勤怠データ検索・一覧</p>
                 <?= $this->Form->label("csv_exported", "CSV未出力", ['for' => 'csv_exported']) ?>
                 <?= $this->Form->checkbox("csv_exported", ["id" => "csv_exported", "value" => "1"]) ?>
             </span>
-            <span class="inline-block">
+            <span class="inline-block hidden">
                 <?= $this->Form->label("unmatch", "予定と実績が異なる" ) ?>
                 <?= $this->Form->checkbox("unmatch", ["id" => "unmatch", "value" => "1"]) ?>
             </span>
@@ -150,9 +150,9 @@ $this->append('breadcrumbs', sprintf('<p>%s＞勤怠データ検索・一覧</p>
             <p>
                 <span class="inline-block">並び順は店舗カナ名、従業員コード順</span>
                 <span class="inline-block text-primary">検索結果は<?= count($monthlyTimeCards) ?>件です</span>
-                <span class="inline-block"><?= $this->Html->link('人件費計算', ['controller'=>'Employees', 'action'=>'add'], ['class' => 'btn btn-default btn-md disabled']) ?></span>
-                <span class="inline-block text-primary">予定: <?= '1,500,000' ?>円</span>
-                <span class="inline-block text-primary">実績: <?= '1,580,000' ?>円</span>
+                <span class="inline-block hidden"><?= $this->Html->link('人件費計算', ['controller'=>'Employees', 'action'=>'add'], ['class' => 'btn btn-default btn-md disabled']) ?></span>
+                <span class="inline-block text-primary hidden">予定: <?= '1,500,000' ?>円</span>
+                <span class="inline-block text-primary hidden">実績: <?= '1,580,000' ?>円</span>
             </p>
         <?php endif; ?>
     </div>

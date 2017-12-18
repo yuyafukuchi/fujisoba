@@ -67,7 +67,7 @@ $this->append('breadcrumbs', '<p>勤怠データ詳細</p>');
             echo $url.'?t='.date('Y-m',$day2);
         ?>'" class="btn btn-default btn-md">翌月</button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <?=$current_year . '年' . $current_month . '月'?>
+        <span style="font-size: large; zoom: 1.5;"><?=$current_year . '年' . $current_month . '月'?></span>
     </div>
 </div>
 

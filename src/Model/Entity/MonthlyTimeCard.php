@@ -34,17 +34,7 @@ class MonthlyTimeCard extends Entity
      * @var array
      */
     protected $_accessible = [
-        'employee_id' => true,
-        'date' => true,
-        'latest_emboss_day' => true,
-        'finished' => true,
-        'printed' => true,
-        'approved' => true,
-        'csv_exported' => true,
-        'created' => true,
-        'created_by' => true,
-        'modified' => true,
-        'modified_by' => true,
-        'employee' => true
+        'id' => false,
+        '*' => true
     ];
 }

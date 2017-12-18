@@ -30,6 +30,7 @@ if (Configure::read('App.author')) {
 // Prepend scripts required by the navbar
 $this->prepend('script', $this->Html->script([
     '//code.jquery.com/jquery-2.1.1.min.js',
+    '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/moment.min.js',
     '/bootstrap/js/transition',
     '/bootstrap/js/collapse',
     '/bootstrap/js/dropdown',

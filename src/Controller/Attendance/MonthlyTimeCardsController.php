@@ -45,7 +45,8 @@ class MonthlyTimeCardsController extends AppController
             $name = '本社管理者 様';
             $companies = $this->Users->Companies->find('list', ['limit' => 200])
                 ->where(['id' => $this->Auth->user('company_id')]);
-            $stores = $this->Users->Stores->find('list', ['limit' => 200]);
+            $stores = $this->Users->Stores->find('list', ['limit' => 200])
+                ->where(['company_id' => $this->Auth->user('company_id')]);
         }
         else if($type === 'M')
         {
@@ -53,6 +54,7 @@ class MonthlyTimeCardsController extends AppController
             $companies = $this->Users->Companies->find('list', ['limit' => 200])
                 ->where(['id' => $this->Auth->user('company_id')]);
             $stores = $this->Users->Stores->find('list', ['limit' => 200])
+                // ->where(['company_id' => $this->Auth->user('company_id')])
                 ->where(['id' => $this->Auth->user('store_id')]);
         }
          $data = array('type' => $type, 'name' => $name);
@@ -136,6 +138,8 @@ class MonthlyTimeCardsController extends AppController
      */
     public function view($index = null)
     {
+        $this->loadModel('TimeCards');
+
         $index = intval($index);
         $this->Session = $this->request->session();
         $idArray = $this->Session->read('MonthlyTimeCard.idArray');
@@ -152,7 +156,112 @@ class MonthlyTimeCardsController extends AppController
         $monthlyTimeCard = $this->MonthlyTimeCards->get($id, [
             'contain' => ['Employees','Employees.Companies', 'Employees.Stores']
         ]);
+
+        // Set date
+        if(!isset($_GET['t']) || !preg_match('/\A\d{4}-\d{2}\z/', $_GET['t'])){
+            if(intval(date('d',time())) >= 16){
+                $date = strtotime('+1 month',time());
+            } else {
+                $date = time();
+            }
+        }else{
+            $date = strtotime($_GET['t']);
+        }
+
+        // Get current MonthlyTimeCard entity
+        $currentMonthlyTimeCard = $this->MonthlyTimeCards->find()
+            ->where(['MonthlyTimeCards.date' => date('Y-m-01', $date)])
+            ->where(['MonthlyTimeCards.employee_id' => $monthlyTimeCard->employee_id])
+            ->first();
+
         if ($this->request->is('post')) {
+            // debug($this->request->data()); // die;
+
+            // Save summary
+            if (!empty($this->request->getData('MonthlyTimeCards'))) {
+                // debug($this->request->getData('MonthlyTimeCards'));
+                if (isset($currentMonthlyTimeCard->id)) {
+                    // UPDATE
+                    $currentMonthlyTimeCard = $this->MonthlyTimeCards->patchEntity($currentMonthlyTimeCard, $this->request->getData('MonthlyTimeCards'));
+                    // debug($currentMonthlyTimeCard);die;
+                    $this->MonthlyTimeCards->save($currentMonthlyTimeCard);
+                } else {
+                    // NEW
+                    $currentMonthlyTimeCard = $this->MonthlyTimeCards->newEntity();
+                    $currentMonthlyTimeCard = $this->MonthlyTimeCards->patchEntity($currentMonthlyTimeCard, $this->request->getData('MonthlyTimeCards'));
+                    $currentMonthlyTimeCard = $this->MonthlyTimeCards->patchEntity($currentMonthlyTimeCard, [
+                        'employee_id' => $monthlyTimeCard->employee_id,
+                        'date' => date('Y-m-01', $date),
+                    ]);
+                    $this->MonthlyTimeCards->save($currentMonthlyTimeCard);
+                }
+            }
+
+            // Save TimeCards
+            if (!empty($this->request->getData('TimeCard'))) {
+                $tempTimeCards = $this->request->getData('TimeCard');
+                // debug($tempTimeCards); // die;
+
+                foreach ($tempTimeCards as $tempTimeCard) {
+                    // Determine blank data
+                    $isNull = true;
+                    // debug($tempTimeCard);
+                    foreach ($tempTimeCard as $key => $tempTimeCardData) {
+                        if (in_array($key, ['employee_id', 'date', 'store_id', 'attendance_store_id'])) {
+                            continue;
+                        }
+
+                        if (!empty($tempTimeCardData)) {
+                            $isNull = false;
+                        }
+
+                        // Append date into user input time
+                        if (in_array($key, ['in_time', 'out_time', 'in_time2', 'out_time2', 'scheduled_in_time', 'scheduled_out_time', 'scheduled_in_time2', 'scheduled_out_time2'])) {
+                            if (preg_match('/^[0-9]{2}:[0-9]{2}$/', $tempTimeCardData)) {
+                                $tempTime = explode(':', $tempTimeCardData);
+                                if (count($tempTime) === 2) {
+                                    if ((int)$tempTime[0] >= 24) {
+                                        $tempTime[0] = $tempTime[0] - 24;
+                                        $tempTime[0] = sprintf('%02d', $tempTime[0]);
+                                        $tempTime = implode(':', $tempTime);
+                                        $tempTimeCard[$key] = sprintf('%s %s:00', date('Y-m-d', strtotime('+1 days', strtotime($tempTimeCard['date']))), $tempTime);
+                                    } else {
+                                        $tempTimeCard[$key] = sprintf('%s %s:00', $tempTimeCard['date'], $tempTimeCardData);
+                                    }
+                                }
+                                $tempDate = strtotime($tempTimeCard[$key]);
+                            }
+                        }
+                    } // debug($tempTimeCard);
+
+                    // Save data
+                    if (!$isNull) {
+                        if (isset($tempTimeCard['id'])) {
+                            // UPDATE
+                            $newTimeCard = $this->TimeCards->get($tempTimeCard['id']);
+                            $newTimeCard = $this->TimeCards->patchEntity($newTimeCard, $tempTimeCard);
+                            $dirtyFields = $newTimeCard->dirty_fields;
+                            if (!empty($dirtyFields)) {
+                                $dirtyFields = unserialize($dirtyFields);
+                                $dirtyFields = array_merge($dirtyFields, $newTimeCard->getDirty());
+                                $dirtyFields = array_unique($dirtyFields);
+                            } else {
+                                $dirtyFields = $newTimeCard->getDirty();
+                            }
+                            $newTimeCard = $this->TimeCards->patchEntity($newTimeCard, ['dirty_fields' => serialize($dirtyFields)]);
+                            // debug($newTimeCard);
+                            $this->TimeCards->save($newTimeCard);
+                        } else {
+                            // NEW
+                            $newTimeCard = $this->TimeCards->newEntity();
+                            $newTimeCard = $this->TimeCards->patchEntity($newTimeCard, $tempTimeCard);
+                            // debug($newTimeCard);die;
+                            $this->TimeCards->save($newTimeCard);
+                        }
+                    }
+                }
+            }
+
             if($this->request->data()['button'] === '承認'){
                 $monthlyTimeCard = $this->MonthlyTimeCards->patchEntity($monthlyTimeCard,array('id' => $monthlyTimeCard['id'],'approved' => true));
                 $this->MonthlyTimeCards->save($monthlyTimeCard);
@@ -163,25 +272,17 @@ class MonthlyTimeCardsController extends AppController
                 $this->MonthlyTimeCards->save($monthlyTimeCard);
                 $this->Flash->success('この勤務表の承認を取り消しました');
             }
-            debug($this->request->data());
         }
         $approveButton = $monthlyTimeCard['approved'] ? '非承認' : '承認';
 
         // get timeCards
-        $this->TimeCards = TableRegistry::get('time_cards');
-
-		if(!isset($_GET['t']) || !preg_match('/\A\d{4}-\d{2}\z/', $_GET['t'])){
-            if(intval(date('d',time())) >= 16){
-                $date = strtotime('+1 month',time());
-            } else {
-                $date = time();
-            }
-		}else{
-		    $date = strtotime($_GET['t']);
-		}
-        $timeCardsOld = $this->TimeCards->find()->where([   'employee_id' => $monthlyTimeCard['employee_id'],
-                                                        'date >=' => date('Y-m',strtotime('-1 month',$date)).'-16',
-                                                        'date <=' => date('Y-m',$date).'-15'])->toArray();
+        $timeCardsOld = $this->TimeCards->find()
+            ->where([
+                'employee_id' => $monthlyTimeCard['employee_id'],
+                'date >=' => date('Y-m',strtotime('-1 month',$date)).'-16',
+                'date <=' => date('Y-m',$date).'-15'
+            ])
+            ->toArray();
         $timeCards = array();
         foreach ($timeCardsOld as $timeCard){
             $key = $timeCard['date']->i18nFormat('YYYY-MM-dd');
@@ -200,7 +301,8 @@ class MonthlyTimeCardsController extends AppController
                         'approveButton' => $approveButton,
                         'employee' => $monthlyTimeCard->employee,
         );
-        $this->set(compact('monthlyTimeCard','timeCards','data'));
+
+        $this->set(compact('monthlyTimeCard','timeCards','data','currentMonthlyTimeCard'));
         $this->set('_serialize', ['monthlyTimeCard']);
     }
 
@@ -248,15 +350,25 @@ class MonthlyTimeCardsController extends AppController
 
         // get timeCards
         $this->TimeCards = TableRegistry::get('time_cards');
-        if(intval(date('d',time())) >= 16){
-            $date = strtotime('+1 month',time());
-        } else {
-            $date = time();
+
+        if(!isset($_GET['t']) || !preg_match('/\A\d{4}-\d{2}\z/', $_GET['t'])){
+            if(intval(date('d',time())) >= 16){
+                $date = strtotime('+1 month',time());
+            } else {
+                $date = time();
+            }
+        }else{
+            $date = strtotime($_GET['t']);
         }
-        $timeCardsOld = $this->TimeCards->find()->where([   'employee_id' => $monthlyTimeCard['employee_id'],
-                                                        'date >=' => date('Y-m',strtotime('-1 month',$date)).'-16',
-                                                        'date <=' => date('Y-m',$date).'-15'])->toArray();
-        $timeCards = array();
+        $timeCardsOld = $this->TimeCards->find()
+            ->where([
+                'employee_id' => $monthlyTimeCard['employee_id'],
+                'date >=' => date('Y-m', strtotime('-1 month',$date)).'-16',
+                'date <=' => date('Y-m', $date).'-15',
+            ])
+            ->toArray();
+
+        $timeCards = [];
         foreach ($timeCardsOld as $timeCard){
             $key = $timeCard['date']->i18nFormat('YYYY-MM-dd');
             $storeName = $this->TimeCards->Stores->get($timeCard['attendance_store_id'])['name'];
@@ -267,14 +379,26 @@ class MonthlyTimeCardsController extends AppController
             $timeCards[$key] = $timeCard;
         }
 
-        $data = array(  'index' => $index,
-                        'length' => $length,
-                        'current_year'=>date('Y',$date),
-                        'current_month'=>date('m',$date),
-                        'approveButton' => $approveButton,
-                        'employee' => $monthlyTimeCard->employee,
-        );
-        $this->set(compact('monthlyTimeCard','timeCards','data'));
+        $data = [
+            'index' => $index,
+            'length' => $length,
+            'current_year'=>date('Y',$date),
+            'current_month'=>date('m',$date),
+            'approveButton' => $approveButton,
+            'employee' => $monthlyTimeCard->employee,
+        ];
+
+        // Update `printed` flag
+        $currentMonthlyTimeCard = $this->MonthlyTimeCards->find()
+            ->where(['MonthlyTimeCards.date' => date('Y-m-01', $date)])
+            ->where(['MonthlyTimeCards.employee_id' => $monthlyTimeCard['employee_id']])
+            ->first();
+        if (isset($currentMonthlyTimeCard->id)) {
+            $currentMonthlyTimeCard = $this->MonthlyTimeCards->patchEntity($currentMonthlyTimeCard, ['printed' => 1]);
+            $this->MonthlyTimeCards->save($currentMonthlyTimeCard);
+        }
+
+        $this->set(compact('monthlyTimeCard','timeCards','data','currentMonthlyTimeCard'));
         $this->set('_serialize', ['monthlyTimeCard']);
     }
 
