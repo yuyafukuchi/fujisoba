@@ -122,16 +122,27 @@ $this->append('breadcrumbs', sprintf('<p>%s＞勤怠データ検索・一覧</p>
             </thead>
             <tbody>
                 <?php $i = 1; foreach ($monthlyTimeCards as $monthlyTimeCard): ?>
-                <tr>
-                    <td><?= h($i) ?></td>
-                    <td><?= $monthlyTimeCard->has('employee') ? h($monthlyTimeCard->employee->code) : '' ?></td>
-                    <td><?= $monthlyTimeCard->has('employee') ? $this->Html->link(h($monthlyTimeCard->employee->name_last.' '.$monthlyTimeCard->employee->name_first) . $monthlyTimeCard->employee->retired, ['action' => 'view', $i], ['escape' => false]) : ''?></td>
-                    <td><?= $monthlyTimeCard->has('employee') ? h($monthlyTimeCard->employee->company->name): '' ?></td>
-                    <td><?= $monthlyTimeCard->has('employee') ? h($monthlyTimeCard->employee->store->name): '' ?></td>
-                    <td><?= $monthlyTimeCard->has('employee') ? h($monthlyTimeCard->employee->contact_type): '' ?></td>
-                    <td><?=($monthlyTimeCard->printed ? '印刷':'').' '.($monthlyTimeCard->approved ? '承認' : '').' '.($monthlyTimeCard->csv_exported ? 'CSV' : '') ?></td>
-                    <td><?= '' ?></td>
-                </tr>
+                    <?php
+                    $retired = (!empty($monthlyTimeCard->employee->retired) && $monthlyTimeCard->employee->retired->format('Y-m-d') <= date('Y-m-d')) ? ' <span class="text-danger">(退職)</span>' : null;
+                    ?>
+                    <tr>
+                        <td><?= h($i) ?></td>
+                        <td><?= $monthlyTimeCard->has('employee') ? h($monthlyTimeCard->employee->code) : '' ?></td>
+                        <td><?= $monthlyTimeCard->has('employee') ? $this->Html->link(h($monthlyTimeCard->employee->name_last.' '.$monthlyTimeCard->employee->name_first) . $retired, ['action' => 'view', $i], ['escape' => false]) : ''?></td>
+                        <td><?= $monthlyTimeCard->has('employee') ? h($monthlyTimeCard->employee->company->name): '' ?></td>
+                        <td><?= $monthlyTimeCard->has('employee') ? h($monthlyTimeCard->employee->store->name): '' ?></td>
+                        <td><?php
+                            if ($monthlyTimeCard->has('employee')) {
+                                switch ($monthlyTimeCard->employee->contact_type) {
+                                    case 'P': echo '正社員'; break;
+                                    case 'C': echo '契約社員'; break;
+                                    case 'A': echo 'アルバイト'; break;
+                                }
+                            }
+                        ?></td>
+                        <td><?=($monthlyTimeCard->printed ? '印刷':'').' '.($monthlyTimeCard->approved ? '承認' : '').' '.($monthlyTimeCard->csv_exported ? 'CSV' : '') ?></td>
+                        <td><?= '' ?></td>
+                    </tr>
                 <?php $i++; endforeach; ?>
             </tbody>
         </table>

@@ -75,56 +75,33 @@ class MonthlyTimeCardsController extends AppController
         $this->paginate = [
             'contain' => ['Employees','Employees.Companies', 'Employees.Stores']
         ];
+
+        // 検索クエリの調整
         $searchQuery = $this->request->query();
         $searchQuery['deleted'] = 0;
         $type = $this->Auth->user('type');
-        if($type === 'H')
-        {
+
+        if ($type === 'H') {
             $searchQuery['company_id'] = $this->Auth->user('company_id');
-        }
-        else if($type === 'M')
-        {
+        } elseif ($type === 'M') {
             $searchQuery['company_id'] = $this->Auth->user('company_id');
             $searchQuery['store_id'] = $this->Auth->user('store_id');
         }
-        if(array_key_exists('date',$searchQuery)){
-             $searchQuery['dateQuery'] = $searchQuery['date']['year'].'-'.$searchQuery['date']['month'].'-01';
+
+        if (!empty($searchQuery['date'])) {
+             $searchQuery['dateQuery'] = sprintf('%s-%s-01', $searchQuery['date']['year'], $searchQuery['date']['month']);
         }
+
+        $isSearch = !empty($this->request->getQuery('is_search'));
         $monthlyTimeCards = $this->MonthlyTimeCards->find('search', ['search' => $searchQuery])
             ->contain(['Employees','Employees.Companies', 'Employees.Stores'])
             ->order(['Stores.name_kana' => 'ASC'])
             ->order(['Employees.code' => 'ASC'])
             ->toArray();
-        $timeCardIDs = array();
-        /* これを入れると止まる（なんで？）
-        foreach ($monthlyTimeCards as $monthlyTimeCard){
-            array_push($timeCardIDs,$monthlyTimeCard['id']);
-        }*/
 
-        $isSearch = !empty($this->request->getQuery('is_search'));
-
-        // $monthlyTimeCards = $this->paginate($monthlyTimeCards)->toArray();
-        foreach ($monthlyTimeCards as $monthlyTimeCard){
-            array_push($timeCardIDs,$monthlyTimeCard['id']);
-            switch ($monthlyTimeCard->employee->contact_type){
-                case 'P':
-                    $monthlyTimeCard->employee->contact_type = '正社員';
-                    break;
-                case 'C':
-                    $monthlyTimeCard->employee->contact_type = '契約社員';
-                    break;
-                case 'A':
-                    $monthlyTimeCard->employee->contact_type = 'アルバイト';
-                    break;
-            }
-            if ($monthlyTimeCard->employee->retired != null && $monthlyTimeCard->employee->retired->format('Y-m-d') <= date('Y-m-d')) {
-                $monthlyTimeCard->employee->retired = ' <span class="text-danger">(退職)</span>';
-            } else {
-                $monthlyTimeCard->employee->retired = null;
-            }
-        }
         $this->Session = $this->request->session();
-        $this->Session->write('MonthlyTimeCard.idArray', $timeCardIDs);
+        $this->Session->write('MonthlyTimeCard.idArray', array_column($monthlyTimeCards, 'id'));
+
         $this->set(compact('monthlyTimeCards', 'isSearch'));
         $this->set('_serialize', ['monthlyTimeCards']);
     }
