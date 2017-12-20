@@ -1653,3 +1653,10 @@ Stack trace:
 #4 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Controller/Controller.php(610): Cake\Controller\Controller->dispatchEvent('Controller.befo...')
 #5 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(325): Cake\Controller\Controller->render('error')
 #6 /home/ubuntu/w in /home/ubuntu/workspace/src/Controller/AppController.php on line 81
+[18-Dec-2017 17:27:34 Asia/Tokyo] PHP Fatal error:  Uncaught Error: Call to undefined method App\Model\Entity\MonthlyTimeCard::aliasFields() in /home/ubuntu/workspace/vendor/cakephp/cakephp/src/ORM/Association/Loader/SelectLoader.php:241
+Stack trace:
+#0 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/ORM/Association/Loader/SelectLoader.php(197): Cake\ORM\Association\Loader\SelectLoader->_assertFieldsPresent(Object(App\Model\Entity\MonthlyTimeCard), Array)
+#1 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/ORM/Association/Loader/SelectLoader.php(124): Cake\ORM\Association\Loader\SelectLoader->_buildQuery(Array)
+#2 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/ORM/Association/HasMany.php(688): Cake\ORM\Association\Loader\SelectLoader->buildEagerLoader(Array)
+#3 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/ORM/EagerLoader.php(672): Cake\ORM\Association\HasMany->eagerLoader(Array)
+#4 /home/ubuntu/workspace/vendor/cakephp/cakephp/src/ORM/Query.php(1039): Cake\ORM\EagerLoader->loadExternal(Object(Cake\ORM\Query), Object(Cake\Database\Statement\BufferedS in /home/ubuntu/workspace/vendor/cakephp/cakephp/src/ORM/Association/Loader/SelectLoader.php on line 241

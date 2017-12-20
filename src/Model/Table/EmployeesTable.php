@@ -55,6 +55,9 @@ class EmployeesTable extends Table
         $this->hasMany('TimeCards', [
             'foreignKey' => 'employee_id'
         ]);
+        $this->hasMany('MonthlyTimeCards', [
+            'foreignKey' => 'employee_id'
+        ]);
 
         $this->searchManager()
             ->add('deleted', 'Search.Callback', [
@@ -95,7 +98,6 @@ class EmployeesTable extends Table
                     return $query;
                 }
             ])
-
             ->add('store_id', 'Search.Callback', [
                 'callback' => function ($query, $args, $type) {
                     $query->where(['Employees.store_id' => $args['store_id']]);
@@ -106,6 +108,59 @@ class EmployeesTable extends Table
                 'callback' => function ($query, $args, $type) {
                     $query->where(['Employees.code LIKE' => '%' . $args['code'] . '%']);
                     return $query;
+                }
+            ])
+            ->add('dateQuery', 'Search.Callback', [
+                'callback' => function ($query, $args, $type) {
+                    return $query;
+                }
+            ])
+            ->add('printed', 'Search.Callback', [
+                'callback' => function ($query, $args, $type) {
+                    if (empty($args['dateQuery']) || empty($args['printed'])) {
+                        return $query;
+                    }
+                    return $query
+                        ->leftJoinWith('MonthlyTimeCards', function ($query) use ($args) {
+                            return $query
+                                ->where([$this->MonthlyTimeCards->target()->aliasField('date') => $args['dateQuery']]);
+                        })
+                        ->where(['OR' => [
+                            $this->MonthlyTimeCards->target()->aliasField('printed') => !(bool)$args['printed'],
+                            $this->MonthlyTimeCards->target()->aliasField('printed') . ' IS' => NULL,
+                        ]]);
+                }
+            ])
+            ->add('approved', 'Search.Callback', [
+                'callback' => function ($query, $args, $type) {
+                    if (empty($args['dateQuery']) || empty($args['approved'])) {
+                        return $query;
+                    }
+                    return $query
+                        ->leftJoinWith('MonthlyTimeCards', function ($query) use ($args) {
+                            return $query
+                                ->where([$this->MonthlyTimeCards->target()->aliasField('date') => $args['dateQuery']]);
+                        })
+                        ->where(['OR' => [
+                            $this->MonthlyTimeCards->target()->aliasField('approved') => !(bool)$args['approved'],
+                            $this->MonthlyTimeCards->target()->aliasField('approved') . ' IS' => NULL,
+                        ]]);
+                }
+            ])
+            ->add('csv_exported', 'Search.Callback', [
+                'callback' => function ($query, $args, $type) {
+                    if (empty($args['dateQuery']) || empty($args['csv_exported'])) {
+                        return $query;
+                    }
+                    return $query
+                        ->leftJoinWith('MonthlyTimeCards', function ($query) use ($args) {
+                            return $query
+                                ->where([$this->MonthlyTimeCards->target()->aliasField('date') => $args['dateQuery']]);
+                        })
+                        ->where(['OR' => [
+                            $this->MonthlyTimeCards->target()->aliasField('csv_exported') => !(bool)$args['csv_exported'],
+                            $this->MonthlyTimeCards->target()->aliasField('csv_exported') . ' IS' => NULL,
+                        ]]);
                 }
             ]);
     }

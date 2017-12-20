@@ -121,26 +121,24 @@ $this->append('breadcrumbs', sprintf('<p>%s＞勤怠データ検索・一覧</p>
                 </tr>
             </thead>
             <tbody>
-                <?php $i = 1; foreach ($monthlyTimeCards as $monthlyTimeCard): ?>
+                <?php $i = 1; foreach ($employees as $employee): ?>
                     <?php
-                    $retired = (!empty($monthlyTimeCard->employee->retired) && $monthlyTimeCard->employee->retired->format('Y-m-d') <= date('Y-m-d')) ? ' <span class="text-danger">(退職)</span>' : null;
+                    $retired = (!empty($employee->retired) && $employee->retired->format('Y-m-d') <= date('Y-m-d')) ? ' <span class="text-danger">(退職)</span>' : null;
                     ?>
                     <tr>
                         <td><?= h($i) ?></td>
-                        <td><?= $monthlyTimeCard->has('employee') ? h($monthlyTimeCard->employee->code) : '' ?></td>
-                        <td><?= $monthlyTimeCard->has('employee') ? $this->Html->link(h($monthlyTimeCard->employee->name_last.' '.$monthlyTimeCard->employee->name_first) . $retired, ['action' => 'view', $i], ['escape' => false]) : ''?></td>
-                        <td><?= $monthlyTimeCard->has('employee') ? h($monthlyTimeCard->employee->company->name): '' ?></td>
-                        <td><?= $monthlyTimeCard->has('employee') ? h($monthlyTimeCard->employee->store->name): '' ?></td>
+                        <td><?= h($employee->code) ?></td>
+                        <td><?= $this->Html->link(h($employee->name_last.' '.$employee->name_first) . $retired, ['action' => 'view', $i], ['escape' => false]) ?></td>
+                        <td><?= $employee->company->name ?></td>
+                        <td><?= $employee->store->name ?></td>
                         <td><?php
-                            if ($monthlyTimeCard->has('employee')) {
-                                switch ($monthlyTimeCard->employee->contact_type) {
-                                    case 'P': echo '正社員'; break;
-                                    case 'C': echo '契約社員'; break;
-                                    case 'A': echo 'アルバイト'; break;
-                                }
+                            switch ($employee->contact_type) {
+                                case 'P': echo '正社員'; break;
+                                case 'C': echo '契約社員'; break;
+                                case 'A': echo 'アルバイト'; break;
                             }
                         ?></td>
-                        <td><?=($monthlyTimeCard->printed ? '印刷':'').' '.($monthlyTimeCard->approved ? '承認' : '').' '.($monthlyTimeCard->csv_exported ? 'CSV' : '') ?></td>
+                        <td><?= (!empty($employee->monthly_time_cards[0]->printed) ? '印刷':'').' '.(!empty($employee->monthly_time_cards[0]->approved) ? '承認' : '').' '.(!empty($employee->monthly_time_cards[0]->csv_exported) ? 'CSV' : '') ?></td>
                         <td><?= '' ?></td>
                     </tr>
                 <?php $i++; endforeach; ?>
@@ -152,15 +150,15 @@ $this->append('breadcrumbs', sprintf('<p>%s＞勤怠データ検索・一覧</p>
 <div class="row" style="margin: 0;">
     <div class="col-xs-12">
         <p class="pull-right">
-        <?= $this->Html->link('一括印刷', ['controller'=>'Employees', 'action'=>'add'], ['class' => 'btn btn-default btn-md add-link hidden', 'style' => 'margin-right: 15px;']) ?>
-        <?= $this->Html->link('CSV', ['controller'=>'Employees', 'action'=>'add'], ['class' => 'btn btn-default btn-md add-link hidden', 'style' => 'margin-right: 15px;']) ?>
+        <?= $this->Html->link('一括印刷', ['controller'=>'Employees', 'action'=>'bulkPrint'], ['class' => 'btn btn-default btn-md add-link hidden', 'style' => 'margin-right: 15px;']) ?>
+        <?= $this->Html->link('CSV', ['controller'=>'Employees', 'action'=>'csv'], ['class' => 'btn btn-default btn-md add-link hidden', 'style' => 'margin-right: 15px;']) ?>
         <?= $this->Html->link('戻る', ['controller'=>'Users', 'action'=>'attendance', 'prefix' => false], ['class' => 'btn btn-default btn-md return-link']) ?>
         </p>
 
         <?php if ($isSearch): ?>
             <p>
                 <span class="inline-block">並び順は店舗カナ名、従業員コード順</span>
-                <span class="inline-block text-primary">検索結果は<?= count($monthlyTimeCards) ?>件です</span>
+                <span class="inline-block text-primary">検索結果は<?= count($employees) ?>件です</span>
                 <span class="inline-block hidden"><?= $this->Html->link('人件費計算', ['controller'=>'Employees', 'action'=>'add'], ['class' => 'btn btn-default btn-md disabled']) ?></span>
                 <span class="inline-block text-primary hidden">予定: <?= '1,500,000' ?>円</span>
                 <span class="inline-block text-primary hidden">実績: <?= '1,580,000' ?>円</span>

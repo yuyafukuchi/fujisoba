@@ -89,20 +89,62 @@ class MonthlyTimeCardsController extends AppController
         }
 
         if (!empty($searchQuery['date'])) {
-             $searchQuery['dateQuery'] = sprintf('%s-%s-01', $searchQuery['date']['year'], $searchQuery['date']['month']);
+            $searchQuery['dateQuery'] = sprintf('%s-%s-01', $searchQuery['date']['year'], $searchQuery['date']['month']);
+        } else {
+            $searchQuery['dateQuery'] = date('Y-m-01');
         }
 
         $isSearch = !empty($this->request->getQuery('is_search'));
-        $monthlyTimeCards = $this->MonthlyTimeCards->find('search', ['search' => $searchQuery])
-            ->contain(['Employees','Employees.Companies', 'Employees.Stores'])
+
+        $employees = $this->MonthlyTimeCards->Employees->find('search', ['search' => $searchQuery])
+            ->contain([
+                'MonthlyTimeCards' => function($query) use ($searchQuery) {
+                    $query->where(['MonthlyTimeCards.date' => $searchQuery['dateQuery']]);
+
+                    if (!empty($searchQuery['invalid'])) {
+                        // 勤務データ不備あり (出勤データしかない)
+                        // TODO
+                    }
+                    if (!empty($searchQuery['printed'])) {
+                        // 未印刷
+                        $query->where(['MonthlyTimeCards.printed' => 0]);
+                    }
+                    if (!empty($searchQuery['approved'])) {
+                        // 未承認
+                        $query->where(['MonthlyTimeCards.approved' => 0]);
+                    }
+                    if (!empty($searchQuery['csv_exported'])) {
+                        // CSV未出力
+                        $query->where(['MonthlyTimeCards.csv_exported' => 0]);
+                    }
+                    if (!empty($searchQuery['unmatch'])) {
+                        // 予定と実績が異なる
+                        // TODO
+                    }
+
+                    return $query;
+                },
+                'Companies',
+                'Stores',
+            ])
             ->order(['Stores.name_kana' => 'ASC'])
-            ->order(['Employees.code' => 'ASC'])
-            ->toArray();
+            ->order(['Employees.code' => 'ASC']);
+            // debug($employees->toArray());die;
+
+        // Get approved MonthlyTimeCard ids
+        $monthlyTimeCardIds = [];
+        if (!empty($employees)) {
+            foreach ($employees as $employee) {
+                if (!empty($employee->id)) {
+                    $monthlyTimeCardIds[] = $employee->id;
+                }
+            } // debug($monthlyTimeCardIds);die;
+        }
 
         $this->Session = $this->request->session();
-        $this->Session->write('MonthlyTimeCard.idArray', array_column($monthlyTimeCards, 'id'));
+        $this->Session->write('MonthlyTimeCard.idArray', $monthlyTimeCardIds);
 
-        $this->set(compact('monthlyTimeCards', 'isSearch'));
+        $this->set(compact('monthlyTimeCards', 'employees', 'isSearch'));
         $this->set('_serialize', ['monthlyTimeCards']);
     }
 
@@ -117,6 +159,17 @@ class MonthlyTimeCardsController extends AppController
     {
         $this->loadModel('TimeCards');
 
+        // Set date
+        if(!isset($_GET['t']) || !preg_match('/\A\d{4}-\d{2}\z/', $_GET['t'])){
+            if(intval(date('d',time())) >= 16){
+                $date = strtotime('+1 month',time());
+            } else {
+                $date = time();
+            }
+        }else{
+            $date = strtotime($_GET['t']);
+        }
+
         $index = intval($index);
         $this->Session = $this->request->session();
         $idArray = $this->Session->read('MonthlyTimeCard.idArray');
@@ -130,26 +183,23 @@ class MonthlyTimeCardsController extends AppController
             return $this->redirect(['action' => 'index']);
         }
         $id = $idArray[$index-1];
-        $monthlyTimeCard = $this->MonthlyTimeCards->get($id, [
-            'contain' => ['Employees','Employees.Companies', 'Employees.Stores']
-        ]);
-
-        // Set date
-        if(!isset($_GET['t']) || !preg_match('/\A\d{4}-\d{2}\z/', $_GET['t'])){
-            if(intval(date('d',time())) >= 16){
-                $date = strtotime('+1 month',time());
-            } else {
-                $date = time();
-            }
-        }else{
-            $date = strtotime($_GET['t']);
-        }
 
         // Get current MonthlyTimeCard entity
-        $currentMonthlyTimeCard = $this->MonthlyTimeCards->find()
+        $monthlyTimeCard = $this->MonthlyTimeCards->find()
+            ->contain(['Employees','Employees.Companies', 'Employees.Stores'])
             ->where(['MonthlyTimeCards.date' => date('Y-m-01', $date)])
-            ->where(['MonthlyTimeCards.employee_id' => $monthlyTimeCard->employee_id])
-            ->first();
+            ->where(['MonthlyTimeCards.employee_id' => $id])
+            ->first(); // debug($monthlyTimeCard);
+
+        if (!isset($monthlyTimeCard->employee)) {
+            $monthlyTimeCard = [
+                'employee' => $this->MonthlyTimeCards->Employees->get($id, [
+                    'contain' => ['Companies', 'Stores']
+                ])
+            ];
+        } else {
+            $monthlyTimeCard = (array)$monthlyTimeCard;
+        }
 
         if ($this->request->is('post')) {
             // debug($this->request->data()); // die;
@@ -157,20 +207,20 @@ class MonthlyTimeCardsController extends AppController
             // Save summary
             if (!empty($this->request->getData('MonthlyTimeCards'))) {
                 // debug($this->request->getData('MonthlyTimeCards'));
-                if (isset($currentMonthlyTimeCard->id)) {
+                if (isset($monthlyTimeCard->id)) {
                     // UPDATE
-                    $currentMonthlyTimeCard = $this->MonthlyTimeCards->patchEntity($currentMonthlyTimeCard, $this->request->getData('MonthlyTimeCards'));
-                    // debug($currentMonthlyTimeCard);die;
-                    $this->MonthlyTimeCards->save($currentMonthlyTimeCard);
+                    $monthlyTimeCard = $this->MonthlyTimeCards->patchEntity($monthlyTimeCard, $this->request->getData('MonthlyTimeCards'));
+                    // debug($monthlyTimeCard);die;
+                    $this->MonthlyTimeCards->save($monthlyTimeCard);
                 } else {
                     // NEW
-                    $currentMonthlyTimeCard = $this->MonthlyTimeCards->newEntity();
-                    $currentMonthlyTimeCard = $this->MonthlyTimeCards->patchEntity($currentMonthlyTimeCard, $this->request->getData('MonthlyTimeCards'));
-                    $currentMonthlyTimeCard = $this->MonthlyTimeCards->patchEntity($currentMonthlyTimeCard, [
-                        'employee_id' => $monthlyTimeCard->employee_id,
+                    $monthlyTimeCard = $this->MonthlyTimeCards->newEntity();
+                    $monthlyTimeCard = $this->MonthlyTimeCards->patchEntity($monthlyTimeCard, $this->request->getData('MonthlyTimeCards'));
+                    $monthlyTimeCard = $this->MonthlyTimeCards->patchEntity($monthlyTimeCard, [
+                        'employee_id' => $id,
                         'date' => date('Y-m-01', $date),
                     ]);
-                    $this->MonthlyTimeCards->save($currentMonthlyTimeCard);
+                    $this->MonthlyTimeCards->save($monthlyTimeCard);
                 }
             }
 
@@ -250,14 +300,14 @@ class MonthlyTimeCardsController extends AppController
                 $this->Flash->success('この勤務表の承認を取り消しました');
             }
         }
-        $approveButton = $monthlyTimeCard['approved'] ? '非承認' : '承認';
+        $approveButton = empty($monthlyTimeCard['approved']) ? '非承認' : '承認';
 
         // get timeCards
         $timeCardsOld = $this->TimeCards->find()
             ->where([
-                'employee_id' => $monthlyTimeCard['employee_id'],
-                'date >=' => date('Y-m',strtotime('-1 month',$date)).'-16',
-                'date <=' => date('Y-m',$date).'-15'
+                'employee_id' => $monthlyTimeCard['employee']->id,
+                'date >=' => date('Y-m', strtotime('-1 month',$date)).'-16',
+                'date <=' => date('Y-m', $date).'-15'
             ])
             ->toArray();
         $timeCards = array();
@@ -276,7 +326,7 @@ class MonthlyTimeCardsController extends AppController
                         'current_year'=>date('Y',$date),
                         'current_month'=>date('m',$date),
                         'approveButton' => $approveButton,
-                        'employee' => $monthlyTimeCard->employee,
+                        'employee' => $monthlyTimeCard['employee'],
         );
 
         $this->set(compact('monthlyTimeCard','timeCards','data','currentMonthlyTimeCard'));
