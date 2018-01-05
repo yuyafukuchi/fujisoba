@@ -161,29 +161,19 @@ class MonthlyTimeCardsTable extends Table
             ->allowEmpty('latest_emboss_day');
 
         $validator
-            ->boolean('finished')
-            ->requirePresence('finished', 'create')
-            ->notEmpty('finished');
+            ->boolean('finished');
 
         $validator
-            ->boolean('printed')
-            ->requirePresence('printed', 'create')
-            ->notEmpty('printed');
+            ->boolean('printed');
 
         $validator
-            ->boolean('approved')
-            ->requirePresence('approved', 'create')
-            ->notEmpty('approved');
+            ->boolean('approved');
 
         $validator
-            ->boolean('csv_exported')
-            ->requirePresence('csv_exported', 'create')
-            ->notEmpty('csv_exported');
+            ->boolean('csv_exported');
 
         $validator
-            ->boolean('deleted')
-            ->requirePresence('deleted', 'create')
-            ->notEmpty('deleted');
+            ->boolean('deleted');
 
         $validator
             ->integer('created_by')

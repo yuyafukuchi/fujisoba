@@ -67,7 +67,6 @@ class TimeCardsTable extends Table
 
         $validator
             ->date('date')
-            ->requirePresence('date', 'create')
             ->notEmpty('date');
 
         $validator

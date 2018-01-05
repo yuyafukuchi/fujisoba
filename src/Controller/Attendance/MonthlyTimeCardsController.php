@@ -220,6 +220,7 @@ class MonthlyTimeCardsController extends AppController
                         'employee_id' => $id,
                         'date' => date('Y-m-01', $date),
                     ]);
+                    // debug($monthlyTimeCard);die;
                     $this->MonthlyTimeCards->save($monthlyTimeCard);
                 }
             }
@@ -259,7 +260,7 @@ class MonthlyTimeCardsController extends AppController
                                 $tempDate = strtotime($tempTimeCard[$key]);
                             }
                         }
-                    } // debug($tempTimeCard);
+                    } // debug($tempTimeCard); die;
 
                     // Save data
                     if (!$isNull) {
@@ -276,31 +277,43 @@ class MonthlyTimeCardsController extends AppController
                                 $dirtyFields = $newTimeCard->getDirty();
                             }
                             $newTimeCard = $this->TimeCards->patchEntity($newTimeCard, ['dirty_fields' => serialize($dirtyFields)]);
-                            // debug($newTimeCard);
+                            // debug($newTimeCard); die;
                             $this->TimeCards->save($newTimeCard);
                         } else {
                             // NEW
                             $newTimeCard = $this->TimeCards->newEntity();
                             $newTimeCard = $this->TimeCards->patchEntity($newTimeCard, $tempTimeCard);
-                            // debug($newTimeCard);die;
+                            // Set dirty fields
+                            $dirtyFields = [];
+                            foreach ($tempTimeCard as $key => $v) {
+                                if (in_array($key, ['employee_id', 'date', 'store_id', 'attendance_store_id'])) {
+                                    continue;
+                                }
+                                if (!empty($v)) {
+                                    $dirtyFields[] = $key;
+                                }
+                            }
+                            $newTimeCard = $this->TimeCards->patchEntity($newTimeCard, ['dirty_fields' => serialize($dirtyFields)]);
+                            // debug($newTimeCard); die;
                             $this->TimeCards->save($newTimeCard);
                         }
                     }
                 }
             }
 
-            if($this->request->data()['button'] === '承認'){
+            if ($this->request->data()['button'] === '承認'){
                 $monthlyTimeCard = $this->MonthlyTimeCards->patchEntity($monthlyTimeCard,array('id' => $monthlyTimeCard->id,'approved' => true));
                 $this->MonthlyTimeCards->save($monthlyTimeCard);
                 $this->Flash->success('この勤務表を承認しました');
-            }
-            else if($this->request->data()['button'] === '非承認'){
+            } elseif ($this->request->data()['button'] === '非承認'){
                 $monthlyTimeCard = $this->MonthlyTimeCards->patchEntity($monthlyTimeCard,array('id' => $monthlyTimeCard->id,'approved' => false));
                 $this->MonthlyTimeCards->save($monthlyTimeCard);
                 $this->Flash->success('この勤務表の承認を取り消しました');
             }
+
+            return $this->redirect(['action' => 'view', $index, 't' => date('Y-m', $date)]);
         }
-        $approveButton = empty($monthlyTimeCard->approved) ? '非承認' : '承認';
+        $approveButton = !empty($monthlyTimeCard->approved) ? '非承認' : '承認';
 
         // get timeCards
         $timeCardsOld = $this->TimeCards->find()

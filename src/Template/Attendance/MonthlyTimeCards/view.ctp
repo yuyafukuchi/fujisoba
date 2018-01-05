@@ -96,7 +96,7 @@ function convert_week($week)
         </div>
     </div>
     <div class="col-sm-4">
-        <div class="row" style="margin-bottom: 15px;">
+        <div class="row hidden" style="margin-bottom: 15px;">
             <div class="col-sm-4">
                 <?= $data['index'] > 1 ? $this->Html->link('前', ['action' => 'view', $data['index']-1, '?' => $this->request->query], ['class' => 'btn btn-default btn-block']) : $this->Html->link('前', ['action' => 'view', $data['index']-1, '?' => $this->request->query], ['class' => 'btn btn-default btn-block disabled']) ?>
             </div>
