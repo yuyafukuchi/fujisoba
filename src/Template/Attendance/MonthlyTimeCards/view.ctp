@@ -97,24 +97,24 @@ function convert_week($week)
     </div>
     <div class="col-sm-4">
         <div class="row" style="margin-bottom: 15px;">
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <?= $data['index'] > 1 ? $this->Html->link('前', ['action' => 'view', $data['index']-1, '?' => $this->request->query], ['class' => 'btn btn-default btn-block']) : $this->Html->link('前', ['action' => 'view', $data['index']-1, '?' => $this->request->query], ['class' => 'btn btn-default btn-block disabled']) ?>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <?= $data['index'] < $data['length'] ? $this->Html->link('次', ['action' => 'view', $data['index']+1, '?' => $this->request->query], ['class' => 'btn btn-default btn-block']) : $this->Html->link('次', ['action' => 'view', $data['index']+1, '?' => $this->request->query], ['class' => 'btn btn-default btn-block disabled']) ?>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <?= $this->Form->submit($data['approveButton'], ['name' => 'button', 'class' => 'btn btn-default btn-block']) ?>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <?= $this->Html->link('印刷', ['action' => 'viewPrint', $data['index'], '?' => $this->request->query], ['class' => 'btn btn-default btn-block', 'target' => '_blank']) ?>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <?= $this->Form->submit('登録', ['name' => 'button', 'class' => 'btn btn-default btn-block']) ?>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-3 hidden">
                 <a href="javascript:history.back()" class="btn btn-default btn-block">戻る</a>
             </div>
         </div>
@@ -236,7 +236,7 @@ function convert_week($week)
                         'label' => false,
                         'placeholder' => '__:__',
                         'class' => 'is-time',
-                        'style' => in_array('schedules_in_time', $dirty) ? 'color: #c00 !important;' : null,
+                        // 'style' => in_array('schedules_in_time', $dirty) ? 'color: #c00 !important;' : null,
                         'default' => !empty($timeCard['schedules_in_time']) ? $timeCard['schedules_in_time']->format('H:i') : '',
                         'data-full-date' => !empty($timeCard['schedules_in_time']) ? $timeCard['schedules_in_time']->format('Y-m-d H:i') : '',
                     ]) ?>
@@ -256,7 +256,7 @@ function convert_week($week)
                         'label' => false,
                         'placeholder' => '__:__',
                         'class' => 'is-time',
-                        'style' => in_array('schedules_out_time', $dirty) ? 'color: #c00 !important;' : null,
+                        // 'style' => in_array('schedules_out_time', $dirty) ? 'color: #c00 !important;' : null,
                         'default' => !empty($output) ? $output : '',
                         'data-full-date' => !empty($timeCard['schedules_out_time']) ? $timeCard['schedules_out_time']->format('Y-m-d H:i') : '',
                     ]) ?>
@@ -267,7 +267,7 @@ function convert_week($week)
                         'label' => false,
                         'placeholder' => '__:__',
                         'class' => 'is-time',
-                        'style' => in_array('schedules_in_time2', $dirty) ? 'color: #c00 !important;' : null,
+                        // 'style' => in_array('schedules_in_time2', $dirty) ? 'color: #c00 !important;' : null,
                         'default' => !empty($timeCard['schedules_in_time2']) ? $timeCard['schedules_in_time2']->format('H:i') : '',
                         'data-full-date' => !empty($timeCard['schedules_in_time2']) ? $timeCard['schedules_in_time2']->format('Y-m-d H:i') : '',
                     ]) ?>
@@ -287,7 +287,7 @@ function convert_week($week)
                         'label' => false,
                         'placeholder' => '__:__',
                         'class' => 'is-time',
-                        'style' => in_array('schedules_out_time2', $dirty) ? 'color: #c00 !important;' : null,
+                        // 'style' => in_array('schedules_out_time2', $dirty) ? 'color: #c00 !important;' : null,
                         'default' => !empty($output) ? $output : '',
                         'data-full-date' => !empty($timeCard['schedules_out_time2']) ? $timeCard['schedules_out_time2']->format('Y-m-d H:i') : '',
                     ]) ?>

@@ -58,7 +58,7 @@ $this->append('breadcrumbs', '<p>勤怠データ詳細</p>');
 
 <div class="row">
     <div class="col-xs-12" style="padding: 20px;">
-        <button type="button" onclick="location.href='/attendance/time-cards/login'" class="btn btn-default btn-md pull-right">戻る</button>
+        <button type="button" onclick="location.href='/attendance/time-cards/login'" class="btn btn-default btn-md pull-right hidden">戻る</button>
         <button type="button" onclick="location.href='<?=$url?>'" class="btn btn-default btn-md">当月</button>
         <button type="button" onclick="location.href='<?=$url.'?t='.date('Y-m',$day)?>'" class="btn btn-default btn-md">先月</button>
         <button type="button" onclick="location.href='<?php

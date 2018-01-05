@@ -154,7 +154,7 @@ $this->append('breadcrumbs', sprintf('<p>%s＞勤怠データ検索・一覧</p>
             <?= $this->Html->link('一括印刷', ['controller'=>'Employees', 'action'=>'bulkPrint'], ['class' => 'btn btn-default btn-md add-link hidden', 'style' => 'margin-right: 15px;']) ?>
             <?= $this->Html->link('CSV', ['controller'=>'MonthlyTimeCards', 'action'=>'csv', '?' => $this->request->query], ['class' => 'btn btn-default btn-md add-link', 'style' => 'margin-right: 15px;']) ?>
         <?php endif; ?>
-        <?= $this->Html->link('戻る', ['controller'=>'Users', 'action'=>'attendance', 'prefix' => false], ['class' => 'btn btn-default btn-md return-link']) ?>
+        <?= $this->Html->link('戻る', ['controller'=>'Users', 'action'=>'attendance', 'prefix' => false], ['class' => 'btn btn-default btn-md return-link hidden']) ?>
         </p>
 
         <?php if ($isSearch): ?>

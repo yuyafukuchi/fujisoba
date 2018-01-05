@@ -360,20 +360,6 @@ class MonthlyTimeCardsController extends AppController
         $monthlyTimeCard = $this->MonthlyTimeCards->get($id, [
             'contain' => ['Employees','Employees.Companies', 'Employees.Stores']
         ]);
-        if ($this->request->is('post')) {
-            if($this->request->data()['button'] === '承認'){
-                $monthlyTimeCard = $this->MonthlyTimeCards->patchEntity($monthlyTimeCard,array('id' => $monthlyTimeCard['id'],'approved' => true));
-                $this->MonthlyTimeCards->save($monthlyTimeCard);
-                $this->Flash->success('この勤務表を承認しました');
-            }
-            else if($this->request->data()['button'] === '非承認'){
-                $monthlyTimeCard = $this->MonthlyTimeCards->patchEntity($monthlyTimeCard,array('id' => $monthlyTimeCard['id'],'approved' => false));
-                $this->MonthlyTimeCards->save($monthlyTimeCard);
-                $this->Flash->success('この勤務表の承認を取り消しました');
-            }
-            debug($this->request->data());
-        }
-        $approveButton = $monthlyTimeCard['approved'] ? '非承認' : '承認';
 
         // get timeCards
         $this->TimeCards = TableRegistry::get('time_cards');

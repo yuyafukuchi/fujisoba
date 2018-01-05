@@ -197,7 +197,7 @@ $this->append('breadcrumbs', sprintf('<p>%s＞%s＞従業員登録</p>',
         <div class="col-sm-12">
             <div style="display: inline-block;"><?= $this->Form->submit('登録', ['class' => 'btn btn-default btn-lg']) ?></div>
             <?= $this->Html->link('新規', ['controller'=>'Employees', 'action'=>'add'], ['class' => 'btn btn-default btn-lg']) ?>
-            <?= $this->Html->link('戻る', ['controller'=>'Employees', 'action'=>'index'], ['class' => 'btn btn-default btn-lg']) ?>
+            <?= $this->Html->link('戻る', ['controller'=>'Employees', 'action'=>'index'], ['class' => 'btn btn-default btn-lg hidden']) ?>
         </div>
     </div>
 <?= $this->Form->end() ?>

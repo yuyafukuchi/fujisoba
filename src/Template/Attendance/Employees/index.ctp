@@ -132,7 +132,7 @@ $this->append('breadcrumbs', sprintf('<p>%s＞従業員マスタ検索</p>',
     <div class="col-xs-12">
         <p class="pull-right">
             <?= $this->Html->link('新規', ['controller'=>'Employees', 'action'=>'add'], ['class' => 'btn btn-default btn-md add-link', 'style' => 'margin-right: 15px;']) ?>
-            <?= $this->Html->link('戻る', ['controller'=>'Users', 'action'=>'attendance', 'prefix' => false], ['class' => 'btn btn-default btn-md return-link']) ?>
+            <?= $this->Html->link('戻る', ['controller'=>'Users', 'action'=>'attendance', 'prefix' => false], ['class' => 'btn btn-default btn-md return-link hidden']) ?>
         </p>
 
         <?php if ($isSearch): ?>
