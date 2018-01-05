@@ -115,7 +115,7 @@ function convert_week($week)
                 <?= $this->Form->submit('登録', ['name' => 'button', 'class' => 'btn btn-default btn-block']) ?>
             </div>
             <div class="col-sm-3">
-                <?=$this->Html->link('戻る', ['action' => 'index'], ['class' => 'btn btn-default btn-block'])?>
+                <a href="javascript:history.back()" class="btn btn-default btn-block">戻る</a>
             </div>
         </div>
     </div>
