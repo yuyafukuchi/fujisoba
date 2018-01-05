@@ -128,7 +128,7 @@ $this->append('breadcrumbs', sprintf('<p>%s＞勤怠データ検索・一覧</p>
                     <tr>
                         <td><?= h($i) ?></td>
                         <td><?= h($employee->code) ?></td>
-                        <td><?= $this->Html->link(h($employee->name_last.' '.$employee->name_first) . $retired, ['action' => 'view', $i], ['escape' => false]) ?></td>
+                        <td><?= $this->Html->link(h($employee->name_last.' '.$employee->name_first) . $retired, ['action' => 'view', $i, 't' => $date], ['escape' => false]) ?></td>
                         <td><?= $employee->company->name ?></td>
                         <td><?= $employee->store->name ?></td>
                         <td><?php

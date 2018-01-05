@@ -141,10 +141,12 @@ class MonthlyTimeCardsController extends AppController
             } // debug($monthlyTimeCardIds);die;
         }
 
+        $date = !empty($searchQuery['dateQuery']) ? date('Y-m', strtotime($searchQuery['dateQuery'])) : date('Y-m');
+
         $this->Session = $this->request->session();
         $this->Session->write('MonthlyTimeCard.idArray', $monthlyTimeCardIds);
 
-        $this->set(compact('monthlyTimeCards', 'employees', 'isSearch'));
+        $this->set(compact('monthlyTimeCards', 'employees', 'isSearch', 'date'));
         $this->set('_serialize', ['monthlyTimeCards']);
     }
 
@@ -189,16 +191,14 @@ class MonthlyTimeCardsController extends AppController
             ->contain(['Employees','Employees.Companies', 'Employees.Stores'])
             ->where(['MonthlyTimeCards.date' => date('Y-m-01', $date)])
             ->where(['MonthlyTimeCards.employee_id' => $id])
-            ->first(); // debug($monthlyTimeCard);
+            ->first(); // debug($monthlyTimeCard); die;
 
         if (!isset($monthlyTimeCard->employee)) {
             $monthlyTimeCard = [
                 'employee' => $this->MonthlyTimeCards->Employees->get($id, [
                     'contain' => ['Companies', 'Stores']
                 ])
-            ];
-        } else {
-            $monthlyTimeCard = (array)$monthlyTimeCard;
+            ]; // debug($monthlyTimeCard);die;
         }
 
         if ($this->request->is('post')) {
@@ -290,22 +290,22 @@ class MonthlyTimeCardsController extends AppController
             }
 
             if($this->request->data()['button'] === '承認'){
-                $monthlyTimeCard = $this->MonthlyTimeCards->patchEntity($monthlyTimeCard,array('id' => $monthlyTimeCard['id'],'approved' => true));
+                $monthlyTimeCard = $this->MonthlyTimeCards->patchEntity($monthlyTimeCard,array('id' => $monthlyTimeCard->id,'approved' => true));
                 $this->MonthlyTimeCards->save($monthlyTimeCard);
                 $this->Flash->success('この勤務表を承認しました');
             }
             else if($this->request->data()['button'] === '非承認'){
-                $monthlyTimeCard = $this->MonthlyTimeCards->patchEntity($monthlyTimeCard,array('id' => $monthlyTimeCard['id'],'approved' => false));
+                $monthlyTimeCard = $this->MonthlyTimeCards->patchEntity($monthlyTimeCard,array('id' => $monthlyTimeCard->id,'approved' => false));
                 $this->MonthlyTimeCards->save($monthlyTimeCard);
                 $this->Flash->success('この勤務表の承認を取り消しました');
             }
         }
-        $approveButton = empty($monthlyTimeCard['approved']) ? '非承認' : '承認';
+        $approveButton = empty($monthlyTimeCard->approved) ? '非承認' : '承認';
 
         // get timeCards
         $timeCardsOld = $this->TimeCards->find()
             ->where([
-                'employee_id' => $monthlyTimeCard['employee']->id,
+                'employee_id' => $monthlyTimeCard->employee->id,
                 'date >=' => date('Y-m', strtotime('-1 month',$date)).'-16',
                 'date <=' => date('Y-m', $date).'-15'
             ])
@@ -326,7 +326,7 @@ class MonthlyTimeCardsController extends AppController
                         'current_year'=>date('Y',$date),
                         'current_month'=>date('m',$date),
                         'approveButton' => $approveButton,
-                        'employee' => $monthlyTimeCard['employee'],
+                        'employee' => $monthlyTimeCard->employee,
         );
 
         $this->set(compact('monthlyTimeCard','timeCards','data','currentMonthlyTimeCard'));
