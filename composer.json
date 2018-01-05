@@ -12,7 +12,8 @@
         "cakephp/plugin-installer": "*",
         "muffin/footprint": "^1.1",
         "friendsofcake/search": "^4.0",
-        "elboletaire/twbs-cake-plugin": "^3.4"
+        "elboletaire/twbs-cake-plugin": "^3.4",
+        "satthi/csv-combine": "*"
     },
     "require-dev": {
         "psy/psysh": "@stable",

@@ -4,6 +4,7 @@ namespace App\Controller\Attendance;
 use App\Controller\AppController;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
+use /* CsvCombine */ CsvCombine\Export\CsvExport;
 
 /**
  * MonthlyTimeCards Controller
@@ -28,7 +29,6 @@ class MonthlyTimeCardsController extends AppController
         $this->loadComponent('Search.Prg');
         $this->Auth->sessionKey = 'Auth.Users';
     }
-
 
     public function beforeFilter(Event $event)
     {
@@ -495,5 +495,76 @@ class MonthlyTimeCardsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function csv()
+    {
+        // Get date
+        if (empty($this->request->getQuery('date.year')) || empty($this->request->getQuery('date.month'))) {
+            $this->Flash->error('予期しないエラーが発生しました。');
+
+            return $this->redirect(['action' => 'index']);
+        } else {
+            $date = sprintf('%s-%s-01', $this->request->getQuery('date.year'), $this->request->getQuery('date.month'));
+            // debug($date);
+        }
+
+        // Get Employee ids from session
+        $this->Session = $this->request->session();
+        $employeeIds = $this->Session->read('MonthlyTimeCard.idArray');
+        if (empty($employeeIds)) {
+            $this->Flash->error('出力可能なデータがありません。');
+
+            return $this->redirect(['action' => 'index']);
+        } // debug($employeeIds); die;
+
+        // Get MonthlyTimeCards
+        $monthlyTimeCards = $this->MonthlyTimeCards->find()
+            ->contain(['Employees'])
+            ->where(['MonthlyTimeCards.date' => $date])
+            ->where(['MonthlyTimeCards.employee_id IN' => $employeeIds])
+            // ->where(['MonthlyTimeCards.printed' => false])
+            ->where(['MonthlyTimeCards.approved' => true]); // debug($monthlyTimeCards->toArray()); die;
+        if (empty($monthlyTimeCards->count())) {
+            $this->Flash->error('出力可能なデータがありません。');
+
+            return $this->redirect(['action' => 'index']);
+        }
+
+        // Set data for csv
+        $csv = [
+            ['', '', '', '＜勤怠項目＞', '', '', '', '＜有給休暇項目＞'],
+            ['識別コード※', '部門コード', '従業員コード※', '出勤日数', '５時～２２時', '２２時～５時', '当月有休減'],
+            ['KY01', 'KY02', 'KY03', 'KY11_0', 'KY11_2', 'KY11_3', 'KY31_1'],
+        ];
+        $ids = [];
+        foreach ($monthlyTimeCards as $monthlyTimeCard) {
+            $csv[] = [
+                (int)$this->request->getQuery('date.month') - 1,
+                $monthlyTimeCard->employee->pay_department_code,
+                $monthlyTimeCard->employee->code,
+                $monthlyTimeCard->total_working_days,
+                $monthlyTimeCard->normal_working_hours,
+                $monthlyTimeCard->midnight_working_hours,
+                $monthlyTimeCard->paid_vacation_hours,
+            ];
+            $ids[] = $monthlyTimeCard->id;
+        } // debug($ids); die;
+
+        // Load CsvCombine component
+        $csvExport = new CsvExport();
+        $filePath = TMP . uniqid() . '.csv';
+        if ($csvExport->make($csv, $filePath)) {
+            // Update csv_exported flag
+            $this->MonthlyTimeCards->updateAll(
+                ['csv_exported' => true], // フィールド
+                ['id IN' => $ids] // 条件
+            );
+
+            // Make output
+            $this->response->file($filePath , ['download'=> true, 'name'=> 'output.csv']);
+
+            return $this->response;
+        }
     }
 }

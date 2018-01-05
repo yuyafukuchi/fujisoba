@@ -150,15 +150,17 @@ $this->append('breadcrumbs', sprintf('<p>%s＞勤怠データ検索・一覧</p>
 <div class="row" style="margin: 0;">
     <div class="col-xs-12">
         <p class="pull-right">
-        <?= $this->Html->link('一括印刷', ['controller'=>'Employees', 'action'=>'bulkPrint'], ['class' => 'btn btn-default btn-md add-link hidden', 'style' => 'margin-right: 15px;']) ?>
-        <?= $this->Html->link('CSV', ['controller'=>'Employees', 'action'=>'csv'], ['class' => 'btn btn-default btn-md add-link hidden', 'style' => 'margin-right: 15px;']) ?>
+        <?php if ($isSearch): ?>
+            <?= $this->Html->link('一括印刷', ['controller'=>'Employees', 'action'=>'bulkPrint'], ['class' => 'btn btn-default btn-md add-link hidden', 'style' => 'margin-right: 15px;']) ?>
+            <?= $this->Html->link('CSV', ['controller'=>'MonthlyTimeCards', 'action'=>'csv', '?' => $this->request->query], ['class' => 'btn btn-default btn-md add-link', 'style' => 'margin-right: 15px;']) ?>
+        <?php endif; ?>
         <?= $this->Html->link('戻る', ['controller'=>'Users', 'action'=>'attendance', 'prefix' => false], ['class' => 'btn btn-default btn-md return-link']) ?>
         </p>
 
         <?php if ($isSearch): ?>
             <p>
                 <span class="inline-block">並び順は店舗カナ名、従業員コード順</span>
-                <span class="inline-block text-primary">検索結果は<?= count($employees) ?>件です</span>
+                <span class="inline-block text-primary">検索結果は<?= $employees->count() ?>件です</span>
                 <span class="inline-block hidden"><?= $this->Html->link('人件費計算', ['controller'=>'Employees', 'action'=>'add'], ['class' => 'btn btn-default btn-md disabled']) ?></span>
                 <span class="inline-block text-primary hidden">予定: <?= '1,500,000' ?>円</span>
                 <span class="inline-block text-primary hidden">実績: <?= '1,580,000' ?>円</span>
