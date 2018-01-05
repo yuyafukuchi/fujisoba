@@ -52,7 +52,7 @@ $stopper = 0;
 ?>
 
 <?php
-$this->append('heading', '<p>' . $storeName . ' / '.$user->name_first .' '. $user->name_last .' 様' . '</p>');
+$this->append('heading', '<p>' . $storeName . ' / '.$user->name_last .' '. $user->name_first .' 様' . '</p>');
 $this->append('breadcrumbs', '<p>勤怠データ詳細</p>');
 ?>
 

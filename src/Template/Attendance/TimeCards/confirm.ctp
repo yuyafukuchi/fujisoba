@@ -1,5 +1,5 @@
 <?php
-$this->append('heading', '<p>' . $storeName . ' / '.$user->name_first .' '. $user->name_last .' 様' . '</p>');
+$this->append('heading', '<p>' . $storeName . ' / '.$user->name_last .' '. $user->name_first .' 様' . '</p>');
 $breadcrumb = !empty($timeCard['support']) ? $timeCard['support'] : '勤怠入力';
 $this->append('breadcrumbs', '<p>勤怠入力確認・' . $data['type'] . '時</p>');
 ?>
