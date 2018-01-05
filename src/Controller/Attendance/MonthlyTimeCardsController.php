@@ -305,7 +305,7 @@ class MonthlyTimeCardsController extends AppController
         // get timeCards
         $timeCardsOld = $this->TimeCards->find()
             ->where([
-                'employee_id' => $monthlyTimeCard->employee->id,
+                'employee_id' => $monthlyTimeCard['employee']->id,
                 'date >=' => date('Y-m', strtotime('-1 month',$date)).'-16',
                 'date <=' => date('Y-m', $date).'-15'
             ])
@@ -326,7 +326,7 @@ class MonthlyTimeCardsController extends AppController
                         'current_year'=>date('Y',$date),
                         'current_month'=>date('m',$date),
                         'approveButton' => $approveButton,
-                        'employee' => $monthlyTimeCard->employee,
+                        'employee' => $monthlyTimeCard['employee'],
         );
 
         $this->set(compact('monthlyTimeCard','timeCards','data','currentMonthlyTimeCard'));
