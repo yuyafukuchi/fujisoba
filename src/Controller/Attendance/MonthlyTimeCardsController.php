@@ -532,7 +532,7 @@ class MonthlyTimeCardsController extends AppController
 
         // Set data for csv
         $csv = [
-            ['', '', '', '＜勤怠項目＞', '', '', '', '＜有給休暇項目＞'],
+            ['', '', '', '＜勤怠項目＞', '', '', '＜有給休暇項目＞'],
             ['識別コード※', '部門コード', '従業員コード※', '出勤日数', '５時～２２時', '２２時～５時', '当月有休減'],
             ['KY01', 'KY02', 'KY03', 'KY11_0', 'KY11_2', 'KY11_3', 'KY31_1'],
         ];
@@ -542,13 +542,13 @@ class MonthlyTimeCardsController extends AppController
                 (int)$this->request->getQuery('date.month') - 1,
                 $monthlyTimeCard->employee->pay_department_code,
                 $monthlyTimeCard->employee->code,
-                $monthlyTimeCard->total_working_days,
-                $monthlyTimeCard->normal_working_hours,
-                $monthlyTimeCard->midnight_working_hours,
-                $monthlyTimeCard->paid_vacation_hours,
+                sprintf('%.2f', $monthlyTimeCard->total_working_days),
+                sprintf('%.2f', $monthlyTimeCard->normal_working_hours),
+                sprintf('%.2f', $monthlyTimeCard->midnight_working_hours),
+                sprintf('%.3f', $monthlyTimeCard->paid_vacation_hours),
             ];
             $ids[] = $monthlyTimeCard->id;
-        } // debug($ids); die;
+        } // debug($csv); die;
 
         // Load CsvCombine component
         $csvExport = new CsvExport();

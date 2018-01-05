@@ -367,6 +367,16 @@ jQuery(function($){
             }
         } // console.log($date + ': 残業: ' + $over);
 
+        // 実際の出勤より予定出勤を優先
+        if ($raw_schedules_in_time != '' && $raw_schedules_out_time != '') {
+            $raw_in_time = $raw_schedules_in_time;
+            $raw_out_time = $raw_schedules_out_time;
+        }
+        if ($raw_schedules_in_time2 != '' && $raw_schedules_out_time2 != '') {
+            $raw_in_time2 = $raw_schedules_in_time2;
+            $raw_out_time2 = $raw_schedules_out_time2;
+        }
+
         /**
          * in_time & out_time
          *

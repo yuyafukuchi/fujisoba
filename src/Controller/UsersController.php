@@ -219,6 +219,9 @@ class UsersController extends AppController
     }
 
     public function sales() {
+        // TODO
+        throw new \Cake\Network\Exception\InternalErrorException();
+
        $storeId = $this->Auth->user('store_id');
        if($this->Auth->user('type') == 'H'){
             $this->Stores = TableRegistry::get('stores');

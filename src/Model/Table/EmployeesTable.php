@@ -162,6 +162,22 @@ class EmployeesTable extends Table
                             $this->MonthlyTimeCards->target()->aliasField('csv_exported') . ' IS' => NULL,
                         ]]);
                 }
+            ])
+            ->add('invalid', 'Search.Callback', [
+                'callback' => function ($query, $args, $type) {
+                    if (empty($args['dateQuery']) || empty($args['invalid'])) {
+                        return $query;
+                    }
+                    return $query
+                        ->leftJoinWith('MonthlyTimeCards', function ($query) use ($args) {
+                            return $query
+                                ->where([$this->MonthlyTimeCards->target()->aliasField('date') => $args['dateQuery']]);
+                        })
+                        ->where(['OR' => [
+                            $this->MonthlyTimeCards->target()->aliasField('csv_exported') => !(bool)$args['csv_exported'],
+                            $this->MonthlyTimeCards->target()->aliasField('csv_exported') . ' IS' => NULL,
+                        ]]);
+                }
             ]);
     }
 

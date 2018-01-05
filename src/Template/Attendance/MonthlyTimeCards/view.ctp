@@ -232,64 +232,64 @@ function convert_week($week)
                     <?php unset($output); ?>
                 </td>
                 <td class="editable schedules_in_time">
-                    <?= $this->Form->input(sprintf('TimeCard[%s][schedules_in_time]', $currentDate), [
+                    <?= $this->Form->input(sprintf('TimeCard[%s][scheduled_in_time]', $currentDate), [
                         'label' => false,
                         'placeholder' => '__:__',
                         'class' => 'is-time',
-                        // 'style' => in_array('schedules_in_time', $dirty) ? 'color: #c00 !important;' : null,
-                        'default' => !empty($timeCard['schedules_in_time']) ? $timeCard['schedules_in_time']->format('H:i') : '',
-                        'data-full-date' => !empty($timeCard['schedules_in_time']) ? $timeCard['schedules_in_time']->format('Y-m-d H:i') : '',
+                        // 'style' => in_array('scheduled_in_time', $dirty) ? 'color: #c00 !important;' : null,
+                        'default' => !empty($timeCard['scheduled_in_time']) ? $timeCard['scheduled_in_time']->format('H:i') : '',
+                        'data-full-date' => !empty($timeCard['scheduled_in_time']) ? $timeCard['scheduled_in_time']->format('Y-m-d H:i') : '',
                     ]) ?>
                 </td>
                 <td class="editable schedules_out_time">
                     <?php
                     // 24時を超える時刻の表示を修正
-                    if (!empty($timeCard['schedules_out_time'])) {
-                        if (date('d', $day) != $timeCard['schedules_out_time']->format('d')) {
-                            $output = ((int)$timeCard['schedules_out_time']->format('H') + 24) . ':' . $timeCard['schedules_out_time']->format('i');
+                    if (!empty($timeCard['scheduled_out_time'])) {
+                        if (date('d', $day) != $timeCard['scheduled_out_time']->format('d')) {
+                            $output = ((int)$timeCard['scheduled_out_time']->format('H') + 24) . ':' . $timeCard['scheduled_out_time']->format('i');
                         } else {
-                            $output = $timeCard['schedules_out_time']->format('H:i');
+                            $output = $timeCard['scheduled_out_time']->format('H:i');
                         }
                     }
                     ?>
-                    <?= $this->Form->input(sprintf('TimeCard[%s][schedules_out_time]', $currentDate), [
+                    <?= $this->Form->input(sprintf('TimeCard[%s][scheduled_out_time]', $currentDate), [
                         'label' => false,
                         'placeholder' => '__:__',
                         'class' => 'is-time',
-                        // 'style' => in_array('schedules_out_time', $dirty) ? 'color: #c00 !important;' : null,
+                        // 'style' => in_array('scheduled_out_time', $dirty) ? 'color: #c00 !important;' : null,
                         'default' => !empty($output) ? $output : '',
-                        'data-full-date' => !empty($timeCard['schedules_out_time']) ? $timeCard['schedules_out_time']->format('Y-m-d H:i') : '',
+                        'data-full-date' => !empty($timeCard['scheduled_out_time']) ? $timeCard['scheduled_out_time']->format('Y-m-d H:i') : '',
                     ]) ?>
                     <?php unset($output); ?>
                 </td>
                 <td class="editable schedules_in_time2">
-                    <?= $this->Form->input(sprintf('TimeCard[%s][schedules_in_time2]', $currentDate), [
+                    <?= $this->Form->input(sprintf('TimeCard[%s][scheduled_in_time2]', $currentDate), [
                         'label' => false,
                         'placeholder' => '__:__',
                         'class' => 'is-time',
-                        // 'style' => in_array('schedules_in_time2', $dirty) ? 'color: #c00 !important;' : null,
-                        'default' => !empty($timeCard['schedules_in_time2']) ? $timeCard['schedules_in_time2']->format('H:i') : '',
-                        'data-full-date' => !empty($timeCard['schedules_in_time2']) ? $timeCard['schedules_in_time2']->format('Y-m-d H:i') : '',
+                        // 'style' => in_array('scheduled_in_time2', $dirty) ? 'color: #c00 !important;' : null,
+                        'default' => !empty($timeCard['scheduled_in_time2']) ? $timeCard['scheduled_in_time2']->format('H:i') : '',
+                        'data-full-date' => !empty($timeCard['scheduled_in_time2']) ? $timeCard['scheduled_in_time2']->format('Y-m-d H:i') : '',
                     ]) ?>
                 </td>
                 <td class="editable schedules_out_time2">
                     <?php
                     // 24時を超える時刻の表示を修正
-                    if (!empty($timeCard['schedules_out_time2'])) {
-                        if (date('d', $day) != $timeCard['schedules_out_time2']->format('d')) {
-                            $output = ((int)$timeCard['schedules_out_time2']->format('H') + 24) . ':' . $timeCard['schedules_out_time2']->format('i');
+                    if (!empty($timeCard['scheduled_out_time2'])) {
+                        if (date('d', $day) != $timeCard['scheduled_out_time2']->format('d')) {
+                            $output = ((int)$timeCard['scheduled_out_time2']->format('H') + 24) . ':' . $timeCard['scheduled_out_time2']->format('i');
                         } else {
-                            $output = $timeCard['schedules_out_time2']->format('H:i');
+                            $output = $timeCard['scheduled_out_time2']->format('H:i');
                         }
                     }
                     ?>
-                    <?= $this->Form->input(sprintf('TimeCard[%s][schedules_out_time2]', $currentDate), [
+                    <?= $this->Form->input(sprintf('TimeCard[%s][scheduled_out_time2]', $currentDate), [
                         'label' => false,
                         'placeholder' => '__:__',
                         'class' => 'is-time',
-                        // 'style' => in_array('schedules_out_time2', $dirty) ? 'color: #c00 !important;' : null,
+                        // 'style' => in_array('scheduled_out_time2', $dirty) ? 'color: #c00 !important;' : null,
                         'default' => !empty($output) ? $output : '',
-                        'data-full-date' => !empty($timeCard['schedules_out_time2']) ? $timeCard['schedules_out_time2']->format('Y-m-d H:i') : '',
+                        'data-full-date' => !empty($timeCard['scheduled_out_time2']) ? $timeCard['scheduled_out_time2']->format('Y-m-d H:i') : '',
                     ]) ?>
                     <?php unset($output); ?>
                 </td>
