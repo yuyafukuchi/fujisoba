@@ -206,7 +206,7 @@ class MonthlyTimeCardsController extends AppController
 
             // Save summary
             if (!empty($this->request->getData('MonthlyTimeCards'))) {
-                // debug($this->request->getData('MonthlyTimeCards'));
+                // debug($this->request->getData('MonthlyTimeCards')); die;
                 if (isset($monthlyTimeCard->id)) {
                     // UPDATE
                     $monthlyTimeCard = $this->MonthlyTimeCards->patchEntity($monthlyTimeCard, $this->request->getData('MonthlyTimeCards'));
@@ -357,6 +357,17 @@ class MonthlyTimeCardsController extends AppController
     {
         $this->viewBuilder()->setLayout('print');
 
+        // Set date
+        if(!isset($_GET['t']) || !preg_match('/\A\d{4}-\d{2}\z/', $_GET['t'])){
+            if(intval(date('d',time())) >= 16){
+                $date = strtotime('+1 month',time());
+            } else {
+                $date = time();
+            }
+        }else{
+            $date = strtotime($_GET['t']);
+        }
+
         $index = intval($index);
         $this->Session = $this->request->session();
         $idArray = $this->Session->read('MonthlyTimeCard.idArray');
@@ -369,10 +380,14 @@ class MonthlyTimeCardsController extends AppController
             $this->Session->delete('MonthlyTimeCard.idArray');
             return $this->redirect(['action' => 'index']);
         }
-        $id = $idArray[$index-1];
-        $monthlyTimeCard = $this->MonthlyTimeCards->get($id, [
-            'contain' => ['Employees','Employees.Companies', 'Employees.Stores']
-        ]);
+        $id = $idArray[$index-1]; // debug($idArray); die;
+
+        // Get current MonthlyTimeCard entity
+        $monthlyTimeCard = $this->MonthlyTimeCards->find()
+            ->contain(['Employees','Employees.Companies', 'Employees.Stores'])
+            ->where(['MonthlyTimeCards.date' => date('Y-m-01', $date)])
+            ->where(['MonthlyTimeCards.employee_id' => $id])
+            ->first(); // debug($monthlyTimeCard); die;
 
         // get timeCards
         $this->TimeCards = TableRegistry::get('time_cards');
@@ -410,7 +425,6 @@ class MonthlyTimeCardsController extends AppController
             'length' => $length,
             'current_year'=>date('Y',$date),
             'current_month'=>date('m',$date),
-            'approveButton' => $approveButton,
             'employee' => $monthlyTimeCard->employee,
         ];
 
@@ -543,9 +557,9 @@ class MonthlyTimeCardsController extends AppController
                 $monthlyTimeCard->employee->pay_department_code,
                 $monthlyTimeCard->employee->code,
                 sprintf('%.2f', $monthlyTimeCard->total_working_days),
-                sprintf('%.2f', $monthlyTimeCard->normal_working_hours),
-                sprintf('%.2f', $monthlyTimeCard->midnight_working_hours),
-                sprintf('%.3f', $monthlyTimeCard->paid_vacation_hours),
+                sprintf('%.2f', (int)$monthlyTimeCard->normal_working_hours + (int)$monthlyTimeCard->paid_vacation_hours_normal),
+                sprintf('%.2f', (int)$monthlyTimeCard->midnight_working_hours + (int)$monthlyTimeCard->paid_vacation_hours_midnight),
+                sprintf('%.3f', $monthlyTimeCard->paid_vacation_days),
             ];
             $ids[] = $monthlyTimeCard->id;
         } // debug($csv); die;

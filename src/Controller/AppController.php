@@ -71,6 +71,24 @@ class AppController extends Controller
      */
     public function beforeFilter(Event $event)
     {
+        $this->loadModel('Users');
+        $type = $this->Auth->user('type');
+        $name = '';
+
+        if ($type === 'H') {
+            $name = '本社管理者';
+            $searchQuery['company_id'] = $this->Auth->user('company_id');
+            $companies = $this->Users->Companies->find('list', ['limit' => 200]);
+            $stores = $this->Users->Stores->find('list', ['limit' => 200]);
+        } elseif ($type === 'M') {
+            $searchQuery['company_id'] = $this->Auth->user('company_id');
+            $searchQuery['store_id'] = $this->Auth->user('store_id');
+            $name = $this->Users->Stores->get($this->Auth->user('store_id'))['name'].'/店舗管理者';
+            $companies = $this->Users->Companies->find('list', ['limit' => 200])->where(['id' => $this->Auth->user('company_id')]);
+            $stores = $this->Users->Stores->find('list', ['limit' => 200])->where(['id' => $this->Auth->user('store_id')]);
+        }
+        $data = array('type' => $type, 'name' => $name);
+        $this->set(compact('companies', 'stores', 'data'));
     }
 
     /**
@@ -86,6 +104,10 @@ class AppController extends Controller
 
         if ($this->request->prefix === 'attendance') {
             $this->set('mode', 'atendance');
+        }
+
+        if ($this->request->prefix === 'sales') {
+            $this->viewBuilder()->setLayout('sales');
         }
 
         if (isset($this->Auth)) {

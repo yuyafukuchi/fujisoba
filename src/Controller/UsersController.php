@@ -219,16 +219,15 @@ class UsersController extends AppController
     }
 
     public function sales() {
-        // TODO
-        throw new \Cake\Network\Exception\InternalErrorException();
+        $this->viewBuilder()->setLayout('sales');
 
-       $storeId = $this->Auth->user('store_id');
-       if($this->Auth->user('type') == 'H'){
+        $storeId = $this->Auth->user('store_id');
+        if($this->Auth->user('type') == 'H'){
             $this->Stores = TableRegistry::get('stores');
             $stores = $this->Stores->find()->select(['id','name'])->where(['company_id' => $this->Auth->user('company_id')]);
             $storeId = null;
-       }
-       $this->set(compact('storeId', 'stores'));
+        }
+        $this->set(compact('storeId', 'stores'));
     }
 
     public function list() {

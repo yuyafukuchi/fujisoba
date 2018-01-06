@@ -4,6 +4,7 @@ namespace App\Model\Table;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
+use Cake\ORM\TableRegistry;
 use Cake\Validation\Validator;
 
 /**
@@ -168,15 +169,8 @@ class EmployeesTable extends Table
                     if (empty($args['dateQuery']) || empty($args['invalid'])) {
                         return $query;
                     }
-                    return $query
-                        ->leftJoinWith('MonthlyTimeCards', function ($query) use ($args) {
-                            return $query
-                                ->where([$this->MonthlyTimeCards->target()->aliasField('date') => $args['dateQuery']]);
-                        })
-                        ->where(['OR' => [
-                            $this->MonthlyTimeCards->target()->aliasField('csv_exported') => !(bool)$args['csv_exported'],
-                            $this->MonthlyTimeCards->target()->aliasField('csv_exported') . ' IS' => NULL,
-                        ]]);
+
+                    // TODO
                 }
             ]);
     }

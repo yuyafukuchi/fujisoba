@@ -75,78 +75,165 @@ function convert_week($week)
     </thead>
     <tbody>
         <?php
-        $dayNum = 0;
-        $workDayNum = 0;
 	    $current_month = $data['current_month'];
 	    $day = strtotime($data['current_year'].'-'.$current_month.'-'.'16 -1 month');
-        while(!(date('d',$day) == 16 && date('m',$day) == $current_month)){ ?>
-        <tr>
-            <th><?=date('d ',$day)?></th>
-            <th><?=convert_week(date('w',$day))?></th>
-            <?php if(array_key_exists(date('Y-m-d',$day), $timeCards)) {
-                $timeCard = $timeCards[date('Y-m-d',$day)];?>
-            <th><?=$timeCard['in_time'] != null ?$timeCard['in_time']->i18nFormat('H:mm') : ''?></th>
-            <th><?=$timeCard['out_time'] != null ?$timeCard['out_time']->i18nFormat('H:mm') : ''?></th>
-            <th><?=$timeCard['in_time2'] != null ?$timeCard['in_time2']->i18nFormat('H:mm') : ''?></th>
-            <th><?=$timeCard['out_time2'] != null ?$timeCard['out_time2']->i18nFormat('H:mm') : ''?></th>
-            <th><?=$timeCard['schedules_in_time'] != null ?$timeCard['scheduled_in_time']->i18nFormat('H:mm') : ''?></th>
-            <th><?=$timeCard['schedules_out_time'] != null ?$timeCard['scheduled_out_time']->i18nFormat('H:mm') : ''?></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th><?=$timeCard['note']?></th>
-            <th><?=$timeCard['storeName']?></th>
-            <?php $workDayNum ++;} else { ?>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <?php } ?>
-        </tr>
-        <?php $day = strtotime('+1 day',$day); $dayNum ++;} ?>
+        while (!(date('d',$day) == 16 && date('m',$day) == $current_month)): ?>
+            <?php
+            $currentDate = date('Y-m-d',$day);
+            $timeCard = !empty($timeCards[$currentDate]) ? $timeCards[$currentDate] : [];
+            $dirty = !empty($timeCard['dirty_fields']) ? unserialize($timeCard['dirty_fields']) : [];
+            ?>
+            <tr>
+                <td>
+                    <?= date('d ',$day) ?>
+                    <?php if (!empty($timeCard['id'])): ?>
+                        <?= $this->Form->hidden(sprintf('TimeCard[%s][id]', $currentDate), ['value' => $timeCard['id']]) ?>
+                    <?php endif; ?>
+                    <?= $this->Form->hidden(sprintf('TimeCard[%s][employee_id]', $currentDate), ['value' => $data['employee']->id]) ?>
+                    <?= $this->Form->hidden(sprintf('TimeCard[%s][date]', $currentDate), ['value' => $currentDate]) ?>
+                    <?= $this->Form->hidden(sprintf('TimeCard[%s][store_id]', $currentDate), ['value' => $data['employee']->store_id]) ?>
+                    <?= $this->Form->hidden(sprintf('TimeCard[%s][attendance_store_id]', $currentDate), ['value' => !empty($timeCard['attendance_store_id']) ? $timeCard['attendance_store_id'] : $data['employee']->store_id]) ?>
+                </td>
+                <td>
+                    <?= convert_week(date('w',$day)) ?>
+                </td>
+                <td>
+                    <?= !empty($timeCard['in_time']) ? $timeCard['in_time']->format('H:i') : null ?>
+                </td>
+                <td>
+                    <?php
+                    // 24時を超える時刻の表示を修正
+                    if (!empty($timeCard['out_time'])) {
+                        if (date('d', $day) != $timeCard['out_time']->format('d')) {
+                            $output = ((int)$timeCard['out_time']->format('H') + 24) . ':' . $timeCard['out_time']->format('i');
+                        } else {
+                            $output = $timeCard['out_time']->format('H:i');
+                        }
+                    }
+                    ?>
+                    <?= !empty($output) ? $output : null ?>
+                    <?php unset($output); ?>
+                </td>
+                <td>
+                    <?= !empty($timeCard['in_time2']) ? $timeCard['in_time2']->format('H:i') : null ?>
+                </td>
+                <td>
+                    <?php
+                    // 24時を超える時刻の表示を修正
+                    if (!empty($timeCard['out_time2'])) {
+                        if (date('d', $day) != $timeCard['out_time2']->format('d')) {
+                            $output = ((int)$timeCard['out_time2']->format('H') + 24) . ':' . $timeCard['out_time2']->format('i');
+                        } else {
+                            $output = $timeCard['out_time2']->format('H:i');
+                        }
+                    }
+                    ?>
+                    <?= !empty($output) ? $output : null ?>
+                    <?php unset($output); ?>
+                </td>
+                <td>
+                    <?= !empty($timeCard['scheduled_in_time']) ? $timeCard['scheduled_in_time']->format('H:i') : null ?>
+                </td>
+                <td>
+                    <?php
+                    // 24時を超える時刻の表示を修正
+                    if (!empty($timeCard['scheduled_out_time'])) {
+                        if (date('d', $day) != $timeCard['scheduled_out_time']->format('d')) {
+                            $output = ((int)$timeCard['scheduled_out_time']->format('H') + 24) . ':' . $timeCard['scheduled_out_time']->format('i');
+                        } else {
+                            $output = $timeCard['scheduled_out_time']->format('H:i');
+                        }
+                    }
+                    ?>
+                    <?= !empty($output) ? $output : null ?>
+                    <?php unset($output); ?>
+                </td>
+                <td>
+                    <?= !empty($timeCard['scheduled_in_time2']) ? $timeCard['scheduled_in_time2']->format('H:i') : null ?>
+                </td>
+                <td>
+                    <?php
+                    // 24時を超える時刻の表示を修正
+                    if (!empty($timeCard['scheduled_out_time2'])) {
+                        if (date('d', $day) != $timeCard['scheduled_out_time2']->format('d')) {
+                            $output = ((int)$timeCard['scheduled_out_time2']->format('H') + 24) . ':' . $timeCard['scheduled_out_time2']->format('i');
+                        } else {
+                            $output = $timeCard['scheduled_out_time2']->format('H:i');
+                        }
+                    }
+                    ?>
+                    <?= !empty($output) ? $output : null ?>
+                    <?php unset($output); ?>
+                </td>
+                <td>
+                    <?= !empty($timeCard['paid_vacation']) ? 1 : null ?>
+                </td>
+                <td>
+                    <?php if (!empty($timeCard['paid_vacation_diff'])): ?>
+                        <?= $this->Form->hidden(sprintf('TimeCard[%s][paid_vacation_diff]', $currentDate), ['value' => (int)$timeCard['paid_vacation_diff']]) ?>
+                        <?= (int)$timeCard['paid_vacation_diff'] ?>
+                    <?php endif; ?>
+                </td>
+                <td>
+                    <?php if (!empty($timeCard['paid_vacation']) && (!empty($timeCard['paid_vacation_start_time']) || !empty($timeCard['paid_vacation_end_time']))): ?>
+                        <?= !empty($timeCard['paid_vacation_start_time']) ? (int)$timeCard['paid_vacation_start_time'] : null ?>
+                        &nbsp;～&nbsp;
+                        <?= !empty($timeCard['paid_vacation_end_time']) ? (int)$timeCard['paid_vacation_end_time'] : null ?>
+                    <?php endif; ?>
+                </td>
+                <td class="diff"></td>
+                <td class="over"></td>
+                <td class="editable note">
+                    <?= !empty($timeCard['note']) ? $timeCard['note']->format('H:i') : null ?>
+                </td>
+                <td><?= !empty($timeCard['storeName']) ? $timeCard['storeName'] : null ?></td>
+            </tr>
+            <?php $day = strtotime('+1 day', $day); ?>
+        <?php endwhile; ?>
     </tbody>
 </table>
 
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th>勤務日数</th>
-            <th>総労働時間</th>
-            <th>通常(5~22時)</th>
-            <th>深夜(22~5時)</th>
-            <th>残業</th>
-            <th>その他1</th>
-            <th>その他2</th>
-            <th>有給</th>
+            <th class="text-right">勤務日数</th>
+            <th class="text-right">総労働時間</th>
+            <th class="text-right">通常(5~22時)</th>
+            <th class="text-right">深夜(22~5時)</th>
+            <th class="text-right">残業</th>
+            <th class="text-right">その他1</th>
+            <th class="text-right">その他2</th>
+            <th class="text-right">有給</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td><?= $workDayNum.'日 / '.$dayNum.'日' ?></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td class="text-right"><?= $monthlyTimeCard->total_working_days ?>日 / <?= $monthlyTimeCard->total_days ?>日</td>
+            <td class="text-right">
+                <?= sprintf('%.1f', $monthlyTimeCard->total_working_hours) ?>H<br>
+                <?= $this->Number->format($monthlyTimeCard->total_working_amount) ?>円
+            </td>
+            <td class="text-right">
+                <?= sprintf('%.1f', $monthlyTimeCard->total_working_hours) ?>H<br>
+                <?= $this->Number->format($monthlyTimeCard->total_working_amount) ?>円
+            </td>
+            <td class="text-right">
+                <?= sprintf('%.1f', (int)$monthlyTimeCard->normal_working_hours + (int)$monthlyTimeCard->paid_vacation_hours_normal) ?>H<br>
+                <?= $this->Number->format((int)$monthlyTimeCard->normal_working_amount + (int)$monthlyTimeCard->paid_vacation_normal_amount) ?>円
+            </td>
+            <td class="text-right">
+                <?= sprintf('%.1f', (int)$monthlyTimeCard->midnight_working_hours + (int)$monthlyTimeCard->paid_vacation_hours_midnight) ?>H<br>
+                <?= $this->Number->format((int)$monthlyTimeCard->midnight_working_amount + (int)$monthlyTimeCard->paid_vacation_midnight_amount) ?>円
+            </td>
+            <td class="text-right">0.0H<br>0円</td>
+            <td class="text-right">0.0H<br>0円</td>
+            <td class="text-right">
+                <?= $monthlyTimeCard->paid_vacation_days ?>日　　<?= sprintf('%.1f', $monthlyTimeCard->paid_vacation_hours) ?>H<br>
+                通常 <?= sprintf('%.1f', $monthlyTimeCard->paid_vacation_hours_normal) ?>H<br>
+                深夜 <?= sprintf('%.1f', $monthlyTimeCard->paid_vacation_hours_midnight) ?>H
+            </td>
         </tr>
     </tbody>
 </table>
 
-<?php debug($monthlyTimeCard); ?>
+<?php // debug($monthlyTimeCard); ?>

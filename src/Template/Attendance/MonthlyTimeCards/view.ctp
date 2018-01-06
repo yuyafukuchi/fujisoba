@@ -40,7 +40,7 @@ function convert_week($week)
 }
 
 // debug($this->request->query);
-// debug($data['employee']);
+// debug($monthlyTimeCard);
 ?>
 
 <?= $this->Form->create(null) ?>
@@ -49,15 +49,15 @@ function convert_week($week)
         <div class="row" style="margin: 0 0 15px; font-size: large; font-weight: bold;">
             <?= $data['employee']->company->name ?>／<?= $data['employee']->store->name ?>／<?= $data['employee']->name_last ?><?= $data['employee']->name_first ?>
 
-            <?php if (isset($currentMonthlyTimeCard->printed) && $currentMonthlyTimeCard->printed): ?>
+            <?php if (isset($monthlyTimeCard->printed) && $monthlyTimeCard->printed): ?>
                 <span class="text-info" style="display: inline-block; margin: 0 0 0 20px; font-size: large; font-weight: normal;">印刷済み</span>
             <?php endif; ?>
 
-            <?php if (isset($currentMonthlyTimeCard->approved) && $currentMonthlyTimeCard->approved): ?>
+            <?php if (isset($monthlyTimeCard->approved) && $monthlyTimeCard->approved): ?>
                 <span class="text-info" style="display: inline-block; margin: 0 0 0 20px; font-size: large; font-weight: normal;">承認済み</span>
             <?php endif; ?>
 
-            <?php if (isset($currentMonthlyTimeCard->csv_exported) && $currentMonthlyTimeCard->csv_exported): ?>
+            <?php if (isset($monthlyTimeCard->csv_exported) && $monthlyTimeCard->csv_exported): ?>
                 <span class="text-info" style="display: inline-block; margin: 0 0 0 20px; font-size: large; font-weight: normal;">CSV出力済み</span>
             <?php endif; ?>
         </div>
