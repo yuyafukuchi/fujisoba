@@ -286,6 +286,7 @@ class TimeCardsController extends AppController
         }
         $store_id = $this->Auth->user('store_id');
         $store_name = $this->TimeCards->Stores->get($store_id)->name;
+        $company_id = $this->Auth->user('company_id');
         $this->set(compact('store_name'));
         $this->set('_serialize', ['store_name']);
         $this->Auth->sessionKey = 'Auth.Employees';
@@ -295,7 +296,7 @@ class TimeCardsController extends AppController
             $this->Session = $this->request->session();
             $user = $this->Employees
             ->find()
-            ->where(['code' => $this->request->data()['code']])
+            ->where(['code' => $this->request->data()['code'], 'company_id' => $company_id])
             ->toArray();
              if (count($user) == 1) {
                  $user = $user[0];
