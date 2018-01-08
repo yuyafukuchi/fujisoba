@@ -145,6 +145,14 @@ $this->append('breadcrumbs', sprintf('<p>%s＞%s＞従業員登録</p>',
 
             <div class="row">
                 <div class="col-md-1 text-right"><label>＊</label></div>
+                <div class="col-md-2"><label>部門コード</label></div>
+                <div class="col-md-4">
+                    <?= $this->Form->input('pay_department_code',['type' => 'text', 'label' => false, 'required' => true]) ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-1 text-right"><label>＊</label></div>
                 <div class="col-md-2"><label>シフト</label></div>
                 <div class="col-md-9">
                     <?= $this->Form->radio(

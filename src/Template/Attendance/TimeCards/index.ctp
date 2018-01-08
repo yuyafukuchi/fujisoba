@@ -109,15 +109,15 @@ $this->append('breadcrumbs', '<p>勤怠データ詳細</p>');
                 <th class="text-center"><?=$timeCard['out_time'] != null ?$timeCard['out_time']->i18nFormat('H:mm') : ''?></th>
                 <th class="text-center"><?=$timeCard['in_time2'] != null ?$timeCard['in_time2']->i18nFormat('H:mm') : ''?></th>
                 <th class="text-center"><?=$timeCard['out_time2'] != null ?$timeCard['out_time2']->i18nFormat('H:mm') : ''?></th>
-                <th class="text-center"><?=$timeCard['schedules_in_time'] != null ?$timeCard['scheduled_in_time']->i18nFormat('H:mm') : ''?></th>
-                <th class="text-center"><?=$timeCard['schedules_out_time'] != null ?$timeCard['scheduled_out_time']->i18nFormat('H:mm') : ''?></th>
-                <th class="text-center"></th>
-                <th class="text-center"></th>
-                <th class="text-center"></th>
-                <th class="text-center"></th>
-                <th class="text-center"></th>
-                <th class="text-center"></th>
-                <th class="text-center"></th>
+                <th class="text-center"><?=$timeCard['scheduled_in_time'] != null ?$timeCard['scheduled_in_time']->i18nFormat('H:mm') : ''?></th>
+                <th class="text-center"><?=$timeCard['scheduled_out_time'] != null ?$timeCard['scheduled_out_time']->i18nFormat('H:mm') : ''?></th>
+                <th class="text-center"><?=$timeCard['scheduled_in_time2'] != null ?$timeCard['scheduled_in_time2']->i18nFormat('H:mm') : ''?></th>
+                <th class="text-center"><?=$timeCard['scheduled_out_time2'] != null ?$timeCard['scheduled_out_time2']->i18nFormat('H:mm') : ''?></th>
+                <th class="text-center"><?=$timeCard['paid_vacation'] != null ?$timeCard['paid_vacation'] : ''?></th>
+                <th class="text-center"><?=$timeCard['paid_vacation_diff'] != null ?$timeCard['paid_vacation_diff'] : ''?></th>
+                <th class="text-center"><?=$timeCard['paid_vacation_start_time'] != null ?$timeCard['paid_vacation_start_time'] . " ~ " . $timeCard['paid_vacation_end_time']: ''?></th>
+                <th class="text-center"><?=$timeCard['work_time'] != null ?$timeCard['work_time'] : ''?></th>
+                <th class="text-center"><?=$timeCard['over_time'] != null ?$timeCard['over_time'] : ''?></th>
                 <th class="text-center"><?=$timeCard['note']?></th>
                 <th class="text-left"><?=$timeCard['storeName']?></th>
                 <?php $workDayNum ++; ?>
@@ -159,14 +159,14 @@ $this->append('breadcrumbs', '<p>勤怠データ詳細</p>');
     </thead>
     <tbody>
         <tr>
-            <th class="text-right"><?=$workDayNum.'日 / '.$dayNum.'日'?></th>
-            <th class="text-right"></th>
-            <th class="text-right"></th>
-            <th class="text-right"></th>
-            <th class="text-right"></th>
-            <th class="text-right"></th>
-            <th class="text-right"></th>
-            <th class="text-right"></th>
+            <th class="text-right"><?= $monthlyTimeCard->total_working_days ?>日 / <?= $monthlyTimeCard->total_days ?>日</th>
+            <th class="text-right"><?= sprintf('%.1f', $monthlyTimeCard->total_working_hours) ?>H</th>
+            <th class="text-right"><?= sprintf('%.1f', $monthlyTimeCard->normal_working_hours + $monthlyTimeCard->paid_vacation_hours_normal) ?>H</th>
+            <th class="text-right"><?= sprintf('%.1f', $monthlyTimeCard->midnight_working_hours + $monthlyTimeCard->paid_vacation_midnight_amount_hours) ?>H</th>
+            <th class="text-right"><?= sprintf('%.1f', $monthlyTimeCard->over_working_hours) ?>H</th>
+            <th class="text-right">0.0H</th>
+            <th class="text-right">0.0H</th>
+            <th class="text-right"><?= $monthlyTimeCard->paid_vacation_days ?>日　　<?= sprintf('%.1f', $monthlyTimeCard->paid_vacation_hours) ?>H</th>
         </tr>
     </tbody>
 </table>

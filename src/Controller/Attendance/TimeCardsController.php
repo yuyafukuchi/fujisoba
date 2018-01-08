@@ -83,6 +83,18 @@ class TimeCardsController extends AppController
         //debug($timeCards);
         $this->set(compact('timeCards'));
         $this->set('_serialize', ['timeCards']);
+
+
+        $this->MonthlyTimeCards = TableRegistry::get('monthly_time_cards');
+        // Get MonthlyTimeCard entity
+        $monthlyTimeCard = $this->MonthlyTimeCards->find()
+            ->contain(['Employees','Employees.Companies', 'Employees.Stores'])
+            ->where(['date' => date('Y-m-01', $date)])
+            ->where(['employee_id' => $employee_id])
+            ->first(); // debug($monthlyTimeCard); die;
+
+        $this->set(compact('monthlyTimeCard'));
+        $this->set('_serialize', ['monthlyTimeCard']);
     }
 
     /**
@@ -286,6 +298,7 @@ class TimeCardsController extends AppController
         }
         $store_id = $this->Auth->user('store_id');
         $store_name = $this->TimeCards->Stores->get($store_id)->name;
+        $company_id = $this->Auth->user('company_id');
         $this->set(compact('store_name'));
         $this->set('_serialize', ['store_name']);
         $this->Auth->sessionKey = 'Auth.Employees';
@@ -295,7 +308,7 @@ class TimeCardsController extends AppController
             $this->Session = $this->request->session();
             $user = $this->Employees
             ->find()
-            ->where(['code' => $this->request->data()['code']])
+            ->where(['code' => $this->request->data()['code'], 'company_id' => $company_id])
             ->toArray();
              if (count($user) == 1) {
                  $user = $user[0];
