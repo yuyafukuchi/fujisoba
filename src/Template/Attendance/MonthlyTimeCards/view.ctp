@@ -333,7 +333,7 @@ function convert_week($week)
                 <td class="editable note">
                     <?= $this->Form->input(sprintf('TimeCard[%s][note]', $currentDate), [
                         'label' => false,
-                        'default' => !empty($timeCard['note']) ? $timeCard['note']->format('H:i') : '',
+                        'default' => !empty($timeCard['note']) ? $timeCard['note'] : '',
                     ]) ?>
                 </td>
                 <td><?= !empty($timeCard['storeName']) ? $timeCard['storeName'] : null ?></td>

@@ -83,6 +83,18 @@ class TimeCardsController extends AppController
         //debug($timeCards);
         $this->set(compact('timeCards'));
         $this->set('_serialize', ['timeCards']);
+
+
+        $this->MonthlyTimeCards = TableRegistry::get('monthly_time_cards');
+        // Get MonthlyTimeCard entity
+        $monthlyTimeCard = $this->MonthlyTimeCards->find()
+            ->contain(['Employees','Employees.Companies', 'Employees.Stores'])
+            ->where(['date' => date('Y-m-01', $date)])
+            ->where(['employee_id' => $employee_id])
+            ->first(); // debug($monthlyTimeCard); die;
+
+        $this->set(compact('monthlyTimeCard'));
+        $this->set('_serialize', ['monthlyTimeCard']);
     }
 
     /**
