@@ -184,7 +184,7 @@ function convert_week($week)
                 <td class="diff"></td>
                 <td class="over"></td>
                 <td class="editable note">
-                    <?= !empty($timeCard['note']) ? $timeCard['note']->format('H:i') : null ?>
+                    <?= !empty($timeCard['note']) ? $timeCard['note'] : null ?>
                 </td>
                 <td><?= !empty($timeCard['storeName']) ? $timeCard['storeName'] : null ?></td>
             </tr>
@@ -214,16 +214,16 @@ function convert_week($week)
                 <?= $this->Number->format($monthlyTimeCard->total_working_amount) ?>円
             </td>
             <td class="text-right">
-                <?= sprintf('%.1f', $monthlyTimeCard->total_working_hours) ?>H<br>
-                <?= $this->Number->format($monthlyTimeCard->total_working_amount) ?>円
+                <?= sprintf('%.1f', $monthlyTimeCard->normal_working_hours + $monthlyTimeCard->paid_vacation_hours_normal) ?>H<br>
+                <?= $this->Number->format($monthlyTimeCard->normal_working_amount + $monthlyTimeCard->paid_vacation_normal_amount ) ?>円
             </td>
             <td class="text-right">
-                <?= sprintf('%.1f', (int)$monthlyTimeCard->normal_working_hours + (int)$monthlyTimeCard->paid_vacation_hours_normal) ?>H<br>
-                <?= $this->Number->format((int)$monthlyTimeCard->normal_working_amount + (int)$monthlyTimeCard->paid_vacation_normal_amount) ?>円
+                <?= sprintf('%.1f', $monthlyTimeCard->midnight_working_hours + $monthlyTimeCard->paid_vacation_midnight_amount_hours) ?>H<br>
+                <?= $this->Number->format($monthlyTimeCard->midnight_working_amount + $monthlyTimeCard->paid_vacation_midnight_amount) ?>円
             </td>
             <td class="text-right">
-                <?= sprintf('%.1f', (int)$monthlyTimeCard->midnight_working_hours + (int)$monthlyTimeCard->paid_vacation_hours_midnight) ?>H<br>
-                <?= $this->Number->format((int)$monthlyTimeCard->midnight_working_amount + (int)$monthlyTimeCard->paid_vacation_midnight_amount) ?>円
+                <?= sprintf('%.1f', $monthlyTimeCard->over_working_hours) ?>H<br>
+                <?= $this->Number->format($monthlyTimeCard->over_working_amount) ?>円
             </td>
             <td class="text-right">0.0H<br>0円</td>
             <td class="text-right">0.0H<br>0円</td>
