@@ -94,15 +94,12 @@ class TimeCardsTable extends Table
             ->allowEmpty('scheduled_out_time');
 
         $validator
-            ->decimal('work_time')
             ->allowEmpty('work_time');
 
         $validator
-            ->decimal('over_time')
             ->allowEmpty('over_time');
 
         $validator
-            ->decimal('paid_vacation')
             ->allowEmpty('paid_vacation');
 
         $validator

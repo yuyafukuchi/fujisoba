@@ -277,8 +277,9 @@ class MonthlyTimeCardsController extends AppController
                                 $dirtyFields = $newTimeCard->getDirty();
                             }
                             $newTimeCard = $this->TimeCards->patchEntity($newTimeCard, ['dirty_fields' => serialize($dirtyFields)]);
-                            // debug($newTimeCard); die;
-                            $this->TimeCards->save($newTimeCard);
+                            // debug($newTimeCard); // die;
+                            $saveResult = $this->TimeCards->save($newTimeCard);
+                            // debug($saveResult);
                         } else {
                             // NEW
                             $newTimeCard = $this->TimeCards->newEntity();

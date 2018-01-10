@@ -176,9 +176,28 @@ class TimeCardsController extends AppController
     {
         $this->Session = $this->request->session();
         $timeCard = $this->TimeCards->find()
+            ->where(['employee_id' => $this->Auth->user('id')])
             ->where([
-                'date' => date('Y-m-d'),
-                'employee_id' => $this->Auth->user('id')
+                'OR' => [
+                    'date' => date('Y-m-d'),
+                    [
+                        'date' => date('Y-m-d', strtotime('-1 day')),
+                        'OR' => [
+                            [
+                                'in_time >=' => date('Y-m-d 19:00:00', strtotime('-1 day')),
+                                'out_time IS' => null,
+                                'in_time2 IS' => null,
+                                'out_time IS' => null,
+                            ],
+                            [
+                                'in_time2 >=' => date('Y-m-d 19:00:00', strtotime('-1 day')),
+                                'out_time2 IS' => null,
+                                'in_time IS NOT' => null,
+                                'out_time IS NOT' => null,
+                            ],
+                        ]
+                    ]
+                ]
             ])
             ->toArray();
 

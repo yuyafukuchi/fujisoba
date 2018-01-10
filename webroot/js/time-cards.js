@@ -159,16 +159,16 @@ jQuery(function($){
             var result_diff = $result / 60;
 
             if (result_diff > 0) {
-                $('.diff', $row).html(result_diff.toFixed(1));
+                $('.diff', $row).html(result_diff.toFixed(1) + '<input type="hidden" name="TimeCard['+$date+'][work_time]" value="' + result_diff + '">');
                 $summaryWorkingDays++;
             } else {
-                $('.diff', $row).html('');
+                $('.diff', $row).html('<input type="hidden" name="TimeCard['+$date+'][work_time]" value="0">');
             }
 
             if (result_diff > 8) {
-                $('.over', $row).html((result_diff - 8).toFixed(1));
+                $('.over', $row).html((result_diff - 8).toFixed(1) + '<input type="hidden" name="TimeCard['+$date+'][over_time]" value="' + (result_diff - 8) + '">');
             } else {
-                $('.over', $row).html('');
+                $('.over', $row).html('<input type="hidden" name="TimeCard['+$date+'][over_time]" value="0">');
             }
 
             // console.log($result);

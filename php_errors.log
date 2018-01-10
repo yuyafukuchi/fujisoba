@@ -22,3 +22,57 @@
 [25-Dec-2017 17:00:52 Asia/Tokyo] PHP   7. Cake\Error\ErrorHandler->_displayError() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php:152
 [25-Dec-2017 17:00:52 Asia/Tokyo] PHP   8. Cake\Error\Debugger->outputError() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/ErrorHandler.php:119
 [25-Dec-2017 17:00:52 Asia/Tokyo] PHP   9. Cake\Utility\Text::insert() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Error/Debugger.php:841
+[06-Jan-2018 19:14:17 Asia/Tokyo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 39741432 bytes) in /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/ToolbarService.php on line 266
+[06-Jan-2018 19:14:17 Asia/Tokyo] PHP Stack trace:
+[06-Jan-2018 19:14:17 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[06-Jan-2018 19:14:17 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[06-Jan-2018 19:14:17 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:81
+[06-Jan-2018 19:14:17 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[06-Jan-2018 19:14:17 Asia/Tokyo] PHP   5. DebugKit\Middleware\DebugKitMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[06-Jan-2018 19:14:17 Asia/Tokyo] PHP   6. DebugKit\ToolbarService->injectScripts() /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:58
+[06-Jan-2018 19:14:17 Asia/Tokyo] PHP   7. substr() /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/ToolbarService.php:266
+[08-Jan-2018 08:30:33 Asia/Tokyo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 39744016 bytes) in /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/ToolbarService.php on line 266
+[08-Jan-2018 08:30:33 Asia/Tokyo] PHP Stack trace:
+[08-Jan-2018 08:30:33 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[08-Jan-2018 08:30:33 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[08-Jan-2018 08:30:33 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:81
+[08-Jan-2018 08:30:33 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[08-Jan-2018 08:30:33 Asia/Tokyo] PHP   5. DebugKit\Middleware\DebugKitMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[08-Jan-2018 08:30:33 Asia/Tokyo] PHP   6. DebugKit\ToolbarService->injectScripts() /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:58
+[08-Jan-2018 08:30:33 Asia/Tokyo] PHP   7. substr() /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/ToolbarService.php:266
+[08-Jan-2018 08:30:47 Asia/Tokyo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 39744016 bytes) in /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/ToolbarService.php on line 266
+[08-Jan-2018 08:30:47 Asia/Tokyo] PHP Stack trace:
+[08-Jan-2018 08:30:47 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[08-Jan-2018 08:30:47 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[08-Jan-2018 08:30:47 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:81
+[08-Jan-2018 08:30:47 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[08-Jan-2018 08:30:47 Asia/Tokyo] PHP   5. DebugKit\Middleware\DebugKitMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[08-Jan-2018 08:30:47 Asia/Tokyo] PHP   6. DebugKit\ToolbarService->injectScripts() /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:58
+[08-Jan-2018 08:30:47 Asia/Tokyo] PHP   7. substr() /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/ToolbarService.php:266
+[08-Jan-2018 08:31:47 Asia/Tokyo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 39389416 bytes) in /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/ToolbarService.php on line 266
+[08-Jan-2018 08:31:47 Asia/Tokyo] PHP Stack trace:
+[08-Jan-2018 08:31:47 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[08-Jan-2018 08:31:47 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[08-Jan-2018 08:31:47 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:81
+[08-Jan-2018 08:31:47 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[08-Jan-2018 08:31:47 Asia/Tokyo] PHP   5. DebugKit\Middleware\DebugKitMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[08-Jan-2018 08:31:47 Asia/Tokyo] PHP   6. DebugKit\ToolbarService->injectScripts() /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:58
+[08-Jan-2018 08:31:47 Asia/Tokyo] PHP   7. substr() /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/ToolbarService.php:266
+[08-Jan-2018 08:36:53 Asia/Tokyo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 39744016 bytes) in /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/ToolbarService.php on line 266
+[08-Jan-2018 08:36:53 Asia/Tokyo] PHP Stack trace:
+[08-Jan-2018 08:36:53 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[08-Jan-2018 08:36:53 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[08-Jan-2018 08:36:53 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:81
+[08-Jan-2018 08:36:53 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[08-Jan-2018 08:36:53 Asia/Tokyo] PHP   5. DebugKit\Middleware\DebugKitMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[08-Jan-2018 08:36:53 Asia/Tokyo] PHP   6. DebugKit\ToolbarService->injectScripts() /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:58
+[08-Jan-2018 08:36:53 Asia/Tokyo] PHP   7. substr() /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/ToolbarService.php:266
+[08-Jan-2018 08:37:07 Asia/Tokyo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 39744016 bytes) in /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/ToolbarService.php on line 266
+[08-Jan-2018 08:37:07 Asia/Tokyo] PHP Stack trace:
+[08-Jan-2018 08:37:07 Asia/Tokyo] PHP   1. {main}() /home/ubuntu/workspace/webroot/index.php:0
+[08-Jan-2018 08:37:07 Asia/Tokyo] PHP   2. Cake\Http\Server->run() /home/ubuntu/workspace/webroot/index.php:37
+[08-Jan-2018 08:37:07 Asia/Tokyo] PHP   3. Cake\Http\Runner->run() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Server.php:81
+[08-Jan-2018 08:37:07 Asia/Tokyo] PHP   4. Cake\Http\Runner->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:51
+[08-Jan-2018 08:37:07 Asia/Tokyo] PHP   5. DebugKit\Middleware\DebugKitMiddleware->__invoke() /home/ubuntu/workspace/vendor/cakephp/cakephp/src/Http/Runner.php:65
+[08-Jan-2018 08:37:07 Asia/Tokyo] PHP   6. DebugKit\ToolbarService->injectScripts() /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:58
+[08-Jan-2018 08:37:07 Asia/Tokyo] PHP   7. substr() /home/ubuntu/workspace/vendor/cakephp/debug_kit/src/ToolbarService.php:266
