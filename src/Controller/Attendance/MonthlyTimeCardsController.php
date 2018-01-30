@@ -128,13 +128,45 @@ class MonthlyTimeCardsController extends AppController
                 'Stores',
             ])
             ->order(['Stores.name_kana' => 'ASC'])
-            ->order(['Employees.code' => 'ASC']);
-            // debug($employees->toArray());die;
+            ->order(['Employees.code' => 'ASC'])
+            ->toArray();
+            // debug($employees);die;
+
+        // カスタムフィルタ: 勤務データ不備あり (出勤データしかない)
+        if (!empty($employees) && !empty($searchQuery['invalid'])) {
+            foreach ($employees as $key => $employee) {
+                $query = $this->MonthlyTimeCards->Employees->TimeCards->find()
+                    ->where([
+                        'AND' => [
+                            [
+                                'TimeCards.employee_id' => $employee->id,
+                                'TimeCards.date >=' => date('Y-m-16', strtotime($searchQuery['dateQuery'] . ' - 1 month')),
+                                'TimeCards.date <=' => date('Y-m-15', strtotime($searchQuery['dateQuery'])),
+                            ],
+                            'OR' => [
+                                [
+                                    'TimeCards.in_time IS NOT' => null,
+                                    'TimeCards.out_time IS' => null,
+                                ],
+                                [
+                                    'TimeCards.in_time2 IS NOT' => null,
+                                    'TimeCards.out_time2 IS' => null,
+                                    'TimeCards.date !=' => date('Y-m-d'),
+                                ],
+                            ]
+                        ],
+                    ]); // debug($query->toArray());die;
+
+                if ($query->isEmpty()) {
+                    unset($employees[$key]);
+                }
+            }
+        } // debug($employees);die;
 
         // Get approved MonthlyTimeCard ids
         $monthlyTimeCardIds = [];
         if (!empty($employees)) {
-            foreach ($employees as $employee) {
+            foreach ($employees as $key => $employee) {
                 if (!empty($employee->id)) {
                     $monthlyTimeCardIds[] = $employee->id;
                 }

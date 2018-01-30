@@ -160,7 +160,7 @@ $this->append('breadcrumbs', sprintf('<p>%s＞勤怠データ検索・一覧</p>
         <?php if ($isSearch): ?>
             <p>
                 <span class="inline-block">並び順は店舗カナ名、従業員コード順</span>
-                <span class="inline-block text-primary">検索結果は<?= $employees->count() ?>件です</span>
+                <span class="inline-block text-primary">検索結果は<?= count($employees) ?>件です</span>
                 <span class="inline-block hidden"><?= $this->Html->link('人件費計算', ['controller'=>'Employees', 'action'=>'add'], ['class' => 'btn btn-default btn-md disabled']) ?></span>
                 <span class="inline-block text-primary hidden">予定: <?= '1,500,000' ?>円</span>
                 <span class="inline-block text-primary hidden">実績: <?= '1,580,000' ?>円</span>

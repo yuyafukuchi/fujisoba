@@ -10,14 +10,14 @@ jQuery(function($){
             // console.log(shiftType);
 
         if (shiftType == 'E') {
-            var shiftBegin = '5',
-                shiftEnd = '13';
+            var shiftBegin = '7',
+                shiftEnd = '15';
         } else if (shiftType == 'M') {
-            var shiftBegin = '13',
-                shiftEnd = '21';
+            var shiftBegin = '15',
+                shiftEnd = '23';
         } else if (shiftType == 'L') {
-            var shiftBegin = '21',
-                shiftEnd = '5';
+            var shiftBegin = '23',
+                shiftEnd = '7';
         } // console.log(shiftBegin);
 
         if (isChecked) {
@@ -147,8 +147,10 @@ jQuery(function($){
                 }
             }
 
-            // ADD paid_vacation
-            $result += parseInt($('.paid_vacation_time', $row).data('diff')) * 60;
+            // ADD paid_vacation (ただし有給のみの日は出勤日数を増分しない)
+            if (parseInt($result) > 0) {
+                $result += parseInt($('.paid_vacation_time', $row).data('diff')) * 60;
+            }
 
             // Increment summary of paid vacation days
             if (parseInt($('.paid_vacation_time', $row).data('diff')) > 0) {
@@ -183,7 +185,7 @@ jQuery(function($){
             $summary.paidNormalWorkingHours += $currentSummary.paidNormalWorkingHours;
             $summary.paidNightWorkingHours += $currentSummary.paidNightWorkingHours;
             $summary.paidVacationHours += $currentSummary.paidVacationHours;
-            $summary.totalWorkingHours += $currentSummary.totalWorkingHours - $currentSummary.paidVacationHours;
+            $summary.totalWorkingHours += $currentSummary.totalWorkingHours;
             $summary.normalWorkingAmount += $currentSummary.normalWorkingAmount;
             $summary.nightWorkingAmount += $currentSummary.nightWorkingAmount;
             $summary.paidNormalWorkingAmount += $currentSummary.paidNormalWorkingAmount;
