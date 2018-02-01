@@ -28,11 +28,6 @@ class Menu extends Entity
      * @var array
      */
     protected $_accessible = [
-        'menu_number' => true,
-        'created' => true,
-        'created_by' => true,
-        'modified' => true,
-        'modified_by' => true,
-        'sales_transactions' => true
+        '*' => true
     ];
 }

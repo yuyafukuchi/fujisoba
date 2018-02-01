@@ -17,7 +17,7 @@
         </thead>
         <tbody>
             <tr>
-                <td>品名</td>
+                <td>番号</td>
                 <td><?=h($salesItemHistory->sales_item->sales_item_number)?></td>
             </tr>
             <tr>

@@ -75,7 +75,7 @@ class UsersTable extends Table
         $validator
             ->requirePresence('password', 'create')
             ->notEmpty('password');
-        
+
         $validator
             ->add('password', [
                 'comWith' => ['rule' => ['compareWith', 'password_confirm']],
@@ -90,7 +90,7 @@ class UsersTable extends Table
             ->allowEmpty('created_by');
 
         $validator
-            ->dateTime('modified_by')
+            ->integer('modified_by')
             ->allowEmpty('modified_by');
 
         return $validator;

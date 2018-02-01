@@ -5,8 +5,8 @@
  */
 ?>
 <div class="inventoryItemHistories index large-9 medium-8 columns content">
-    マスタ出庫アイテム削除<br>
-    以下のマスタ出庫アイテムを
+    マスタメニュー削除<br>
+    以下のマスタメニューを
     <?=date('Y年m月d日',$date)?>
     以降削除しますが、よろしいですか？
     <table cellpadding="0" cellspacing="0">

@@ -35,19 +35,7 @@ class StoreInventoryItemHistory extends Entity
      * @var array
      */
     protected $_accessible = [
-        'inventory_item_id' => true,
-        'store_id' => true,
-        'price' => true,
-        'cost' => true,
-        'start' => true,
-        'end' => true,
-        'deleted' => true,
-        'created' => true,
-        'created_by' => true,
-        'modified' => true,
-        'modified_by' => true,
-        'inventory_item' => true,
-        'store' => true
+        '*' => true
     ];
 
 }

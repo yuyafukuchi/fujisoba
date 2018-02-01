@@ -5,7 +5,7 @@
  */
 ?>
 <div class="inventoryItemHistories index large-9 medium-8 columns content">
-    マスタ出庫アイテム変更<br>
+    マスターメニュー名変更<br>
     新しい品名を入力してください
     <?=$this->Form->create(null) ?>
     <table cellpadding="0" cellspacing="0">
@@ -17,7 +17,7 @@
         </thead>
         <tbody>
             <tr>
-                <td>品名</td>
+                <td>番号</td>
                 <td><?=h($menuHistory->menu->menu_number)?></td>
             </tr>
             <tr>

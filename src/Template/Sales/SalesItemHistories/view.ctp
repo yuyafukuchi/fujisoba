@@ -40,7 +40,7 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Start') ?></th>
-            <td><?= h($salesItemHistory->start) ?></td>
+            <td><?= h($storeName) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('End') ?></th>

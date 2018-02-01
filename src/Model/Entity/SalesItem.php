@@ -30,13 +30,6 @@ class SalesItem extends Entity
      * @var array
      */
     protected $_accessible = [
-        'sales_item_number' => true,
-        'created' => true,
-        'created_by' => true,
-        'modified' => true,
-        'modified_by' => true,
-        'sales_item_assign_histories' => true,
-        'sales_item_histories' => true,
-        'sales_item_transactions' => true
+        '*' => true
     ];
 }

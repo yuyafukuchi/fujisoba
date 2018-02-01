@@ -39,22 +39,6 @@ class StoreMenuHistory extends Entity
      * @var array
      */
     protected $_accessible = [
-        'menu_item_id' => true,
-        'store_id' => true,
-        'store_menu_number' => true,
-        'price' => true,
-        'vending_mashine1' => true,
-        'vending_mashine2' => true,
-        'sales_item_price' => true,
-        'sales_item_cost' => true,
-        'start_date' => true,
-        'end_date' => true,
-        'deleted' => true,
-        'created' => true,
-        'created_by' => true,
-        'modified' => true,
-        'modified_by' => true,
-        'menu_item' => true,
-        'store' => true
+        '*' => true
     ];
 }

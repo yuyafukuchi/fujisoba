@@ -44,11 +44,12 @@ class SalesItemAssignHistoriesTable extends Table
 
         $this->belongsTo('Menus', [
             'foreignKey' => 'menu_item_id',
-            'joinType' => 'INNER'
+            'joinType' => 'LEFT'
         ]);
         $this->belongsTo('SalesItems', [
             'foreignKey' => 'sales_item_id'
         ]);
+
     }
 
     /**

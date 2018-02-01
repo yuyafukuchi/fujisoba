@@ -143,6 +143,7 @@ $this->prepend('script', $this->Html->script([
                                     マスタ設定
                                 </li>
                                 <ul class="sub-menu collapse" id="master-settings">
+                                    <li><?= $this->Html->link('マスタメニュー設定', ['prefix' => false, 'controller' => 'Sales/MenuHistories','action' => 'index']) ?></li>
                                     <li><?= $this->Html->link('マスタ在庫アイテム設定', ['prefix' => false, 'controller' => 'Sales/InventoryItemHistories','action' => 'index']) ?></li>
                                     <li><?= $this->Html->link('マスタ出庫アイテム設定', ['prefix' => false, 'controller' => 'Sales/SalesItemHistories','action' => 'index']) ?></li>
 
@@ -151,7 +152,6 @@ $this->prepend('script', $this->Html->script([
                                         <?php foreach ($stores as $store) : ?>
                                             <li  data-toggle="collapse" data-target="#master-settings-store-<?= $store->id ?>" class="collapsed"><?=$store->name ?></li>
                                             <ul class="sub-menu collapse" id="master-settings-store-<?= $store->id ?>">
-                                                <li><?= $this->Html->link('出庫アイテム割付', ['prefix' => false, 'controller' => 'Sales/SalesItemAssignHistories','action' => 'index', 'store' => $store->id]) ?></li>
                                                 <li><?= $this->Html->link('在庫計算アイテム設定', ['prefix' => false, 'controller' => 'Sales/StoreInventoryItemHistories','action' => 'index', 'store' => $store->id]) ?></li>
                                                 <li><?= $this->Html->link('店舗メニュー設定', ['prefix' => false, 'controller' => 'Sales/StoreMenuHistories','action' => 'index', 'store' => $store->id]) ?></li>
                                             </ul>

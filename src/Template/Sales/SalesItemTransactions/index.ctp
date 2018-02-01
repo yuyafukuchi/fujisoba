@@ -15,14 +15,14 @@
     </ul>
 </nav>
 <?php $week_name = array("日", "月", "火", "水", "木", "金", "土");?>
-<?php $arraySize = count($salesItemHistories->toArray()); ?>
+<?php $arraySize = count($salesItemHistories);?>
 <?php $lastDay = date('d', strtotime('last day of this month', $date)) ?>
 <?php $day = strtotime('first day of this month',$date);?>
 <?php $sumArray = array(array(0,0), array(0,0), array(0,0), array(0,0)); ?>
 <?php $index = array(0,0,0,0); ?>
 <div class="salesItemTransactions index large-9 medium-8 columns content">
     <?php if($storeName == null){$storeName = 'ほげ';}?>
-    <?=$storeName ?> 出庫日計表 
+    <?=$storeName ?> 出庫日計表
     <?=date('Y年m月度',$date)?>
     <?=$this->Form->create(null) ?>
     <?= $this->Form->input(
@@ -58,7 +58,8 @@
             <tr>
                 <th colspan="2"></th>
                 <?php foreach ($salesItemHistories as $salesItemHistory) : ?>
-                    <th colspan="2"><?=$salesItemHistory->sales_item_name?><br>単価：</th>
+                    <th colspan="2"><?=$salesItemHistory[0]['sales_item_name']?><br>
+                    単価：<?= $salesItemHistory[0]['sales_item_daliy_summary']['sales_item_price_sum'] / $salesItemHistory[0]['sales_item_daliy_summary']['qty'] ?></th>
                 <?php endforeach; ?>
                 <th>合計金額</th>
             </tr>
@@ -78,12 +79,13 @@
                     <td><?=h(date('d',$day))?></td>
                     <td><?=h($week_name[date('w',$day)]) ?></td>
                     <?php for($i=0;$i<$arraySize;$i++) : ?>
-                        <?php if(count($salesItemTransactions[$i]) > $index[$i] 
-                        && $salesItemTransactions[$i][$index[$i]]['sales_transaction']['transaction_date']->i18nFormat('dd') == date('d',$day) ) : ?>
-                            <td><?=$salesItemTransactions[$i][$index[$i]]['qty']?></td>
-                            <?php $sumArray[$i][0] += intval($salesItemTransactions[$i][$index[$i]]['qty']); ?>
+                        <?php if(count($salesItemHistories[$i]) > $index[$i]
+                        && $salesItemHistories[$i][$index[$i]]['sales_item_daliy_summary']['transaction_date']->i18nFormat('dd') == date('d',$day) ) : ?>
+                            <td><?=$salesItemHistories[$i][$index[$i]]['sales_item_daliy_summary']['qty']?></td>
+                            <td><?=number_format($salesItemHistories[$i][$index[$i]]['sales_item_daliy_summary']['sales_item_price_sum'])?></td>
+                            <?php $sumArray[$i][0] += intval($salesItemHistories[$i][$index[$i]]['sales_item_daliy_summary']['qty']); ?>
+                            <?php $sumArray[$i][1] += intval($salesItemHistories[$i][$index[$i]]['sales_item_daliy_summary']['sales_item_price_sum']); ?>
                             <?php $index[$i] ++; ?>
-                            <td>金額</td>
                         <?php else : ?>
                             <td></td>
                             <td></td>
@@ -96,16 +98,16 @@
                 <td>合計</td>
                 <td></td>
                 <?php for($i=0;$i<$arraySize;$i++) : ?>
-                    <td><?=h($sumArray[$i][0]) ?></td>
-                    <td><?=h($sumArray[$i][1]) ?></td>
+                    <td><?=number_format(h($sumArray[$i][0])) ?></td>
+                    <td><?=number_format(h($sumArray[$i][1])) ?></td>
                 <?php endfor; ?>
             </tr>
             <tr>
                 <td>平均</td>
                 <td></td>
                 <?php for($i=0;$i<$arraySize;$i++) : ?>
-                    <td><?= h(count($salesItemTransactions[$i]) != 0 ? round($sumArray[$i][0]/count($salesItemTransactions[$i])) : 0) ?></td>
-                    <td><?= h(count($salesItemTransactions[$i]) != 0 ? round($sumArray[$i][1]/count($salesItemTransactions[$i])) : 0) ?></td>
+                    <td><?= number_format(h(count($salesItemHistories[$i])) != 0 ? round($sumArray[$i][0]/count($salesItemHistories[$i])) : 0) ?></td>
+                    <td><?= number_format(h(count($salesItemHistories[$i])) != 0 ? round($sumArray[$i][1]/count($salesItemHistories[$i])) : 0) ?></td>
                 <?php endfor; ?>
             </tr>
         </tbody>

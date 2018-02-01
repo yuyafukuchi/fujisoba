@@ -29,18 +29,19 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($storeMenuHistories as $storeMenuHistory): ?>
-            <?=$this->Form->create('StoreMenuHistories'.$storeMenuHistory->id,['url' => ['action' => 'edit','menu_item_id' => intval($storeMenuHistory->menu_item_id)]]) ?>
+            <?php foreach ($menuHistories as $menuHistory): ?>
+            <?=$this->Form->create('MenuHistories'.$menuHistory->id,['url' => ['action' => 'edit','menu_item_id' => intval($menuHistory->menu_item_id)]]) ?>
             <tr>
-                <td><?= h($storeMenuHistory->menu_history->name . ' : ' . $storeMenuHistory->price) ?><?= $this->Form->submit("登録",['name'=>'button']) ?></td>
+                <!--<td><?= h($menuHistory->menu_history->name . ' : ' . $menuHistory->price) ?><?= $this->Form->submit("登録",['name'=>'button']) ?></td>-->
+                <td><?= h($menuHistory->name) ?><?= $this->Form->submit("登録",['name'=>'button']) ?></td>
             </tr>
             <tr>
                 <td>
                     <?php foreach ($salesItemHistories as $salesItemHistory) : ?>
-                        <?=  $this->Form->input('check-'.$storeMenuHistory->id.'-'.$salesItemHistory->id, 
+                        <?=  $this->Form->input('check-'.$menuHistory->id.'-'.$salesItemHistory->id,
                             [ "type" => "checkbox","value" => $salesItemHistory->sales_item_id,"label" => "" ,'hiddenField' => false,
-                            'checked' => array_key_exists($storeMenuHistory->menu_item_id, $assignArray) ? in_array($salesItemHistory->sales_item_id,$assignArray[$storeMenuHistory->menu_item_id]) : false ]);?>
-                         <?=$this->Form->label('check-'.$storeMenuHistory->id.'-'.$salesItemHistory->id,  $salesItemHistory->sales_item->sales_item_number . ' : ' . $salesItemHistory->sales_item_name )?><br>
+                            'checked' => array_key_exists($menuHistory->menu_item_id, $assignArray) ? in_array($salesItemHistory->sales_item_id,$assignArray[$menuHistory->menu_item_id]) : false ]);?>
+                         <?=$this->Form->label('check-'.$menuHistory->id.'-'.$salesItemHistory->id,  $salesItemHistory->sales_item->sales_item_number . ' : ' . $salesItemHistory->sales_item_name )?><br>
                     <?php endforeach; ?>
                 </td>
             </tr>

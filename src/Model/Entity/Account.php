@@ -34,17 +34,6 @@ class Account extends Entity
      * @var array
      */
     protected $_accessible = [
-        'code' => true,
-        'name' => true,
-        'debit_tax_code' => true,
-        'debit_found_class' => true,
-        'credit_tax_code' => true,
-        'credit_found_class' => true,
-        'cash_account' => true,
-        'created' => true,
-        'created_by' => true,
-        'modified' => true,
-        'modified_by' => true,
-        'store_account_infos' => true
+        '*' => true
     ];
 }

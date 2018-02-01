@@ -18,7 +18,7 @@
 <div class="inventoryPurchaseTransactions index large-9 medium-8 columns content">
     <?php $lastDay = date('d', strtotime('last day of this month', $date)) ?>
     <h3><?= __('Inventory Purchase Transactions') ?></h3>
-    <?=$storeName ?> 在庫日計表 
+    <?=$storeName ?> 在庫日計表
     <?=date('Y年m月度',$date)?>
     <?=$this->Form->create(null) ?>
     <?= $this->Form->input(
@@ -56,8 +56,8 @@
             <tr>
                 <?php $itemPrice = array(); ?>
                 <?php for($i = 0 ; $i < $arraySize ; $i ++) : ?>
-                <th colspan="6"><?= date('Y年m月度',$date)?> 
-                                <?=$storeInventoryItemHistories[$i]->inventory_item->inventory_item_histories[0]->item_name ?> 
+                <th colspan="6"><?= date('Y年m月度',$date)?>
+                                <?=$storeInventoryItemHistories[$i]['inventory_item_history']['item_name'] ?>
                                 <?php $itemPrice[$i] = $storeInventoryItemHistories[$i]->price; ?>
                                 <?=$itemPrice[$i] ?></th>
                 <?php endfor; ?>
@@ -75,51 +75,62 @@
         </thead>
         <tbody>
             <?php $index = array(0,0); ?>
+            <?php $itemPriceIndex = array(0,0); ?>
+
             <?php $priceSum = array(array(0,0,0,0,0),array(0,0,0,0,0)) ; ?>
+
             <?php $recordSize = array(0,0); ?>
-            <?php for($i = 0 ; $i < $arraySize ; $i ++) : ?>
-            <?php if(count($inventoryPurchaseTransactions[$i]) > 0) : ?>
-                <?php $index[$i] = $inventoryPurchaseTransactions[$i][0]['transaction_date']->i18nFormat('YYYY-MM-dd') 
-                        == date('Y-m-d',strtotime('last day of previous month', $date)) ? 1 : 0 ;?> 
-                <?php $recordSize[$i] = count($inventoryPurchaseTransactions[$i]) - $index[$i]; ?>
-                <?php endif; ?>
-            <?php endfor; ?>
-           <?php for($i = 1 ; $i <= $lastDay ;  $i++) : ?>
-           <tr>
-               <?php for($j = 0 ; $j < $arraySize ; $j ++) :?>
-               <td><?= $i?></td>
-               <?php if($index[$j] < count($inventoryPurchaseTransactions[$j]) &&
-                       $inventoryPurchaseTransactions[$j][$index[$j]]['transaction_date']->i18nFormat('dd') == $i ): ?>
-                   <td><?= $index[$j] === 0 ?  h(0) : h($inventoryPurchaseTransactions[$j][$index[$j]-1]['count_qty']) ?></td>
-                   <?php $priceSum[$j][0] += $index[$j] === 0 ? 0 :  $inventoryPurchaseTransactions[$j][$index[$j]-1]['count_qty'] ; ?>
-                   <td><?= h($inventoryPurchaseTransactions[$j][$index[$j]]['purchase_qty']) ?></td>
-                   <?php $priceSum[$j][1] += $inventoryPurchaseTransactions[$j][$index[$j]]['purchase_qty']; ?>
-                   <td><?= h($inventoryPurchaseTransactions[$j][$index[$j]]['loss_qty']) ?></td>
-                   <?php $priceSum[$j][2] += $inventoryPurchaseTransactions[$j][$index[$j]]['loss_qty']; ?>
-                   <?php $sum = ($index[$j] === 0 ? 0 : $inventoryPurchaseTransactions[$j][$index[$j]-1]['count_qty'])
-                       + $inventoryPurchaseTransactions[$j][$index[$j]]['purchase_qty']
-                       - $inventoryPurchaseTransactions[$j][$index[$j]]['loss_qty']
-                       - $inventoryPurchaseTransactions[$j][$index[$j]]['count_qty']; 
-                       $priceSum[$j][3] += $sum?>
-                   <td><?= h($sum) ?></td>
-                   <td><?= h($itemPrice[$j] * $sum) ?> </td>
-                   <?php $priceSum[$j][4] += $itemPrice[$j] * $sum ; ?>
-                   <?php $index[$j] ++ ;?>
-               <?php else : ?>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-               <?php endif; ?>
-               <?php endfor; ?>
-           </tr>
+            <?php for($i = 1 ; $i <= $lastDay ;  $i++) : ?>
+                <tr>
+                   <?php for($j = 0 ; $j < $arraySize ; $j ++) :?>
+                       <td><?= $i?></td>
+                       <?php if($index[$j] < count($inventoryPurchaseTransactions[$j]) &&
+                               $inventoryPurchaseTransactions[$j][$index[$j]]['transaction_date']->i18nFormat('dd') == $i ): ?>
+                            <td><?php $lastDayQty =
+                                    $index[$j] === 0 ?
+                                        ($lastMonthInventoryPurchaseTransactions[$j] == null ?
+                                            h(0)
+                                            : h($lastMonthInventoryPurchaseTransactions[$j]['count_qty']))
+                                        : h($inventoryPurchaseTransactions[$j][$index[$j]-1]['count_qty'])
+                                ?>
+                                <?= $lastDayQty ?></td>
+                                <?php $priceSum[$j][0] += $lastDayQty ; ?>
+                            <td><?= h($inventoryPurchaseTransactions[$j][$index[$j]]['purchase_qty']) ?></td>
+                                <?php $priceSum[$j][1] += $inventoryPurchaseTransactions[$j][$index[$j]]['purchase_qty']; ?>
+                            <td><?= h($inventoryPurchaseTransactions[$j][$index[$j]]['loss_qty']) ?></td>
+                                <?php $priceSum[$j][2] += $inventoryPurchaseTransactions[$j][$index[$j]]['loss_qty']; ?>
+                            <?php $sum = $lastDayQty
+                               + $inventoryPurchaseTransactions[$j][$index[$j]]['purchase_qty']
+                               - $inventoryPurchaseTransactions[$j][$index[$j]]['loss_qty']
+                               - $inventoryPurchaseTransactions[$j][$index[$j]]['count_qty'];
+                               $priceSum[$j][3] += $sum?>
+                           <td><?= h($sum) ?></td>
+                            <td>
+                                <?php  if (!($itemPriceHistories[$j][$itemPriceIndex[$j]]['start']->i18nFormat('Y-MM-dd') <= date('Y-m-',$date) . sprintf('%02d', $i) &&
+                                            ($itemPriceHistories[$j][$itemPriceIndex[$j]]['end'] == null ||
+                                                $itemPriceHistories[$j][$itemPriceIndex[$j]]['end']->i18nFormat('Y-MM-dd') > date('Y-m-',$date) . sprintf('%02d', $i) ))): ?>
+                                        <?php $itemPriceIndex[$j] ++; $itemPrice[$j] = $itemPriceHistories[$j][$itemPriceIndex[$j]]['price']; ?>
+                                <?php endif; ?>
+                               <?= number_format(h($itemPrice[$j] * $sum)) ?> </td>
+                           <?php $priceSum[$j][4] += $itemPrice[$j] * $sum ; ?>
+                           <?php $index[$j] ++ ;?>
+                           <?php $recordSize[$j] ++ ;?>
+
+                       <?php else : ?>
+                           <td></td>
+                           <td></td>
+                           <td></td>
+                           <td></td>
+                           <td></td>
+                       <?php endif; ?>
+                   <?php endfor; ?>
+               </tr>
            <?php endfor; ?>
            <tr>
            <?php for($j = 0 ; $j < $arraySize ; $j ++) : ?>
             <td>合計</td>
             <?php for($k = 0 ; $k < 5 ; $k ++ ): ?>
-                <td><?= h($priceSum[$j][$k]) ?></td>
+                <td><?= number_format(h($priceSum[$j][$k])) ?></td>
             <?php endfor; ?>
            <?php endfor; ?>
            </tr>
@@ -127,12 +138,13 @@
            <?php for($j = 0 ; $j < $arraySize ; $j ++) : ?>
             <td>平均</td>
             <?php for($k = 0 ; $k < 5 ; $k ++ ): ?>
-                <td><?= h(round($priceSum[$j][$k]/$recordSize[$j],2)) ?></td>
+                <!--<td><?= number_format(h($recordSize[$j]) != 0 ? round($priceSum[$j][$k]/$recordSize[$j]) : 0) ?></td>-->
+                <td><?= number_format(h($recordSize[$j]) != 0 ? $priceSum[$j][$k]/$recordSize[$j] : 0) ?></td>
             <?php endfor; ?>
            <?php endfor; ?>
            </tr>
         </tbody>
     </table>
-    <?= $this->Form->submit("登録",['name'=>'button']) ?>
-            <?= $this->Form->end() ?>
+    <!--<?= $this->Form->submit("登録",['name'=>'button']) ?>-->
+    <!--        <?= $this->Form->end() ?>-->
 </div>

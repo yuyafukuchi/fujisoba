@@ -46,6 +46,7 @@
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
+        <!--
         <tbody>
             <?php $i = 1;$sum = 0; foreach ($cashAccountTrans as $cashAccountTran): ?>
             <tr>
@@ -53,21 +54,37 @@
                 <td><?= h($cashAccountTran['amount']) ?></td>
                 <td><?= h($cashAccountTran['note']) ?></td>
                 <td><?= $this->Form->postLink('削除', ['action' => 'deleteCache', $i], ['confirm' => '削除してよろしいですか？']) ?></td>
-                <!--
+                <td><?= h($cashAccountTran['cash_account_id']) ?></td>
+
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $cashAccountTran->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $cashAccountTran->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $cashAccountTran->id], ['confirm' => __('Are you sure you want to delete # {0}?', $cashAccountTran->id)]) ?>
                 </td>
-                -->
+
             </tr>
             <?php $sum += intVal($cashAccountTran['amount']); $i ++ ; endforeach; ?>
+        </tbody>
+        -->
+
+        <tbody>
+            <?php echo(count($cashAccountTrans)) ?>
+            <?php $i = 1;$sum = 0; for ($j=0; $j<20; $j++): ?>
+            <?php if(empty($cashAccountTrans[$j])){continue;}; ?>
+            <tr>
+                <td>$j = <?= h($j) ?></td>
+                <td><?= h($i) ?></td>
+                <td><?= number_format(h($cashAccountTrans[$j]['amount'])) ?></td>
+                <td><?= h($cashAccountTrans[$j]['note']) ?></td>
+                <td><?= $this->Form->postLink('削除', ['action' => 'deleteCache', $j+1], ['confirm' => '削除してよろしいですか？']) ?></td>
+            </tr>
+            <?php $sum += intVal($cashAccountTran['amount']); $i ++ ; endfor; ?>
         </tbody>
         <tfoot>
             <tr>
                 <td></td>
                 <td>'出納合計：</td>
-                <td><?=h($sum) ?></td>
+                <td><?= number_format(h($sum)) ?></td>
                 <td></td>
                 <td><?= $this->Html->link('登録', ['action'=>'addConfirm']);?></td>
             </tr>

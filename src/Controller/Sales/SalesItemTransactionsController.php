@@ -16,7 +16,7 @@ class SalesItemTransactionsController extends AppController
     public $paginate = [
         'limit' => 4,
     ];
-    
+
 
     /**
      * Index method
@@ -25,26 +25,6 @@ class SalesItemTransactionsController extends AppController
      */
     public function index()
     {
-        $this->Session = $this->request->session();
-        //$storeId = $this->Auth->user('store_id');
-        $date = null;
-        if ($this->request->is('post')) {
-            $data = $this->request->data();
-            if($data['button'] === '設定') {
-                if(strtotime($data['date'])){
-                    $date = strtotime($data['date']);
-                    $this->Session->write('SalesItemTransactions.date', $date);
-                }
-            }
-        }
-        if($date == null){
-            if($this->Session->read('SalesItemTransactions.date') == null){
-                $date = time();
-                $this->Session->write('SalesItemTransactions.date', $date);
-            } else {
-                $date = $this->Session->read('SalesItemTransactions.date');
-            }
-        }
         if(isset($_GET['store'])){
             $storeId = intval($_GET['store']);
         } else {
@@ -53,40 +33,97 @@ class SalesItemTransactionsController extends AppController
         if($storeId === 0) {
             return $this->redirect(['controller' => '/../Users', 'action' => 'sales']);
         }
-        $salesItemHistories = null;
+        $this->Stores = TableRegistry::get('stores');
+        $storeName = $this->Stores->get($storeId)->name;
+        $this->Session = $this->request->session();
+        $date = null;
+        if($date == null){
+            if($this->Session->read('SalesItemTransactions.date') == null){
+                $date = time();
+                $this->Session->write('SalesItemTransactions.date', $date);
+            } else {
+                $date = $this->Session->read('SalesItemTransactions.date');
+            }
+        }
+        // if ($this->request->is('post')) {
+        //     $data = $this->request->data();
+        //     if($data['button'] === '設定') {
+        //         if(strtotime($data['date']['year'].'-'.$data['date']['month'])){
+        //             $date = strtotime($data['date']['year'].'-'.$data['date']['month']);
+        //             $this->Session->write('SalesItemTransactions.date', $date);
+        //             debug($date);
+        //         }
+        //     }
+        // }
+
+        $searchWord = null;//検索ワード
         if ($this->request->is('post')) {
             $data = $this->request->data();
-            debug($data);
             if($data['button'] === '設定') {
                 if(strtotime($data['date']['year'].'-'.$data['date']['month'])){
                     $date = strtotime($data['date']['year'].'-'.$data['date']['month']);
-                    $this->Session->write('InventoryPurchaseTransactions.date', $date);
+                    $this->Session->write('SalesItemTransactions.date', $date);
                 }
             } else if($data['button'] === '検索'){
-                $this->SalesItemHistories = TableRegistry::get('sales_item_histories');
-                $salesItemHistories = $this->SalesItemHistories->find()
-                    ->where(['sales_item_name LIKE' => '%'.$data['queryName'].'%']);
+                $searchWord = $data['queryName'];
             }
         }
-        $this->Stores = TableRegistry::get('stores');
-        $storeName = $this->Stores->get($storeId)->name;
-        //$salesItemTransactions = $this->SalesItemTransactions->find();
-        
-        $salesItemTransactions = array();
-        if($salesItemHistories == null){
-            $this->SalesItemHistories = TableRegistry::get('sales_item_histories');
-            $salesItemHistories = $this->SalesItemHistories->find();
+        // $salesItemTransactions = $this->SalesItemTransactions->find();
+        // $salesItemTransactions = array();
+        // if($salesItemHistories == null){
+        //     $this->SalesItemHistories = TableRegistry::get('sales_item_histories');
+        //     $salesItemHistories = $this->SalesItemHistories->find()
+        //         ->where(['start <=' => date('Y-m-d H:i:s', $date), 'OR' => [['end >' => date('Y-m-d H:i:s', $date)],['end is' => null]]])
+        //         ->where(['deleted' => '0'])
+        //         ->where(['end >=' => '2017-12-30 00:00:00'])
+        //         ->orwhere(function ($exp, $q) {
+        //             return $exp->isNull('end');
+        //         })
+        //         ->where(['store_id' => $storeId])
+        //         ->contain(['Stores', 'InventoryItems','InventoryItems.InventoryItemHistories'])
+        //         ->where(['start <=' => '2017-12-01 00:00:00']);
+        // }
+        // $salesItemHistories = $this->paginate($salesItemHistories);
+        // foreach ($salesItemHistories as $salesItemHistory) {
+        //     $array = $this->SalesItemTransactions->find()
+        //         ->where(['sales_item_id' => $salesItemHistory->sales_item_id])
+        //         ->contain(['SalesTransactions'])->toArray();
+        //     array_push($salesItemTransactions, $array);
+        // }
+
+        // $this->set(compact('salesItemTransactions', 'salesItemHistories','date', 'storeName'));
+        // $this->set('_serialize', ['salesItemTransactions']);
+
+        // 該当月のdaily_summaryに含まれるsales_item_idを取得
+        $this->SalesItemDaliySummaries = TableRegistry::get('sales_item_daliy_summaries');
+        if($searchWord == null){
+            $salesItemIDs = $this->SalesItemDaliySummaries->find()
+                ->where(['transaction_date LIKE' => date('Y-m', $date).'%', 'store_id' => $storeId])
+                ->distinct('sales_item_id')
+                ->select('sales_item_id');
+        }else {
+            $salesItemIDs = $this->SalesItemDaliySummaries->find()
+                ->contain(['SalesItemHistories'])
+                ->where(['transaction_date LIKE' => date('Y-m', $date).'%', 'store_id' => $storeId])
+                ->where(['sales_item_name LIKE' => '%'.$searchWord.'%'])
+                ->distinct('sales_item_daliy_summaries.sales_item_id')
+                ->select('sales_item_daliy_summaries.sales_item_id');
         }
-        $salesItemHistories = $this->paginate($salesItemHistories);
-        foreach ($salesItemHistories as $salesItemHistory) {
-            $array = $this->SalesItemTransactions->find()
-                ->where(['sales_item_id' => $salesItemHistory->sales_item_id])
-                ->contain(['SalesTransactions'])->toArray();
-            array_push($salesItemTransactions, $array);
+        $salesItemIDs = $this->paginate($salesItemIDs);
+
+        $this->SalesItemHistories = TableRegistry::get('sales_item_histories');
+        $salesItemHistories = array();
+        foreach ($salesItemIDs as $salesItemID) {
+            $array = $this->SalesItemHistories->find('all', ['order' => 'SalesItemDaliySummaries.transaction_date'])
+                ->contain(['SalesItemDaliySummaries'])
+                ->where(['start <=' => date('Y-m-d H:i:s', $date), 'OR' => [['end >' => date('Y-m-d H:i:s', $date)],['end is' => null]]])
+                ->where(['deleted' => '0'])
+                ->where([['sales_item_histories.sales_item_id' => $salesItemID->sales_item_id]])->toArray();
+            array_push($salesItemHistories, $array);
         }
-        
-        $this->set(compact('salesItemTransactions', 'salesItemHistories','date', 'storeName'));
-        $this->set('_serialize', ['salesItemTransactions']);
+
+        $this->set(compact('salesItemHistories','date', 'storeName'));
+        $this->set('_serialize', ['salesItemHistories']);
     }
 
     /**

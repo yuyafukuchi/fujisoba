@@ -26,7 +26,7 @@ class CashAccountTransController extends AppController
         ]);
         $this->Auth->sessionKey = 'Auth.Users';
     }
-    
+
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
@@ -41,7 +41,7 @@ class CashAccountTransController extends AppController
             $name = '本社管理者';
             $searchQuery['company_id'] = $this->Auth->user('company_id');
         }
-        else if($type === 'M')       
+        else if($type === 'M')
         {
             $searchQuery['company_id'] = $this->Auth->user('company_id');
             $searchQuery['store_id'] = $this->Auth->user('store_id');
@@ -58,7 +58,7 @@ class CashAccountTransController extends AppController
      */
     public function index()
     {
-        debug($this->request->data());
+        // debug($this->request->data());
         $this->paginate = [
             'contain' => ['Stores', 'Accounts']
         ];
@@ -150,7 +150,7 @@ class CashAccountTransController extends AppController
                 $cashAccountTran = $this->CashAccountTrans->patchEntity($cashAccountTran, $this->request->getData());
                 if ($this->CashAccountTrans->save($cashAccountTran)) {
                     $this->Flash->success(__('The cash account tran has been saved.'));
-    
+
                     return $this->redirect(['action' => 'index']);
                 }
                 $this->Flash->error(__('The cash account tran could not be saved. Please, try again.'));
@@ -163,7 +163,7 @@ class CashAccountTransController extends AppController
         $this->set(compact('cashAccountTran','cashAccountTrans', 'stores', 'accounts','date'));
         $this->set('_serialize', ['cashAccountTrans']);
     }
-    
+
     public function addConfirm() {
         $this->Session = $this->request->session();
         $cashAccountTrans = $this->Session->read('CashAccountTrans.newTrans');
@@ -234,10 +234,9 @@ class CashAccountTransController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-    
+
     public function deleteCache($id = null)
     {
-        $id = intVal($id);
         if($id == 0){
              $this->Flash->error('エラー：不正な操作です');
              return $this->redirect(['action' => 'add']);
@@ -250,7 +249,7 @@ class CashAccountTransController extends AppController
             $this->Flash->success('現金出納のデータを削除しました');
             return $this->redirect(['action' => 'add']);
         }
-        
+
         //$data = $this->request->data();
         //return $this->redirect(['action' => 'index']);
     }

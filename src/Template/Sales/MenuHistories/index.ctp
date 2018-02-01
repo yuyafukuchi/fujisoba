@@ -32,7 +32,7 @@
                 <th scope="col">メニュー番号</th>
                 <th scope="col">メニュー名</th>
                 <th scope="col">出庫アイテム番号</th>
-                <th scope="col">出庫アイテム</th>
+                <th scope="col">出庫アイテム名</th>
                 <th scope="col">期間</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
@@ -42,14 +42,15 @@
         <tbody>
             <?php foreach ($menuHistories as $menuHistory): ?>
             <tr>
-                <td><?= h($menuHistory->menu->menu_number) ?></td>
+                <td><?= h($menuHistory['Menus']['menu_number']) ?></td>
                 <td><?= h($menuHistory->name) ?></td>
-                <td><?= h($menuHistory->sales_item_assign_history->sales_item->sales_item_number)?></td>
-               <td><?= h($menuHistory->sales_item_assign_history->sales_item->sales_item_histories[0]->sales_item_name)?></td>
+                <td><?= h($menuHistory['SalesItems']['sales_item_number'])?></td>
+                <td><?= h($menuHistory['SalesItemHistories']['sales_item_name'])?></td>
                 <td><?= h($menuHistory->start->i18nFormat('yyyy/MM/dd~')) ?> </td>
                 <td><?= $this->Html->link(__('Edit'), ['action' => 'edit', $menuHistory->id]) ?></td>
                 <td> <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $menuHistory->id]) ?></td>
-                <td> <?= $this->Form->postLink('割付', ['action' => 'delete', $menuHistory->id]) ?></td>
+                <!--<td> <?= $this->Form->postLink('割付', ['controller' => 'SalesItemAssignHistories','action' => 'index']) ?></td>-->
+                <td> <?= $this->Html->link('割付', ['controller' => 'SalesItemAssignHistories','action' => 'index']) ?></td>
             </tr>
             <?php endforeach; ?>
         </tbody>

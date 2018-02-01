@@ -45,6 +45,11 @@ class SalesItemHistoriesTable extends Table
             'foreignKey' => 'sales_item_id',
             'joinType' => 'INNER'
         ]);
+
+        $this->hasOne('SalesItemDaliySummaries', [
+            'foreignKey' => 'sales_item_id',
+            'bindingKey' => 'sales_item_id'
+        ]);
     }
 
     /**

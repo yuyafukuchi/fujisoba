@@ -34,7 +34,7 @@
             <tr>
                 <td><?= h($menuHistory->menu->menu_number) ?></td>
                 <td><?= h($menuHistory->name) ?></td>
-                <td><?= in_array($menuHistory->menu_item_id,$idArray,true) ? h(''): 
+                <td><?= in_array($menuHistory->menu_item_id,$idArray,true) ? h(''):
                 $this->Form->postLink('>', ['action' => 'add', 'item' => $menuHistory->menu_item_id, 'store' => $storeId, ]) ?></td>
             </tr>
             <?php endforeach; ?>
@@ -61,11 +61,11 @@
         </thead>
         <tbody>
             <?php foreach ($storeMenuHistories as $storeMenuHistory): ?>
+            <?=$this->Form->create('StoreMenuHistories',['url' => ['action' => 'edit','store' => $storeId, 'menu_item_id' => intval($storeMenuHistory->menu_item_id), $storeMenuHistory->id]]) ?>
             <tr>
                 <td><?= h($storeMenuHistory->menu_history->name) ?></td>
-                <td><?= $this->Number->format($storeMenuHistory->id) ?></td>
-                <?=$this->Form->create('StoreMenuHistories'.$storeMenuHistory->id,['url' => ['action' => 'edit','store' => $storeId, $storeMenuHistory->id]]) ?>
-                <td><?= $this->Form->control('store_menu_num',['label' => '','rows'=>1,'type'=>'number', 'step'=>0.1, 'default' => intval($storeMenuHistory->store_menu_number)])?></td>
+                <td><?= $this->Number->format($storeMenuHistory->menu->menu_number) ?></td>
+                <td><?= $this->Form->control('store_menu_number',['label' => '','rows'=>1,'type'=>'number', 'step'=>0.1, 'default' => intval($storeMenuHistory->store_menu_number)])?></td>
                 <td><?= $this->Form->control('price',['label' => '','rows'=>1,'type'=>'number', 'default' => intval($storeMenuHistory->price)])?></td>
                 <td><?=  $this->Form->input("vm1", ["type" => "checkbox","value" => "1","label" => "" ,'checked' => $storeMenuHistory->vending_mashine1, 'default' => 0 ]);?></td>
                 <td><?=  $this->Form->input("vm2", ["type" => "checkbox","value" => "1","label" => "" ,'checked' => $storeMenuHistory->vending_mashine2, 'default' => 0 ]);?></td>
@@ -77,10 +77,13 @@
                 <td><?= $this->Form->submit("登録",['name'=>'button']) ?></td>
                 <?=$this->Form->end() ?>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $storeMenuHistory->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $storeMenuHistory->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $storeMenuHistory->id], ['confirm' => __('Are you sure you want to delete # {0}?', $storeMenuHistory->id)]) ?>
-                </td>
+                    <!--<?= $this->Html->link(__('View'), ['action' => 'view', $storeMenuHistory->id]) ?>-->
+                    <!--<?= $this->Html->link(__('Edit'), ['action' => 'edit', $storeMenuHistory->id]) ?>-->
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete',
+                                                                $storeMenuHistory->id,
+                                                                'store' => $storeId,
+                                                                'menu_item_id' => intval($storeMenuHistory->menu_item_id)],
+                                                        ['confirm' => __('Are you sure you want to delete # {0}?', $storeMenuHistory->id)]) ?></td>
             </tr>
             <?php endforeach; ?>
         </tbody>

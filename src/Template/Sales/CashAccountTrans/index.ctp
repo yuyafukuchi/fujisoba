@@ -41,6 +41,7 @@
                 <?php endforeach ; ?>
             </tr>
         </thead>
+
         <tbody>
             <?php $array_sum = array_fill(0,count($key_array),0); $day_cache = 0;?>
             <?php $midPrinted = false; foreach ($cashAccountTrans as $cashAccountTran): ?>
@@ -48,7 +49,7 @@
                 <tr>
                     <th>中間計</th>
                     <?php for($j = 0 ; $j < count($key_array) ; $j++) :?>
-                            <th><?=$array_sum[$j]?></th>
+                            <th><?=number_format($array_sum[$j])?></th>
                     <?php endfor;  ?>
                 </tr>
             <?php $midPrinted = true ; endif; ?>
@@ -63,7 +64,7 @@
                     <?php for($i = 0 ; $i < count($key_array) ; $i++) :?>
                         <?php if($key_array[$i] == $account_id) :?>
                             <?php $array_sum[$i] += strval($cashAccountTran->amount); ?>
-                            <th><?=h($cashAccountTran->amount)?></th>
+                            <th><?=h(number_format($cashAccountTran->amount))?></th>
                         <?php else : ?>
                             <th></th>
                         <?php endif; ?>
@@ -84,7 +85,8 @@
             <tr>
                 <th>合計</th>
                 <?php for($j = 0 ; $j < count($key_array) ; $j++) :?>
-                        <th><?=$array_sum[$j]?></th>
+                        <th><?=number_format($array_sum[$j])?></th>
+
                 <?php endfor;  ?>
             </tr>
         </tbody>

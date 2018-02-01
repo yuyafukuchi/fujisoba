@@ -13,7 +13,7 @@ use Cake\ORM\TableRegistry;
  */
 class InventoryPurchaseTransactionsController extends AppController
 {
-    
+
     public function initialize()
     {
         parent::initialize();
@@ -50,7 +50,8 @@ class InventoryPurchaseTransactionsController extends AppController
             if($this->Session->read('InventoryPurchaseTransactions.date') == null){
                 $date = time();
                 $this->Session->write('InventoryPurchaseTransactions.date', $date);
-            } else {
+            }
+            else {
                 $date = $this->Session->read('InventoryPurchaseTransactions.date');
             }
         }
@@ -64,8 +65,13 @@ class InventoryPurchaseTransactionsController extends AppController
         }
         $this->StoreInventoryItemHistories = TableRegistry::get('store_inventory_item_histories');
         $storeInventoryItemHistories = $this->StoreInventoryItemHistories->find()
-            ->where(['store_id' => $storeId])->contain(['Stores', 'InventoryItems','InventoryItems.InventoryItemHistories']);
-            
+            ->where(['end >=' => $date])
+            ->orwhere(function ($exp, $q) {
+                return $exp->isNull('end');
+            })
+            ->where(['store_id' => $storeId])->contain(['Stores', 'InventoryItems','InventoryItems.InventoryItemHistories'])
+            ->where(['start <=' => $date]);
+
         $previousDayCountArray = array();
         foreach($storeInventoryItemHistories as $storeInventoryItemHistory) {
             $inventoryPurchaseTransaction = $this->InventoryPurchaseTransactions->find()->where([
@@ -167,7 +173,7 @@ class InventoryPurchaseTransactionsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-    
+
     public function register($id = null)
     {
         $this->request->allowMethod(['post']);
@@ -191,10 +197,11 @@ class InventoryPurchaseTransactionsController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+
     public $paginate = [
         'limit' => 2,
     ];
-    
+
     public function monthly(){
         if(isset($_GET['store'])){
             $storeId = intval($_GET['store']);
@@ -204,33 +211,17 @@ class InventoryPurchaseTransactionsController extends AppController
         if($storeId === 0) {
             return $this->redirect(['controller' => '/../Users', 'action' => 'sales']);
         }
+        // $this->Stores = TableRegistry::get('stores');
+        // if(count($this->Stores->find()->where(['id' => $storeId])->toArray()) === 1){
+        //     $storeName = $this->Stores->get($storeId)->name;
+        // } else {
+        //     return $this->redirect(['controller' => '/../Users', 'action' => 'sales']);
+        // }
+        // debug($storeName);
         $this->Stores = TableRegistry::get('stores');
-        if(count($this->Stores->find()->where(['id' => $storeId])->toArray()) === 1){
-            $storeName = $this->Stores->get($storeId)->name;
-        } else {
-            return $this->redirect(['controller' => '/../Users', 'action' => 'sales']);
-        }
-        debug($storeName);
+        $storeName = $this->Stores->get($storeId)->name;
         $this->Session = $this->request->session();
         $date = null;
-        $storeInventoryItemHistories = null;
-        if ($this->request->is('post')) {
-            $data = $this->request->data();
-            debug($data);
-            if($data['button'] === '設定') {
-                if(strtotime($data['date']['year'].'-'.$data['date']['month'])){
-                    $date = strtotime($data['date']['year'].'-'.$data['date']['month']);
-                    $this->Session->write('InventoryPurchaseTransactions.date', $date);
-                }
-            } else if($data['button'] === '検索'){
-                $this->StoreInventoryItemHistories = TableRegistry::get('store_inventory_item_histories');
-                $storeInventoryItemHistories = $this->StoreInventoryItemHistories->find()->contain(['Stores', 'InventoryItems','InventoryItems.InventoryItemHistories'])
-                    ->where(['store_inventory_item_histories.store_id' => $storeId])
-                    ->matching('InventoryItemHIstories', function ($q) use ($data) {
-                      return $q->where(['InventoryItemHistories.item_name LIKE' => '%'.$data['queryName'].'%']);
-                    });
-            }
-        }
         if($date == null){
             if($this->Session->read('InventoryPurchaseTransactions.date') == null){
                 $date = time();
@@ -239,22 +230,66 @@ class InventoryPurchaseTransactionsController extends AppController
                 $date = $this->Session->read('InventoryPurchaseTransactions.date');
             }
         }
-        $inventoryPurchaseTransactions = array();
-        if($storeInventoryItemHistories == null) {
-            $this->StoreInventoryItemHistories = TableRegistry::get('store_inventory_item_histories');
-            $storeInventoryItemHistories = $this->StoreInventoryItemHistories->find()
-            ->where(['store_id' => $storeId])->contain(['Stores', 'InventoryItems','InventoryItems.InventoryItemHistories']);
+        // $storeInventoryItemHistories = null;
+        $searchWord = null;//検索ワード
+        if ($this->request->is('post')) {
+            $data = $this->request->data();
+            if($data['button'] === '設定') {
+                if(strtotime($data['date']['year'].'-'.$data['date']['month'])){
+                    $date = strtotime($data['date']['year'].'-'.$data['date']['month']);
+                    $this->Session->write('InventoryPurchaseTransactions.date', $date);
+                }
+            } else if($data['button'] === '検索'){
+                $searchWord = $data['queryName'];
+            }
         }
-        $storeInventoryItemHisotries = $this->paginate($storeInventoryItemHistories);
+
+        $this->StoreInventoryItemHistories = TableRegistry::get('store_inventory_item_histories');
+        if($searchWord == null){
+            $storeInventoryItemHistories = $this->StoreInventoryItemHistories->find()
+                ->contain(['InventoryItemHistories'])
+                ->where(['store_id' => $storeId])
+                ->where(['store_inventory_item_histories.start <=' => date('Y-m-d', strtotime('last day of this month', $date))])
+                ->where(['OR' => [['store_inventory_item_histories.end >=' => date('Y-m-d', strtotime('first day of this month', $date))],['store_inventory_item_histories.end is' => null]]])
+                ->distinct('store_inventory_item_histories.inventory_item_id');
+        }else {
+            $storeInventoryItemHistories = $this->StoreInventoryItemHistories->find()
+                ->contain(['InventoryItemHistories'])
+                ->where(['store_id' => $storeId])
+                ->where(['store_inventory_item_histories.start <=' => date('Y-m-d', strtotime('last day of this month', $date))])
+                ->where(['OR' => [['store_inventory_item_histories.end >=' => date('Y-m-d', strtotime('first day of this month', $date))],['store_inventory_item_histories.end is' => null]]])
+                ->where(['InventoryItemHistories.item_name LIKE' => '%'.$searchWord.'%'])
+                ->distinct('store_inventory_item_histories.inventory_item_id');
+        }
+
+        $storeInventoryItemHistories = $this->paginate($storeInventoryItemHistories);
+
+        $lastMonthInventoryPurchaseTransactions = array(); //先月以前の最新の残取り数
+        $inventoryPurchaseTransactions = array();
+        $itemPriceHistories = array();
         foreach($storeInventoryItemHistories as $storeInventoryItemHistory) {
             $array = $this->InventoryPurchaseTransactions->find()
-                ->where([   'transaction_date >=' => date('Y-m-d 00:00:00',strtotime('last day of previous month',$date)),
-                            'transaction_date <=' => date('Y-m-d 00:00:00',strtotime('last day of this month', $date)),
+                ->where([   'transaction_date >=' => date('Y-m-d',strtotime('first day of this month',$date)),
+                            'transaction_date <' => date('Y-m-d',strtotime('first day of next month', $date)),
                             'inventory_item_id' => $storeInventoryItemHistory->inventory_item_id,
                             'store_id' => $storeId])
                 ->order(['transaction_date'])->toArray();
             array_push($inventoryPurchaseTransactions, $array );
+            $array = $this->InventoryPurchaseTransactions->find()
+                ->where(['transaction_date <' => date('Y-m-d',strtotime('first day of this month', $date))])
+                ->where(['inventory_item_id' => $storeInventoryItemHistory->inventory_item_id])
+                ->where(['store_id' => $storeId])
+                ->order(['transaction_date' => 'desc'])
+                ->first();
+            array_push($lastMonthInventoryPurchaseTransactions, $array );
+            $array = $this->StoreInventoryItemHistories->find()
+                ->where(['store_id' => $storeId])
+                ->where(['start <=' => date('Y-m-d', strtotime('last day of this month', $date))])
+                ->where(['OR' => [['end >=' => date('Y-m-d', strtotime('first day of this month', $date))],['end is' => null]]])
+                ->where(['inventory_item_id' => $storeInventoryItemHistory->inventory_item_id])
+                ->toArray();
+            array_push($itemPriceHistories, $array );
         }
-        $this->set(compact('date', 'storeInventoryItemHistories','inventoryPurchaseTransactions', 'storeName'));
+        $this->set(compact('date', 'storeInventoryItemHistories','inventoryPurchaseTransactions', 'storeName', 'lastMonthInventoryPurchaseTransactions', 'itemPriceHistories'));
     }
 }

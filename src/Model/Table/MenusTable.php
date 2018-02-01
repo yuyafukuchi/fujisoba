@@ -44,6 +44,9 @@ class MenusTable extends Table
         $this->hasMany('SalesTransactions', [
             'foreignKey' => 'menu_id'
         ]);
+        $this->hasMany('SalesItemAssignHistories', [
+            'foreignKey' => 'menu_item_id'
+        ]);
     }
 
     /**

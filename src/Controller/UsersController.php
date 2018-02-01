@@ -16,19 +16,6 @@ class UsersController extends AppController
     public function initialize()
     {
         parent::initialize();
-        $this->loadComponent('Auth', [
-            'loginAction' => [
-                'controller' => 'Users',
-                'action' => 'login',
-            ],
-            'authError' => 'このページを見るためにはログインが必要です',
-            'authenticate' => [
-                'Form' => [
-                    'fields' => ['username' => 'name','password' => 'password']    // ログインID対象をemailカラムへ
-                ]
-            ]
-        ]);
-        $this->Auth->sessionKey = 'Auth.Users';
     }
 
     public function beforeFilter(Event $event)
@@ -222,7 +209,7 @@ class UsersController extends AppController
         $this->viewBuilder()->setLayout('sales');
 
         $storeId = $this->Auth->user('store_id');
-        if($this->Auth->user('type') == 'H'){
+        if ($this->Auth->user('type') == 'H'){
             $this->Stores = TableRegistry::get('stores');
             $stores = $this->Stores->find()->select(['id','name'])->where(['company_id' => $this->Auth->user('company_id')]);
             $storeId = null;

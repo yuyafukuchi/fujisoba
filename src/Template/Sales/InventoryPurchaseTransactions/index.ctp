@@ -75,7 +75,7 @@
             </tr>
             <?php $i ++; endforeach; ?>
             <tr>
-                <td></td>    
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -88,5 +88,5 @@
         </tbody>
     </table>
     <?= $this->Form->submit("登録",['name'=>'button']) ?>
-            <?= $this->Form->end() ?>
+    <?= $this->Form->end() ?>
 </div>

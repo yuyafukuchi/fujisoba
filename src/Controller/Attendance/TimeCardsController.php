@@ -19,7 +19,12 @@ class TimeCardsController extends AppController
         // _userModel is used inside Footprint plugin
         $this->_userModel = 'Employees';
 
-        $this->loadComponent('Auth', [
+        // Double Login as Employees
+        $this->Auth->__set('sessionKey', 'Auth.Employees');
+        $this->Auth->config([
+            'authenticate' => [
+                'Form' => ['userModel' => 'Employees']
+            ],
             'loginAction' => [
                 'controller' => 'TimeCards',
                 'action' => 'login',
@@ -30,10 +35,11 @@ class TimeCardsController extends AppController
                     'fields' => ['username' => 'code','password' => 'code'],    // ログインID対象をemailカラムへ
                     'userModel' => 'Employees', // Use same model for AuthComponent
                 ]
-            ]
-        ]);
-        $this->Auth->config('authenticate', [
-            'Form' => ['userModel' => 'Employees']
+            ],
+            'storage' => [
+                'className' => 'Session',
+                'key' => 'Auth.Employees',
+            ],
         ]);
         $this->Auth->sessionKey = 'Auth.Employees';
     }
