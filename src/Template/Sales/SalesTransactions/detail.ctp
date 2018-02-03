@@ -13,7 +13,7 @@
 <?php $lastDay = date('d', strtotime('last day of this month', $date)) ?>
 <?php $day = strtotime('first day of this month',$date);?>
 <div class="salesTransactions view large-9 medium-8 columns content">
-    <?=$storeName ?> 在庫日計表 
+    <?=$storeName ?> 在庫日計表
     <?=date('Y年m月度',$date)?>
     <?=$this->Form->create(null) ?>
     <?= $this->Form->input(
@@ -24,8 +24,8 @@
                       "separator" => "/",
                       "templates" => [ "dateWidget" => '{{year}} 年 {{month}} 月' ],
                       "minYear" => date("Y" ) - 70,
-                      "maxYear" => date("Y" ) - 18,
-                      "default" => date("Y-m" ),
+                      "maxYear" => date("Y"),
+                      "default" => date("Y-m", $date),
                       "empty" => [ "year" => "年", "month" => "月"]]) ?>
     <?= $this->Form->submit("設定",['name'=>'button']) ?>
     <?=$this->Form->end() ?>
@@ -41,7 +41,7 @@
                 <th>遅番</th>
                 <?php while(true) : ?>
                 <?php if($hour == 31) :?>
-                <?php 
+                <?php
                     $hour = 7;
                     break; ?>
                 <?php endif; ?>

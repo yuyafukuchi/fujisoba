@@ -41,7 +41,6 @@ class TimeCardsController extends AppController
                 'key' => 'Auth.Employees',
             ],
         ]);
-        $this->Auth->sessionKey = 'Auth.Employees';
     }
 
     /**

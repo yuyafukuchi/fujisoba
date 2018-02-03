@@ -74,7 +74,7 @@ class CashAccountTransTable extends Table
 
         $validator
             ->scalar('note')
-            ->allowEmpty('note');
+            ->notEmpty('note');
 
         $validator
             ->integer('created_by')

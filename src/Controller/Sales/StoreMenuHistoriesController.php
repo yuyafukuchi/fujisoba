@@ -472,7 +472,6 @@ class StoreMenuHistoriesController extends AppController
     public function delete($id = null)
     {
         $this->Session = $this->request->session();
-        $this->request->allowMethod(['post']);
 
         if($this->Session->read('StoreMenuHistories.date') == null){
             $date = time();

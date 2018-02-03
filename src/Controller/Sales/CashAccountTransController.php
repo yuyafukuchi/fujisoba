@@ -17,38 +17,28 @@ class CashAccountTransController extends AppController
     public function initialize()
     {
         parent::initialize();
-        $this->loadComponent('Auth', [
-            'loginAction' => [
-                'controller' => '/../Users',
-                'action' => 'login',
-            ],
-            'authError' => 'このページにアクセスするためにはログインが必要です。',
-        ]);
-        $this->Auth->sessionKey = 'Auth.Users';
     }
 
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
+
         $type = $this->Auth->user('type');
         $name = '';
-        if($type === 'G')
-        {
+
+        if ($type === 'G') {
             $this->redirect(array('controller' => 'Attendance/TimeCards', 'action' => 'login'));
-        }
-        else if($type === 'H')
-        {
+        } elseif ($type === 'H') {
             $name = '本社管理者';
             $searchQuery['company_id'] = $this->Auth->user('company_id');
-        }
-        else if($type === 'M')
-        {
+        } elseif ($type === 'M') {
             $searchQuery['company_id'] = $this->Auth->user('company_id');
             $searchQuery['store_id'] = $this->Auth->user('store_id');
             $name = $this->CashAccountTrans->Stores->get($this->Auth->user('store_id'))['name'];
         }
-         $data = array('type' => $type, 'name' => $name);
-         $this->set(compact('data'));
+
+        $data = array('type' => $type, 'name' => $name);
+        $this->set(compact('data'));
     }
 
     /**
@@ -112,59 +102,63 @@ class CashAccountTransController extends AppController
     public function add()
     {
         $type = $this->Auth->user('type');
-        if($type != 'M')
-        {
+        if ($type != 'M') {
             $this->redirect(array('action' => 'index'));
         }
+
         $this->Session = $this->request->session();
-        $cashAccountTrans = $this->Session->read('CashAccountTrans.newTrans');
         $date = $this->Session->read('CashAccountTrans.date');
-        if($date == null){
+        if (empty($date)){
             $date = time();
-            $this->Session->write('CashAccountTrans.date', date('Y-m-d',$date));
+            $this->Session->write('CashAccountTrans.date', date('Y-m-d 00:00:00', $date));
         } else {
             $date = strtotime($date);
         }
+
         if ($this->request->is('post')) {
             $data = $this->request->data();
-            if($data['button'] === '設定'){
-                if($date = strtotime($data['date'])){
+            if ($data['button'] === '設定') {
+                if ($date = strtotime($data['datepicker'])) {
                     $this->Session->write('CashAccountTrans.date', date('Y-m-d',$date));
                 } else {
                     $this->Flash->error('入力された日付が不正です。');
                 }
-            } else if($data['button'] === '送信'){
+            } elseif ($data['button'] === '新規登録') {
                 unset($data['button']);
-                if(!is_array($cashAccountTrans)){
-                    $cashAccountTrans = array();
-                }
                 if(count($data) != 0){
-                    array_push($cashAccountTrans, $data);
-                    $this->Session->write('CashAccountTrans.newTrans',$cashAccountTrans);
+                    $data += ['transaction_date' => date('Y-m-d 00:00:00', $date)];
+                    $data += ['store_id' => $this->Auth->user('store_id')];
+                    $cashAccountTran = $this->CashAccountTrans->newEntity();
+                    $this->CashAccountTrans->patchEntity($cashAccountTran,$data);
+                    $this->CashAccountTrans->save($cashAccountTran);
                 }
+            } elseif ($data['button'] === '登録' && !empty($data['cashAccountTrans'])) {
+                // debug($data['cashAccountTrans']);die;
+                unset($data['button']);
+                $cashAccountTranss = $this->CashAccountTrans->find()
+                    ->where([
+                        'transaction_date' => date('Y-m-d 00:00:00', $date),
+                        'store_id' => $this->request->getQuery('store')
+                    ]);
+                $entities = $this->CashAccountTrans->patchEntities($cashAccountTranss, $data['cashAccountTrans']);
+                // debug($entities);die;
+                $result = $this->CashAccountTrans->saveMany($entities);
             }
         }
-            $cashAccountTran = $this->CashAccountTrans->newEntity();
-            /*
-            if ($this->request->is('post')) {
-                $cashAccountTran = $this->CashAccountTrans->patchEntity($cashAccountTran, $this->request->getData());
-                if ($this->CashAccountTrans->save($cashAccountTran)) {
-                    $this->Flash->success(__('The cash account tran has been saved.'));
 
-                    return $this->redirect(['action' => 'index']);
-                }
-                $this->Flash->error(__('The cash account tran could not be saved. Please, try again.'));
-            }
-            }
-        */
-        $date = explode('-',date('Y-m-d',$date));
-        $stores = $this->CashAccountTrans->Stores->find('list', ['limit' => 200]);
+        $cashAccountTranss = $this->CashAccountTrans->find()
+            ->where([
+                'transaction_date' => date('Y-m-d 00:00:00', $date),
+                'store_id' => $this->request->getQuery('store')
+            ])
+            ->contain(['Accounts']);
         $accounts = $this->CashAccountTrans->Accounts->find('list', ['limit' => 200]);
-        $this->set(compact('cashAccountTran','cashAccountTrans', 'stores', 'accounts','date'));
-        $this->set('_serialize', ['cashAccountTrans']);
+
+        $this->set(compact('cashAccountTran','cashAccountTranss', 'accounts', 'date'));
     }
 
-    public function addConfirm() {
+    public function addConfirm()
+    {
         $this->Session = $this->request->session();
         $cashAccountTrans = $this->Session->read('CashAccountTrans.newTrans');
         $date = $this->Session->read('CashAccountTrans.date');
@@ -222,35 +216,11 @@ class CashAccountTransController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
+    public function delete($id = null, $store_id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
         $cashAccountTran = $this->CashAccountTrans->get($id);
-        if ($this->CashAccountTrans->delete($cashAccountTran)) {
-            $this->Flash->success(__('The cash account tran has been deleted.'));
-        } else {
-            $this->Flash->error(__('The cash account tran could not be deleted. Please, try again.'));
-        }
+        $this->CashAccountTrans->delete($cashAccountTran);
 
-        return $this->redirect(['action' => 'index']);
-    }
-
-    public function deleteCache($id = null)
-    {
-        if($id == 0){
-             $this->Flash->error('エラー：不正な操作です');
-             return $this->redirect(['action' => 'add']);
-        } else {
-            $id --;
-            $this->Session = $this->request->session();
-            $cashAccountTrans = $this->Session->read('CashAccountTrans.newTrans');
-            unset($cashAccountTrans[$id]);
-            $this->Session->write('CashAccountTrans.newTrans', $cashAccountTrans);
-            $this->Flash->success('現金出納のデータを削除しました');
-            return $this->redirect(['action' => 'add']);
-        }
-
-        //$data = $this->request->data();
-        //return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'add', 'store' => $store_id]);
     }
 }

@@ -353,7 +353,8 @@ class MenuHistoriesController extends AppController
 				'SalesItemHistories.start',
 				'SalesItemHistories.end',
 				'SalesItemHistories.deleted'
-			]);
+			])
+			->order(['Menus.menu_number' => 'ASC']);
 
 
 

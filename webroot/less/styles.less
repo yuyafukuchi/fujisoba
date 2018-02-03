@@ -114,6 +114,26 @@ footer.navbar-inverse {
     background-color: #d9d9d9;
     border: 1px solid #41719c;
 }
+.form-bordered {
+    border: 1px solid #999;
+    padding: 20px;
+}
+.form-inline {
+    input, select, label {
+        margin-right: 10px;
+    }
+    td, th {
+        input, select, label {
+            margin-right: 0;
+        }
+        input, select {
+            max-width: 8em;
+        }
+    }
+    .submit {
+        display: inline-block;
+    }
+}
 
 /**
  * Misc
@@ -132,6 +152,15 @@ footer.navbar-inverse {
     .row, form {
         width: 100%;
     }
+}
+.text-red {
+    color: #c00;
+}
+.text-blue {
+    color: darkblue;
+}
+.bold {
+    font-weight: bold;
 }
 
 /**
@@ -289,5 +318,47 @@ td.editable {
 @media (min-width: 767px) {
     .nav-side-menu .menu-list .menu-content {
         display: block;
+    }
+}
+
+/* Sales */
+
+.sales.main{
+    > header {
+        margin-top: -20px;
+        margin-bottom: 20px;
+        padding: 0.5em 0;
+        background: deepskyblue;
+
+        h2 {
+            margin: 0;
+        }
+    }
+
+    .table-bordered {
+        caption {
+            font-weight: bold;
+        }
+
+        thead tr th {
+            background: lightblue;
+            text-align: center;
+        }
+
+        .pink {
+            background: lavenderblush;
+        }
+        .green {
+            background: #ade5b7;
+
+            input, select {
+                background: #dbf4e0;
+                color: green;
+                border: 1px solid #dbf4e0;
+            }
+        }
+        .blue {
+            background: lightblue;
+        }
     }
 }

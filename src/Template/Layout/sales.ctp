@@ -30,11 +30,17 @@ if (Configure::read('App.author')) {
 // Prepend scripts required by the navbar
 $this->prepend('script', $this->Html->script([
     '//code.jquery.com/jquery-2.1.1.min.js',
+    '//cdnjs.cloudflare.com/ajax/libs/jquery-ui-bootstrap/0.5pre/js/jquery-ui-1.9.2.custom.min.js',
+    '//ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js',
     '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/moment.min.js',
     '/bootstrap/js/transition',
     '/bootstrap/js/collapse',
     '/bootstrap/js/dropdown',
-    '/bootstrap/js/alert'
+    '/bootstrap/js/alert',
+    'common',
+]));
+$this->prepend('css', $this->Html->css([
+    '//cdnjs.cloudflare.com/ajax/libs/jquery-ui-bootstrap/0.5pre/css/custom-theme/jquery-ui-1.9.2.custom.css',
 ]));
 ?>
 <!DOCTYPE html>
@@ -59,6 +65,7 @@ $this->prepend('script', $this->Html->script([
         // Sometimes we'll want to send scripts to the top (rarely..)
         echo $this->fetch('script.top');
     ?>
+    <?= $this->fetch('script'); ?>
 </head>
 <body class="sales">
     <header role="banner" class="navbar navbar-inverse">
@@ -97,6 +104,7 @@ $this->prepend('script', $this->Html->script([
                                     売上日計表
                                 </li>
                                 <ul class="sub-menu collapse" id="sales-summary">
+                                    <li><?= $this->Html->link('全店舗', ['prefix' => false, 'controller' => 'Sales/SalesTransactions','action' => 'index']) ?></li>
                                     <?php foreach ($stores as $store) : ?>
                                         <li><?= $this->Html->link($store->name, ['prefix' => false, 'controller' => 'Sales/SalesTransactions','action' => 'view', 'store' => $store->id]) ?></li>
                                     <?php endforeach; ?>
@@ -177,7 +185,7 @@ $this->prepend('script', $this->Html->script([
                      </div>
                 </div>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-10 sales main">
             <?= $this->fetch('content'); ?>
             </div>
         </div>
@@ -187,6 +195,5 @@ $this->prepend('script', $this->Html->script([
             <p class="text-center">Copyright &copy; 2017 powered by TRT Corp. All rights reserved.</p>
         </div>
     </footer>
-    <?= $this->fetch('script'); ?>
 </body>
 </html>

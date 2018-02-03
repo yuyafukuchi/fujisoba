@@ -1,36 +1,31 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\InventoryItemHistory[]|\Cake\Collection\CollectionInterface $inventoryItemHistories
- */
-?>
-<div class="inventoryItemHistories index large-9 medium-8 columns content">
-    マスターメニュー名変更<br>
-    新しい品名を入力してください
-    <?=$this->Form->create(null) ?>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
+<header class="row">
+    <div class="col-sm-12">
+        <h2>マスターメニュー名変更</h2>
+    </div>
+</header>
+
+<p class="text-blue bold">新しいメニュー名、出庫アイテム番号・名を入力してください。</p>
+
+<?=$this->Form->create(null, ['class' => 'form-inline']) ?>
+    <table class="table table-bordered">
         <tbody>
             <tr>
-                <td>番号</td>
+                <td>メニュー番号</td>
                 <td><?=h($menuHistory->menu->menu_number)?></td>
             </tr>
             <tr>
-                <td>品名</td>
+                <td>メニュー名</td>
                 <td><?=h($menuHistory->name)?></td>
             </tr>
             <tr>
-                <td>新品名</td>
-                <td><?= $this->Form->control('name',['label' => '', 'rows'=>1,'type'=>'text'])?></td>
+                <td>新メニュー名</td>
+                <td class="green"><?= $this->Form->control('name', ['label' => false, 'required' => true, 'style' => 'min-width: 20em;']) ?></td>
             </tr>
         </tbody>
     </table>
-    <?= $this->Form->submit("キャンセル",['name'=>'button']) ?>
-    <?= $this->Form->submit("変更",['name'=>'button']) ?>
-    <?=$this->Form->end() ?>
-</div>
+
+    <div class="text-center">
+        <?= $this->Form->submit("キャンセル", ['name'=>'button', 'style' => 'margin-right: 50px;']) ?>
+        <?= $this->Form->submit("　変更　", ['name'=>'button']) ?>
+    </div>
+<?=$this->Form->end() ?>

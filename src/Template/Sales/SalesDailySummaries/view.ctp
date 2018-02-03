@@ -31,8 +31,8 @@
                       "separator" => "/",
                       "templates" => [ "dateWidget" => '{{year}} 年 {{month}} 月' ],
                       "minYear" => date("Y" ) - 70,
-                      "maxYear" => date("Y" ) - 18,
-                      "default" => date("Y-m" ),
+                      "maxYear" => date("Y"),
+                      "default" => date("Y-m", $date),
                       "empty" => [ "year" => "年", "month" => "月"]]) ?>
     <?= $this->Form->submit("設定",['name'=>'button']) ?>
     <?=$this->Form->end() ?>

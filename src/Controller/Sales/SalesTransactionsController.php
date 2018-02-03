@@ -18,19 +18,6 @@ class SalesTransactionsController extends AppController
     public function initialize()
     {
         parent::initialize();
-        $this->loadComponent('Auth', [
-            'loginAction' => [
-                'controller' => '/../Users',
-                'action' => 'login',
-            ],
-            'authError' => 'このページを見るためにはログインが必要です',
-            'authenticate' => [
-                'Form' => [
-                    'fields' => ['username' => 'name','password' => 'password']    // ログインID対象をemailカラムへ
-                ]
-            ]
-        ]);
-        $this->Auth->sessionKey = 'Auth.Users';
     }
 
     /**
@@ -40,13 +27,38 @@ class SalesTransactionsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Stores', 'Menus']
-        ];
-        $salesTransactions = $this->paginate($this->SalesTransactions);
+        if($this->Auth->user('type') == 'H'){
+            $this->Stores = TableRegistry::get('stores');
+            $stores = $this->Stores->find()->select(['id','name'])->where(['company_id' => $this->Auth->user('company_id')]);
+        } else {
+            return $this->redirect(['controller' => '/../Users', 'action' => 'sales']);
+        }
 
-        $this->set(compact('salesTransactions'));
-        $this->set('_serialize', ['salesTransactions']);
+        $this->Session = $this->request->session();
+        $salesTransactions = $this->SalesTransactions->find()
+            ->contain(['Stores', 'Menus']);
+        $date = null;
+
+        if ($this->request->is('post')) {
+            $data = $this->request->data();
+            if($data['button'] === '検索') {
+                if(strtotime($data['date']['year'].'-'.$data['date']['month'])){
+                    $date = strtotime($data['date']['year'].'-'.$data['date']['month']);
+                    $this->Session->write('SalesTransactions.date', $date);
+                }
+            }
+        }
+
+        if (empty($date)) {
+            if($this->Session->read('SalesTransactions.date') == null){
+                $date = time();
+                $this->Session->write('SalesTransactions.date', $date);
+            } else {
+                $date = $this->Session->read('SalesTransactions.date');
+            }
+        }
+
+        $this->set(compact('salesTransactions','date','stores'));
     }
 
     /**
@@ -106,7 +118,7 @@ class SalesTransactionsController extends AppController
 
         if ($this->request->is('post')) {
             $data = $this->request->data();
-            if($data['button'] === '設定') {
+            if($data['button'] === '検索') {
                 if(strtotime($data['date']['year'].'-'.$data['date']['month'])){
                     $date = strtotime($data['date']['year'].'-'.$data['date']['month']);  //date取得
                     $this->Session->write('SalesTransactions.date', $date);
