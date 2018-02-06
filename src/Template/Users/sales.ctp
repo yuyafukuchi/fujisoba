@@ -8,13 +8,14 @@
     <ul class="side-nav">
         <li class="heading">富士そば</li>
         <li class="heading"><?=h($data['name']) ?></li>
+
+
+
         <?php if($data['type'] === 'H') : ?> <!-- 本社管理者 -->
         <li class="heading">売上日計表</li>
             <?php foreach ($stores as $store) : ?>
-            <li><?= $this->Html->link($store->name, ['controller' => 'Sales/SalesTransactions','action' => 'view', 'store' => $store->id]) ?></li>
+            <li><?= $this->Html->link($store->name, ['controller' => 'Sales/SalesTransactions','action' => 'viewH', 'store' => $store->id]) ?></li>
             <?php endforeach; ?>
-
-
 
         <li class="heading">売上一覧表</li>
              <li><?= $this->Html->link('売上集計表', ['controller' => 'Sales/SalesTransactions', 'action' => 'all']) ?></li>
@@ -46,6 +47,8 @@
         <?php endforeach; ?>
         <li></li>
         <li><?= $this->Html->link('ユーザパスワード設定', ['action' => 'list']) ?></li>
+
+
 
         <?php elseif($data['type'] === 'M') : ?> <!--店舗管理者 -->
         <li class="heading">店舗作業</li>

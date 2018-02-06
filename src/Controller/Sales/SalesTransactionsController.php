@@ -196,10 +196,45 @@ class SalesTransactionsController extends AppController
             ->where(['deleted' => '0'])
             ->toArray();
         for($j = 0 ; $j < count($storeInventoryItemHistories) ; $j ++){
-        $storeInventoryItemHistoryArray[$i][$j]=array($storeInventoryItemHistories[$j]['inventory_item_id']=>$storeInventoryItemHistories[$j]['loss_price']);
+        $storeInventoryItemHistoryArray[$i][$j]
+        =array($storeInventoryItemHistories[$j]['inventory_item_id']=>$storeInventoryItemHistories[$j]['loss_price']);
 
         }
         }
+//前日残高の配列を作る
+
+        for($i = 1 ; $i <= $lastDay ; $i ++){
+        $date2=strtotime(date('Y',$date).'-'.date('m',$date).'-'.date($i));
+
+        $inventoryPurchaseTransactions = $this->InventoryPurchaseTransactions->find()
+                            ->where(['transaction_date ' => date('Y-m-d',$date2)])
+                            ->where(['store_id' => $storeId])
+                            ->toArray();
+        for($j = 0 ; $j < count($inventoryPurchaseTransactions) ; $j ++){
+        $inventoryPurchaseTransactionsCostArray[$i][$j][$inventoryPurchaseTransactions[$j]['inventory_item_id']]=
+        [$inventoryPurchaseTransactions[$j]['purchase_qty'],//0
+         $inventoryPurchaseTransactions[$j]['loss_qty'],//1
+         $inventoryPurchaseTransactions[$j]['count_qty'] //2
+        ];
+
+        }
+        }
+//価格(原価)の配列を作る
+        for($i = 1 ; $i <= $lastDay ; $i ++){
+        $date2=strtotime(date('Y',$date).'-'.date('m',$date).'-'.date($i));
+        $storeInventoryItemHistories = $this->StoreInventoryItemHistories->find()
+            ->where(['start <=' => date('Y-m-d H:i:s', $date2), 'OR' => [['end >' => date('Y-m-d H:i:s', $date2)],['end is' => null]]])
+            ->where(['store_id' => $storeId])
+            ->where(['deleted' => '0'])
+            ->toArray();
+        for($j = 0 ; $j < count($storeInventoryItemHistories) ; $j ++){
+        $storeInventoryItemHistoryCostArray[$i][$j]
+        =array($storeInventoryItemHistories[$j]['inventory_item_id']=>$storeInventoryItemHistories[$j]['cost']);
+
+        }
+        }
+
+
 
 
 
@@ -210,8 +245,136 @@ class SalesTransactionsController extends AppController
             return $this->redirect(['controller' => '/../Users', 'action' => 'sales']);
         }
 
-        $this->set(compact('salesTransactions','storeName','date','salesDailySummary','inventoryPurchaseTransactions','cashAccountTrans','idArray','storeInventoryItemHistories','lossArray','storeInventoryItemHistoryArray','inventoryPurchaseTransactionsArray'));
-        $this->set('_serialize', ['salesTransactions','storeName','date','salesDailySummary','inventoryPurchaseTransactions','cashAccountTrans','idArray','storeInventoryItemHistories','lossArray','storeInventoryItemHistoryArray','inventoryPurchaseTransactionsArray']);
+        $this->set(compact('salesTransactions','storeName','date','salesDailySummary','inventoryPurchaseTransactions','cashAccountTrans','idArray','storeInventoryItemHistories','lossArray','storeInventoryItemHistoryArray','storeInventoryItemHistoryCostArray','inventoryPurchaseTransactionsArray','inventoryPurchaseTransactionsCostArray'));
+        $this->set('_serialize', ['salesTransactions','storeName','date','salesDailySummary','inventoryPurchaseTransactions','cashAccountTrans','idArray','storeInventoryItemHistories','lossArray','storeInventoryItemHistoryArray','storeInventoryItemHistoryCostArray','inventoryPurchaseTransactionsArray','inventoryPurchaseTransactionsCostArray']);
+
+    }
+    public function viewH()
+    {
+        $this->Session = $this->request->session();
+        $salesTransactions = $this->SalesTransactions->find();
+        $date = null;
+
+        if(isset($_GET['store'])){ //値があるかどうかを確認
+            $storeId = intval($_GET['store']);
+        } else {
+            $storeId = 0;
+        }
+        if($storeId === 0) {
+            return $this->redirect(['controller' => '/../Users', 'action' => 'sales']);
+        }
+
+        if ($this->request->is('post')) {
+            $data = $this->request->data();
+            if($data['button'] === '検索') {
+                if(strtotime($data['date']['year'].'-'.$data['date']['month'])){
+                    $date = strtotime($data['date']['year'].'-'.$data['date']['month']);  //date取得
+                    $this->Session->write('SalesTransactions.date', $date);
+
+                }
+            }
+        }
+
+        if($date == null){
+            if($this->Session->read('SalesTransactions.date') == null){
+                $date = time();
+                $this->Session->write('SalesTransactions.date', $date);
+            } else {
+                $date = $this->Session->read('SalesTransactions.date');
+            }
+        }
+        $this->Stores = TableRegistry::get('stores');
+        $this->SalesDailySummaries=TableRegistry::get('sales_daily_summaries');
+        $this->CashAccountTrans = TableRegistry::get('cash_account_trans');
+        $this->StoreInventoryItemHistories = TableRegistry::get('store_inventory_item_histories');
+        $this->InventoryPurchaseTransactions= TableRegistry::get('inventory_purchase_transactions');
+        $salesDailySummary = $this->SalesDailySummaries->find()
+                            ->where(['store_id'=>$storeId])
+                            ->where(['transaction_date >=' => date('Y-m-d',$date), 'transaction_date <' => date('Y-m-d',strtotime('+1 month', $date))])
+                            ->order(['transaction_date' => 'ASC'])
+                            ->toArray();
+
+        $cashAccountTrans =$this->CashAccountTrans->find()
+                            ->where(['store_id' => $storeId, 'transaction_date >=' => date('Y-m-d',$date), 'transaction_date <' => date('Y-m-d',strtotime('+1 month', $date))])
+                            ->order(['transaction_date' => 'ASC'])
+                            ->toArray();
+        $inventoryPurchaseTransactions = $this->InventoryPurchaseTransactions->find()
+                            ->where(['transaction_date >=' => date('Y-m-d',$date), 'transaction_date <' => date('Y-m-d',strtotime('+1 month', $date))])
+                            ->where(['store_id' => $storeId])
+                            ->toArray();
+
+//ロス数の配列を作る
+
+        $lastDay = date('d', strtotime('last day of this month', $date));
+
+        for($i = 1 ; $i <= $lastDay ; $i ++){
+        $date2=strtotime(date('Y',$date).'-'.date('m',$date).'-'.date($i));
+
+        $inventoryPurchaseTransactions = $this->InventoryPurchaseTransactions->find()
+                            ->where(['transaction_date ' => date('Y-m-d',$date2)])
+                            ->where(['store_id' => $storeId])
+                            ->toArray();
+        for($j = 0 ; $j < count($inventoryPurchaseTransactions) ; $j ++){
+        $inventoryPurchaseTransactionsArray[$i][$j]=array($inventoryPurchaseTransactions[$j]['inventory_item_id']=>$inventoryPurchaseTransactions[$j]['loss_qty']);
+
+        }
+        }
+
+//価格(ロス)の配列を作る
+        for($i = 1 ; $i <= $lastDay ; $i ++){
+        $date2=strtotime(date('Y',$date).'-'.date('m',$date).'-'.date($i));
+        $storeInventoryItemHistories = $this->StoreInventoryItemHistories->find()
+            ->where(['start <=' => date('Y-m-d H:i:s', $date2), 'OR' => [['end >' => date('Y-m-d H:i:s', $date2)],['end is' => null]]])
+            ->where(['store_id' => $storeId])
+            ->where(['deleted' => '0'])
+            ->toArray();
+        for($j = 0 ; $j < count($storeInventoryItemHistories) ; $j ++){
+        $storeInventoryItemHistoryArray[$i][$j]
+        =array($storeInventoryItemHistories[$j]['inventory_item_id']=>$storeInventoryItemHistories[$j]['loss_price']);
+
+        }
+        }
+//前日残高の配列を作る
+
+        for($i = 1 ; $i <= $lastDay ; $i ++){
+        $date2=strtotime(date('Y',$date).'-'.date('m',$date).'-'.date($i));
+
+        $inventoryPurchaseTransactions = $this->InventoryPurchaseTransactions->find()
+                            ->where(['transaction_date ' => date('Y-m-d',$date2)])
+                            ->where(['store_id' => $storeId])
+                            ->toArray();
+        for($j = 0 ; $j < count($inventoryPurchaseTransactions) ; $j ++){
+        $inventoryPurchaseTransactionsCostArray[$i][$j][$inventoryPurchaseTransactions[$j]['inventory_item_id']]=
+        [$inventoryPurchaseTransactions[$j]['purchase_qty'],//0
+         $inventoryPurchaseTransactions[$j]['loss_qty'],//1
+         $inventoryPurchaseTransactions[$j]['count_qty'] //2
+        ];
+
+        }
+        }
+//価格(原価)の配列を作る
+        for($i = 1 ; $i <= $lastDay ; $i ++){
+        $date2=strtotime(date('Y',$date).'-'.date('m',$date).'-'.date($i));
+        $storeInventoryItemHistories = $this->StoreInventoryItemHistories->find()
+            ->where(['start <=' => date('Y-m-d H:i:s', $date2), 'OR' => [['end >' => date('Y-m-d H:i:s', $date2)],['end is' => null]]])
+            ->where(['store_id' => $storeId])
+            ->where(['deleted' => '0'])
+            ->toArray();
+        for($j = 0 ; $j < count($storeInventoryItemHistories) ; $j ++){
+        $storeInventoryItemHistoryCostArray[$i][$j]
+        =array($storeInventoryItemHistories[$j]['inventory_item_id']=>$storeInventoryItemHistories[$j]['cost']);
+
+        }
+        }
+
+        if(count($this->Stores->find()->where(['id' => $storeId])->toArray()) === 1){
+            $storeName = $this->Stores->get($storeId)->name;
+        } else {
+            return $this->redirect(['controller' => '/../Users', 'action' => 'sales']);
+        }
+
+        $this->set(compact('salesTransactions','storeName','date','salesDailySummary','inventoryPurchaseTransactions','cashAccountTrans','idArray','storeInventoryItemHistories','lossArray','storeInventoryItemHistoryArray','storeInventoryItemHistoryCostArray','inventoryPurchaseTransactionsArray','inventoryPurchaseTransactionsCostArray'));
+        $this->set('_serialize', ['salesTransactions','storeName','date','salesDailySummary','inventoryPurchaseTransactions','cashAccountTrans','idArray','storeInventoryItemHistories','lossArray','storeInventoryItemHistoryArray','storeInventoryItemHistoryCostArray','inventoryPurchaseTransactionsArray','inventoryPurchaseTransactionsCostArray']);
 
     }
 

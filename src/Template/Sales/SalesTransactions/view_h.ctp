@@ -40,7 +40,7 @@
             <th>預金高</th>
             <th>備考</th>
             <th>ロス額</th>
-            <th>原価</th>
+            <th>原</th>
 
         </tr>
     </thead>

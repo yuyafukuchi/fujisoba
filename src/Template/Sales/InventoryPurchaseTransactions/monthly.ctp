@@ -67,12 +67,14 @@
         <?php $index = array(0,0); ?>
         <?php $itemPriceIndex = array(0,0); ?>
 
+
         <?php $priceSum = array(array(0,0,0,0,0),array(0,0,0,0,0)) ; ?>
 
         <?php $recordSize = array(0,0); ?>
         <?php for($i = 1 ; $i <= $lastDay ;  $i++) : ?>
             <tr>
                <?php for($j = 0 ; $j < $arraySize ; $j ++) :?>
+
                     <td><?= $i?></td>
                     <?php if (!empty($index[$j]) &&
                         !empty($inventoryPurchaseTransactions[$j][$index[$j]]['transaction_date']) &&
@@ -114,6 +116,7 @@
                        <td></td>
                        <td></td>
                        <td></td>
+
                    <?php endif; ?>
                <?php endfor; ?>
            </tr>
